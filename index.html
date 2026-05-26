@@ -650,6 +650,54 @@
             transition-delay: 4.5s; 
         }
 
+        /* ==========================================
+           СЕТКА ССЫЛОК (В 2 КОЛОНКИ)
+           ========================================== */
+        .links-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Ровно 2 колонки */
+            gap: 15px;
+            width: 100%;
+            max-width: 600px; /* Ширина блока кнопок */
+            margin: 0 auto 20px;
+        }
+
+        /* На телефонах делаем в 1 колонку, чтобы кнопки не сплющило */
+        @media (max-width: 500px) {
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .links-grid .btn-donate {
+            width: 100%; /* Чтобы кнопки заполняли свою колонку */
+            max-width: none;
+            padding: 15px 10px;
+            font-size: 16px; /* Чуть уменьшим шрифт для аккуратности */
+        }
+
+        /* ==========================================
+           КНОПКА "ПОКАЗАТЬ БОЛЬШЕ" ДЛЯ АРТОВ
+           ========================================== */
+        .btn-more-arts {
+            display: block;
+            margin: 10px auto 40px;
+            background: transparent;
+            color: #ff3385;
+            border: 2px dashed #ff3385;
+            padding: 10px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-more-arts:hover {
+            background: rgba(255, 51, 133, 0.1);
+            transform: translateY(-2px);
+        }
+
     </style>
 </head>
 <body>
@@ -672,26 +720,30 @@
         </div>
     </section>
 
-     <section id="news">
+    <section id="news">
         <div class="content-container">
             <h2 class="section-title">Новости</h2>
             
-            <div style="max-width: 550px; margin: 0 auto; background-color: #1e1e1e; padding: 15px; border-radius: 12px; 		box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+            <div style="max-width: 550px; margin: 0 auto; background-color: #1e1e1e; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center;">
                 
-                <script async src="https://telegram.org/js/telegram-widget.js?22" 
-                        data-telegram-post="yurummiyt/681" 
-                        data-width="100%" 
-                        data-dark="1">
-                </script>
+                <h3 style="color: #fff; margin-top: 0;">Последние события канала</h3>
+                <p style="color: #ff3385; font-size: 14px; margin-bottom: 20px;">
+                    ⚠️ Если у вас не работает VPN, виджет ниже может не загрузиться. 
+                </p>
+
+                <div style="min-height: 100px; background: #2a2a2a; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
+                    <script async src="https://telegram.org/js/telegram-widget.js?22" 
+                            data-telegram-post="yurummiyt/681" 
+                            data-width="100%" 
+                            data-dark="1">
+                    </script>
+                </div>
+                
+                <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-da" style="font-size: 18px; padding: 15px; margin-top: 10px; width: 100%;">
+                    Читать все новости в Telegram ➔
+                </a>
                 
             </div>
-            
-            <p style="text-align: center; margin-top: 20px;">
-                <a href="https://t.me/yurummiyt" target="_blank" style="color: #ff3385; text-decoration: none; font-weight: 		bold; border-bottom: 1px dashed #ff3385;">
-                    Перейти в Telegram канал ➔
-                </a>
-            </p>
-            
         </div>
     </section>
 
@@ -789,7 +841,7 @@
                 </div>
 
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="заказ_юруми.JPEG" alt="Фан-арт">
+                    <img src="заказ_юруми.jpeg" alt="Фан-арт">
                     <div class="gallery-overlay">
                         <h3>Фан-арт</h3>
                         <p>От @inari_teru</p>
@@ -970,24 +1022,28 @@
             </p>
 
             <div class="donate-wrapper">
-                <a href="https://www.donationalerts.com/r/yurummi" target="_blank" class="btn-donate btn-da" style="font-size: 24px; padding: 25px; margin-bottom: 20px;">
+                <a href="https://www.donationalerts.com/r/yurummi" target="_blank" class="btn-donate btn-da" style="font-size: 24px; padding: 25px; margin-bottom: 30px;">
                     💸 Поддержать донатом
                 </a>
 
                 <h3 style="color: #fff; margin: 10px 0;">Мои соцсети:</h3>
-                <a href="https://www.twitch.tv/yurummi_" target="_blank" class="btn-donate btn-crypto">🟪 Twitch</a>
-                <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-crypto">🟦 Telegram</a>
-                <a href="https://www.youtube.com/@itsYurummi?sub_confirmation=1" target="_blank" class="btn-donate btn-crypto">🟥 YouTube</a>
-                <a href="https://discord.gg/b8qjYMTJcf" target="_blank" class="btn-donate btn-crypto">👾 Discord</a>
-                <a href="https://www.instagram.com/itsyurummi/" target="_blank" class="btn-donate btn-crypto">📸 Instagram</a>
-                <a href="https://www.tiktok.com/@yurummi" target="_blank" class="btn-donate btn-crypto">🎵 TikTok</a>
+                <div class="links-grid">
+                    <a href="https://www.twitch.tv/yurummi_" target="_blank" class="btn-donate btn-crypto">🟪 Twitch</a>
+                    <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-crypto">🟦 Telegram</a>
+                    <a href="https://www.youtube.com/@itsYurummi?sub_confirmation=1" target="_blank" class="btn-donate btn-crypto">🟥 YouTube</a>
+                    <a href="https://discord.gg/b8qjYMTJcf" target="_blank" class="btn-donate btn-crypto">👾 Discord</a>
+                    <a href="https://www.instagram.com/itsyurummi/" target="_blank" class="btn-donate btn-crypto">📸 Instagram</a>
+                    <a href="https://www.tiktok.com/@yurummi" target="_blank" class="btn-donate btn-crypto">🎵 TikTok</a>
+                </div>
 
-                <h3 style="color: #fff; margin: 25px 0 10px;">Проект Aniwex:</h3>
-                <a href="https://www.youtube.com/@aniwex?sub_confirmation=1" target="_blank" class="btn-donate btn-crypto">📺 Aniwex YouTube</a>
-                <a href="https://www.tiktok.com/@aniwex.yt" target="_blank" class="btn-donate btn-crypto">📱 Aniwex TikTok</a>
+                <h3 style="color: #fff; margin: 10px 0;">Проект Aniwex:</h3>
+                <div class="links-grid">
+                    <a href="https://www.youtube.com/@aniwex?sub_confirmation=1" target="_blank" class="btn-donate btn-crypto">📺 YouTube</a>
+                    <a href="https://www.tiktok.com/@aniwex.yt" target="_blank" class="btn-donate btn-crypto">📱 TikTok</a>
+                </div>
 
-                <h3 style="color: #fff; margin: 25px 0 10px;">Связь:</h3>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arbeitenaniwex@gmail.com" target="_blank" class="btn-donate btn-crypto" style="border-color: #888; color: #888;">
+                <h3 style="color: #fff; margin: 15px 0 10px;">Связь:</h3>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arbeitenaniwex@gmail.com" target="_blank" class="btn-donate btn-crypto" style="border-color: #888; color: #888; max-width: 600px;">
                     ✉️ Почта для сотрудничества
                 </a>
             </div>
@@ -1331,6 +1387,52 @@
         Сайт отправился в таймаут! ⚔️<br>
         <span style="font-size: 20px; color: #fff;">(Обнови страницу, чтобы починить гравитацию)</span>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Находим все разделы с сетками артов
+            const grids = document.querySelectorAll('.gallery-grid');
+            
+            grids.forEach(grid => {
+                const items = grid.querySelectorAll('.gallery-item');
+                
+                // Если картинок больше 6
+                if (items.length > 6) {
+                    // Прячем все, начиная с 7-й (индекс 6)
+                    for (let i = 6; i < items.length; i++) {
+                        items[i].style.display = 'none';
+                    }
+                    
+                    // Создаем кнопку
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-more-arts';
+                    btn.innerText = 'Показать больше ▼';
+                    
+                    // Вставляем кнопку сразу после сетки артов
+                    grid.parentNode.insertBefore(btn, grid.nextSibling);
+                    
+                    let currentlyShown = 6;
+                    
+                    // Логика по клику на кнопку
+                    btn.addEventListener('click', () => {
+                        const nextLimit = currentlyShown + 6;
+                        
+                        // Показываем следующие 6 картинок
+                        for (let i = currentlyShown; i < nextLimit && i < items.length; i++) {
+                            items[i].style.display = ''; // Возвращаем отображение по умолчанию
+                        }
+                        
+                        currentlyShown = nextLimit;
+                        
+                        // Если показали все картинки - прячем кнопку
+                        if (currentlyShown >= items.length) {
+                            btn.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
