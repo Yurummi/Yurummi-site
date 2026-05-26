@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт Стримера</title>
+    <style>
+	* {
+            box-sizing: border-box;
+        }
+        /* ==========================================
+           БАЗОВЫЕ НАСТРОЙКИ И МЕНЮ
+           ========================================== */
+        html {
+            scroll-behavior: smooth; /* Плавная прокрутка к секциям */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Верхняя панель навигации */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            text-align: center;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff3385;
+        }
+
+        /* Настройки секций (чтобы меню их не перекрывало) */
+        section {
+            padding-top: 100px; 
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        h2.section-title {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            color: #ff3385;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        /* ==========================================
+           ТВОЙ СЛАЙДЕР (ПОЛНАЯ ВЕРСИЯ)
+           ========================================== */
+        .slider-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            gap: 20px;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 4px solid #ffffff;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.9),
+                0 0 20px rgba(255, 255, 255, 0.3),
+                inset 0 0 50px rgba(0, 0, 0, 0.6);
+            background-color: #0f0f0f;
+        }
+
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 1s ease-in-out;
+        }
+        .slide.active { opacity: 1; z-index: 2; }
+        .slide.clickable { cursor: pointer; }
+
+        .slide-blur-bg {
+            position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+            background-size: cover; background-position: center; filter: blur(25px) brightness(0.4);
+        }
+
+        .slide-main-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: contain; background-position: center; background-repeat: no-repeat;
+            filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.8)); transition: transform 0.3s;
+        }
+        .slide.clickable:hover .slide-main-img { transform: scale(1.02); }
+
+        .caption-panel {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 12px 30px 15px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);
+            backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.1); color: white;
+            transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .slide.active .caption-panel { transform: translateY(0); }
+
+        .caption-title { font-size: 28px; font-weight: bold; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .caption-author { font-size: 20px; color: #b3b3b3; }
+        .caption-author span { color: #ff3385; font-weight: bold; }
+
+        #badges-layer { position: absolute; top: 0; left: 0; width: 100%; height: calc(100% - 40px); pointer-events: none; z-index: 50; }
+        .badge-wrapper { position: absolute; top: -25px; right: -25px; opacity: 0; transition: opacity 1s ease-in-out; filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.8)); }
+        .badge-wrapper.active { opacity: 1; }
+        .badge { display: flex; align-items: center; justify-content: center; font-family: 'Arial Black', Impact, sans-serif; font-weight: 900; text-align: center; color: #000; }
+
+        .badge.yellow { width: 150px; height: 150px; font-size: 32px; background-color: #ffe600; clip-path: polygon(50% 0%, 61% 20%, 85% 15%, 75% 35%, 100% 50%, 75% 65%, 85% 85%, 61% 80%, 50% 100%, 39% 80%, 15% 85%, 25% 65%, 0% 50%, 25% 35%, 15% 15%, 39% 20%); animation: pulse-star 0.7s infinite alternate ease-in-out; }
+        .badge.green { width: 180px; height: 65px; font-size: 26px; background-color: #10ff00; clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%); animation: pulse-tag 0.8s infinite alternate ease-in-out; margin-top: 35px; }
+        .badge.pink { width: auto; padding: 0 25px; height: 60px; font-size: 26px; background: linear-gradient(135deg, #ff0066, #ff66a3); color: white; border-radius: 30px; border: 3px solid #ffffff; animation: float-pink 1.5s infinite alternate ease-in-out; margin-top: 35px; margin-right: 15px; }
+
+        @keyframes pulse-star { 0% { transform: scale(1) rotate(15deg); } 100% { transform: scale(1.15) rotate(15deg); } }
+        @keyframes pulse-tag { 0% { transform: scale(1) rotate(10deg); } 100% { transform: scale(1.1) rotate(10deg); } }
+        @keyframes float-pink { 0% { transform: translateY(0) rotate(5deg); } 100% { transform: translateY(-10px) rotate(-5deg); } }
+
+        .pagination { display: flex; gap: 12px; align-items: center; justify-content: center; z-index: 10; margin-top: 10px; }
+        .dot { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #ffffff; background-color: transparent; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.8); cursor: pointer; }
+        .dot.active { background-color: #ffffff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 2px 5px rgba(0,0,0,0.8); }
+	/* ==========================================
+           ГАЛЕРЕЯ АРТОВ И СКЕТЧЕЙ
+           ========================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1; /* Делает картинки квадратными для аккуратности */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1); /* Увеличение при наведении */
+        }
+
+        /* Затемнение и текст при наведении */
+        .gallery-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            margin: 0 0 10px 0;
+            color: #ff3385;
+            font-size: 22px;
+        }
+
+        .gallery-overlay p {
+            margin: 0;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .gallery-subtitle {
+            text-align: center;
+            color: #b3b3b3;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+	/* ==========================================
+           МОДАЛЬНОЕ ОКНО (LIGHTBOX)
+           ========================================== */
+        .lightbox {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            object-fit: contain; /* Чтобы картинка не искажалась */
+        }
+
+        .lightbox-caption {
+            margin-top: 15px;
+            color: #fff;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: #ff3385;
+        }
+
+	/* ==========================================
+           ПАСХАЛКА ДЛЯ АРТА С ТРЕКОМ
+           ========================================== */
+        .music-hint {
+            display: inline-block;
+            margin-top: 10px;
+            color: #ffe600; /* Желтый цвет для привлечения внимания */
+            font-size: 14px;
+            font-style: italic;
+            animation: pulse-text 2s infinite;
+        }
+
+        .lightbox-content.clickable-art {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Неоновое свечение при наведении на секретную картинку */
+        .lightbox-content.clickable-art:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(255, 51, 133, 0.8);
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+	/* ==========================================
+           КАЛЕНДАРЬ СТРИМОВ
+           ========================================== */
+        .calendar-wrapper {
+            background-color: #1e1e1e;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timezone-note {
+            text-align: center;
+            color: #b3b3b3;
+            font-size: 14px;
+            margin-bottom: 20px;
+            background: #2a2a2a;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header button {
+            background: #2a2a2a;
+            border: none;
+            color: #ff3385;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .calendar-header button:hover {
+            background: #3a3a3a;
+        }
+
+        .calendar-header h3 {
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+	.calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 10px;
+            width: 100%;
+        }
+
+        .weekday {
+            text-align: center;
+            font-weight: bold;
+            color: #888;
+            padding-bottom: 10px;
+        }
+
+.day-cell {
+            background: #2a2a2a;
+            border-radius: 8px;
+            aspect-ratio: 1 / 1;
+            min-height: 90px; /* ФИКС: Теперь они никогда не сплющатся меньше этого размера */
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 2px solid transparent;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .day-cell.empty {
+            background: transparent;
+            border: none;
+        }
+
+        .day-cell.stream-day {
+            background: #2b1124;
+            border-color: #ff3385;
+        }
+
+        .day-cell.stream-day:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(255, 51, 133, 0.4);
+        }
+
+        .day-cell.today {
+            border-color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .day-number {
+            font-size: clamp(14px, 2vw, 20px);
+            font-weight: bold;
+            color: #fff;
+            opacity: 0.5;
+            position: relative;
+            z-index: 2;
+        }
+
+	/* Дизайн ОТМЕНЕННОГО стрима */
+        .day-cell.canceled-day {
+            background: #2a2a2a; /* Оставляем тусклый фон */
+            border-color: #555; /* Серая рамка */
+            opacity: 0.7; /* Делаем всю ячейку немного бледной */
+        }
+
+        .day-cell.canceled-day .stream-info {
+            background: #444; /* Темно-серая плашка */
+            color: #aaa; /* Светло-серый текст */
+            text-decoration: line-through; /* Зачеркиваем текст */
+        }
+
+        /* Добавляем маленькую красную метку "Отменен" поверх плашки */
+        .day-cell.canceled-day .stream-info::after {
+            content: "ОТМЕНЕН";
+            display: block;
+            background: #ff3333;
+            color: white;
+            font-size: 8px;
+            text-decoration: none; /* Убираем зачеркивание с этой метки */
+            border-radius: 4px;
+            margin-top: 2px;
+            padding: 1px 0;
+        }
+
+
+        .day-cell.stream-day .day-number, .day-cell.period-day .day-number {
+            opacity: 1;
+        }
+
+        .stream-info {
+            margin-top: auto;
+            background: #fff;
+            color: #121212;
+            font-size: clamp(9px, 1.2vw, 12px);
+            font-weight: bold;
+            text-align: center;
+            padding: 4px 2px;
+            border-radius: 6px;
+            line-height: 1.1;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stream-info.special {
+            background: #ff3385;
+            color: #fff;
+        }
+
+	/* ==========================================
+           МНОГОДНЕВНЫЕ СОБЫТИЯ (ПОЛУПРОЗРАЧНЫЕ ЯЧЕЙКИ)
+           ========================================== */
+        
+        /* Полупрозрачная заливка для ячеек Отпуска */
+        .day-cell.vacation {
+            background-color: rgba(255, 230, 0, 0.15); /* Легкий желтый фон */
+            border-color: rgba(255, 230, 0, 0.3); /* Еле заметная рамка */
+        }
+        
+        /* Полупрозрачная заливка для ячеек Марафона */
+        .day-cell.marathon {
+            background-color: rgba(255, 51, 133, 0.15); /* Легкий розовый фон */
+            border-color: rgba(255, 51, 133, 0.3);
+        }
+
+        /* Аккуратный текст внутри выделенных дней */
+        .period-text {
+            margin-top: auto;
+            text-align: center;
+            font-size: clamp(9px, 1vw, 11px);
+            font-weight: bold;
+            line-height: 1.2;
+            padding: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Цвета текста для разных событий */
+        .vacation .period-text { color: #ffe600; }
+        .marathon .period-text { color: #ff3385; }
+
+	/* ==========================================
+           КОМАНДЫ (ВЫПАДАЮЩИЕ СПИСКИ)
+           ========================================== */
+        .command-group { margin-bottom: 15px; }
+        
+        .command-group details {
+            background: #2a2a2a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+        .command-group summary {
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none; /* Убирает стандартный треугольник */
+            transition: background 0.3s;
+            position: relative;
+        }
+        
+        .command-group summary:hover { background: #3a3a3a; }
+        
+        /* Кастомный плюсик для выпадающего списка */
+        .command-group summary::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            color: #ff3385;
+            font-size: 24px;
+            line-height: 1;
+            transition: transform 0.3s;
+        }
+        
+        .command-group details[open] summary::after { transform: rotate(45deg); }
+        
+        .command-content {
+            padding: 20px;
+            background: #1e1e1e;
+            border-top: 1px solid #333;
+        }
+
+        .cmd-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .cmd-item:last-child { margin-bottom: 0; }
+
+        .cmd-name {
+            background: #ff3385;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 15px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .cmd-desc { color: #ccc; font-size: 15px; line-height: 1.4; }
+
+        /* ==========================================
+           КНОПКИ ПОДДЕРЖКИ (ДОНАТЫ)
+           ========================================== */
+        .donate-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-donate {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 350px;
+            padding: 18px 20px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+
+        .btn-donate:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.6);
+        }
+
+        /* Цвета конкретных кнопок */
+        .btn-boosty { background: linear-gradient(135deg, #ff5e00, #ff8a00); }
+        .btn-da { background: linear-gradient(135deg, #1e90ff, #00bfff); } /* Синий цвет DonationAlerts */
+        .btn-crypto { background: #2a2a2a; border: 2px solid #ff3385; color: #ff3385; box-shadow: none; }
+        .btn-crypto:hover { background: rgba(255, 51, 133, 0.1); }
+
+/* ==========================================
+           ПАСХАЛКИ (КОРОБКИ И ГРАВИТАЦИЯ)
+           ========================================== */
+        
+        /* Дождь из коробок */
+        .falling-box {
+            position: fixed;
+            top: -50px;
+            font-size: 35px;
+            animation: fall linear forwards;
+            z-index: 9999;
+            pointer-events: none; /* Чтобы коробки не мешали кликать по сайту */
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+/* Эффект сломанной гравитации (!seppuku) */
+        body.seppuku-mode section, 
+        body.seppuku-mode nav {
+            /* Увеличили время падения с 2.5s до 4.5s */
+            transition: transform 4.5s cubic-bezier(0.55, 0.085, 0.68, 0.53), opacity 4s;
+            transform: translateY(150vh) rotate(10deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        body.seppuku-mode {
+            overflow: hidden; /* Запрещаем скроллить, пока сайт падает */
+        }
+
+        .seppuku-message {
+            /* Вместо display: none прячем через прозрачность, чтобы текст мог плавно появиться */
+            opacity: 0;
+            pointer-events: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff3385;
+            font-size: clamp(24px, 4vw, 40px);
+            font-weight: bold;
+            z-index: 999999;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255, 51, 133, 0.8);
+            transition: opacity 1s ease; /* Задаем плавное появление длиной 1 секунду */
+        }
+
+        body.seppuku-mode .seppuku-message {
+            opacity: 1;
+            /* ТА САМАЯ МАГИЯ: Текст ждет 4.5 секунды (пока падает сайт), и только потом появляется */
+            transition-delay: 4.5s; 
+        }
+
+    </style>
+</head>
+<body>
+
+<nav>
+        <a href="#home">Главная</a>
+        <a href="#news">Новости</a>
+        <a href="#arts">Арты</a>
+        <a href="#schedule">Расписание</a>
+        <a href="#faq">Обо мне</a>
+        <a href="#commands">Команды</a>
+        <a href="#support">Ссылки и Поддержка</a>
+    </nav>
+
+    <section id="home">
+        <div class="slider-wrapper">
+            <div class="slider-container" id="slider"></div>
+            <div id="badges-layer"></div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </section>
+
+     <section id="news">
+        <div class="content-container">
+            <h2 class="section-title">Новости</h2>
+            
+            <div style="max-width: 550px; margin: 0 auto; background-color: #1e1e1e; padding: 15px; border-radius: 12px; 		box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                
+                <script async src="https://telegram.org/js/telegram-widget.js?22" 
+                        data-telegram-post="yurummiyt/681" 
+                        data-width="100%" 
+                        data-dark="1">
+                </script>
+                
+            </div>
+            
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="https://t.me/yurummiyt" target="_blank" style="color: #ff3385; text-decoration: none; font-weight: 		bold; border-bottom: 1px dashed #ff3385;">
+                    Перейти в Telegram канал ➔
+                </a>
+            </p>
+            
+        </div>
+    </section>
+
+<section id="arts">
+        <div class="content-container">
+            <h2 class="section-title">Галерея Работ</h2>
+            
+            <div class="gallery-subtitle">Мои арты (Полноценные)</div>
+            <div class="gallery-grid">
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="Вафер2.png" alt="Вафер">
+                    <div class="gallery-overlay">
+                        <h3>Вафер</h3>
+                        <p>Специально для Вафера</p>
+                    </div>
+                </div>  
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="птицафинал.png" alt="Птица">
+                    <div class="gallery-overlay">
+                        <h3>Птица</h3>
+                        <p>Специально для @bird_hello</p>
+                    </div>
+                </div>  
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="Тутрфинал.png" alt="Туртл">
+                    <div class="gallery-overlay">
+                        <h3>Туртл</h3>
+                        <p>Специально для @turtle_pressf</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="offlineфинал.png" alt="Оффалйн экран">
+                    <div class="gallery-overlay">
+                        <h3>Оффалйн экран</h3>
+                        <p></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="Микубот.png" alt="Микубот">
+                    <div class="gallery-overlay">
+                        <h3>Микубот</h3>
+                        <p>Специально для @kumqch3d</p>
+                    </div>
+                </div>
+              
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="ЯМАДАAIi.png" alt="Ямада/Teto">
+                    <div class="gallery-overlay">
+                        <h3>Ямада/Teto</h3>
+                        <p>Специально для @yamada_ai</p>
+                    </div>
+                </div>
+              
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="Фуруммизаставка.png" alt="Фурумми">
+                    <div class="gallery-overlay">
+                        <h3>Фурумми Х Юрумми</h3>
+                        <p>Женская версия Юрумми</p>
+                    </div>
+                </div>
+
+              
+		<div class="gallery-item" onclick="openLightbox(this)" data-music="https://youtu.be/yfnCGoUl4PI?si=lDihzmKaUF9zG22o">
+                    <img src="фурумми шл.png" alt="Sound Queen">
+                    <div class="gallery-overlay">
+                        <h3>Фурумми</h3>
+                        <p>Sound Queen</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="gallery-subtitle" style="margin-top: 40px;">Фан-арты (От зрителей)</div>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="слайд1.png" alt="Фан-арт">
+                    <div class="gallery-overlay">
+                        <h3>Фан-арт</h3>
+                        <p>От @Maku_q</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="юрумипнгартналови.png" alt="Фан-арт">
+                    <div class="gallery-overlay">
+                        <h3>Фан-арт</h3>
+                        <p>От @kalderbasina</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="заказ_юруми.JPEG" alt="Фан-арт">
+                    <div class="gallery-overlay">
+                        <h3>Фан-арт</h3>
+                        <p>От @inari_teru</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="зерошка.png" alt="Фан-арт">
+                    <div class="gallery-overlay">
+                        <h3>Фан-арт</h3>
+                        <p>От @zeroshka_000</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="акемо.png" alt="Фан-арт">
+                    <div class="gallery-overlay">
+                        <h3>Фан-арт</h3>
+                        <p>От @akem0</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="ноунеймартстарый.png" alt="Фан-арт">
+                    <div class="gallery-overlay">
+                        <h3>Фан-арт</h3>
+                        <p></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="gallery-subtitle" style="margin-top: 40px;">Скетчи и наброски</div>
+            <div class="gallery-grid">
+          
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="Фарочан.png" alt="Быстрый набросок">
+                    <div class="gallery-overlay">
+                        <h3>Быстрый набросок</h3>
+                        <p>В процессе создания</p>
+                    </div>
+                </div>     
+ 
+               <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="abobanYan.png" alt="Быстрый набросок">
+                    <div class="gallery-overlay">
+                        <h3>Набросок для стримера</h3>
+                        <p>Mikan</p>
+                    </div>
+                </div>
+          
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="Фраза.png" alt="Быстрый набросок">
+                    <div class="gallery-overlay">
+                        <h3>Быстрый набросок</h3>
+                        <p>В процессе создания</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="Альтушка.png" alt="Быстрый набросок">
+                    <div class="gallery-overlay">
+                        <h3>Быстрый набросок</h3>
+                        <p>В процессе создания</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="Юрумми атлет.png" alt="Быстрый набросок">
+                    <div class="gallery-overlay">
+                        <h3>Быстрый набросок</h3>
+                        <p>В процессе создания</p>
+                    </div>
+                </div>
+
+		<div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="фуринья фурумми 2.png" alt="Быстрый набросок">
+                    <div class="gallery-overlay">
+                        <h3>Быстрый набросок</h3>
+                        <p>В процессе создания</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section> <div id="myLightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <section id="schedule">
+        <div class="content-container">
+            <h2 class="section-title">Расписание</h2>
+            
+            <div style="text-align: center;">
+                <div class="timezone-note">⏰ Время всех стримов указано по <strong>НЕМЕЦИИ (GMT+2)</strong></div>
+            </div>
+
+            <div class="calendar-wrapper">
+                <div class="calendar-header">
+                    <button onclick="changeMonth(-1)">&#9664; Пред</button>
+                    <h3 id="monthYearDisplay">Май 2026</h3>
+                    <button onclick="changeMonth(1)">След &#9654;</button>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="weekday">ПН</div>
+                    <div class="weekday">ВТ</div>
+                    <div class="weekday">СР</div>
+                    <div class="weekday">ЧТ</div>
+                    <div class="weekday">ПТ</div>
+                    <div class="weekday">СБ</div>
+                    <div class="weekday">ВС</div>
+                </div>
+
+                <div class="calendar-grid" id="calendarDays"></div>
+            </div>
+
+        </div>
+    </section>
+
+	<section id="faq" style="padding-top: 60px;">
+        <div class="content-container">
+            <h2 class="section-title">Обо мне</h2>
+            
+            <div style="background: #2a2a2a; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 18px; line-height: 1.6;">
+                
+                <h3 style="color: #ff3385; margin-top: 0;">Привет! Я Yurummi 📦</h3>
+                <p>Если ты новенький, то у тебя наверняка вопрос: <em>«Кто это вообще такой?»</em>.</p>
+		<p>Yurummi - это мой оригинальный персонаж с коробкой на голове. У него есть свой глубокий лор и целый мир внутри этой самой <span id="secret-box" style="cursor: pointer; display: inline-block; transition: transform 0.1s;">коробки</span>. Пока что я держу большинство тайн при себе, но просто знайте: ОН СУЩЕСТВУЕТ.</p>
+                
+                <h3 style="color: #ff3385; margin-top: 30px;">А что за кошкодевочка? 🐱</h3>
+                <p>Всё течёт, всё меняется! Встречайте - <strong>Furummi (Фурумми)</strong>! Это «мой новый» маскот и альтер-эго на стримах. Коробка никуда не исчезла, мы просто добавили в наш суровый картонный мир немного ушек, милоты и уюта.</p>
+
+                <h3 style="color: #ff3385; margin-top: 30px;">Расписание и Стримы ⏰</h3>
+                <p>Я стримлю БЕЗ ЖЁСТКОГО РАСПИСАНИЯ — всё зависит от вдохновения, настроения и самочувствия. Чтобы не пропустить трансляции, обязательно поглядывай в календарь выше или включи уведомления в <a href="https://t.me/yurummiyt" target="_blank" style="color: #ff3385;">Телеграме</a>.</p>
+
+            </div>
+        </div>
+    </section>
+
+<section id="commands">
+        <div class="content-container">
+            <h2 class="section-title">Команды чата</h2>
+            
+            <div class="command-group">
+                <details>
+                    <summary>🌐 Полезные ссылки</summary>
+                    <div class="command-content">
+                        <div class="cmd-item"><span class="cmd-name">!тг</span><span class="cmd-desc">Ссылка на мой Telegram канал.</span></div>
+                        <div class="cmd-item"><span class="cmd-name">!ютуб</span><span class="cmd-desc">Ссылка на мой YouTube канал.</span></div>
+                        <div class="cmd-item"><span class="cmd-name">!дискорд</span><span class="cmd-desc">Присоединиться к нашему серверу.</span></div>
+                        <div class="cmd-item"><span class="cmd-name">!сайт</span><span class="cmd-desc">Ссылка на этот сайт со всей инфой.</span></div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="command-group">
+                <details>
+                    <summary>🎮 Игры с чатом (Осторожно!)</summary>
+                    <div class="command-content">
+                        <div class="cmd-item"><span class="cmd-name">!seppuku</span><span class="cmd-desc">Отправит тебя в таймаут на 60 секунд. На свой страх и риск! ⚔️</span></div>
+                        <div class="cmd-item"><span class="cmd-name">!topseppuku</span><span class="cmd-desc">Показывает лидеров по количеству прописанных !seppuku.</span></div>
+                    </div>
+                </details>
+            </div>
+
+        </div>
+    </section>
+
+	<section id="support" style="margin-bottom: 80px;">
+        <div class="content-container">
+            <h2 class="section-title">Все ссылки & Поддержка</h2>
+            
+            <p style="text-align: center; color: #b3b3b3; font-size: 16px; margin-bottom: 30px;">
+                Здесь собраны все мои соцсети. А если хочешь поддержать выход контента — жми на самую яркую кнопку! 💖
+            </p>
+
+            <div class="donate-wrapper">
+                <a href="https://www.donationalerts.com/r/yurummi" target="_blank" class="btn-donate btn-da" style="font-size: 24px; padding: 25px; margin-bottom: 20px;">
+                    💸 Поддержать донатом
+                </a>
+
+                <h3 style="color: #fff; margin: 10px 0;">Мои соцсети:</h3>
+                <a href="https://www.twitch.tv/yurummi_" target="_blank" class="btn-donate btn-crypto">🟪 Twitch</a>
+                <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-crypto">🟦 Telegram</a>
+                <a href="https://www.youtube.com/@itsYurummi?sub_confirmation=1" target="_blank" class="btn-donate btn-crypto">🟥 YouTube</a>
+                <a href="https://discord.gg/b8qjYMTJcf" target="_blank" class="btn-donate btn-crypto">👾 Discord</a>
+                <a href="https://www.instagram.com/itsyurummi/" target="_blank" class="btn-donate btn-crypto">📸 Instagram</a>
+                <a href="https://www.tiktok.com/@yurummi" target="_blank" class="btn-donate btn-crypto">🎵 TikTok</a>
+
+                <h3 style="color: #fff; margin: 25px 0 10px;">Проект Aniwex:</h3>
+                <a href="https://www.youtube.com/@aniwex?sub_confirmation=1" target="_blank" class="btn-donate btn-crypto">📺 Aniwex YouTube</a>
+                <a href="https://www.tiktok.com/@aniwex.yt" target="_blank" class="btn-donate btn-crypto">📱 Aniwex TikTok</a>
+
+                <h3 style="color: #fff; margin: 25px 0 10px;">Связь:</h3>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arbeitenaniwex@gmail.com" target="_blank" class="btn-donate btn-crypto" style="border-color: #888; color: #888;">
+                    ✉️ Почта для сотрудничества
+                </a>
+            </div>
+        </div>
+
+	<div style="text-align: center; margin-top: 50px;">
+                <span id="seppuku-btn" style="cursor: pointer; opacity: 0.1; font-size: 14px;" title="???">!</span>
+            </div>
+    </section>
+
+    <script>
+        const timePerSlide = 12000; 
+        
+        // Массив твоих слайдов с ссылками (url)
+        const slidesData = [
+            { 
+                file: 'Ютубоснова.png', badgeStyle: 'yellow', badgeText: 'NEW', 
+                textMain: 'Новый Ютуб канал', textAuthor: '',
+                url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1' // Откроет ютуб при клике
+            },
+            { 
+                file: 'Тутрфинал.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
+                textMain: '3/9', textAuthor: '@yurummi',
+                url: 'https://t.me/yurummiyt/657' // Откроет ТГ
+            },
+            { 
+                file: 'слайд1.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
+                textMain: 'Фан арт от Маку', textAuthor: '@Maku_q',
+                url: 'https://t.me/maku_qq' // Откроет ТГ
+            },
+            { 
+                file: 'анонсвидео.png', badgeStyle: 'green', badgeText: 'АНОНС', 
+                textMain: 'Первое длинное видео для ютуба', textAuthor: '',
+                url: '' 
+            },
+            { 
+                file: 'птицафинал.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
+                textMain: '4/9', textAuthor: '@yurummi',
+                url: 'https://t.me/yurummiyt/662' // Откроет ТГ
+            },
+            { 
+                file: '3.png', badgeStyle: 'none', badgeText: '', 
+                textMain: 'Важный пост 📌', textAuthor: '',
+                url: 'https://t.me/yurummiyt/681' // Если пусто, слайд просто показывается, но не кликается
+            }
+        ];
+
+        const slider = document.getElementById('slider');
+        const badgesLayer = document.getElementById('badges-layer');
+        const pagination = document.getElementById('pagination');
+        let currentIndex = 0;
+        
+        const slides = [];
+        const dots = [];
+        const badges = []; 
+
+        if (slidesData && slidesData.length > 0) {
+            slidesData.forEach((item, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                if (index === 0) slide.classList.add('active');
+
+                // Добавляем кликабельность, если указан url
+                if (item.url) {
+                    slide.classList.add('clickable');
+                    slide.onclick = () => window.open(item.url, '_blank');
+                }
+
+                const blurBg = document.createElement('div');
+                blurBg.className = 'slide-blur-bg';
+                blurBg.style.backgroundImage = `url('${item.file}')`;
+                slide.appendChild(blurBg);
+
+                const mainImg = document.createElement('div');
+                mainImg.className = 'slide-main-img';
+                mainImg.style.backgroundImage = `url('${item.file}')`;
+                slide.appendChild(mainImg);
+
+                if (item.textMain || item.textAuthor) {
+                    const captionPanel = document.createElement('div');
+                    captionPanel.className = 'caption-panel';
+                    
+                    let captionHtml = '';
+                    if (item.textMain) { captionHtml += `<div class="caption-title">${item.textMain}</div>`; }
+                    if (item.textAuthor) {
+                        const authorPrefix = item.textAuthor.includes('@') ? '🎨 Автор:' : '💡';
+                        captionHtml += `<div class="caption-author">${authorPrefix} <span>${item.textAuthor}</span></div>`;
+                    }
+                    
+                    captionPanel.innerHTML = captionHtml;
+                    slide.appendChild(captionPanel);
+                }
+
+                slider.appendChild(slide);
+                slides.push(slide);
+
+                const badgeWrapper = document.createElement('div');
+                badgeWrapper.className = 'badge-wrapper';
+                if (item.badgeStyle !== 'none') {
+                    const badgeInner = document.createElement('div');
+                    badgeInner.className = `badge ${item.badgeStyle}`;
+                    badgeInner.innerText = item.badgeText;
+                    badgeWrapper.appendChild(badgeInner);
+                }
+                if (index === 0) badgeWrapper.classList.add('active');
+                badgesLayer.appendChild(badgeWrapper);
+                badges.push(badgeWrapper);
+
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (index === 0) dot.classList.add('active');
+                
+                // Делаем точки внизу кликабельными (чтобы можно было переключать вручную)
+                dot.onclick = () => goToSlide(index);
+                
+                pagination.appendChild(dot);
+                dots.push(dot);
+            });
+
+            let slideInterval = setInterval(nextSlide, timePerSlide);
+
+            function nextSlide() {
+                let nextIndex = (currentIndex + 1) % slidesData.length;
+                goToSlide(nextIndex);
+            }
+
+            function goToSlide(index) {
+                if (index === currentIndex) return;
+                
+                slides[currentIndex].classList.remove('active');
+                dots[currentIndex].classList.remove('active');
+                badges[currentIndex].classList.remove('active');
+
+                currentIndex = index;
+
+                slides[currentIndex].classList.add('active');
+                dots[currentIndex].classList.add('active');
+                badges[currentIndex].classList.add('active');
+
+                // Сбрасываем таймер при ручном переключении
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, timePerSlide);
+            }
+        }
+    </script>
+	
+	<script>
+        function openLightbox(element) {
+            const lightbox = document.getElementById('myLightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            const img = element.querySelector('img');
+            const h3 = element.querySelector('h3');
+            const p = element.querySelector('p');
+            
+            const title = h3 ? h3.innerText : '';
+            const subtitle = p ? p.innerText : '';
+            
+            // ИЩЕМ СЕКРЕТНУЮ ССЫЛКУ (атрибут data-music)
+            const musicLink = element.getAttribute('data-music');
+
+            lightboxImg.src = img.src;
+            
+            // Если у арта ЕСТЬ пасхалка
+            if (musicLink) {
+                // Добавляем подсказку в текст
+                lightboxCaption.innerHTML = `<strong>${title}</strong><br>${subtitle}<br><span class="music-hint">🎵 псс... кликни по самой картинке!</span>`;
+                // Делаем картинку кликабельной и светящейся
+                lightboxImg.classList.add('clickable-art');
+                lightboxImg.onclick = function(event) {
+                    event.stopPropagation(); // Чтобы при клике на картинку не закрывалось окно
+                    window.open(musicLink, '_blank'); // Открываем трек в новой вкладке
+                };
+            } 
+            // Если это ОБЫЧНЫЙ арт
+            else {
+                lightboxCaption.innerHTML = `<strong>${title}</strong><br>${subtitle}`;
+                // Убираем кликабельность и эффекты
+                lightboxImg.classList.remove('clickable-art');
+                lightboxImg.onclick = null;
+            }
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            // Закрываем, только если кликнули на фон или на крестик
+            if (event.target.id === 'myLightbox' || event.target.classList.contains('lightbox-close')) {
+                document.getElementById('myLightbox').classList.remove('active');
+                document.body.style.overflow = 'auto'; 
+                
+                // Очищаем ссылку при закрытии окна, чтобы она не перенеслась на другие арты
+                document.getElementById('lightbox-img').onclick = null;
+            }
+        }
+   	 </script>
+	<script>
+        // ==========================================
+        // БАЗА ДАННЫХ ТВОИХ СТРИМОВ
+        // ==========================================
+        const streamsList = [
+            // 1. ОБЫЧНЫЕ СТРИМЫ (Точечные дни)
+            { date: '2026-05-29', time: '19:00', text: 'Стрим возвращение', isSpecial: false, isCanceled: false },
+            { date: '2026-05-30', time: '15:00', text: 'Крафт коробки', isSpecial: true, isCanceled: false },
+            
+            // ВОТ ПРИМЕР ОТМЕНЕННОГО СТРИМА (Добавлено isCanceled: true)
+            { date: '2026-06-02', time: '19:00', text: 'Костюм горничной', isSpecial: true, isCanceled: false }, 
+            { date: '2026-06-05', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+            { date: '2026-06-06', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+            { date: '2026-06-09', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+
+            // 2. МНОГОДНЕВНЫЕ СОБЫТИЯ (Полупрозрачная заливка ячеек)
+            // type может быть: 'vacation' (желтый) или 'marathon' (розовый)
+            { startDate: '2026-07-06', endDate: '2026-07-16', text: 'ОТПУСК 🌴', type: 'vacation' },
+            //{ startDate: '', endDate: '', text: 'Марафон', type: 'marathon' }
+        ];
+// ==========================================
+
+	let currentDate = new Date(); // Текущий месяц
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+            document.getElementById('monthYearDisplay').innerText = `${monthNames[month]} ${year}`;
+
+            const daysContainer = document.getElementById('calendarDays');
+            daysContainer.innerHTML = ''; 
+
+            let firstDay = new Date(year, month, 1).getDay();
+            firstDay = firstDay === 0 ? 6 : firstDay - 1; 
+
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+
+            // Пустые ячейки в начале месяца
+            for (let i = 0; i < firstDay; i++) {
+                daysContainer.innerHTML += `<div class="day-cell empty"></div>`;
+            }
+
+            // Отрисовка дней
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                
+                const streamEvent = streamsList.find(s => s.date === dateString);
+                const periodEvent = streamsList.find(s => s.startDate && dateString >= s.startDate && dateString <= s.endDate);
+
+                let cellClasses = 'day-cell';
+                let cellContent = `<div class="day-number">${i}</div>`;
+
+                // Подсветка сегодняшнего дня
+                if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
+                    cellClasses += ' today';
+                }
+
+                // Логика отрисовки
+                if (periodEvent) {
+                    // Многодневное событие
+                    cellClasses += ` ${periodEvent.type}`;
+                    cellContent += `<div class="period-text">${periodEvent.text}</div>`;
+                } 
+                else if (streamEvent) {
+                    if (streamEvent.isCanceled) {
+                        // Если стрим ОТМЕНЕН
+                        cellClasses += ' canceled-day';
+                        cellContent += `<div class="stream-info">${streamEvent.time}<br>${streamEvent.text}</div>`;
+                    } else {
+                        // Если стрим ОБЫЧНЫЙ
+                        cellClasses += ' stream-day';
+                        const specialClass = streamEvent.isSpecial ? 'special' : '';
+                        cellContent += `<div class="stream-info ${specialClass}">${streamEvent.time}<br>${streamEvent.text}</div>`;
+                    }
+                }
+
+                daysContainer.innerHTML += `<div class="${cellClasses}">${cellContent}</div>`;
+            }
+        }
+
+        function changeMonth(step) {
+            currentDate.setMonth(currentDate.getMonth() + step);
+            renderCalendar();
+        }
+
+        renderCalendar();
+    </script>
+
+	<script>
+        // 1. ПАСХАЛКА С КОРОБКОЙ (Дождь из коробок)
+        const secretBox = document.getElementById('secret-box');
+        let boxClicks = 0;
+
+        if (secretBox) {
+            secretBox.addEventListener('click', () => {
+                boxClicks++;
+                
+                // Легкая тряска слова при клике
+                secretBox.style.transform = `translateX(${boxClicks % 2 === 0 ? 4 : -4}px)`;
+                setTimeout(() => secretBox.style.transform = 'none', 100);
+
+                if (boxClicks === 5) {
+                    boxClicks = 0; // Сбрасываем счетчик
+                    startBoxRain();
+                }
+            });
+        }
+
+        function startBoxRain() {
+            // Создаем 40 коробок с разной задержкой
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const box = document.createElement('div');
+                    box.innerText = '📦';
+                    box.className = 'falling-box';
+                    box.style.left = Math.random() * 100 + 'vw'; // Рандомная позиция по ширине
+                    box.style.animationDuration = (Math.random() * 2 + 2) + 's'; // Разная скорость падения
+                    document.body.appendChild(box);
+                    
+                    // Удаляем коробку, когда она упала (чтобы не засорять память браузера)
+                    setTimeout(() => box.remove(), 5000);
+                }, i * 100); // Интервал появления
+            }
+        }
+
+        // 2. ПАСХАЛКА СЕППУКУ (Сломанная гравитация)
+        const seppukuBtn = document.getElementById('seppuku-btn');
+        if (seppukuBtn) {
+            seppukuBtn.addEventListener('click', () => {
+                document.body.classList.add('seppuku-mode');
+                // Скроллим в самый верх, чтобы зритель видел, как всё летит в бездну
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
+
+</script>
+
+    <div class="seppuku-message">
+        Сайт отправился в таймаут! ⚔️<br>
+        <span style="font-size: 20px; color: #fff;">(Обнови страницу, чтобы починить гравитацию)</span>
+    </div>
+
+</body>
+</html>
