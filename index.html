@@ -11,6 +11,107 @@
 	* {
             box-sizing: border-box;
         }
+
+/* ==========================================
+           ЭФФЕКТ 1: СЕКРЕТНАЯ ПАПКА (Желтая папка)
+           ========================================== */
+        .day-cell.noir-day {
+            background: #facc15 !important; /* Яркий желтый цвет */
+            background-image: linear-gradient(to bottom right, #facc15, #ca8a04) !important;
+            border: 2px solid #a16207 !important;
+            border-radius: 2px 10px 10px 10px !important;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Корешок папки (выступ сверху) */
+        .day-cell.noir-day::before {
+            content: '';
+            position: absolute;
+            top: -10px; /* Вылазит наверх в отступ между ячейками */
+            left: -2px; /* Учитываем ширину рамки */
+            width: 45%;
+            height: 12px;
+            background: #facc15;
+            border: 2px solid #a16207;
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+        }
+
+        /* Закрашиваем границу между выступом и телом папки */
+        .day-cell.noir-day::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 42%;
+            height: 4px;
+            background: #facc15;
+            z-index: 1;
+        }
+
+        /* Номер дня (темно-коричневый, чтобы подходил под папку) */
+        .day-cell.noir-day .day-number {
+            color: #452e04 !important; 
+            opacity: 0.8 !important;
+            z-index: 2;
+        }
+
+        /* Замазанная улика (черная плашка) */
+        .day-cell.noir-day .stream-info {
+            background: #111 !important;
+            color: #111 !important; /* Текст сливается с фоном (замазано) */
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 2px;
+            transform: rotate(-4deg); /* Приклеена немного криво для реалистичности */
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+            border-radius: 3px;
+        }
+
+        /* При наведении — снимаем цензуру */
+        .day-cell.noir-day:hover .stream-info {
+            color: #fff !important;
+            background: #222 !important;
+            transform: rotate(0deg) scale(1.05); /* Плашка выравнивается и увеличивается */
+        }
+
+        /* ==========================================
+           ЭФФЕКТ 2: ГЛИТЧ ПОРТАЛ (Glitch/Rift)
+           ========================================== */
+        .day-cell.glitch-day {
+            background: #0f001a !important; /* Очень темный фиолетовый */
+            border-color: #a855f7 !important; /* Яркий фиолетовый */
+            box-shadow: 0 0 15px #a855f7, inset 0 0 10px #a855f7;
+            animation: rift-vibrate 0.2s infinite; /* Постоянная вибрация */
+        }
+
+        .day-cell.glitch-day .stream-info {
+            background: #a855f7 !important;
+            color: #fff !important;
+            text-transform: uppercase;
+            font-family: monospace;
+            animation: glitch-text-flicker 1s infinite;
+        }
+
+        /* Анимация дрожания портала */
+        @keyframes rift-vibrate {
+            0% { transform: translate(0); }
+            25% { transform: translate(-1px, 1px); border-color: #ff00ff !important; }
+            50% { transform: translate(1px, -1px); }
+            75% { transform: translate(-1px, -1px); border-color: #00ffff !important; }
+            100% { transform: translate(0); }
+        }
+
+        /* Мигание текста в глитче */
+        @keyframes glitch-text-flicker {
+            0%, 100% { opacity: 1; transform: skew(0deg); }
+            20% { opacity: 0.8; transform: skew(5deg); }
+            40% { opacity: 1; transform: skew(-5deg); }
+            50% { opacity: 0.5; }
+        }
+
         /* ==========================================
            БАЗОВЫЕ НАСТРОЙКИ И МЕНЮ
            ========================================== */
@@ -1357,30 +1458,34 @@
             { date: '2026-05-29', time: '19:00', text: 'Стрим возвращение', isSpecial: false, isCanceled: false },
             { date: '2026-05-31', time: '15:00', text: 'Крафт коробки', isSpecial: true, isCanceled: false },
             
-            // ВОТ ПРИМЕР ОТМЕНЕННОГО СТРИМА (Добавлено isCanceled: true)
-            { date: '2026-06-05', time: '19:00', text: 'Костюм горничной', isSpecial: true, isCanceled: false }, 
+            // ОТМЕНЕННЫЙ СТРИМ
             { date: '2026-06-02', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: true },
-            { date: '2026-06-12', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+            { date: '2026-06-05', time: '19:00', text: 'Костюм горничной', isSpecial: true, isCanceled: false }, 
             { date: '2026-06-09', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+            { date: '2026-06-12', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-06-17', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-06-19', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-06-20', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
-            { date: '2026-06-20', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-06-23', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
-            { date: '2026-06-25', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+            { date: '2026-06-25', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+
+            // ТЕСТОВЫЕ ПАСХАЛКИ (Глитч и Нуар)
+            //{ date: '2026-08-11', time: '20:00', text: 'ERROR_404', isGlitch: true },
+            //{ date: '2026-08-10', time: '??:??', text: 'УЛИКА #1', isNoir: true },
+
             { date: '2026-06-30', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-07-03', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-07-04', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+
             // 2. МНОГОДНЕВНЫЕ СОБЫТИЯ (Полупрозрачная заливка ячеек)
-            // type может быть: 'vacation' (желтый) или 'marathon' (розовый)
             { startDate: '2026-07-06', endDate: '2026-07-16', text: 'ОТПУСК 🌴', type: 'vacation' },
-            //{ startDate: '', endDate: '', text: 'Марафон', type: 'marathon' }
+	        // { startDate: '2026-07-18', endDate: '2026-07-25', text: 'Марафон', type: 'marathon' }
         ];
-// ==========================================
+        // ==========================================
 
-	let currentDate = new Date(); // Текущий месяц
+        let currentDate = new Date(); // ТА САМАЯ ВАЖНАЯ СТРОЧКА!
 
-    function renderCalendar() {
+        function renderCalendar() {
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
 
@@ -1395,9 +1500,7 @@
 
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             
-            // Создаем удобные переменные для проверки "сегодня" и "прошлого"
             const today = new Date();
-            // Форматируем сегодняшнюю дату в '2026-06-13', чтобы легко сравнивать
             const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
             // Пустые ячейки в начале месяца
@@ -1420,26 +1523,31 @@
                     cellClasses += ' today';
                 }
 
-                // Логика отрисовки
+                // Логика отрисовки всех событий
                 if (periodEvent) {
-                    // Многодневное событие
                     cellClasses += ` ${periodEvent.type}`;
                     cellContent += `<div class="period-text">${periodEvent.text}</div>`;
                 } 
                 else if (streamEvent) {
-                    if (streamEvent.isCanceled) {
-                        // Если стрим ОТМЕНЕН
+                    // Проверяем все наши спецэффекты по очереди
+                    if (streamEvent.isNoir) {
+                        cellClasses += ' noir-day';
+                    } else if (streamEvent.isGlitch) {
+                        cellClasses += ' glitch-day';
+                    } else if (streamEvent.isCanceled) {
                         cellClasses += ' canceled-day';
                         cellContent += `<div class="stream-info">${streamEvent.time}<br>${streamEvent.text}</div>`;
                     } else {
-                        // Если стрим ОБЫЧНЫЙ
+                        // Обычный стрим
                         cellClasses += ' stream-day';
-                        
-                        // НОВАЯ ПРОВЕРКА: Если дата стрима меньше сегодняшней - это прошлое
+                        // Если дата меньше сегодняшней - вешаем галочку и тусклость
                         if (dateString < todayString) {
                             cellClasses += ' past-stream';
                         }
+                    }
 
+                    // Добавляем контент для не-отмененных стримов (и для спецэффектов)
+                    if (!streamEvent.isCanceled) {
                         const specialClass = streamEvent.isSpecial ? 'special' : '';
                         cellContent += `<div class="stream-info ${specialClass}">${streamEvent.time}<br>${streamEvent.text}</div>`;
                     }
