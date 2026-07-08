@@ -11,12 +11,57 @@
 	* {
             box-sizing: border-box;
         }
+        
+        /* ==========================================
+           ЭФФЕКТ 3: АРТ-СТРИМ (Уникальные кляксы)
+           ========================================== */
+           .day-cell.art-day {
+            background-image: linear-gradient(var(--art-angle, 130deg), var(--art-color1, #ff3385), var(--art-color2, #9333ea));
+            border-radius: var(--art-shape, 20% 80% 30% 70% / 60% 30% 70% 40%) !important;
+            border: none !important;
+            transform: scale(1.15) rotate(var(--art-rot, -3deg));
+            z-index: 5;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.3);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-/* ==========================================
+        .day-cell.art-day:hover {
+            transform: scale(1.25) rotate(calc(var(--art-rot, -3deg) + 4deg));
+            z-index: 15;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.6), inset 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        .day-cell.art-day .day-number {
+            color: #fff !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            opacity: 1 !important;
+        }
+
+        .day-cell.art-day .stream-info {
+            background: rgba(0, 0, 0, 0.6) !important;
+            color: #fff !important;
+            border-radius: 8px !important;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: none;
+        }
+
+        .art-icon {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 24px;
+            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.6));
+            z-index: 10;
+            transform: rotate(var(--art-rot, 10deg));
+        }
+
+        /* ==========================================
            ЭФФЕКТ 1: СЕКРЕТНАЯ ПАПКА (Желтая папка)
            ========================================== */
         .day-cell.noir-day {
-            background: #facc15 !important; /* Яркий желтый цвет */
+            background: #facc15 !important;
             background-image: linear-gradient(to bottom right, #facc15, #ca8a04) !important;
             border: 2px solid #a16207 !important;
             border-radius: 2px 10px 10px 10px !important;
@@ -24,12 +69,11 @@
             box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* Корешок папки (выступ сверху) */
         .day-cell.noir-day::before {
             content: '';
             position: absolute;
-            top: -10px; /* Вылазит наверх в отступ между ячейками */
-            left: -2px; /* Учитываем ширину рамки */
+            top: -10px;
+            left: -2px;
             width: 45%;
             height: 12px;
             background: #facc15;
@@ -38,7 +82,6 @@
             border-radius: 6px 6px 0 0;
         }
 
-        /* Закрашиваем границу между выступом и телом папки */
         .day-cell.noir-day::after {
             content: '';
             position: absolute;
@@ -50,41 +93,38 @@
             z-index: 1;
         }
 
-        /* Номер дня (темно-коричневый, чтобы подходил под папку) */
         .day-cell.noir-day .day-number {
             color: #452e04 !important; 
             opacity: 0.8 !important;
             z-index: 2;
         }
 
-        /* Замазанная улика (черная плашка) */
         .day-cell.noir-day .stream-info {
             background: #111 !important;
-            color: #111 !important; /* Текст сливается с фоном (замазано) */
+            color: #111 !important;
             transition: all 0.3s ease;
             position: relative;
             z-index: 2;
             letter-spacing: 2px;
-            transform: rotate(-4deg); /* Приклеена немного криво для реалистичности */
+            transform: rotate(-4deg);
             box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
             border-radius: 3px;
         }
 
-        /* При наведении — снимаем цензуру */
         .day-cell.noir-day:hover .stream-info {
             color: #fff !important;
             background: #222 !important;
-            transform: rotate(0deg) scale(1.05); /* Плашка выравнивается и увеличивается */
+            transform: rotate(0deg) scale(1.05);
         }
 
         /* ==========================================
            ЭФФЕКТ 2: ГЛИТЧ ПОРТАЛ (Glitch/Rift)
            ========================================== */
         .day-cell.glitch-day {
-            background: #0f001a !important; /* Очень темный фиолетовый */
-            border-color: #a855f7 !important; /* Яркий фиолетовый */
+            background: #0f001a !important;
+            border-color: #a855f7 !important;
             box-shadow: 0 0 15px #a855f7, inset 0 0 10px #a855f7;
-            animation: rift-vibrate 0.2s infinite; /* Постоянная вибрация */
+            animation: rift-vibrate 0.2s infinite;
         }
 
         .day-cell.glitch-day .stream-info {
@@ -95,7 +135,6 @@
             animation: glitch-text-flicker 1s infinite;
         }
 
-        /* Анимация дрожания портала */
         @keyframes rift-vibrate {
             0% { transform: translate(0); }
             25% { transform: translate(-1px, 1px); border-color: #ff00ff !important; }
@@ -104,7 +143,6 @@
             100% { transform: translate(0); }
         }
 
-        /* Мигание текста в глитче */
         @keyframes glitch-text-flicker {
             0%, 100% { opacity: 1; transform: skew(0deg); }
             20% { opacity: 0.8; transform: skew(5deg); }
@@ -116,7 +154,7 @@
            БАЗОВЫЕ НАСТРОЙКИ И МЕНЮ
            ========================================== */
         html {
-            scroll-behavior: smooth; /* Плавная прокрутка к секциям */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -128,7 +166,6 @@
             overflow-x: hidden;
         }
 
-        /* Верхняя панель навигации */
         nav {
             position: sticky;
             top: 0;
@@ -156,7 +193,6 @@
             color: #ff3385;
         }
 
-        /* Настройки секций (чтобы меню их не перекрывало) */
         section {
             padding-top: 100px; 
             min-height: 60vh;
@@ -269,7 +305,7 @@
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            aspect-ratio: 1 / 1; /* Делает картинки квадратными для аккуратности */
+            aspect-ratio: 1 / 1;
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
             cursor: pointer;
         }
@@ -282,10 +318,9 @@
         }
 
         .gallery-item:hover img {
-            transform: scale(1.1); /* Увеличение при наведении */
+            transform: scale(1.1);
         }
 
-        /* Затемнение и текст при наведении */
         .gallery-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -326,7 +361,7 @@
            МОДАЛЬНОЕ ОКНО (LIGHTBOX)
            ========================================== */
         .lightbox {
-            display: none; /* Скрыто по умолчанию */
+            display: none;
             position: fixed;
             z-index: 2000;
             left: 0;
@@ -351,7 +386,7 @@
             max-height: 80vh;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            object-fit: contain; /* Чтобы картинка не искажалась */
+            object-fit: contain;
         }
 
         .lightbox-caption {
@@ -382,7 +417,7 @@
         .music-hint {
             display: inline-block;
             margin-top: 10px;
-            color: #ffe600; /* Желтый цвет для привлечения внимания */
+            color: #ffe600;
             font-size: 14px;
             font-style: italic;
             animation: pulse-text 2s infinite;
@@ -393,7 +428,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Неоновое свечение при наведении на секретную картинку */
         .lightbox-content.clickable-art:hover {
             transform: scale(1.02);
             box-shadow: 0 0 40px rgba(255, 51, 133, 0.8);
@@ -475,7 +509,7 @@
             background: #2a2a2a;
             border-radius: 8px;
             aspect-ratio: 1 / 1;
-            min-height: 90px; /* ФИКС: Теперь они никогда не сплющатся меньше этого размера */
+            min-height: 90px;
             padding: 8px;
             display: flex;
             flex-direction: column;
@@ -514,27 +548,32 @@
             z-index: 2;
         }
 
-	/* Дизайн ОТМЕНЕННОГО стрима */
+	    /* Дизайн ОТМЕНЕННОГО стрима */
         .day-cell.canceled-day {
-            background: #2a2a2a; /* Оставляем тусклый фон */
-            border-color: #555; /* Серая рамка */
-            opacity: 0.7; /* Делаем всю ячейку немного бледной */
+            background: #2a2a2a;
+            border-color: #555;
+            opacity: 0.7;
+        }
+        
+        /* Если отменился именно АРТ-стрим */
+        .day-cell.art-day.canceled-day {
+            filter: grayscale(1) opacity(0.4) !important;
+            box-shadow: none !important;
         }
 
         .day-cell.canceled-day .stream-info {
-            background: #444; /* Темно-серая плашка */
-            color: #aaa; /* Светло-серый текст */
-            text-decoration: line-through; /* Зачеркиваем текст */
+            background: #444;
+            color: #aaa;
+            text-decoration: line-through;
         }
 
-        /* Добавляем маленькую красную метку "Отменен" поверх плашки */
         .day-cell.canceled-day .stream-info::after {
             content: "ОТМЕНЕН";
             display: block;
             background: #ff3333;
             color: white;
             font-size: 8px;
-            text-decoration: none; /* Убираем зачеркивание с этой метки */
+            text-decoration: none;
             border-radius: 4px;
             margin-top: 2px;
             padding: 1px 0;
@@ -542,18 +581,17 @@
 
         /* Дизайн ПРОШЕДШЕГО стрима */
         .day-cell.past-stream {
-            opacity: 0.5; /* Делаем ячейку тусклой */
+            opacity: 0.5;
             transition: opacity 0.3s;
         }
 
         .day-cell.past-stream:hover {
-            opacity: 0.9; /* При наведении немного возвращаем яркость */
+            opacity: 0.9;
         }
 
-        /* Добавляем зеленую галочку перед текстом */
         .day-cell.past-stream .stream-info::before {
             content: "✔ ";
-            color: #10ff00; /* Тот самый неоновый зеленый */
+            color: #10ff00;
             font-size: 10px;
         }
 
@@ -586,19 +624,16 @@
            МНОГОДНЕВНЫЕ СОБЫТИЯ (ПОЛУПРОЗРАЧНЫЕ ЯЧЕЙКИ)
            ========================================== */
         
-        /* Полупрозрачная заливка для ячеек Отпуска */
         .day-cell.vacation {
-            background-color: rgba(255, 230, 0, 0.15); /* Легкий желтый фон */
-            border-color: rgba(255, 230, 0, 0.3); /* Еле заметная рамка */
+            background-color: rgba(255, 230, 0, 0.15);
+            border-color: rgba(255, 230, 0, 0.3);
         }
         
-        /* Полупрозрачная заливка для ячеек Марафона */
         .day-cell.marathon {
-            background-color: rgba(255, 51, 133, 0.15); /* Легкий розовый фон */
+            background-color: rgba(255, 51, 133, 0.15);
             border-color: rgba(255, 51, 133, 0.3);
         }
 
-        /* Аккуратный текст внутри выделенных дней */
         .period-text {
             margin-top: auto;
             text-align: center;
@@ -609,7 +644,6 @@
             text-transform: uppercase;
         }
 
-        /* Цвета текста для разных событий */
         .vacation .period-text { color: #ffe600; }
         .marathon .period-text { color: #ff3385; }
 
@@ -630,14 +664,13 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            list-style: none; /* Убирает стандартный треугольник */
+            list-style: none;
             transition: background 0.3s;
             position: relative;
         }
         
         .command-group summary:hover { background: #3a3a3a; }
         
-        /* Кастомный плюсик для выпадающего списка */
         .command-group summary::after {
             content: '+';
             position: absolute;
@@ -711,9 +744,8 @@
             box-shadow: 0 12px 20px rgba(0,0,0,0.6);
         }
 
-        /* Цвета конкретных кнопок */
         .btn-boosty { background: linear-gradient(135deg, #ff5e00, #ff8a00); }
-        .btn-da { background: linear-gradient(135deg, #1e90ff, #00bfff); } /* Синий цвет DonationAlerts */
+        .btn-da { background: linear-gradient(135deg, #1e90ff, #00bfff); }
         .btn-crypto { background: #2a2a2a; border: 2px solid #ff3385; color: #ff3385; box-shadow: none; }
         .btn-crypto:hover { background: rgba(255, 51, 133, 0.1); }
 
@@ -721,24 +753,21 @@
            ПАСХАЛКИ (КОРОБКИ И ГРАВИТАЦИЯ)
            ========================================== */
         
-        /* Дождь из коробок */
         .falling-box {
             position: fixed;
             top: -50px;
             font-size: 35px;
             animation: fall linear forwards;
             z-index: 9999;
-            pointer-events: none; /* Чтобы коробки не мешали кликать по сайту */
+            pointer-events: none;
         }
 
         @keyframes fall {
             to { transform: translateY(110vh) rotate(360deg); }
         }
 
-/* Эффект сломанной гравитации (!seppuku) */
         body.seppuku-mode section, 
         body.seppuku-mode nav {
-            /* Увеличили время падения с 2.5s до 4.5s */
             transition: transform 4.5s cubic-bezier(0.55, 0.085, 0.68, 0.53), opacity 4s;
             transform: translateY(150vh) rotate(10deg);
             opacity: 0;
@@ -746,11 +775,10 @@
         }
 
         body.seppuku-mode {
-            overflow: hidden; /* Запрещаем скроллить, пока сайт падает */
+            overflow: hidden;
         }
 
         .seppuku-message {
-            /* Вместо display: none прячем через прозрачность, чтобы текст мог плавно появиться */
             opacity: 0;
             pointer-events: none;
             position: fixed;
@@ -762,12 +790,11 @@
             z-index: 999999;
             text-align: center;
             text-shadow: 0 0 20px rgba(255, 51, 133, 0.8);
-            transition: opacity 1s ease; /* Задаем плавное появление длиной 1 секунду */
+            transition: opacity 1s ease;
         }
 
         body.seppuku-mode .seppuku-message {
             opacity: 1;
-            /* ТА САМАЯ МАГИЯ: Текст ждет 4.5 секунды (пока падает сайт), и только потом появляется */
             transition-delay: 4.5s; 
         }
 
@@ -776,14 +803,13 @@
            ========================================== */
         .links-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Ровно 2 колонки */
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
             width: 100%;
-            max-width: 600px; /* Ширина блока кнопок */
+            max-width: 600px;
             margin: 0 auto 20px;
         }
 
-        /* На телефонах делаем в 1 колонку, чтобы кнопки не сплющило */
         @media (max-width: 500px) {
             .links-grid {
                 grid-template-columns: 1fr;
@@ -791,10 +817,10 @@
         }
 
         .links-grid .btn-donate {
-            width: 100%; /* Чтобы кнопки заполняли свою колонку */
+            width: 100%;
             max-width: none;
             padding: 15px 10px;
-            font-size: 16px; /* Чуть уменьшим шрифт для аккуратности */
+            font-size: 16px;
         }
 
         /* ==========================================
@@ -823,7 +849,6 @@
            АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ (МОБИЛЬНАЯ ВЕРСИЯ)
            ========================================== */
         @media (max-width: 600px) {
-            /* 1. Спасаем шапку календаря (Месяц и кнопки) */
             .calendar-header {
                 flex-wrap: wrap; 
                 justify-content: center;
@@ -844,33 +869,27 @@
                 white-space: nowrap; 
             }
 
-            /* 2. Спасаем сетку дней (Делаем свайп вбок) */
             .calendar-wrapper {
                 overflow-x: auto; 
-                padding: 10px; /* Чуть уменьшили боковые отступы */
-                -webkit-overflow-scrolling: touch; /* Плавный свайп на смартфонах */
+                padding: 10px;
+                -webkit-overflow-scrolling: touch;
             }
             
             .calendar-grid {
-                /* ИСПРАВЛЕНИЕ: Увеличиваем минимальную ширину до 700px! */
-                /* Теперь каждый день будет стабильно по 100px в ширину */
                 min-width: 700px; 
             }
             
-            /* Делаем сами окошки пропорциональными */
             .calendar-day {
-                min-height: 90px; /* Задаем минимальную высоту, чтобы не были сплюснутыми */
+                min-height: 90px;
                 padding: 5px;
             }
 
-            /* Аккуратно уменьшаем текст внутри событий на мобилках */
             .stream-info, .canceled-info, .special-info {
                 font-size: 11px;
                 padding: 3px;
                 line-height: 1.2;
             }
 
-            /* 3. Делаем верхнее меню навигации более аккуратным */
             nav { 
                 gap: 12px; 
                 padding: 15px 10px; 
@@ -1262,29 +1281,31 @@
     </section>
 
     <script>
+        // ==========================================
+        // 1. ЛОГИКА СЛАЙДЕРА
+        // ==========================================
         const timePerSlide = 12000; 
         
-        // Массив твоих слайдов с ссылками (url)
         const slidesData = [
             { 
                 file: 'vacation.jpg', badgeStyle: 'none', badgeText: '', 
                 textMain: 'Отпуск📌', textAuthor: '',
-                url: 'https://t.me/yurummiyt/714' // Откроет ютуб при клике
+                url: 'https://t.me/yurummiyt/714'
             },
             { 
                 file: 'Ютубоснова.png', badgeStyle: 'yellow', badgeText: 'NEW', 
                 textMain: 'Новый YouTube канал', textAuthor: '',
-                url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1' // Откроет ютуб при клике
+                url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1'
             },
             { 
                 file: 'Тутрфинал.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
                 textMain: '3/9', textAuthor: '@yurummi',
-                url: 'https://t.me/yurummiyt/657' // Откроет ТГ
+                url: 'https://t.me/yurummiyt/657'
             },
             { 
                 file: 'слайд1.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
                 textMain: 'Фан арт от Маку', textAuthor: '@Maku_q',
-                url: 'https://t.me/maku_qq' // Откроет ТГ
+                url: 'https://t.me/maku_qq'
             },
             { 
                 file: 'анонсвидео.png', badgeStyle: 'green', badgeText: 'АНОНС', 
@@ -1294,12 +1315,12 @@
             { 
                 file: 'птицафинал.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
                 textMain: '4/9', textAuthor: '@yurummi',
-                url: 'https://t.me/yurummiyt/662' // Откроет ТГ
+                url: 'https://t.me/yurummiyt/662'
             },
             { 
                 file: '3.png', badgeStyle: 'none', badgeText: '', 
                 textMain: 'Важный пост 📌', textAuthor: '',
-                url: 'https://t.me/yurummiyt/681' // Если пусто, слайд просто показывается, но не кликается
+                url: 'https://t.me/yurummiyt/681'
             }
         ];
 
@@ -1318,7 +1339,6 @@
                 slide.className = 'slide';
                 if (index === 0) slide.classList.add('active');
 
-                // Добавляем кликабельность, если указан url
                 if (item.url) {
                     slide.classList.add('clickable');
                     slide.onclick = () => window.open(item.url, '_blank');
@@ -1368,7 +1388,6 @@
                 dot.className = 'dot';
                 if (index === 0) dot.classList.add('active');
                 
-                // Делаем точки внизу кликабельными (чтобы можно было переключать вручную)
                 dot.onclick = () => goToSlide(index);
                 
                 pagination.appendChild(dot);
@@ -1395,14 +1414,14 @@
                 dots[currentIndex].classList.add('active');
                 badges[currentIndex].classList.add('active');
 
-                // Сбрасываем таймер при ручном переключении
                 clearInterval(slideInterval);
                 slideInterval = setInterval(nextSlide, timePerSlide);
             }
         }
-    </script>
-	
-	<script>
+
+        // ==========================================
+        // 2. ЛОГИКА ГАЛЕРЕИ (ЛАЙТБОКС)
+        // ==========================================
         function openLightbox(element) {
             const lightbox = document.getElementById('myLightbox');
             const lightboxImg = document.getElementById('lightbox-img');
@@ -1415,26 +1434,20 @@
             const title = h3 ? h3.innerText : '';
             const subtitle = p ? p.innerText : '';
             
-            // ИЩЕМ СЕКРЕТНУЮ ССЫЛКУ (атрибут data-music)
             const musicLink = element.getAttribute('data-music');
 
             lightboxImg.src = img.src;
             
-            // Если у арта ЕСТЬ пасхалка
             if (musicLink) {
-                // Добавляем подсказку в текст
                 lightboxCaption.innerHTML = `<strong>${title}</strong><br>${subtitle}<br><span class="music-hint">🎵 псс... кликни по самой картинке!</span>`;
-                // Делаем картинку кликабельной и светящейся
                 lightboxImg.classList.add('clickable-art');
                 lightboxImg.onclick = function(event) {
-                    event.stopPropagation(); // Чтобы при клике на картинку не закрывалось окно
-                    window.open(musicLink, '_blank'); // Открываем трек в новой вкладке
+                    event.stopPropagation();
+                    window.open(musicLink, '_blank');
                 };
             } 
-            // Если это ОБЫЧНЫЙ арт
             else {
                 lightboxCaption.innerHTML = `<strong>${title}</strong><br>${subtitle}`;
-                // Убираем кликабельность и эффекты
                 lightboxImg.classList.remove('clickable-art');
                 lightboxImg.onclick = null;
             }
@@ -1444,26 +1457,57 @@
         }
 
         function closeLightbox(event) {
-            // Закрываем, только если кликнули на фон или на крестик
             if (event.target.id === 'myLightbox' || event.target.classList.contains('lightbox-close')) {
                 document.getElementById('myLightbox').classList.remove('active');
                 document.body.style.overflow = 'auto'; 
-                
-                // Очищаем ссылку при закрытии окна, чтобы она не перенеслась на другие арты
                 document.getElementById('lightbox-img').onclick = null;
             }
         }
-   	 </script>
-	<script>
+
+        // КНОПКА "ПОКАЗАТЬ БОЛЬШЕ" ДЛЯ АРТОВ
+        document.addEventListener('DOMContentLoaded', () => {
+            const grids = document.querySelectorAll('.gallery-grid');
+            
+            grids.forEach(grid => {
+                const items = grid.querySelectorAll('.gallery-item');
+                
+                if (items.length > 6) {
+                    for (let i = 6; i < items.length; i++) {
+                        items[i].style.display = 'none';
+                    }
+                    
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-more-arts';
+                    btn.innerText = 'Показать больше ▼';
+                    
+                    grid.parentNode.insertBefore(btn, grid.nextSibling);
+                    
+                    let currentlyShown = 6;
+                    
+                    btn.addEventListener('click', () => {
+                        const nextLimit = currentlyShown + 6;
+                        
+                        for (let i = currentlyShown; i < nextLimit && i < items.length; i++) {
+                            items[i].style.display = '';
+                        }
+                        
+                        currentlyShown = nextLimit;
+                        
+                        if (currentlyShown >= items.length) {
+                            btn.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
         // ==========================================
-        // БАЗА ДАННЫХ ТВОИХ СТРИМОВ
+        // 3. ЛОГИКА КАЛЕНДАРЯ
         // ==========================================
         const streamsList = [
-            // 1. ОБЫЧНЫЕ СТРИМЫ (Точечные дни)
             { date: '2026-05-29', time: '19:00', text: 'Стрим возвращение', isSpecial: false, isCanceled: false },
             { date: '2026-05-31', time: '15:00', text: 'Крафт коробки', isSpecial: true, isCanceled: false },
             
-            // ОТМЕНЕННЫЙ СТРИМ
             { date: '2026-06-02', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: true },
             { date: '2026-06-05', time: '19:00', text: 'Костюм горничной', isSpecial: true, isCanceled: false }, 
             { date: '2026-06-09', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
@@ -1474,22 +1518,22 @@
             { date: '2026-06-23', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-06-25', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
 
-            // ТЕСТОВЫЕ ПАСХАЛКИ (Глитч и Нуар)
-            //{ date: '2026-08-11', time: '20:00', text: 'ERROR_404', isGlitch: true },
-            //{ date: '2026-08-10', time: '??:??', text: 'УЛИКА #1', isNoir: true },
-
             { date: '2026-06-30', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: true },
             { date: '2026-07-01', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-07-03', time: '±19:30', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-07-04', time: '', text: 'Стрим', isSpecial: false, isCanceled: true },
+            { date: '2026-07-19', time: '±19:30', text: 'Стрим', isSpecial: false, isCanceled: false },
+            
+            { date: '2026-07-21', time: '19:00', text: 'Рисование', isArt: true, isCanceled: false },
 
-            // 2. МНОГОДНЕВНЫЕ СОБЫТИЯ (Полупрозрачная заливка ячеек)
-            { startDate: '2026-07-06', endDate: '2026-07-16', text: 'ОТПУСК 🌴', type: 'vacation' },
-	        // { startDate: '2026-07-18', endDate: '2026-07-25', text: 'Марафон', type: 'marathon' }
+            { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' },
+            // { startDate: '2026-07-18', endDate: '2026-07-25', text: 'Марафон', type: 'marathon' }
+            // ТЕСТОВЫЕ ПАСХАЛКИ (Глитч и Нуар)
+            //{ date: '2026-08-11', time: '20:00', text: 'ERROR_404', isGlitch: true },
+            //{ date: '2026-08-10', time: '??:??', text: 'УЛИКА #1', isNoir: true },
         ];
-        // ==========================================
 
-        let currentDate = new Date(); // ТА САМАЯ ВАЖНАЯ СТРОЧКА!
+        let currentDate = new Date(); 
 
         function renderCalendar() {
             const year = currentDate.getFullYear();
@@ -1509,12 +1553,10 @@
             const today = new Date();
             const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
-            // Пустые ячейки в начале месяца
             for (let i = 0; i < firstDay; i++) {
                 daysContainer.innerHTML += `<div class="day-cell empty"></div>`;
             }
 
-            // Отрисовка дней
             for (let i = 1; i <= daysInMonth; i++) {
                 const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
                 
@@ -1523,43 +1565,57 @@
 
                 let cellClasses = 'day-cell';
                 let cellContent = `<div class="day-number">${i}</div>`;
+                let inlineStyles = '';
 
-                // Подсветка сегодняшнего дня
                 if (dateString === todayString) {
                     cellClasses += ' today';
                 }
 
-                // Логика отрисовки всех событий
                 if (periodEvent) {
                     cellClasses += ` ${periodEvent.type}`;
                     cellContent += `<div class="period-text">${periodEvent.text}</div>`;
                 } 
                 else if (streamEvent) {
-                    // Проверяем все наши спецэффекты по очереди
                     if (streamEvent.isNoir) {
                         cellClasses += ' noir-day';
                     } else if (streamEvent.isGlitch) {
                         cellClasses += ' glitch-day';
-                    } else if (streamEvent.isCanceled) {
-                        cellClasses += ' canceled-day';
-                        cellContent += `<div class="stream-info">${streamEvent.time}<br>${streamEvent.text}</div>`;
+                    } else if (streamEvent.isArt) {
+                        cellClasses += ' art-day';
+                        const artIconsArray = ['🎨', '🖌️', '✏️', '🖍️', '✒️'];
+                        const autoIcon = artIconsArray[i % artIconsArray.length];
+                        const icon = streamEvent.artIcon || autoIcon;
+                        cellContent += `<div class="art-icon">${icon}</div>`;
+                        
+                        const hue1 = (i * 65) % 360; 
+                        const hue2 = (hue1 + 60) % 360; 
+                        const angle = 45 + (i * 37) % 360;
+                        const rot = -6 + (i * 11) % 12; 
+                        const shapes = [
+                            "20% 80% 30% 70% / 60% 30% 70% 40%",
+                            "60% 40% 50% 50% / 40% 50% 50% 60%",
+                            "30% 70% 60% 40% / 50% 30% 70% 50%",
+                            "80% 20% 40% 60% / 60% 50% 50% 40%"
+                        ];
+                        const shape = shapes[i % 4];
+                        inlineStyles += `--art-angle: ${angle}deg; --art-color1: hsl(${hue1}, 90%, 65%); --art-color2: hsl(${hue2}, 90%, 55%); --art-shape: ${shape}; --art-rot: ${rot}deg;`;
                     } else {
-                        // Обычный стрим
                         cellClasses += ' stream-day';
-                        // Если дата меньше сегодняшней - вешаем галочку и тусклость
                         if (dateString < todayString) {
                             cellClasses += ' past-stream';
                         }
                     }
 
-                    // Добавляем контент для не-отмененных стримов (и для спецэффектов)
-                    if (!streamEvent.isCanceled) {
+                    if (streamEvent.isCanceled) {
+                        cellClasses += ' canceled-day';
+                        cellContent += `<div class="stream-info">${streamEvent.time}<br>${streamEvent.text}</div>`;
+                    } else {
                         const specialClass = streamEvent.isSpecial ? 'special' : '';
                         cellContent += `<div class="stream-info ${specialClass}">${streamEvent.time}<br>${streamEvent.text}</div>`;
                     }
                 }
 
-                daysContainer.innerHTML += `<div class="${cellClasses}">${cellContent}</div>`;
+                daysContainer.innerHTML += `<div class="${cellClasses}" style="${inlineStyles}">${cellContent}</div>`;
             }
         }
 
@@ -1569,10 +1625,10 @@
         }
 
         renderCalendar();
-    </script>
 
-	<script>
-        // 1. ПАСХАЛКА С КОРОБКОЙ (Дождь из коробок)
+        // ==========================================
+        // 4. ПАСХАЛКИ (КОРОБКИ И ГРАВИТАЦИЯ)
+        // ==========================================
         const secretBox = document.getElementById('secret-box');
         let boxClicks = 0;
 
@@ -1580,97 +1636,44 @@
             secretBox.addEventListener('click', () => {
                 boxClicks++;
                 
-                // Легкая тряска слова при клике
                 secretBox.style.transform = `translateX(${boxClicks % 2 === 0 ? 4 : -4}px)`;
                 setTimeout(() => secretBox.style.transform = 'none', 100);
 
                 if (boxClicks === 5) {
-                    boxClicks = 0; // Сбрасываем счетчик
+                    boxClicks = 0; 
                     startBoxRain();
                 }
             });
         }
 
         function startBoxRain() {
-            // Создаем 40 коробок с разной задержкой
             for (let i = 0; i < 40; i++) {
                 setTimeout(() => {
                     const box = document.createElement('div');
                     box.innerText = '📦';
                     box.className = 'falling-box';
-                    box.style.left = Math.random() * 100 + 'vw'; // Рандомная позиция по ширине
-                    box.style.animationDuration = (Math.random() * 2 + 2) + 's'; // Разная скорость падения
+                    box.style.left = Math.random() * 100 + 'vw'; 
+                    box.style.animationDuration = (Math.random() * 2 + 2) + 's'; 
                     document.body.appendChild(box);
                     
-                    // Удаляем коробку, когда она упала (чтобы не засорять память браузера)
                     setTimeout(() => box.remove(), 5000);
-                }, i * 100); // Интервал появления
+                }, i * 100); 
             }
         }
 
-        // 2. ПАСХАЛКА СЕППУКУ (Сломанная гравитация)
         const seppukuBtn = document.getElementById('seppuku-btn');
         if (seppukuBtn) {
             seppukuBtn.addEventListener('click', () => {
                 document.body.classList.add('seppuku-mode');
-                // Скроллим в самый верх, чтобы зритель видел, как всё летит в бездну
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
     </script>
 
-</script>
-
     <div class="seppuku-message">
         Сайт отправился в таймаут! ⚔️<br>
         <span style="font-size: 20px; color: #fff;">(Обнови страницу, чтобы починить гравитацию)</span>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Находим все разделы с сетками артов
-            const grids = document.querySelectorAll('.gallery-grid');
-            
-            grids.forEach(grid => {
-                const items = grid.querySelectorAll('.gallery-item');
-                
-                // Если картинок больше 6
-                if (items.length > 6) {
-                    // Прячем все, начиная с 7-й (индекс 6)
-                    for (let i = 6; i < items.length; i++) {
-                        items[i].style.display = 'none';
-                    }
-                    
-                    // Создаем кнопку
-                    const btn = document.createElement('button');
-                    btn.className = 'btn-more-arts';
-                    btn.innerText = 'Показать больше ▼';
-                    
-                    // Вставляем кнопку сразу после сетки артов
-                    grid.parentNode.insertBefore(btn, grid.nextSibling);
-                    
-                    let currentlyShown = 6;
-                    
-                    // Логика по клику на кнопку
-                    btn.addEventListener('click', () => {
-                        const nextLimit = currentlyShown + 6;
-                        
-                        // Показываем следующие 6 картинок
-                        for (let i = currentlyShown; i < nextLimit && i < items.length; i++) {
-                            items[i].style.display = ''; // Возвращаем отображение по умолчанию
-                        }
-                        
-                        currentlyShown = nextLimit;
-                        
-                        // Если показали все картинки - прячем кнопку
-                        if (currentlyShown >= items.length) {
-                            btn.style.display = 'none';
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 
 </body>
 </html>
