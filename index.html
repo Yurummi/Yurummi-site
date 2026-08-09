@@ -125,6 +125,21 @@
             z-index: 10;
             transform: rotate(var(--art-rot, 10deg));
         }
+        /* Подсветка СЕГОДНЯШНЕГО арт-стрима (возвращаем белую рамку поверх кляксы) */
+        .day-cell.art-day.today {
+            border: 3px solid #ffffff !important;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5) !important;
+            z-index: 25; /* Поднимаем выше всех, чтобы рамку было четко видно */
+        }
+
+        /* Дизайн ПРОШЕДШЕГО арт-стрима (блеклые мазки краски) */
+        .day-cell.art-day.past-stream {
+            filter: grayscale(0.5) opacity(0.6) !important; /* Убираем половину цвета и делаем полупрозрачной */
+        }
+        
+        .day-cell.art-day.past-stream:hover {
+            filter: grayscale(0.2) opacity(0.9) !important; /* При наведении чуть-чуть возвращаем жизнь */
+        }
 
         /* ==========================================
            ЭФФЕКТ 1: СЕКРЕТНАЯ ПАПКА (Желтая папка)
@@ -1732,9 +1747,8 @@
                         cellClasses += ' noir-day';
                     } else if (streamEvent.isGlitch) {
                         cellClasses += ' glitch-day';
-                    } else if (streamEvent.isExam) { // <--- НОВАЯ СТРОЧКА ТУТ
+                    } else if (streamEvent.isExam) {
                         cellClasses += ' panic-day';
-                    } else if (streamEvent.isCanceled) {
                     } else if (streamEvent.isArt) {
                         cellClasses += ' art-day';
                         const artIconsArray = ['🎨', '🖌️', '✏️', '🖍️', '✒️'];
@@ -1756,9 +1770,11 @@
                         inlineStyles += `--art-angle: ${angle}deg; --art-color1: hsl(${hue1}, 90%, 65%); --art-color2: hsl(${hue2}, 90%, 55%); --art-shape: ${shape}; --art-rot: ${rot}deg;`;
                     } else {
                         cellClasses += ' stream-day';
-                        if (dateString < todayString) {
-                            cellClasses += ' past-stream';
-                        }
+                    }
+
+                    // УНИВЕРСАЛЬНАЯ ПРОВЕРКА НА ПРОШЛОЕ: работает для артов, нуара и обычных стримов
+                    if (dateString < todayString && !streamEvent.isCanceled) {
+                        cellClasses += ' past-stream';
                     }
 
                     if (streamEvent.isCanceled) {
