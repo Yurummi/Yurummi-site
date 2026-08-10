@@ -5,355 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сайт Юрумми</title>
 
-    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" href="img/logo.png">
 
     <style>
-	* {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
         
-        /* ==========================================
-           ЭФФЕКТ 4: ЭКЗАМЕН / ПАНИКА (Красный маркер)
-           ========================================== */
-        .day-cell.panic-day {
-            background: rgba(239, 68, 68, 0.1) !important; /* Легкий красный фон */
-            position: relative;
-            z-index: 20; /* Поднимаем выше всех, чтобы надписи перекрывали соседей */
-            animation: panic-shake 0.4s infinite; /* Нервное дрожание */
-        }
-
-        /* Небрежный красный круг (маркер) */
-        .day-cell.panic-day::before {
-            content: '';
-            position: absolute;
-            top: -8px; left: -8px; right: -8px; bottom: -8px;
-            border: 3px solid #ef4444; /* Красный цвет маркера */
-            /* Делаем форму кривой и органичной, как от руки */
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
-            transform: rotate(-5deg);
-            pointer-events: none;
-            box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.2);
-        }
-
-        /* Вторая линия для эффекта "чирканья" несколько раз */
-        .day-cell.panic-day .day-number::after {
-            content: '';
-            position: absolute;
-            top: -12px; left: -5px; right: -10px; bottom: -5px;
-            border: 2px solid rgba(239, 68, 68, 0.7);
-            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
-            transform: rotate(15deg);
-            pointer-events: none;
-        }
-
-        /* Кривая надпись поверх других ячеек */
-        .day-cell.panic-day::after {
-            content: 'ААААА!!!'; /* Тот самый крик души */
-            position: absolute;
-            top: -25px;
-            right: -60px; /* Жестко вылезаем на правую ячейку */
-            color: #ef4444;
-            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif; /* Шрифт от руки */
-            font-size: 28px;
-            font-weight: 900;
-            transform: rotate(18deg);
-            pointer-events: none;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.9);
-            white-space: nowrap;
-        }
-
-        /* Убираем стандартную плашку стрима, чтобы было больше похоже на просто пометку */
-        .day-cell.panic-day .stream-info {
-            background: transparent !important;
-            border: none;
-            color: #ef4444 !important;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            font-size: 16px;
-            text-transform: uppercase;
-            transform: rotate(-10deg);
-        }
-
-        @keyframes panic-shake {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-1px, 1px) rotate(-1deg); }
-            50% { transform: translate(1px, -1px) rotate(1deg); }
-            75% { transform: translate(-1px, -1px) rotate(0deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
-        }
-
-        /* ==========================================
-           ЭФФЕКТ 3: АРТ-СТРИМ (Уникальные кляксы)
-           ========================================== */
-           .day-cell.art-day {
-            background-image: linear-gradient(var(--art-angle, 130deg), var(--art-color1, #ff3385), var(--art-color2, #9333ea));
-            border-radius: var(--art-shape, 20% 80% 30% 70% / 60% 30% 70% 40%) !important;
-            border: none !important;
-            transform: scale(1.15) rotate(var(--art-rot, -3deg));
-            z-index: 5;
-            position: relative;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.3);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .day-cell.art-day:hover {
-            transform: scale(1.25) rotate(calc(var(--art-rot, -3deg) + 4deg));
-            z-index: 15;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.6), inset 0 0 15px rgba(255,255,255,0.5);
-        }
-
-        .day-cell.art-day .day-number {
-            color: #fff !important;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            opacity: 1 !important;
-        }
-
-        .day-cell.art-day .stream-info {
-            background: rgba(0, 0, 0, 0.6) !important;
-            color: #fff !important;
-            border-radius: 8px !important;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: none;
-        }
-
-        .art-icon {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            font-size: 24px;
-            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.6));
-            z-index: 10;
-            transform: rotate(var(--art-rot, 10deg));
-        }
-        /* Подсветка СЕГОДНЯШНЕГО арт-стрима (возвращаем белую рамку поверх кляксы) */
-        .day-cell.art-day.today {
-            border: 3px solid #ffffff !important;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5) !important;
-            z-index: 25; /* Поднимаем выше всех, чтобы рамку было четко видно */
-        }
-
-        /* Дизайн ПРОШЕДШЕГО арт-стрима (блеклые мазки краски) */
-        .day-cell.art-day.past-stream {
-            filter: grayscale(0.5) opacity(0.6) !important; /* Убираем половину цвета и делаем полупрозрачной */
-        }
-        
-        .day-cell.art-day.past-stream:hover {
-            filter: grayscale(0.2) opacity(0.9) !important; /* При наведении чуть-чуть возвращаем жизнь */
-        }
-
-        /* ==========================================
-           ЭФФЕКТ 1: СЕКРЕТНАЯ ПАПКА (Желтая папка)
-           ========================================== */
-        .day-cell.noir-day {
-            background: #facc15 !important;
-            background-image: linear-gradient(to bottom right, #facc15, #ca8a04) !important;
-            border: 2px solid #a16207 !important;
-            border-radius: 2px 10px 10px 10px !important;
-            position: relative;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .day-cell.noir-day::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -2px;
-            width: 45%;
-            height: 12px;
-            background: #facc15;
-            border: 2px solid #a16207;
-            border-bottom: none;
-            border-radius: 6px 6px 0 0;
-        }
-
-        .day-cell.noir-day::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 42%;
-            height: 4px;
-            background: #facc15;
-            z-index: 1;
-        }
-
-        .day-cell.noir-day .day-number {
-            color: #452e04 !important; 
-            opacity: 0.8 !important;
-            z-index: 2;
-        }
-
-        .day-cell.noir-day .stream-info {
-            background: #111 !important;
-            color: #111 !important;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
-            letter-spacing: 2px;
-            transform: rotate(-4deg);
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-            border-radius: 3px;
-        }
-
-        .day-cell.noir-day:hover .stream-info {
-            color: #fff !important;
-            background: #222 !important;
-            transform: rotate(0deg) scale(1.05);
-        }
-
-        /* ==========================================
-           ЭФФЕКТ 2: ГЛИТЧ ПОРТАЛ (Glitch/Rift)
-           ========================================== */
-        .day-cell.glitch-day {
-            background: #0f001a !important;
-            border-color: #a855f7 !important;
-            box-shadow: 0 0 15px #a855f7, inset 0 0 10px #a855f7;
-            animation: rift-vibrate 0.2s infinite;
-        }
-
-        .day-cell.glitch-day .stream-info {
-            background: #a855f7 !important;
-            color: #fff !important;
-            text-transform: uppercase;
-            font-family: monospace;
-            animation: glitch-text-flicker 1s infinite;
-        }
-
-        @keyframes rift-vibrate {
-            0% { transform: translate(0); }
-            25% { transform: translate(-1px, 1px); border-color: #ff00ff !important; }
-            50% { transform: translate(1px, -1px); }
-            75% { transform: translate(-1px, -1px); border-color: #00ffff !important; }
-            100% { transform: translate(0); }
-        }
-
-        @keyframes glitch-text-flicker {
-            0%, 100% { opacity: 1; transform: skew(0deg); }
-            20% { opacity: 0.8; transform: skew(5deg); }
-            40% { opacity: 1; transform: skew(-5deg); }
-            50% { opacity: 0.5; }
-        }
-
         /* ==========================================
            БАЗОВЫЕ НАСТРОЙКИ И МЕНЮ
            ========================================== */
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #ffffff;
+            margin: 0; padding: 0;
+            background-color: #121212; color: #ffffff;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         nav {
-            position: sticky;
-            top: 0;
+            position: sticky; top: 0;
             background-color: rgba(18, 18, 18, 0.95);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
-            text-align: center;
-            z-index: 1000;
-            border-bottom: 1px solid #333;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            padding: 20px 0; text-align: center;
+            z-index: 1000; border-bottom: 1px solid #333;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;
         }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            transition: color 0.3s;
+        nav a { color: #fff; text-decoration: none; font-size: 18px; font-weight: bold; transition: color 0.3s; }
+        nav a:hover { color: #ff3385; }
+
+        .nav-item-new { position: relative; }
+        .badge-new {
+            position: absolute; top: -10px; right: -20px;
+            background: #10ff00; color: #000; font-size: 10px; font-weight: 900;
+            padding: 2px 6px; border-radius: 10px; text-transform: uppercase;
+            animation: pulse-badge 2s infinite; pointer-events: none;
+        }
+        @keyframes pulse-badge {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 255, 0, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 10px 5px rgba(16, 255, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 255, 0, 0); }
         }
 
-        nav a:hover {
-            color: #ff3385;
-        }
-
-        section {
-            padding-top: 100px; 
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .content-container {
-            width: 100%;
-            max-width: 1000px;
-            padding: 0 20px;
-        }
-
-        h2.section-title {
-            text-align: center;
-            border-bottom: 2px solid #333;
-            padding-bottom: 15px;
-            color: #ff3385;
-            margin-bottom: 30px;
-            font-size: 32px;
-        }
+        section { padding-top: 100px; min-height: 60vh; display: flex; flex-direction: column; align-items: center; }
+        .content-container { width: 100%; max-width: 1000px; padding: 0 20px; }
+        h2.section-title { text-align: center; border-bottom: 2px solid #333; padding-bottom: 15px; color: #ff3385; margin-bottom: 30px; font-size: 32px; }
 
         /* ==========================================
-           ТВОЙ СЛАЙДЕР (ПОЛНАЯ ВЕРСИЯ)
+           СЛАЙДЕР
            ========================================== */
-        .slider-wrapper {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 1200px;
-            gap: 20px;
-        }
-
+        .slider-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; gap: 20px; }
         .slider-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 4px solid #ffffff;
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.9),
-                0 0 20px rgba(255, 255, 255, 0.3),
-                inset 0 0 50px rgba(0, 0, 0, 0.6);
+            position: relative; width: 100%; aspect-ratio: 16 / 9;
+            border-radius: 16px; overflow: hidden; border: 4px solid #ffffff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 50px rgba(0, 0, 0, 0.6);
             background-color: #0f0f0f;
         }
-
-        .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; transition: opacity 1s ease-in-out;
-        }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
         .slide.active { opacity: 1; z-index: 2; }
         .slide.clickable { cursor: pointer; }
-
-        .slide-blur-bg {
-            position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
-            background-size: cover; background-position: center; filter: blur(25px) brightness(0.4);
-        }
-
-        .slide-main-img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: contain; background-position: center; background-repeat: no-repeat;
-            filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.8)); transition: transform 0.3s;
-        }
+        .slide-blur-bg { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; background-size: cover; background-position: center; filter: blur(25px) brightness(0.4); }
+        .slide-main-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: contain; background-position: center; background-repeat: no-repeat; filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.8)); transition: transform 0.3s; }
         .slide.clickable:hover .slide-main-img { transform: scale(1.02); }
-
-        .caption-panel {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 12px 30px 15px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);
-            backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.1); color: white;
-            transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
+        .caption-panel { position: absolute; bottom: 0; left: 0; width: 100%; padding: 12px 30px 15px; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%); backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.1); color: white; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .slide.active .caption-panel { transform: translateY(0); }
-
         .caption-title { font-size: 28px; font-weight: bold; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
         .caption-author { font-size: 20px; color: #b3b3b3; }
         .caption-author span { color: #ff3385; font-weight: bold; }
@@ -362,7 +79,6 @@
         .badge-wrapper { position: absolute; top: -25px; right: -25px; opacity: 0; transition: opacity 1s ease-in-out; filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.8)); }
         .badge-wrapper.active { opacity: 1; }
         .badge { display: flex; align-items: center; justify-content: center; font-family: 'Arial Black', Impact, sans-serif; font-weight: 900; text-align: center; color: #000; }
-
         .badge.yellow { width: 150px; height: 150px; font-size: 32px; background-color: #ffe600; clip-path: polygon(50% 0%, 61% 20%, 85% 15%, 75% 35%, 100% 50%, 75% 65%, 85% 85%, 61% 80%, 50% 100%, 39% 80%, 15% 85%, 25% 65%, 0% 50%, 25% 35%, 15% 15%, 39% 20%); animation: pulse-star 0.7s infinite alternate ease-in-out; }
         .badge.green { width: 180px; height: 65px; font-size: 26px; background-color: #10ff00; clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%); animation: pulse-tag 0.8s infinite alternate ease-in-out; margin-top: 35px; }
         .badge.pink { width: auto; padding: 0 25px; height: 60px; font-size: 26px; background: linear-gradient(135deg, #ff0066, #ff66a3); color: white; border-radius: 30px; border: 3px solid #ffffff; animation: float-pink 1.5s infinite alternate ease-in-out; margin-top: 35px; margin-right: 15px; }
@@ -370,629 +86,210 @@
         @keyframes pulse-star { 0% { transform: scale(1) rotate(15deg); } 100% { transform: scale(1.15) rotate(15deg); } }
         @keyframes pulse-tag { 0% { transform: scale(1) rotate(10deg); } 100% { transform: scale(1.1) rotate(10deg); } }
         @keyframes float-pink { 0% { transform: translateY(0) rotate(5deg); } 100% { transform: translateY(-10px) rotate(-5deg); } }
-
+        
         .pagination { display: flex; gap: 12px; align-items: center; justify-content: center; z-index: 10; margin-top: 10px; }
         .dot { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #ffffff; background-color: transparent; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.8); cursor: pointer; }
         .dot.active { background-color: #ffffff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 2px 5px rgba(0,0,0,0.8); }
-	/* ==========================================
-           ГАЛЕРЕЯ АРТОВ И СКЕТЧЕЙ
+
+        /* ==========================================
+           ГАЛЕРЕЯ АРТОВ
            ========================================== */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-            margin-bottom: 40px;
-        }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; width: 100%; margin-bottom: 40px; }
+        .gallery-item { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 1 / 1; box-shadow: 0 8px 20px rgba(0,0,0,0.5); cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; padding: 15px; text-align: center; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay h3 { margin: 0 0 10px 0; color: #ff3385; font-size: 22px; }
+        .gallery-overlay p { margin: 0; color: #fff; font-size: 16px; }
+        .gallery-subtitle { text-align: center; color: #b3b3b3; margin-bottom: 20px; font-size: 20px; }
+        .btn-more-arts { display: block; margin: 10px auto 40px; background: transparent; color: #ff3385; border: 2px dashed #ff3385; padding: 10px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+        .btn-more-arts:hover { background: rgba(255, 51, 133, 0.1); transform: translateY(-2px); }
 
-        .gallery-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 1 / 1;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            cursor: pointer;
-        }
+        /* LIGHTBOX */
+        .lightbox { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center; flex-direction: column; opacity: 0; transition: opacity 0.3s ease; }
+        .lightbox.active { display: flex; opacity: 1; }
+        .lightbox-content { max-width: 90%; max-height: 80vh; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5); object-fit: contain; }
+        .lightbox-caption { margin-top: 15px; color: #fff; font-size: 20px; text-align: center; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; transition: color 0.3s; }
+        .lightbox-close:hover { color: #ff3385; }
+        .music-hint { display: inline-block; margin-top: 10px; color: #ffe600; font-size: 14px; font-style: italic; animation: pulse-text 2s infinite; }
+        .lightbox-content.clickable-art { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .lightbox-content.clickable-art:hover { transform: scale(1.02); box-shadow: 0 0 40px rgba(255, 51, 133, 0.8); }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-overlay h3 {
-            margin: 0 0 10px 0;
-            color: #ff3385;
-            font-size: 22px;
-        }
-
-        .gallery-overlay p {
-            margin: 0;
-            color: #fff;
-            font-size: 16px;
-        }
-        
-        .gallery-subtitle {
-            text-align: center;
-            color: #b3b3b3;
-            margin-bottom: 20px;
-            font-size: 20px;
-        }
-	/* ==========================================
-           МОДАЛЬНОЕ ОКНО (LIGHTBOX)
+        /* ==========================================
+           КАЛЕНДАРЬ И ЭФФЕКТЫ
            ========================================== */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+        .calendar-wrapper { background-color: #1e1e1e; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 800px; margin: 0 auto; }
+        .timezone-note { text-align: center; color: #b3b3b3; font-size: 14px; margin-bottom: 20px; background: #2a2a2a; padding: 10px; border-radius: 8px; display: inline-block; }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .calendar-header button { background: #2a2a2a; border: none; color: #ff3385; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: background 0.3s; }
+        .calendar-header button:hover { background: #3a3a3a; }
+        .calendar-header h3 { margin: 0; font-size: 24px; text-transform: uppercase; color: #fff; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; width: 100%; }
+        .weekday { text-align: center; font-weight: bold; color: #888; padding-bottom: 10px; }
 
-        .lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
+        .day-cell { background: #2a2a2a; border-radius: 8px; aspect-ratio: 1 / 1; min-height: 90px; padding: 8px; display: flex; flex-direction: column; position: relative; border: 2px solid transparent; transition: transform 0.2s, box-shadow 0.2s; }
+        .day-cell.empty { background: transparent; border: none; }
+        .day-cell.stream-day { background: #2b1124; border-color: #ff3385; }
+        .day-cell.stream-day:hover { transform: scale(1.05); z-index: 10; box-shadow: 0 0 15px rgba(255, 51, 133, 0.4); }
+        .day-cell.today { border-color: #ffffff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+        .day-number { font-size: clamp(14px, 2vw, 20px); font-weight: bold; color: #fff; opacity: 0.5; position: relative; z-index: 2; }
+        .day-cell.stream-day .day-number, .day-cell.period-day .day-number { opacity: 1; }
+        .stream-info { margin-top: auto; background: #fff; color: #121212; font-size: clamp(9px, 1.2vw, 12px); font-weight: bold; text-align: center; padding: 4px 2px; border-radius: 6px; line-height: 1.1; overflow: hidden; position: relative; z-index: 2; }
+        .stream-info.special { background: #ff3385; color: #fff; }
 
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 80vh;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            object-fit: contain;
-        }
+        .day-cell.canceled-day { background: #2a2a2a; border-color: #555; opacity: 0.7; }
+        .day-cell.art-day.canceled-day { filter: grayscale(1) opacity(0.4) !important; box-shadow: none !important; }
+        .day-cell.canceled-day .stream-info { background: #444; color: #aaa; text-decoration: line-through; }
+        .day-cell.canceled-day .stream-info::after { content: "ОТМЕНЕН"; display: block; background: #ff3333; color: white; font-size: 8px; text-decoration: none; border-radius: 4px; margin-top: 2px; padding: 1px 0; }
+        .day-cell.past-stream { opacity: 0.5; transition: opacity 0.3s; }
+        .day-cell.past-stream:hover { opacity: 0.9; }
+        .day-cell.past-stream .stream-info::before { content: "✔ "; color: #10ff00; font-size: 10px; }
+        .day-cell.art-day.past-stream { filter: grayscale(0.5) opacity(0.6) !important; }
+        .day-cell.art-day.past-stream:hover { filter: grayscale(0.2) opacity(0.9) !important; }
 
-        .lightbox-caption {
-            margin-top: 15px;
-            color: #fff;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .lightbox-close:hover {
-            color: #ff3385;
-        }
-
-	/* ==========================================
-           ПАСХАЛКА ДЛЯ АРТА С ТРЕКОМ
-           ========================================== */
-        .music-hint {
-            display: inline-block;
-            margin-top: 10px;
-            color: #ffe600;
-            font-size: 14px;
-            font-style: italic;
-            animation: pulse-text 2s infinite;
-        }
-
-        .lightbox-content.clickable-art {
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .lightbox-content.clickable-art:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 40px rgba(255, 51, 133, 0.8);
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-	/* ==========================================
-           КАЛЕНДАРЬ СТРИМОВ
-           ========================================== */
-        .calendar-wrapper {
-            background-color: #1e1e1e;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timezone-note {
-            text-align: center;
-            color: #b3b3b3;
-            font-size: 14px;
-            margin-bottom: 20px;
-            background: #2a2a2a;
-            padding: 10px;
-            border-radius: 8px;
-            display: inline-block;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .calendar-header button {
-            background: #2a2a2a;
-            border: none;
-            color: #ff3385;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .calendar-header button:hover {
-            background: #3a3a3a;
-        }
-
-        .calendar-header h3 {
-            margin: 0;
-            font-size: 24px;
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-	.calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
-            gap: 10px;
-            width: 100%;
-        }
-
-        .weekday {
-            text-align: center;
-            font-weight: bold;
-            color: #888;
-            padding-bottom: 10px;
-        }
-
-.day-cell {
-            background: #2a2a2a;
-            border-radius: 8px;
-            aspect-ratio: 1 / 1;
-            min-height: 90px;
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            border: 2px solid transparent;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .day-cell.empty {
-            background: transparent;
-            border: none;
-        }
-
-        .day-cell.stream-day {
-            background: #2b1124;
-            border-color: #ff3385;
-        }
-
-        .day-cell.stream-day:hover {
-            transform: scale(1.05);
-            z-index: 10;
-            box-shadow: 0 0 15px rgba(255, 51, 133, 0.4);
-        }
-
-        .day-cell.today {
-            border-color: #ffffff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-
-        .day-number {
-            font-size: clamp(14px, 2vw, 20px);
-            font-weight: bold;
-            color: #fff;
-            opacity: 0.5;
-            position: relative;
-            z-index: 2;
-        }
-
-	    /* Дизайн ОТМЕНЕННОГО стрима */
-        .day-cell.canceled-day {
-            background: #2a2a2a;
-            border-color: #555;
-            opacity: 0.7;
-        }
-        
-        /* Если отменился именно АРТ-стрим */
-        .day-cell.art-day.canceled-day {
-            filter: grayscale(1) opacity(0.4) !important;
-            box-shadow: none !important;
-        }
-
-        .day-cell.canceled-day .stream-info {
-            background: #444;
-            color: #aaa;
-            text-decoration: line-through;
-        }
-
-        .day-cell.canceled-day .stream-info::after {
-            content: "ОТМЕНЕН";
-            display: block;
-            background: #ff3333;
-            color: white;
-            font-size: 8px;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-top: 2px;
-            padding: 1px 0;
-        }
-
-        /* Дизайн ПРОШЕДШЕГО стрима */
-        .day-cell.past-stream {
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-
-        .day-cell.past-stream:hover {
-            opacity: 0.9;
-        }
-
-        .day-cell.past-stream .stream-info::before {
-            content: "✔ ";
-            color: #10ff00;
-            font-size: 10px;
-        }
-
-
-        .day-cell.stream-day .day-number, .day-cell.period-day .day-number {
-            opacity: 1;
-        }
-
-        .stream-info {
-            margin-top: auto;
-            background: #fff;
-            color: #121212;
-            font-size: clamp(9px, 1.2vw, 12px);
-            font-weight: bold;
-            text-align: center;
-            padding: 4px 2px;
-            border-radius: 6px;
-            line-height: 1.1;
-            overflow: hidden;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stream-info.special {
-            background: #ff3385;
-            color: #fff;
-        }
-
-	/* ==========================================
-           МНОГОДНЕВНЫЕ СОБЫТИЯ (ПОЛУПРОЗРАЧНЫЕ ЯЧЕЙКИ)
-           ========================================== */
-        
-        .day-cell.vacation {
-            background-color: rgba(255, 230, 0, 0.15);
-            border-color: rgba(255, 230, 0, 0.3);
-        }
-        
-        .day-cell.marathon {
-            background-color: rgba(255, 51, 133, 0.15);
-            border-color: rgba(255, 51, 133, 0.3);
-        }
-
-        .period-text {
-            margin-top: auto;
-            text-align: center;
-            font-size: clamp(9px, 1vw, 11px);
-            font-weight: bold;
-            line-height: 1.2;
-            padding: 2px;
-            text-transform: uppercase;
-        }
-
+        .day-cell.art-day { background-image: linear-gradient(var(--art-angle, 130deg), var(--art-color1, #ff3385), var(--art-color2, #9333ea)); border-radius: var(--art-shape, 20% 80% 30% 70% / 60% 30% 70% 40%) !important; border: none !important; transform: scale(1.15) rotate(var(--art-rot, -3deg)); z-index: 5; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.3); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .day-cell.art-day:hover { transform: scale(1.25) rotate(calc(var(--art-rot, -3deg) + 4deg)); z-index: 15; box-shadow: 0 15px 25px rgba(0,0,0,0.6), inset 0 0 15px rgba(255,255,255,0.5); }
+        .day-cell.art-day .day-number { color: #fff !important; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); opacity: 1 !important; }
+        .day-cell.art-day .stream-info { background: rgba(0, 0, 0, 0.6) !important; color: #fff !important; border-radius: 8px !important; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); box-shadow: none; }
+        .art-icon { position: absolute; top: -8px; right: -8px; font-size: 24px; filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.6)); z-index: 10; transform: rotate(var(--art-rot, 10deg)); }
+        .day-cell.art-day.today { border: 3px solid #ffffff !important; box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5) !important; z-index: 25; }
+        .day-cell.panic-day { background: rgba(239, 68, 68, 0.1) !important; position: relative; z-index: 20; animation: panic-shake 0.4s infinite; }
+        .day-cell.panic-day::before { content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px; border: 3px solid #ef4444; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(-5deg); pointer-events: none; box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.2); }
+        .day-cell.panic-day .day-number::after { content: ''; position: absolute; top: -12px; left: -5px; right: -10px; bottom: -5px; border: 2px solid rgba(239, 68, 68, 0.7); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; transform: rotate(15deg); pointer-events: none; }
+        .day-cell.panic-day::after { content: 'ААААА!!!'; position: absolute; top: -25px; right: -60px; color: #ef4444; font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif; font-size: 28px; font-weight: 900; transform: rotate(18deg); pointer-events: none; text-shadow: 2px 2px 0px rgba(0,0,0,0.9); white-space: nowrap; }
+        .day-cell.panic-day .stream-info { background: transparent !important; border: none; color: #ef4444 !important; font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 16px; text-transform: uppercase; transform: rotate(-10deg); }
+        @keyframes panic-shake { 0% { transform: translate(0, 0) rotate(0deg); } 25% { transform: translate(-1px, 1px) rotate(-1deg); } 50% { transform: translate(1px, -1px) rotate(1deg); } 75% { transform: translate(-1px, -1px) rotate(0deg); } 100% { transform: translate(0, 0) rotate(0deg); } }
+        .day-cell.noir-day { background: #facc15 !important; background-image: linear-gradient(to bottom right, #facc15, #ca8a04) !important; border: 2px solid #a16207 !important; border-radius: 2px 10px 10px 10px !important; position: relative; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
+        .day-cell.noir-day::before { content: ''; position: absolute; top: -10px; left: -2px; width: 45%; height: 12px; background: #facc15; border: 2px solid #a16207; border-bottom: none; border-radius: 6px 6px 0 0; }
+        .day-cell.noir-day::after { content: ''; position: absolute; top: 0; left: 0; width: 42%; height: 4px; background: #facc15; z-index: 1; }
+        .day-cell.noir-day .day-number { color: #452e04 !important; opacity: 0.8 !important; z-index: 2; }
+        .day-cell.noir-day .stream-info { background: #111 !important; color: #111 !important; transition: all 0.3s ease; position: relative; z-index: 2; letter-spacing: 2px; transform: rotate(-4deg); box-shadow: 2px 2px 5px rgba(0,0,0,0.4); border-radius: 3px; }
+        .day-cell.noir-day:hover .stream-info { color: #fff !important; background: #222 !important; transform: rotate(0deg) scale(1.05); }
+        .day-cell.glitch-day { background: #0f001a !important; border-color: #a855f7 !important; box-shadow: 0 0 15px #a855f7, inset 0 0 10px #a855f7; animation: rift-vibrate 0.2s infinite; }
+        .day-cell.glitch-day .stream-info { background: #a855f7 !important; color: #fff !important; text-transform: uppercase; font-family: monospace; animation: glitch-text-flicker 1s infinite; }
+        @keyframes rift-vibrate { 0% { transform: translate(0); } 25% { transform: translate(-1px, 1px); border-color: #ff00ff !important; } 50% { transform: translate(1px, -1px); } 75% { transform: translate(-1px, -1px); border-color: #00ffff !important; } 100% { transform: translate(0); } }
+        @keyframes glitch-text-flicker { 0%, 100% { opacity: 1; transform: skew(0deg); } 20% { opacity: 0.8; transform: skew(5deg); } 40% { opacity: 1; transform: skew(-5deg); } 50% { opacity: 0.5; } }
+        .day-cell.vacation { background-color: rgba(255, 230, 0, 0.15); border-color: rgba(255, 230, 0, 0.3); }
+        .day-cell.marathon { background-color: rgba(255, 51, 133, 0.15); border-color: rgba(255, 51, 133, 0.3); }
+        .period-text { margin-top: auto; text-align: center; font-size: clamp(9px, 1vw, 11px); font-weight: bold; line-height: 1.2; padding: 2px; text-transform: uppercase; }
         .vacation .period-text { color: #ffe600; }
         .marathon .period-text { color: #ff3385; }
 
-	/* ==========================================
-           КОМАНДЫ (ВЫПАДАЮЩИЕ СПИСКИ)
+        /* ==========================================
+           ЛОР И ТУЛТИПЫ
            ========================================== */
-        .command-group { margin-bottom: 15px; }
-        
-        .command-group details {
-            background: #2a2a2a;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        
-        .command-group summary {
-            padding: 15px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            list-style: none;
-            transition: background 0.3s;
-            position: relative;
-        }
-        
-        .command-group summary:hover { background: #3a3a3a; }
-        
-        .command-group summary::after {
-            content: '+';
-            position: absolute;
-            right: 20px;
-            color: #ff3385;
-            font-size: 24px;
-            line-height: 1;
-            transition: transform 0.3s;
-        }
-        
-        .command-group details[open] summary::after { transform: rotate(45deg); }
-        
-        .command-content {
-            padding: 20px;
-            background: #1e1e1e;
-            border-top: 1px solid #333;
-        }
+        .lore-timeline { display: flex; flex-direction: column; gap: 30px; margin-top: 20px; }
+        .lore-card { display: flex; flex-direction: row; align-items: center; padding: 15px; background: #1e1e1e; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid #333; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+        .lore-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(255, 51, 133, 0.15); border-color: #ff3385; }
+        .lore-video { flex: 1; min-width: 320px; max-width: 400px; aspect-ratio: 16 / 9; background: #0f0f0f; position: relative; border-radius: 8px; overflow: hidden; }
+        .video-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background-size: cover; background-position: center; text-decoration: none; color: #fff; position: relative; box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6); transition: box-shadow 0.3s; }
+        .video-placeholder:hover { box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.3); }
+        .video-placeholder .play-btn { font-size: 50px; color: #ff3385; transition: transform 0.3s, text-shadow 0.3s; z-index: 2; }
+        .video-placeholder:hover .play-btn { transform: scale(1.1); text-shadow: 0 0 15px #ff3385; }
+        .video-overlay { position: absolute; bottom: 10px; background: rgba(0,0,0,0.8); padding: 6px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; border: 1px solid #ff3385; }
+        .lore-content { flex: 2; padding: 15px 30px; display: flex; flex-direction: column; justify-content: center; }
+        .lore-title { color: #ff3385; margin-top: 0; margin-bottom: 15px; font-size: 26px; }
+        .lore-desc { color: #ccc; font-size: 16px; line-height: 1.7; margin: 0; }
 
-        .cmd-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+        .char-tooltip { position: relative; color: #a855f7; border-bottom: 1px dashed #a855f7; cursor: help; font-weight: bold; transition: color 0.3s; }
+        .char-tooltip:hover { color: #ff3385; border-color: #ff3385; }
+        .tooltip-content, .node-tooltip { visibility: hidden; opacity: 0; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%) translateY(10px); background: #1a1a1a; border: 2px solid #a855f7; padding: 15px; border-radius: 12px; width: 260px; z-index: 100; box-shadow: 0 10px 25px rgba(0,0,0,0.9); transition: opacity 0.3s ease 1s, transform 0.3s ease 1s, visibility 0s linear 1.3s; pointer-events: auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .tooltip-content::before, .node-tooltip::before { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 25px; }
+        .char-tooltip:hover .tooltip-content, .tooltip-content:hover, .h-node:hover .node-tooltip, .node-tooltip:hover { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); transition: opacity 0.3s ease 0s, transform 0.3s ease 0s, visibility 0s linear 0s; }
+        .tooltip-content::after, .node-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -10px; border-width: 10px; border-style: solid; border-color: #a855f7 transparent transparent transparent; }
+        .tooltip-content img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 2px solid #ff3385; background: #333; }
+        .tooltip-content strong { color: #fff; font-size: 18px; margin-bottom: 5px; }
+        .tooltip-content span { color: #ccc; font-size: 13px; font-weight: normal; line-height: 1.4; }
+        .node-tooltip video { width: 100%; border-radius: 8px; background: #000; outline: none; }
+
+        .lore-tree-window { width: 100%; height: 350px; background: #111; border-radius: 16px; border: 2px solid #2a2a2a; overflow: hidden; position: relative; cursor: grab; margin-top: 40px; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); }
+        .lore-tree-window:active { cursor: grabbing; }
+        .tree-canvas { position: absolute; width: 1200px; height: 100%; transform-origin: 0 0; }
+        .h-node { position: absolute; width: 24px; height: 24px; background: #ff3385; border-radius: 50%; z-index: 2; cursor: pointer; box-shadow: 0 0 15px #ff3385; transition: transform 0.3s, box-shadow 0.3s; }
+        .h-node:hover { transform: scale(1.4); box-shadow: 0 0 25px #ff3385; }
+        .h-node.active { background: #a855f7; box-shadow: 0 0 15px #a855f7; }
+        .h-node.active:hover { box-shadow: 0 0 25px #a855f7; }
+        .h-node.dead { background: #444; box-shadow: none; cursor: default; }
+        .h-node.dead:hover { transform: none; }
+        .h-node.future { background: #151515; border: none; box-shadow: none; cursor: default; animation: none; }
         
-        .cmd-item:last-child { margin-bottom: 0; }
-
-        .cmd-name {
-            background: #ff3385;
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-weight: bold;
-            font-size: 16px;
-            margin-right: 15px;
-            min-width: 100px;
-            text-align: center;
-        }
-
-        .cmd-desc { color: #ccc; font-size: 15px; line-height: 1.4; }
+        /* Исправлен кружок загрузки - теперь крутится сама рамка */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .h-node.future::before { content: ''; position: absolute; top: -3px; bottom: -3px; left: -3px; right: -3px; border: 3px dashed #a855f7; border-radius: 50%; animation: spin 5s linear infinite; display: block; box-sizing: border-box; }
+        
+        .h-cross { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 16px; pointer-events: none; }
+        .h-label { position: absolute; white-space: nowrap; color: #fff; font-size: 14px; font-weight: bold; left: 50%; transform: translateX(-50%); transition: color 0.3s; pointer-events: none; }
+        .h-label.top { top: -35px; }
+        .h-label.bottom { bottom: -35px; }
+        .h-label.dead-text { color: #666; }
+        .h-node:hover .h-label:not(.dead-text) { color: #ff3385; }
+        .h-node.active:hover .h-label { color: #a855f7; }
 
         /* ==========================================
-           КНОПКИ ПОДДЕРЖКИ (ДОНАТЫ)
+           КОМАНДЫ И ССЫЛКИ
            ========================================== */
-        .donate-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
+        .command-group { margin-bottom: 15px; }
+        .command-group details { background: #2a2a2a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .command-group summary { padding: 15px 20px; font-size: 18px; font-weight: bold; cursor: pointer; list-style: none; transition: background 0.3s; position: relative; }
+        .command-group summary:hover { background: #3a3a3a; }
+        .command-group summary::after { content: '+'; position: absolute; right: 20px; color: #ff3385; font-size: 24px; line-height: 1; transition: transform 0.3s; }
+        .command-group details[open] summary::after { transform: rotate(45deg); }
+        .command-content { padding: 20px; background: #1e1e1e; border-top: 1px solid #333; }
+        .cmd-item { display: flex; align-items: center; margin-bottom: 15px; }
+        .cmd-item:last-child { margin-bottom: 0; }
+        .cmd-name { background: #ff3385; color: #fff; padding: 4px 10px; border-radius: 6px; font-family: monospace; font-weight: bold; font-size: 16px; margin-right: 15px; min-width: 100px; text-align: center; }
+        .cmd-desc { color: #ccc; font-size: 15px; line-height: 1.4; }
 
-        .btn-donate {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 350px;
-            padding: 18px 20px;
-            border-radius: 12px;
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #fff;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-        }
-
-        .btn-donate:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.6);
-        }
-
+        .donate-wrapper { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px; }
+        .btn-donate { display: inline-flex; align-items: center; justify-content: center; width: 100%; max-width: 350px; padding: 18px 20px; border-radius: 12px; font-size: 20px; font-weight: bold; text-decoration: none; color: #fff; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 15px rgba(0,0,0,0.4); }
+        .btn-donate:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.6); }
         .btn-boosty { background: linear-gradient(135deg, #ff5e00, #ff8a00); }
         .btn-da { background: linear-gradient(135deg, #1e90ff, #00bfff); }
         .btn-crypto { background: #2a2a2a; border: 2px solid #ff3385; color: #ff3385; box-shadow: none; }
         .btn-crypto:hover { background: rgba(255, 51, 133, 0.1); }
+        .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 600px; margin: 0 auto 20px; }
+        .links-grid .btn-donate { width: 100%; max-width: none; padding: 15px 10px; font-size: 16px; }
 
-/* ==========================================
-           ПАСХАЛКИ (КОРОБКИ И ГРАВИТАЦИЯ)
-           ========================================== */
+        /* ПАСХАЛКИ */
+        .falling-box { position: fixed; top: -50px; font-size: 35px; animation: fall linear forwards; z-index: 9999; pointer-events: none; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        body.seppuku-mode section, body.seppuku-mode nav { transition: transform 4.5s cubic-bezier(0.55, 0.085, 0.68, 0.53), opacity 4s; transform: translateY(150vh) rotate(10deg); opacity: 0; pointer-events: none; }
+        body.seppuku-mode { overflow: hidden; }
         
-        .falling-box {
-            position: fixed;
-            top: -50px;
-            font-size: 35px;
-            animation: fall linear forwards;
-            z-index: 9999;
-            pointer-events: none;
-        }
+        /* Исправлен блок таймаута - теперь он невидим по умолчанию */
+        .seppuku-message { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ff3385; font-size: clamp(24px, 4vw, 40px); font-weight: bold; z-index: 999999; text-align: center; text-shadow: 0 0 20px rgba(255, 51, 133, 0.8); transition: opacity 1s ease, visibility 0s linear 1s; }
+        body.seppuku-mode .seppuku-message { visibility: visible; opacity: 1; transition-delay: 4.5s, 4.5s; }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
-
-        body.seppuku-mode section, 
-        body.seppuku-mode nav {
-            transition: transform 4.5s cubic-bezier(0.55, 0.085, 0.68, 0.53), opacity 4s;
-            transform: translateY(150vh) rotate(10deg);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        body.seppuku-mode {
-            overflow: hidden;
-        }
-
-        .seppuku-message {
-            opacity: 0;
-            pointer-events: none;
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: #ff3385;
-            font-size: clamp(24px, 4vw, 40px);
-            font-weight: bold;
-            z-index: 999999;
-            text-align: center;
-            text-shadow: 0 0 20px rgba(255, 51, 133, 0.8);
-            transition: opacity 1s ease;
-        }
-
-        body.seppuku-mode .seppuku-message {
-            opacity: 1;
-            transition-delay: 4.5s; 
-        }
-
-        /* ==========================================
-           СЕТКА ССЫЛОК (В 2 КОЛОНКИ)
-           ========================================== */
-        .links-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto 20px;
-        }
-
-        @media (max-width: 500px) {
-            .links-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .links-grid .btn-donate {
-            width: 100%;
-            max-width: none;
-            padding: 15px 10px;
-            font-size: 16px;
-        }
-
-        /* ==========================================
-           КНОПКА "ПОКАЗАТЬ БОЛЬШЕ" ДЛЯ АРТОВ
-           ========================================== */
-        .btn-more-arts {
-            display: block;
-            margin: 10px auto 40px;
-            background: transparent;
-            color: #ff3385;
-            border: 2px dashed #ff3385;
-            padding: 10px 30px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-more-arts:hover {
-            background: rgba(255, 51, 133, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* ==========================================
-           АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ (МОБИЛЬНАЯ ВЕРСИЯ)
-           ========================================== */
         @media (max-width: 600px) {
-            .calendar-header {
-                flex-wrap: wrap; 
-                justify-content: center;
-                gap: 10px;
-            }
-            
-            .calendar-header h3 {
-                width: 100%; 
-                text-align: center;
-                order: -1; 
-                margin-bottom: 10px;
-            }
-            
-            .calendar-header button {
-                flex: 1; 
-                font-size: 14px;
-                padding: 10px;
-                white-space: nowrap; 
-            }
-
-            .calendar-wrapper {
-                overflow-x: auto; 
-                padding: 10px;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .calendar-grid {
-                min-width: 700px; 
-            }
-            
-            .calendar-day {
-                min-height: 90px;
-                padding: 5px;
-            }
-
-            .stream-info, .canceled-info, .special-info {
-                font-size: 11px;
-                padding: 3px;
-                line-height: 1.2;
-            }
-
-            nav { 
-                gap: 12px; 
-                padding: 15px 10px; 
-            }
-            nav a { 
-                font-size: 14px; 
-            }
+            .calendar-header { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .calendar-header h3 { width: 100%; text-align: center; order: -1; margin-bottom: 10px; }
+            .calendar-header button { flex: 1; font-size: 14px; padding: 10px; white-space: nowrap; }
+            .calendar-wrapper { overflow-x: auto; padding: 10px; -webkit-overflow-scrolling: touch; }
+            .calendar-grid { min-width: 700px; }
+            .calendar-day { min-height: 90px; padding: 5px; }
+            .stream-info, .canceled-info, .special-info { font-size: 11px; padding: 3px; line-height: 1.2; }
+            nav { gap: 12px; padding: 15px 10px; }
+            nav a { font-size: 14px; }
+            .links-grid { grid-template-columns: 1fr; }
         }
-
+        @media (max-width: 768px) {
+            .lore-card { flex-direction: column; padding: 0; align-items: stretch; }
+            .lore-video { max-width: 100%; aspect-ratio: 16 / 9; border-radius: 12px 12px 0 0; margin: 0; }
+            .lore-content { padding: 20px; }
+        }
     </style>
 </head>
 <body>
 
-<nav>
+    <nav>
         <a href="#home">Главная</a>
         <a href="#news">Новости</a>
         <a href="#arts">Арты</a>
         <a href="#schedule">Расписание</a>
         <a href="#faq">Обо мне</a>
+        <a href="#lore" class="nav-item-new">Лор <span class="badge-new">NEW</span></a>
         <a href="#commands">Команды</a>
         <a href="#support">Ссылки и Поддержка</a>
     </nav>
@@ -1008,299 +305,164 @@
     <section id="news">
         <div class="content-container">
             <h2 class="section-title">Новости</h2>
-            
             <div style="max-width: 550px; margin: 0 auto; background-color: #1e1e1e; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center;">
-                
                 <h3 style="color: #fff; margin-top: 0;">Последние события канала</h3>
                 <p style="color: #ff3385; font-size: 14px; margin-bottom: 20px;">
                     ⚠️ Если у вас не работает VPN, виджет ниже может не загрузиться. 
                 </p>
-
                 <div style="min-height: 100px; background: #2a2a2a; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
-                    <script async src="https://telegram.org/js/telegram-widget.js?22" 
-                            data-telegram-post="yurummiyt/714" 
-                            data-width="100%" 
-                            data-dark="1">
-                    </script>
+                    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="yurummiyt/714" data-width="100%" data-dark="1"></script>
                 </div>
-                
                 <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-da" style="font-size: 18px; padding: 15px; margin-top: 10px; width: 100%;">
                     Читать все новости в Telegram ➔
                 </a>
-                
             </div>
         </div>
     </section>
 
-<section id="arts">
+    <section id="arts">
         <div class="content-container">
             <h2 class="section-title">Галерея Работ</h2>
             
             <div class="gallery-subtitle">Мои арты (Полноценные)</div>
-            <div class="gallery-grid">
-
+            <div class="gallery-grid" id="main-arts-grid">
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Фарочан ФИНАЛЛ.png" alt="Фарочан">
-                    <div class="gallery-overlay">
-                        <h3>Фарочан</h3>
-                        <p>Специально для Фароста</p>
-                    </div>
+                    <img src="img/arts/Фарочан ФИНАЛЛ.png" alt="Фарочан">
+                    <div class="gallery-overlay"><h3>Фарочан</h3><p>Специально для Фароста</p></div>
                 </div>  
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Вафер2.png" alt="Вафер">
-                    <div class="gallery-overlay">
-                        <h3>Вафер</h3>
-                        <p>Специально для Вафера</p>
-                    </div>
+                    <img src="img/arts/Вафер2.png" alt="Вафер">
+                    <div class="gallery-overlay"><h3>Вафер</h3><p>Специально для Вафера</p></div>
                 </div>  
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="птицафинал.png" alt="Птица">
-                    <div class="gallery-overlay">
-                        <h3>Птица</h3>
-                        <p>Специально для @bird_hello</p>
-                    </div>
+                    <img src="img/arts/птицафинал.png" alt="Птица">
+                    <div class="gallery-overlay"><h3>Птица</h3><p>Специально для @bird_hello</p></div>
                 </div>  
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Тутрфинал.png" alt="Туртл">
-                    <div class="gallery-overlay">
-                        <h3>Туртл</h3>
-                        <p>Специально для @turtle_pressf</p>
-                    </div>
+                    <img src="img/arts/Тутрфинал.png" alt="Туртл">
+                    <div class="gallery-overlay"><h3>Туртл</h3><p>Специально для @turtle_pressf</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="offlineфинал.png" alt="Оффалйн экран">
-                    <div class="gallery-overlay">
-                        <h3>Оффалйн экран</h3>
-                        <p></p>
-                    </div>
+                    <img src="img/arts/offlineфинал.png" alt="Оффалйн экран">
+                    <div class="gallery-overlay"><h3>Оффалйн экран</h3><p></p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Микубот.png" alt="Микубот">
-                    <div class="gallery-overlay">
-                        <h3>Микубот</h3>
-                        <p>Специально для @kumqch3d</p>
-                    </div>
+                    <img src="img/arts/Микубот.png" alt="Микубот">
+                    <div class="gallery-overlay"><h3>Микубот</h3><p>Специально для @kumqch3d</p></div>
                 </div>
-              
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="ЯМАДАAIi.png" alt="Ямада/Teto">
-                    <div class="gallery-overlay">
-                        <h3>Ямада/Teto</h3>
-                        <p>Специально для @yamada_ai</p>
-                    </div>
+                    <img src="img/arts/ЯМАДАAIi.png" alt="Ямада/Teto">
+                    <div class="gallery-overlay"><h3>Ямада/Teto</h3><p>Специально для @yamada_ai</p></div>
                 </div>
-              
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Фуруммизаставка.png" alt="Фурумми">
-                    <div class="gallery-overlay">
-                        <h3>Фурумми Х Юрумми</h3>
-                        <p>Женская версия Юрумми</p>
-                    </div>
+                    <img src="img/arts/Фуруммизаставка.png" alt="Фурумми">
+                    <div class="gallery-overlay"><h3>Фурумми Х Юрумми</h3><p>Женская версия Юрумми</p></div>
                 </div>
-
-              
-		<div class="gallery-item" onclick="openLightbox(this)" data-music="https://youtu.be/yfnCGoUl4PI?si=lDihzmKaUF9zG22o">
-                    <img src="фурумми шл.png" alt="Sound Queen">
-                    <div class="gallery-overlay">
-                        <h3>Фурумми</h3>
-                        <p>Sound Queen</p>
-                    </div>
+        		<div class="gallery-item" onclick="openLightbox(this)" data-music="https://youtu.be/yfnCGoUl4PI?si=lDihzmKaUF9zG22o">
+                    <img src="img/arts/фурумми шл.png" alt="Sound Queen">
+                    <div class="gallery-overlay"><h3>Фурумми</h3><p>Sound Queen</p></div>
                 </div>
-
             </div>
 
             <div class="gallery-subtitle" style="margin-top: 40px;">Фан-арты (От зрителей)</div>
-            <div class="gallery-grid">
-
+            <div class="gallery-grid" id="fan-arts-grid">
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="ммр абузер скетч.jpg" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @mmr_abuser</p>
-                    </div>
+                    <img src="img/fanarts/ммр абузер скетч.jpg" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @mmr_abuser</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="бутер.jpg" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/бутер.jpg" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="пиксельный.png" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/пиксельный.png" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="СПИНА.jpg" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/СПИНА.jpg" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="клубнички.jpg" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/клубнички.jpg" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>                
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Арбузик.png" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/Арбузик.png" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-                
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="горничная.png" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/горничная.png" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="maku3.jpg" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/maku3.jpg" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="maku2.jpg" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/maku2.jpg" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="maku1.jpg" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/maku1.jpg" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="слайд1.png" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @Maku_q</p>
-                    </div>
+                    <img src="img/fanarts/слайд1.png" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="юрумипнгартналови.png" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @kalderbasina</p>
-                    </div>
+                    <img src="img/fanarts/юрумипнгартналови.png" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @kalderbasina</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="заказ_юруми.jpeg" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @inari_teru</p>
-                    </div>
+                    <img src="img/fanarts/заказ_юруми.jpeg" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @inari_teru</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="зерошка.png" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @zeroshka_000</p>
-                    </div>
+                    <img src="img/fanarts/зерошка.png" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @zeroshka_000</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="акемо.png" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p>От @akem0</p>
-                    </div>
+                    <img src="img/fanarts/акемо.png" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @akem0</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="ноунеймартстарый.png" alt="Фан-арт">
-                    <div class="gallery-overlay">
-                        <h3>Фан-арт</h3>
-                        <p></p>
-                    </div>
+                    <img src="img/fanarts/ноунеймартстарый.png" alt="Фан-арт">
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p></p></div>
                 </div>
-
             </div>
 
             <div class="gallery-subtitle" style="margin-top: 40px;">Скетчи и наброски</div>
-            <div class="gallery-grid">
-          
+            <div class="gallery-grid" id="sketches-grid">
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Фарочан.png" alt="Фарочан">
-                    <div class="gallery-overlay">
-                        <h3>Фарочан</h3>
-                        <p>Во время дебюта Фарочан</p>
-                    </div>
+                    <img src="img/sketches/Фарочан.png" alt="Фарочан">
+                    <div class="gallery-overlay"><h3>Фарочан</h3><p>Во время дебюта Фарочан</p></div>
                 </div>     
- 
                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="abobanYan.png" alt="Микан">
-                    <div class="gallery-overlay">
-                        <h3>Mikan</h3>
-                        <p>Вдохновился стримером</p>
-                    </div>
+                    <img src="img/sketches/abobanYan.png" alt="Микан">
+                    <div class="gallery-overlay"><h3>Mikan</h3><p>Вдохновился стримером</p></div>
                 </div>
-          
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Фраза.png" alt="Фраза">
-                    <div class="gallery-overlay">
-                        <h3>Фраза</h3>
-                        <p>Фраза-балерина</p>
-                    </div>
+                    <img src="img/sketches/Фраза.png" alt="Фраза">
+                    <div class="gallery-overlay"><h3>Фраза</h3><p>Фраза-балерина</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Альтушка.png" alt="Фурумми-альтушка">
-                    <div class="gallery-overlay">
-                        <h3>Фурумми</h3>
-                        <p>Альтушку Фурумми видели?</p>
-                    </div>
+                    <img src="img/sketches/Альтушка.png" alt="Фурумми-альтушка">
+                    <div class="gallery-overlay"><h3>Фурумми</h3><p>Альтушку Фурумми видели?</p></div>
                 </div>
-
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="Юрумми атлет.png" alt="Юрумми атлет">
-                    <div class="gallery-overlay">
-                        <h3>Юрумми GOAT</h3>
-                        <p>Это когда-то был я</p>
-                    </div>
+                    <img src="img/sketches/Юрумми атлет.png" alt="Юрумми атлет">
+                    <div class="gallery-overlay"><h3>Юрумми GOAT</h3><p>Это когда-то был я</p></div>
                 </div>
-
-		<div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="фуринья фурумми 2.png" alt="Фуринья и Фурумми">
-                    <div class="gallery-overlay">
-                        <h3>Фуринья и Фурумми</h3>
-                        <p>Человек бензопила реф</p>
-                    </div>
+        		<div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="img/sketches/фуринья фурумми 2.png" alt="Фуринья и Фурумми">
+                    <div class="gallery-overlay"><h3>Фуринья и Фурумми</h3><p>Человек бензопила реф</p></div>
                 </div>
-
             </div>
         </div>
-    </section> <div id="myLightbox" class="lightbox" onclick="closeLightbox(event)">
+    </section> 
+
+    <div id="myLightbox" class="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-content" id="lightbox-img">
         <div class="lightbox-caption" id="lightbox-caption"></div>
@@ -1309,7 +471,6 @@
     <section id="schedule">
         <div class="content-container">
             <h2 class="section-title">Расписание</h2>
-            
             <div style="text-align: center;">
                 <div class="timezone-note">⏰ Время всех стримов указано по <strong>НЕМЕЦИИ (GMT+2)</strong></div>
             </div>
@@ -1320,47 +481,199 @@
                     <h3 id="monthYearDisplay">Май 2026</h3>
                     <button onclick="changeMonth(1)">След &#9654;</button>
                 </div>
-
                 <div class="calendar-grid">
-                    <div class="weekday">ПН</div>
-                    <div class="weekday">ВТ</div>
-                    <div class="weekday">СР</div>
-                    <div class="weekday">ЧТ</div>
-                    <div class="weekday">ПТ</div>
-                    <div class="weekday">СБ</div>
-                    <div class="weekday">ВС</div>
+                    <div class="weekday">ПН</div><div class="weekday">ВТ</div><div class="weekday">СР</div><div class="weekday">ЧТ</div><div class="weekday">ПТ</div><div class="weekday">СБ</div><div class="weekday">ВС</div>
                 </div>
-
                 <div class="calendar-grid" id="calendarDays"></div>
             </div>
-
         </div>
     </section>
 
-	<section id="faq" style="padding-top: 60px;">
+    <section id="faq" style="padding-top: 60px;">
         <div class="content-container">
             <h2 class="section-title">Обо мне</h2>
-            
             <div style="background: #2a2a2a; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 18px; line-height: 1.6;">
-                
                 <h3 style="color: #ff3385; margin-top: 0;">Привет! Я Yurummi 📦</h3>
                 <p>Если ты новенький, то у тебя наверняка вопрос: <em>«Кто это вообще такой?»</em>.</p>
-		<p>Yurummi - это мой оригинальный персонаж с коробкой на голове. У него есть свой глубокий лор и целый мир внутри этой самой <span id="secret-box" style="cursor: pointer; display: inline-block; transition: transform 0.1s;">коробки</span>. Пока что я держу большинство тайн при себе, но просто знайте: ОН СУЩЕСТВУЕТ.</p>
-                
+                <!-- Исправлен баг выделения при множественном клике -->
+        		<p>Yurummi - это мой оригинальный персонаж с коробкой на голове. У него есть свой глубокий лор и целый мир внутри этой самой <span id="secret-box" style="cursor: pointer; display: inline-block; transition: transform 0.1s; user-select: none; -webkit-user-select: none; -moz-user-select: none;">коробки</span>. Пока что я держу большинство тайн при себе, но просто знайте: ОН СУЩЕСТВУЕТ.</p>
                 <h3 style="color: #ff3385; margin-top: 30px;">А что за кошкодевочка? 🐱</h3>
                 <p>Всё течёт, всё меняется! Встречайте - <strong>Furummi (Фурумми)</strong>! Это «мой новый» маскот и альтер-эго на стримах. Коробка никуда не исчезла, мы просто добавили в наш суровый картонный мир немного ушек, милоты и уюта.</p>
-
                 <h3 style="color: #ff3385; margin-top: 30px;">Расписание и Стримы ⏰</h3>
                 <p>Я стримлю БЕЗ ЖЁСТКОГО РАСПИСАНИЯ — всё зависит от вдохновения, настроения и самочувствия. Чтобы не пропустить трансляции, обязательно поглядывай в календарь выше или включи уведомления в <a href="https://t.me/yurummiyt" target="_blank" style="color: #ff3385;">Телеграме</a>.</p>
-
             </div>
         </div>
     </section>
 
-<section id="commands">
+    <section id="lore" style="padding-top: 60px;">
+        <div class="content-container">
+            <h2 class="section-title">Лор канала</h2>
+            <p style="text-align: center; color: #b3b3b3; font-size: 16px; margin-bottom: 40px;">
+                Мультивселенная, вирусы и интерактивные расследования. Изучай хронологию событий ниже.
+            </p>
+
+            <div class="lore-tree-window" id="loreWindow">
+                <div style="position:absolute; bottom:15px; right:20px; color:#666; font-size:12px; pointer-events:none; z-index:10;">
+                    🖱️ Зажми и тащи / Колесико для зума
+                </div>
+                
+                <div class="tree-canvas" id="loreCanvas">
+                    <svg width="100%" height="100%" style="position:absolute; top:0; left:0; z-index:1; pointer-events:none;">
+                        <path d="M 50 125 L 550 125" stroke="#ff3385" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M 550 125 L 630 60 L 750 60" stroke="#444" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M 550 125 L 630 190 L 1050 190" stroke="#a855f7" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    </svg>
+
+                    <div class="h-node" style="top:113px; left:38px;" onclick="document.getElementById('card-intro').scrollIntoView({behavior: 'smooth', block: 'center'})">
+                        <div class="h-label top">Начало (Изгнание)</div>
+                    </div>
+                    <div class="h-node" style="top:113px; left:188px;" onclick="document.getElementById('card-act1').scrollIntoView({behavior: 'smooth', block: 'center'})">
+                        <div class="h-label bottom">Акт I: Экстренные новости</div>
+                    </div>
+                    <div class="h-node" style="top:113px; left:338px;" onclick="document.getElementById('card-act2').scrollIntoView({behavior: 'smooth', block: 'center'})">
+                        <div class="h-label top">Акт II: Папка с секретами</div>
+                    </div>
+                    <div class="h-node" style="top:113px; left:538px;" onclick="document.getElementById('card-act3').scrollIntoView({behavior: 'smooth', block: 'center'})">
+                        <div class="h-label bottom">Акт III: Судьбоносный код</div>
+                    </div>
+                    
+                    <div class="h-node dead" style="top:48px; left:718px;">
+                        <div class="h-label top dead-text">Стереть данные</div>
+                        <div class="h-cross">❌</div>
+                    </div>
+
+                    <div class="h-node active" style="top:178px; left:718px;">
+                        <div class="h-label bottom">Сохранить Фурумми</div>
+                        <div class="node-tooltip" style="width: 300px;">
+                            <video autoplay loop muted playsinline>
+                                <source src="img/lore/save-video.mov" type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+                            <div style="margin-top: 10px; color: #fff; font-size: 14px; font-weight: bold;">«Чат сделал выбор»</div>
+                        </div>
+                    </div>
+                    <div class="h-node active" style="top:178px; left:868px;" onclick="document.getElementById('card-act4').scrollIntoView({behavior: 'smooth', block: 'center'})">
+                        <div class="h-label top">Ивент: Горничная</div>
+                    </div>
+                    <div class="h-node future" style="top:178px; left:1018px;">
+                        <div class="h-label bottom" style="color: #a855f7;">...Загрузка...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lore-timeline">
+                <div id="card-intro" class="lore-card">
+                    <div class="lore-video">
+                        <div class="video-placeholder" style="background-image: url('img/lore/intro-bg.jpg');">
+                            <div class="video-overlay" style="bottom: auto; top: 15px; border-color:#555;">Предыстория</div>
+                        </div>
+                    </div>
+                    <div class="lore-content">
+                        <h3 class="lore-title">Эпоха Изгнания</h3>
+                        <p class="lore-desc">
+                            Всё началось далеко за пределами привычного мира. Спасаясь от преследования мстительных богов, отец 
+                            <span class="char-tooltip">Юрумми
+                                <span class="tooltip-content">
+                                    <img src="img/fanarts/юрумипнгартналови.png" alt="Юрумми">
+                                    <strong>Юрумми</strong>
+                                    <span>Парень с коробкой на голове. Беглец из другого измерения, пытающийся жить обычной жизнью на Земле.</span>
+                                </span>
+                            </span> 
+                            отправляет его сквозь мультивселенную. Будучи ещё младенцем, Юрумми попадает на планету Земля, где долгие годы ведёт жизнь обычного человека, скрывая своё происхождение под картонной коробкой.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="card-act1" class="lore-card">
+                    <div class="lore-video">
+                        <a href="https://www.twitch.tv/videos/2666615999" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt1.png');">
+                            <span class="play-btn">▶</span>
+                            <div class="video-overlay">Смотреть Акт I</div>
+                        </a>
+                    </div>
+                    <div class="lore-content">
+                        <h3 class="lore-title">Акт I: Экстренные новости</h3>
+                        <p class="lore-desc">
+                            Эфир прерывается срочным включением. Ведущий новостей 
+                            <span class="char-tooltip">Мистер Б. Окс
+                                <span class="tooltip-content">
+                                    <img src="img/lore/mr-boks.png" alt="Б. Окс">
+                                    <strong>Мистер Б. Окс</strong>
+                                    <span>Усатая версия Юрумми. Загадочный ведущий новостей, у которого всегда есть свои скрытые мотивы.</span>
+                                </span>
+                            </span> 
+                            сообщает тревожную весть - загадочная кошкодевочка Фурумми бесследно исчезла! Единственный свидетель на месте преступления - кот 
+                            <span class="char-tooltip">Ботглорп
+                                <span class="tooltip-content">
+                                    <img src="img/lore/glorp.png" alt="Ботглорп">
+                                    <strong>Ботглорп</strong>
+                                    <span>Верный кот-помощник и бот из чата. Понимает всё, но говорит только «мяу». Хакер со стажем.</span>
+                                </span>
+                            </span>, 
+                            от которого невозможно добиться внятных показаний. Зрителям приходится взять расследование в свои руки, используя команду <code>!улика</code> в чате.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="card-act2" class="lore-card">
+                    <div class="lore-video">
+                        <a href="https://www.twitch.tv/videos/2666617364" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt2.png');">
+                            <span class="play-btn">▶</span>
+                            <div class="video-overlay">Смотреть Акт II</div>
+                        </a>
+                    </div>
+                    <div class="lore-content">
+                        <h3 class="lore-title">Акт II: Папка с секретами</h3>
+                        <p class="lore-desc">
+                            Мистер Б. Окс гордо анализирует собранные чатом теории, запуская игру «Правда или Ложь». Но внезапно всплывают анонимные улики и странные звонки в студию, прямо указывающие на причастность самого Б. Окса к похищению! Впав в панику, ведущий пытается всё отрицать. Ситуация накаляется, когда Ботглорп взламывает систему защиты студии, и трансляция экстренно обрывается.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="card-act3" class="lore-card">
+                    <div class="lore-video">
+                        <a href="https://www.twitch.tv/videos/2666618658" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt3.png');">
+                            <span class="play-btn">▶</span>
+                            <div class="video-overlay">Смотреть Акт III</div>
+                        </a>
+                    </div>
+                    <div class="lore-content">
+                        <h3 class="lore-title">Акт III: Судьбоносный код</h3>
+                        <p class="lore-desc">
+                            Юрумми и Ботглорп по комиксам отслеживают сигнал до главного компьютера Б. Окса. Чат проникает в систему и находит запечатанные файлы с мольбой 
+                            <span class="char-tooltip">Фурумми
+                                <span class="tooltip-content">
+                                    <img src="img/lore/БУУУУУМ.png" alt="Фурумми">
+                                    <strong>Фурумми</strong>
+                                    <span>Милая кошкодевочка и альтер-эго. Её истинная сила и намерения долгое время оставались загадкой.</span>
+                                </span>
+                            </span> 
+                            о спасении. Появляется сам Б. Окс, уверяя, что запечатал её ради нашей же безопасности. После эпичного босс-файта через чат-команды злодей повержен. Перед зрителями встаёт выбор: <strong>Стереть файлы</strong> или <strong>Сохранить Фурумми</strong>. Чат выбирает сохранение... и Фурумми перехватывает контроль над реальностью.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="card-act4" class="lore-card">
+                    <div class="lore-video">
+                        <a href="https://www.twitch.tv/videos/2790091850" target="_blank" class="video-placeholder" style="background-image: url('img/lore/maid.png');">
+                            <span class="play-btn">▶</span>
+                            <div class="video-overlay" style="border-color: #a855f7;">Секретный Ивент</div>
+                        </a>
+                    </div>
+                    <div class="lore-content">
+                        <h3 class="lore-title" style="color: #a855f7;">Вирус Горничной</h3>
+                        <p class="lore-desc">
+                            Последствия выбора чата не заставили себя ждать. Эфир был заражен таинственным «вирусом», который полностью изменил реальность. На экране появилась Фурумми в костюме горничной, окончательно закрепив свою власть над каналом. Юрумми с коробкой больше не выходит на связь в прежнем виде. Новая эра официально началась.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="commands">
         <div class="content-container">
             <h2 class="section-title">Команды чата</h2>
-            
             <div class="command-group">
                 <details>
                     <summary>🌐 Полезные ссылки</summary>
@@ -1373,7 +686,6 @@
                     </div>
                 </details>
             </div>
-
             <div class="command-group">
                 <details>
                     <summary>🎮 Игры с чатом (Осторожно!)</summary>
@@ -1383,23 +695,19 @@
                     </div>
                 </details>
             </div>
-
         </div>
     </section>
 
-	<section id="support" style="margin-bottom: 80px;">
+    <section id="support" style="margin-bottom: 80px;">
         <div class="content-container">
             <h2 class="section-title">Все ссылки & Поддержка</h2>
-            
             <p style="text-align: center; color: #b3b3b3; font-size: 16px; margin-bottom: 30px;">
                 Здесь собраны все мои соцсети. А если хочешь поддержать выход контента — жми на самую яркую кнопку! 💖
             </p>
-
             <div class="donate-wrapper">
                 <a href="https://www.donationalerts.com/r/yurummi" target="_blank" class="btn-donate btn-da" style="font-size: 24px; padding: 25px; margin-bottom: 30px;">
                     💸 Поддержать донатом
                 </a>
-
                 <h3 style="color: #fff; margin: 10px 0;">Мои соцсети:</h3>
                 <div class="links-grid">
                     <a href="https://www.twitch.tv/yurummi" target="_blank" class="btn-donate btn-crypto">🟪 Twitch</a>
@@ -1409,258 +717,162 @@
                     <a href="https://www.instagram.com/itsyurummi/" target="_blank" class="btn-donate btn-crypto">📸 Instagram</a>
                     <a href="https://www.tiktok.com/@yurummi" target="_blank" class="btn-donate btn-crypto">🎵 TikTok</a>
                 </div>
-
                 <h3 style="color: #fff; margin: 10px 0;">Проект Aniwex:</h3>
                 <div class="links-grid">
                     <a href="https://www.youtube.com/@aniwex?sub_confirmation=1" target="_blank" class="btn-donate btn-crypto">📺 YouTube</a>
                     <a href="https://www.tiktok.com/@aniwex.yt" target="_blank" class="btn-donate btn-crypto">📱 TikTok</a>
                 </div>
-
                 <h3 style="color: #fff; margin: 15px 0 10px;">Связь:</h3>
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arbeitenaniwex@gmail.com" target="_blank" class="btn-donate btn-crypto" style="border-color: #888; color: #888; max-width: 600px;">
                     ✉️ Почта для сотрудничества
                 </a>
             </div>
         </div>
-
-	<div style="text-align: center; margin-top: 50px;">
-                <span id="seppuku-btn" style="cursor: pointer; opacity: 0.1; font-size: 14px;" title="???">!</span>
-            </div>
+        <div style="text-align: center; margin-top: 50px;">
+            <span id="seppuku-btn" style="cursor: pointer; opacity: 0.1; font-size: 14px;" title="???">!</span>
+        </div>
     </section>
 
+    <!-- ИСПРАВЛЕННЫЙ БЛОК ТАЙМАУТА -->
+    <div class="seppuku-message">
+        Сайт отправился в таймаут! ⚔️<br>
+        <span style="font-size: 20px; color: #fff;">(Обнови страницу, чтобы починить гравитацию)</span>
+    </div>
+
+    <!-- ЕДИНЫЙ БЛОК СКРИПТОВ -->
     <script>
-        // ==========================================
-        // 1. ЛОГИКА СЛАЙДЕРА
-        // ==========================================
+        // 1. СЛАЙДЕР
         const timePerSlide = 12000; 
-        
         const slidesData = [
-            { 
-                file: 'Фарочан ФИНАЛЛ.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
-                textMain: 'Фарочан', textAuthor: '@yurummi',
-                url: 'https://t.me/yurummiyt/728'
-            },
-            { 
-                file: 'СПИНА.jpg', badgeStyle: 'pink', badgeText: '💖 АРТ', 
-                textMain: 'Фан арт от Маку', textAuthor: '@Maku_q',
-                url: 'https://t.me/maku_qq'
-            },
-            { 
-                file: 'vacation.jpg', badgeStyle: 'none', badgeText: '', 
-                textMain: 'Отпуск📌', textAuthor: '',
-                url: 'https://t.me/yurummiyt/714'
-            },
-            { 
-                file: 'Ютубоснова.png', badgeStyle: 'yellow', badgeText: 'NEW', 
-                textMain: 'Новый YouTube канал', textAuthor: '',
-                url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1'
-            },
-            { 
-                file: 'Тутрфинал.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
-                textMain: '3/9', textAuthor: '@yurummi',
-                url: 'https://t.me/yurummiyt/657'
-            },
-            { 
-                file: 'анонсвидео.png', badgeStyle: 'green', badgeText: 'АНОНС', 
-                textMain: 'Первое длинное видео для ютуба', textAuthor: '',
-                url: '' 
-            },
-            { 
-                file: 'птицафинал.png', badgeStyle: 'pink', badgeText: '💖 АРТ', 
-                textMain: '4/9', textAuthor: '@yurummi',
-                url: 'https://t.me/yurummiyt/662'
-            },
-            { 
-                file: '3.png', badgeStyle: 'none', badgeText: '', 
-                textMain: 'Важный пост 📌', textAuthor: '',
-                url: 'https://t.me/yurummiyt/681'
-            }
+            { file: 'img/arts/Фарочан ФИНАЛЛ.png', badgeStyle: 'pink', badgeText: '💖 АРТ', textMain: 'Фарочан', textAuthor: '@yurummi', url: 'https://t.me/yurummiyt/728' },
+            { file: 'img/fanarts/СПИНА.jpg', badgeStyle: 'pink', badgeText: '💖 АРТ', textMain: 'Фан арт от Маку', textAuthor: '@Maku_q', url: 'https://t.me/maku_qq' },
+            { file: 'img/slider/vacation.jpg', badgeStyle: 'none', badgeText: '', textMain: 'Отпуск📌', textAuthor: '', url: 'https://t.me/yurummiyt/714' },
+            { file: 'img/slider/Ютубоснова.png', badgeStyle: 'yellow', badgeText: 'NEW', textMain: 'Новый YouTube канал', textAuthor: '', url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1' },
+            { file: 'img/arts/Тутрфинал.png', badgeStyle: 'pink', badgeText: '💖 АРТ', textMain: '3/9', textAuthor: '@yurummi', url: 'https://t.me/yurummiyt/657' },
+            { file: 'img/slider/анонсвидео.png', badgeStyle: 'green', badgeText: 'АНОНС', textMain: 'Первое длинное видео для ютуба', textAuthor: '', url: '' },
+            { file: 'img/arts/птицафинал.png', badgeStyle: 'pink', badgeText: '💖 АРТ', textMain: '4/9', textAuthor: '@yurummi', url: 'https://t.me/yurummiyt/662' },
+            { file: 'img/slider/3.png', badgeStyle: 'none', badgeText: '', textMain: 'Важный пост 📌', textAuthor: '', url: 'https://t.me/yurummiyt/681' }
         ];
 
         const slider = document.getElementById('slider');
         const badgesLayer = document.getElementById('badges-layer');
         const pagination = document.getElementById('pagination');
         let currentIndex = 0;
-        
-        const slides = [];
-        const dots = [];
-        const badges = []; 
+        const slides = []; const dots = []; const badges = []; 
 
         if (slidesData && slidesData.length > 0) {
             slidesData.forEach((item, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'slide';
                 if (index === 0) slide.classList.add('active');
+                if (item.url) { slide.classList.add('clickable'); slide.onclick = () => window.open(item.url, '_blank'); }
 
-                if (item.url) {
-                    slide.classList.add('clickable');
-                    slide.onclick = () => window.open(item.url, '_blank');
-                }
-
-                const blurBg = document.createElement('div');
-                blurBg.className = 'slide-blur-bg';
-                blurBg.style.backgroundImage = `url('${item.file}')`;
-                slide.appendChild(blurBg);
-
-                const mainImg = document.createElement('div');
-                mainImg.className = 'slide-main-img';
-                mainImg.style.backgroundImage = `url('${item.file}')`;
-                slide.appendChild(mainImg);
+                const blurBg = document.createElement('div'); blurBg.className = 'slide-blur-bg'; blurBg.style.backgroundImage = `url('${item.file}')`; slide.appendChild(blurBg);
+                const mainImg = document.createElement('div'); mainImg.className = 'slide-main-img'; mainImg.style.backgroundImage = `url('${item.file}')`; slide.appendChild(mainImg);
 
                 if (item.textMain || item.textAuthor) {
-                    const captionPanel = document.createElement('div');
-                    captionPanel.className = 'caption-panel';
-                    
+                    const captionPanel = document.createElement('div'); captionPanel.className = 'caption-panel';
                     let captionHtml = '';
-                    if (item.textMain) { captionHtml += `<div class="caption-title">${item.textMain}</div>`; }
-                    if (item.textAuthor) {
-                        const authorPrefix = item.textAuthor.includes('@') ? '🎨 Автор:' : '💡';
-                        captionHtml += `<div class="caption-author">${authorPrefix} <span>${item.textAuthor}</span></div>`;
-                    }
-                    
-                    captionPanel.innerHTML = captionHtml;
-                    slide.appendChild(captionPanel);
+                    if (item.textMain) captionHtml += `<div class="caption-title">${item.textMain}</div>`;
+                    if (item.textAuthor) { const authorPrefix = item.textAuthor.includes('@') ? '🎨 Автор:' : '💡'; captionHtml += `<div class="caption-author">${authorPrefix} <span>${item.textAuthor}</span></div>`; }
+                    captionPanel.innerHTML = captionHtml; slide.appendChild(captionPanel);
                 }
 
-                slider.appendChild(slide);
-                slides.push(slide);
+                slider.appendChild(slide); slides.push(slide);
 
-                const badgeWrapper = document.createElement('div');
-                badgeWrapper.className = 'badge-wrapper';
-                if (item.badgeStyle !== 'none') {
-                    const badgeInner = document.createElement('div');
-                    badgeInner.className = `badge ${item.badgeStyle}`;
-                    badgeInner.innerText = item.badgeText;
-                    badgeWrapper.appendChild(badgeInner);
-                }
-                if (index === 0) badgeWrapper.classList.add('active');
-                badgesLayer.appendChild(badgeWrapper);
-                badges.push(badgeWrapper);
+                const badgeWrapper = document.createElement('div'); badgeWrapper.className = 'badge-wrapper';
+                if (item.badgeStyle !== 'none') { const badgeInner = document.createElement('div'); badgeInner.className = `badge ${item.badgeStyle}`; badgeInner.innerText = item.badgeText; badgeWrapper.appendChild(badgeInner); }
+                if (index === 0) badgeWrapper.classList.add('active'); badgesLayer.appendChild(badgeWrapper); badges.push(badgeWrapper);
 
-                const dot = document.createElement('div');
-                dot.className = 'dot';
+                const dot = document.createElement('div'); dot.className = 'dot';
                 if (index === 0) dot.classList.add('active');
-                
                 dot.onclick = () => goToSlide(index);
-                
-                pagination.appendChild(dot);
-                dots.push(dot);
+                pagination.appendChild(dot); dots.push(dot);
             });
 
             let slideInterval = setInterval(nextSlide, timePerSlide);
 
-            function nextSlide() {
-                let nextIndex = (currentIndex + 1) % slidesData.length;
-                goToSlide(nextIndex);
-            }
+            function nextSlide() { goToSlide((currentIndex + 1) % slidesData.length); }
 
             function goToSlide(index) {
                 if (index === currentIndex) return;
-                
-                slides[currentIndex].classList.remove('active');
-                dots[currentIndex].classList.remove('active');
-                badges[currentIndex].classList.remove('active');
-
+                slides[currentIndex].classList.remove('active'); dots[currentIndex].classList.remove('active'); badges[currentIndex].classList.remove('active');
                 currentIndex = index;
-
-                slides[currentIndex].classList.add('active');
-                dots[currentIndex].classList.add('active');
-                badges[currentIndex].classList.add('active');
-
-                clearInterval(slideInterval);
-                slideInterval = setInterval(nextSlide, timePerSlide);
+                slides[currentIndex].classList.add('active'); dots[currentIndex].classList.add('active'); badges[currentIndex].classList.add('active');
+                clearInterval(slideInterval); slideInterval = setInterval(nextSlide, timePerSlide);
             }
         }
 
-        // ==========================================
-        // 2. ЛОГИКА ГАЛЕРЕИ (ЛАЙТБОКС)
-        // ==========================================
+        // 2. ГАЛЕРЕЯ (ЛАЙТБОКС И КНОПКИ РАЗВОРАЧИВАНИЯ)
         function openLightbox(element) {
             const lightbox = document.getElementById('myLightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxCaption = document.getElementById('lightbox-caption');
-            
-            const img = element.querySelector('img');
-            const h3 = element.querySelector('h3');
-            const p = element.querySelector('p');
-            
-            const title = h3 ? h3.innerText : '';
-            const subtitle = p ? p.innerText : '';
-            
+            const img = element.querySelector('img'); const h3 = element.querySelector('h3'); const p = element.querySelector('p');
+            const title = h3 ? h3.innerText : ''; const subtitle = p ? p.innerText : '';
             const musicLink = element.getAttribute('data-music');
 
             lightboxImg.src = img.src;
-            
             if (musicLink) {
                 lightboxCaption.innerHTML = `<strong>${title}</strong><br>${subtitle}<br><span class="music-hint">🎵 псс... кликни по самой картинке!</span>`;
                 lightboxImg.classList.add('clickable-art');
-                lightboxImg.onclick = function(event) {
-                    event.stopPropagation();
-                    window.open(musicLink, '_blank');
-                };
-            } 
-            else {
+                lightboxImg.onclick = function(event) { event.stopPropagation(); window.open(musicLink, '_blank'); };
+            } else {
                 lightboxCaption.innerHTML = `<strong>${title}</strong><br>${subtitle}`;
-                lightboxImg.classList.remove('clickable-art');
-                lightboxImg.onclick = null;
+                lightboxImg.classList.remove('clickable-art'); lightboxImg.onclick = null;
             }
-            
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            lightbox.classList.add('active'); document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox(event) {
             if (event.target.id === 'myLightbox' || event.target.classList.contains('lightbox-close')) {
-                document.getElementById('myLightbox').classList.remove('active');
-                document.body.style.overflow = 'auto'; 
-                document.getElementById('lightbox-img').onclick = null;
+                document.getElementById('myLightbox').classList.remove('active'); document.body.style.overflow = 'auto'; document.getElementById('lightbox-img').onclick = null;
             }
         }
 
-        // КНОПКА "ПОКАЗАТЬ БОЛЬШЕ" ДЛЯ АРТОВ
         document.addEventListener('DOMContentLoaded', () => {
             const grids = document.querySelectorAll('.gallery-grid');
             
             grids.forEach(grid => {
                 const items = grid.querySelectorAll('.gallery-item');
+                const limit = 6; 
                 
-                if (items.length > 6) {
-                    for (let i = 6; i < items.length; i++) {
-                        items[i].style.display = 'none';
+                if (items.length > limit) {
+                    for (let i = limit; i < items.length; i++) { 
+                        items[i].style.display = 'none'; 
                     }
                     
-                    const btn = document.createElement('button');
-                    btn.className = 'btn-more-arts';
-                    btn.innerText = 'Показать больше ▼';
-                    
+                    const btn = document.createElement('button'); 
+                    btn.className = 'btn-more-arts'; 
+                    btn.innerText = 'Показать все ▼';
                     grid.parentNode.insertBefore(btn, grid.nextSibling);
                     
-                    let currentlyShown = 6;
+                    let isExpanded = false;
                     
                     btn.addEventListener('click', () => {
-                        const nextLimit = currentlyShown + 6;
-                        
-                        for (let i = currentlyShown; i < nextLimit && i < items.length; i++) {
-                            items[i].style.display = '';
-                        }
-                        
-                        currentlyShown = nextLimit;
-                        
-                        if (currentlyShown >= items.length) {
-                            btn.style.display = 'none';
+                        if (!isExpanded) {
+                            for (let i = limit; i < items.length; i++) { 
+                                items[i].style.display = ''; 
+                            }
+                            btn.innerText = 'Свернуть ▲';
+                            isExpanded = true;
+                        } else {
+                            for (let i = limit; i < items.length; i++) { 
+                                items[i].style.display = 'none'; 
+                            }
+                            btn.innerText = 'Показать все ▼';
+                            isExpanded = false;
+                            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
                     });
                 }
             });
         });
 
-        // ==========================================
-        // 3. ЛОГИКА КАЛЕНДАРЯ
-        // ==========================================
+        // 3. КАЛЕНДАРЬ
         const streamsList = [
             { date: '2026-05-29', time: '19:00', text: 'Стрим возвращение', isSpecial: false, isCanceled: false },
             { date: '2026-05-31', time: '15:00', text: 'Крафт коробки', isSpecial: true, isCanceled: false },
-            
             { date: '2026-06-02', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: true },
             { date: '2026-06-05', time: '19:00', text: 'Костюм горничной', isSpecial: true, isCanceled: false }, 
             { date: '2026-06-09', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
@@ -1670,34 +882,24 @@
             { date: '2026-06-20', time: '19:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-06-23', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-06-25', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
-
             { date: '2026-06-30', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: true },
             { date: '2026-07-01', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-07-03', time: '±19:30', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-07-04', time: '', text: 'Стрим', isSpecial: false, isCanceled: true },
             { date: '2026-07-19', time: '±19:30', text: 'Стрим', isSpecial: false, isCanceled: true },
-            
             { date: '2026-07-21', time: '19:00', text: 'Рисование', isArt: true, isCanceled: true },
             { date: '2026-07-28', time: '±19:30', text: 'Рисование', isArt: true, isCanceled: false },
             { date: '2026-07-29', time: '±19:30', text: 'Рисование', isArt: true, isCanceled: false },
             { date: '2026-07-31', time: '±19:30', text: 'Рисование', isArt: true, isCanceled: false },
-            // Судный день
             { date: '2026-07-24', time: '', text: 'ЭКЗАМЕН', isExam: true },
-
             { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' },
-
             { date: '2026-08-01', time: '±20:00', text: 'Рисование', isArt: true, isCanceled: false },
             { date: '2026-08-04', time: '±20:00', text: 'Рисование', isArt: true, isCanceled: false },
             { date: '2026-08-07', time: '±20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-08-09', time: '±20:00', text: 'Рисование', isArt: true, isCanceled: false },
             { date: '2026-08-11', time: '±20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
             { date: '2026-08-14', time: '±20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
-            { date: '2026-08-15', time: '±20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
-            
-            // { startDate: '2026-07-18', endDate: '2026-07-25', text: 'Марафон', type: 'marathon' }
-            // ТЕСТОВЫЕ ПАСХАЛКИ (Глитч и Нуар)
-            //{ date: '2026-08-11', time: '20:00', text: 'ERROR_404', isGlitch: true },
-            //{ date: '2026-08-10', time: '??:??', text: 'УЛИКА #1', isNoir: true },
+            { date: '2026-08-15', time: '±20:00', text: 'Стрим', isSpecial: false, isCanceled: false }
         ];
 
         let currentDate = new Date(); 
@@ -1716,7 +918,6 @@
             firstDay = firstDay === 0 ? 6 : firstDay - 1; 
 
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
             const today = new Date();
             const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
@@ -1726,7 +927,6 @@
 
             for (let i = 1; i <= daysInMonth; i++) {
                 const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-                
                 const streamEvent = streamsList.find(s => s.date === dateString);
                 const periodEvent = streamsList.find(s => s.startDate && dateString >= s.startDate && dateString <= s.endDate);
 
@@ -1734,48 +934,30 @@
                 let cellContent = `<div class="day-number">${i}</div>`;
                 let inlineStyles = '';
 
-                if (dateString === todayString) {
-                    cellClasses += ' today';
-                }
+                if (dateString === todayString) cellClasses += ' today';
 
                 if (periodEvent) {
                     cellClasses += ` ${periodEvent.type}`;
                     cellContent += `<div class="period-text">${periodEvent.text}</div>`;
                 } 
                 else if (streamEvent) {
-                    if (streamEvent.isNoir) {
-                        cellClasses += ' noir-day';
-                    } else if (streamEvent.isGlitch) {
-                        cellClasses += ' glitch-day';
-                    } else if (streamEvent.isExam) {
-                        cellClasses += ' panic-day';
-                    } else if (streamEvent.isArt) {
+                    if (streamEvent.isNoir) { cellClasses += ' noir-day'; }
+                    else if (streamEvent.isGlitch) { cellClasses += ' glitch-day'; }
+                    else if (streamEvent.isExam) { cellClasses += ' panic-day'; }
+                    else if (streamEvent.isArt) {
                         cellClasses += ' art-day';
                         const artIconsArray = ['🎨', '🖌️', '✏️', '🖍️', '✒️'];
                         const autoIcon = artIconsArray[i % artIconsArray.length];
                         const icon = streamEvent.artIcon || autoIcon;
                         cellContent += `<div class="art-icon">${icon}</div>`;
                         
-                        const hue1 = (i * 65) % 360; 
-                        const hue2 = (hue1 + 60) % 360; 
-                        const angle = 45 + (i * 37) % 360;
-                        const rot = -6 + (i * 11) % 12; 
-                        const shapes = [
-                            "20% 80% 30% 70% / 60% 30% 70% 40%",
-                            "60% 40% 50% 50% / 40% 50% 50% 60%",
-                            "30% 70% 60% 40% / 50% 30% 70% 50%",
-                            "80% 20% 40% 60% / 60% 50% 50% 40%"
-                        ];
+                        const hue1 = (i * 65) % 360; const hue2 = (hue1 + 60) % 360; const angle = 45 + (i * 37) % 360; const rot = -6 + (i * 11) % 12; 
+                        const shapes = ["20% 80% 30% 70% / 60% 30% 70% 40%", "60% 40% 50% 50% / 40% 50% 50% 60%", "30% 70% 60% 40% / 50% 30% 70% 50%", "80% 20% 40% 60% / 60% 50% 50% 40%"];
                         const shape = shapes[i % 4];
                         inlineStyles += `--art-angle: ${angle}deg; --art-color1: hsl(${hue1}, 90%, 65%); --art-color2: hsl(${hue2}, 90%, 55%); --art-shape: ${shape}; --art-rot: ${rot}deg;`;
-                    } else {
-                        cellClasses += ' stream-day';
-                    }
+                    } else { cellClasses += ' stream-day'; }
 
-                    // УНИВЕРСАЛЬНАЯ ПРОВЕРКА НА ПРОШЛОЕ: работает для артов, нуара и обычных стримов
-                    if (dateString < todayString && !streamEvent.isCanceled) {
-                        cellClasses += ' past-stream';
-                    }
+                    if (dateString < todayString && !streamEvent.isCanceled) cellClasses += ' past-stream';
 
                     if (streamEvent.isCanceled) {
                         cellClasses += ' canceled-day';
@@ -1785,34 +967,33 @@
                         cellContent += `<div class="stream-info ${specialClass}">${streamEvent.time}<br>${streamEvent.text}</div>`;
                     }
                 }
-
                 daysContainer.innerHTML += `<div class="${cellClasses}" style="${inlineStyles}">${cellContent}</div>`;
             }
         }
 
-        function changeMonth(step) {
-            currentDate.setMonth(currentDate.getMonth() + step);
-            renderCalendar();
-        }
-
+        function changeMonth(step) { currentDate.setMonth(currentDate.getMonth() + step); renderCalendar(); }
         renderCalendar();
 
-        // ==========================================
-        // 4. ПАСХАЛКИ (КОРОБКИ И ГРАВИТАЦИЯ)
-        // ==========================================
+        // 4. ПАСХАЛКИ И ЛОР (Pan & Zoom)
+        
+        // Исправленная логика кликов по слову "коробки"
         const secretBox = document.getElementById('secret-box');
         let boxClicks = 0;
-
+        let boxRainActive = false; // Предохранитель от спама дождей
+        
         if (secretBox) {
-            secretBox.addEventListener('click', () => {
+            secretBox.addEventListener('click', (e) => {
+                e.preventDefault();
                 boxClicks++;
-                
                 secretBox.style.transform = `translateX(${boxClicks % 2 === 0 ? 4 : -4}px)`;
                 setTimeout(() => secretBox.style.transform = 'none', 100);
-
-                if (boxClicks === 5) {
-                    boxClicks = 0; 
-                    startBoxRain();
+                
+                // Срабатывает на 5 кликах
+                if (boxClicks >= 5 && !boxRainActive) { 
+                    boxRainActive = true; 
+                    startBoxRain(); 
+                    // Сбрасываем счетчик через 6 секунд, когда дождь кончится
+                    setTimeout(() => { boxClicks = 0; boxRainActive = false; }, 6000); 
                 }
             });
         }
@@ -1820,13 +1001,9 @@
         function startBoxRain() {
             for (let i = 0; i < 40; i++) {
                 setTimeout(() => {
-                    const box = document.createElement('div');
-                    box.innerText = '📦';
-                    box.className = 'falling-box';
-                    box.style.left = Math.random() * 100 + 'vw'; 
-                    box.style.animationDuration = (Math.random() * 2 + 2) + 's'; 
+                    const box = document.createElement('div'); box.innerText = '📦'; box.className = 'falling-box';
+                    box.style.left = Math.random() * 100 + 'vw'; box.style.animationDuration = (Math.random() * 2 + 2) + 's'; 
                     document.body.appendChild(box);
-                    
                     setTimeout(() => box.remove(), 5000);
                 }, i * 100); 
             }
@@ -1835,16 +1012,74 @@
         const seppukuBtn = document.getElementById('seppuku-btn');
         if (seppukuBtn) {
             seppukuBtn.addEventListener('click', () => {
-                document.body.classList.add('seppuku-mode');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                document.body.classList.add('seppuku-mode'); window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
+
+        const loreWindow = document.getElementById('loreWindow');
+        const loreCanvas = document.getElementById('loreCanvas');
+        if (loreWindow && loreCanvas) {
+            let isDragging = false; let startX, startY;
+            let translateX = 80; let translateY = 50; let scale = 1;
+
+            function updateCanvas() {
+                // Расширили границы, чтобы зум и перетаскивание не стопорились слишком рано
+                translateX = Math.min(Math.max(translateX, -1500), 800);
+                translateY = Math.min(Math.max(translateY, -800), 800);
+                loreCanvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            }
+            updateCanvas();
+
+            loreWindow.addEventListener('mousedown', (e) => { 
+                isDragging = true; 
+                startX = e.clientX - translateX; 
+                startY = e.clientY - translateY; 
+                loreWindow.style.cursor = 'grabbing';
+            });
+            
+            // Используем window, чтобы мышка не срывалась, если ты резко выведешь ее за пределы окна карты
+            window.addEventListener('mousemove', (e) => { 
+                if (!isDragging) return; 
+                e.preventDefault(); 
+                translateX = e.clientX - startX; 
+                translateY = e.clientY - startY; 
+                updateCanvas(); 
+            });
+            
+            window.addEventListener('mouseup', () => { 
+                isDragging = false; 
+                loreWindow.style.cursor = 'grab'; 
+            });
+            
+            loreWindow.addEventListener('mouseleave', () => {
+                // Страховка
+                if(!isDragging) loreWindow.style.cursor = 'grab';
+            });
+            
+            // ИСПРАВЛЕННЫЙ ЗУМ: Теперь зумится точно к курсору
+            loreWindow.addEventListener('wheel', (e) => { 
+                e.preventDefault(); 
+                
+                const rect = loreWindow.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                const delta = e.deltaY > 0 ? -0.15 : 0.15;
+                let newScale = Math.min(Math.max(0.4, scale + delta), 2.5); // Масштаб от 0.4x до 2.5x
+
+                if (newScale !== scale) {
+                    const canvasX = (mouseX - translateX) / scale;
+                    const canvasY = (mouseY - translateY) / scale;
+
+                    scale = newScale;
+
+                    translateX = mouseX - canvasX * scale;
+                    translateY = mouseY - canvasY * scale;
+
+                    updateCanvas();
+                }
+            }, { passive: false });
+        }
     </script>
-
-    <div class="seppuku-message">
-        Сайт отправился в таймаут! ⚔️<br>
-        <span style="font-size: 20px; color: #fff;">(Обнови страницу, чтобы починить гравитацию)</span>
-    </div>
-
 </body>
 </html>
