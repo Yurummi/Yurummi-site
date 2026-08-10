@@ -204,7 +204,84 @@
         .tooltip-content strong { color: #fff; font-size: 18px; margin-bottom: 5px; }
         .tooltip-content span { color: #ccc; font-size: 13px; font-weight: normal; line-height: 1.4; }
         .node-tooltip video { width: 100%; border-radius: 8px; background: #000; outline: none; }
+        /* ==========================================
+           СЕКРЕТНЫЙ ГЛИТЧ-ТУЛТИП (Отец Юрумми)
+           ========================================== */
+        .char-tooltip.glitch-name {
+            color: #ef4444; /* Красный цвет текста */
+            border-bottom: 1px dashed #ef4444;
+        }
 
+        .char-tooltip.glitch-name:hover {
+            color: #ff0000;
+            border-color: #ff0000;
+            animation: text-shake 0.2s infinite;
+        }
+
+        /* Красная рамка и тень для самого окна */
+        .tooltip-content.glitch-tooltip {
+            border-color: #ef4444 !important;
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2) !important;
+        }
+
+        /* Красный треугольник внизу */
+        .tooltip-content.glitch-tooltip::after {
+            border-color: #ef4444 transparent transparent transparent !important;
+        }
+
+        /* Заглушка вместо фото */
+        .glitch-avatar {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: #000;
+            border: 2px solid #ef4444;
+            display: flex; align-items: center; justify-content: center;
+            color: #ef4444; font-size: 36px; font-weight: 900; font-family: monospace;
+            margin-bottom: 10px;
+            animation: glitch-anim-1 0.15s infinite;
+        }
+
+        /* Имя (вопросительные знаки) */
+        .glitch-title {
+            color: #ef4444 !important;
+            font-family: monospace;
+            font-size: 24px !important;
+            letter-spacing: 5px;
+            animation: glitch-anim-2 0.3s infinite;
+        }
+
+        /* Засекреченный текст */
+        .glitch-desc {
+            color: #ff8888 !important;
+            font-family: monospace !important;
+            text-transform: uppercase;
+        }
+
+        .glitch-block {
+            background: #ef4444;
+            color: #ef4444; /* Скрываем текст внутри блока */
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        @keyframes text-shake {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 1px) }
+            40% { transform: translate(-1px, -1px) }
+            60% { transform: translate(2px, 1px) }
+            80% { transform: translate(1px, -1px) }
+            100% { transform: translate(0) }
+        }
+        @keyframes glitch-anim-1 {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05) skewX(5deg); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { text-shadow: 3px 0 #00ffff, -3px 0 #ff00ff; }
+            50% { text-shadow: -3px 0 #00ffff, 3px 0 #ff00ff; }
+            100% { text-shadow: 3px 0 #00ffff, -3px 0 #ff00ff; }
+        }
         /* Подсказка управления картой */
         .lore-tree-window .map-hint {
             position: absolute; 
@@ -616,15 +693,32 @@
                     <div class="lore-content">
                         <h3 class="lore-title">Эпоха Изгнания</h3>
                         <p class="lore-desc">
-                            Всё началось далеко за пределами привычного мира. Спасаясь от преследования мстительных богов, отец Юрумми
-                            отправляет его сквозь мультивселенную. Будучи ещё младенцем,
+                            Всё началось далеко за пределами привычного мира. Спасаясь от преследования мстительных богов, 
+                            
+                            <!-- ИСПРАВЛЕННЫЙ ГЛИТЧ-ТУЛТИП -->
+                            <span class="char-tooltip glitch-name">отец Юрумми
+                                <span class="tooltip-content glitch-tooltip">
+                                    <!-- Заменили div на span вот здесь: -->
+                                    <span class="glitch-avatar">?</span>
+                                    <strong class="glitch-title">???</strong>
+                                    <span class="glitch-desc">
+                                        [ОШИБКА 404]<br>
+                                        ДАННЫЕ <span class="glitch-block">ПОВРЕЖДЕНЫ</span>.<br>
+                                        СУЩНОСТЬ СКРЫТА ИЗ <span class="glitch-block">БАЗЫ</span>.<br>
+                                        УГРОЗА: НЕИЗВЕСТНА.
+                                    </span>
+                                </span>
+                            </span> 
+                            
+                            отправляет его сквозь мультивселенную. Будучи ещё младенцем, 
                             <span class="char-tooltip">Юрумми
                                 <span class="tooltip-content">
-                                    <img src="img/fanarts/заказ_юруми.jpeg" alt="Юрумми">
+                                    <img src="img/fanarts/юрумипнгартналови.png" alt="Юрумми">
                                     <strong>Юрумми</strong>
                                     <span>Парень с коробкой на голове. Беглец из другого измерения, пытающийся жить обычной жизнью на Земле.</span>
                                 </span>
-                            </span>  попадает на планету Земля, где долгие годы ведёт жизнь обычного человека, скрывая своё происхождение под картонной коробкой.
+                            </span> 
+                            попадает на планету Земля, где долгие годы ведёт жизнь обычного человека, скрывая своё происхождение под картонной коробкой.
                         </p>
                     </div>
                 </div>
@@ -733,7 +827,7 @@
             </div>
             <div class="command-group">
                 <details>
-                    <summary>🎮 Игры с чатом (Осторожно!)</summary>
+                    <summary>🎮 Игры с чатом</summary>
                     <div class="command-content">
                         <div class="cmd-item"><span class="cmd-name">!seppuku</span><span class="cmd-desc">Отправит тебя в таймаут на 60 секунд. На свой страх и риск! ⚔️</span></div>
                         <div class="cmd-item"><span class="cmd-name">!topseppuku</span><span class="cmd-desc">Показывает лидеров по количеству прописанных !seppuku.</span></div>
