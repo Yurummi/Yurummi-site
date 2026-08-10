@@ -238,6 +238,41 @@
         .h-node.active:hover .h-label { color: #a855f7; }
 
         /* ==========================================
+           СТИЛИ ОКНА КАРТЫ (Возвращаем рамки и фон)
+           ========================================== */
+        .lore-tree-window { 
+            width: 100%; 
+            height: 350px; 
+            background: #111; 
+            border-radius: 16px; 
+            border: 2px solid #2a2a2a; 
+            overflow: hidden; 
+            position: relative; 
+            cursor: grab; 
+            margin-top: 40px; 
+            margin-bottom: 40px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8); 
+        }
+        .lore-tree-window:active { cursor: grabbing; }
+        .tree-canvas { position: absolute; width: 1200px; height: 100%; transform-origin: 0 0; }
+        .h-node { position: absolute; width: 24px; height: 24px; background: #ff3385; border-radius: 50%; z-index: 2; cursor: pointer; box-shadow: 0 0 15px #ff3385; transition: transform 0.3s, box-shadow 0.3s; }
+        .h-node:hover { transform: scale(1.4); box-shadow: 0 0 25px #ff3385; }
+        .h-node.active { background: #a855f7; box-shadow: 0 0 15px #a855f7; }
+        .h-node.active:hover { box-shadow: 0 0 25px #a855f7; }
+        .h-node.dead { background: #444; box-shadow: none; cursor: default; }
+        .h-node.dead:hover { transform: none; }
+        .h-node.future { background: #151515; border: none; box-shadow: none; cursor: default; animation: none; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .h-node.future::before { content: ''; position: absolute; top: -3px; bottom: -3px; left: -3px; right: -3px; border: 3px dashed #a855f7; border-radius: 50%; animation: spin 5s linear infinite; display: block; box-sizing: border-box; }
+        .h-cross { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 16px; pointer-events: none; }
+        .h-label { position: absolute; white-space: nowrap; color: #fff; font-size: 14px; font-weight: bold; left: 50%; transform: translateX(-50%); transition: color 0.3s; pointer-events: none; }
+        .h-label.top { top: -35px; }
+        .h-label.bottom { bottom: -35px; }
+        .h-label.dead-text { color: #666; }
+        .h-node:hover .h-label:not(.dead-text) { color: #ff3385; }
+        .h-node.active:hover .h-label { color: #a855f7; }
+
+        /* ==========================================
            КОМАНДЫ И ССЫЛКИ
            ========================================== */
         .command-group { margin-bottom: 15px; }
@@ -523,9 +558,9 @@
             </p>
 
             <div class="lore-tree-window" id="loreWindow">
-                <div style="position:absolute; bottom:15px; right:20px; color:#666; font-size:12px; pointer-events:none; z-index:1;">
-                    🖱️ Зажми и тащи / Колесико для зума
-                </div>
+            <div style="position:absolute; bottom:15px; right:20px; color:#666; font-size:12px; pointer-events:none; z-index:1;">
+            🖱️ Зажми и тащи / Колесико для зума
+            </div>
                 
                 <div class="tree-canvas" id="loreCanvas">
                     <svg width="100%" height="100%" style="position:absolute; top:0; left:0; z-index:1; pointer-events:none;">
