@@ -546,7 +546,7 @@
     color: #ffffff !important;
     font-size: 16px;
     font-weight: 900;
-    text-shadow: 2px 2px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+    text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 0 3px 5px rgba(0,0,0,0.8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -557,31 +557,36 @@
     box-shadow: none;
 }
 
-/* Само кольцо 3D (вращается отдельно от текста) */
+/* Само кольцо 3D (металлический градиент + маска) */
 .day-cell.sonic-cell .day-number::before {
     content: "";
     position: absolute;
     inset: 0; /* Заполняет весь контейнер */
     border-radius: 50%;
-    border: 7px solid #ffd700;
-    box-shadow: 
-        inset 0px 4px 0px #fff5cc,
-        inset 0px -4px 0px #b38f00,
-        0px 4px 0px #b38f00,
-        0px -4px 0px #fff5cc;
-    animation: ring-spin-3d 2.5s linear infinite;
-    transform-style: preserve-3d;
+    /* Создаём эффект золотого металла с помощью конического градиента */
+    background: conic-gradient(
+        from 0deg,
+        #ffc800 0%, #fff7b0 15%, #ffc800 30%, #a67c00 50%,
+        #ffc800 70%, #fff7b0 85%, #ffc800 100%
+    );
+    /* Вырезаем центр, чтобы получилось кольцо */
+    -webkit-mask: radial-gradient(circle, transparent 52%, black 53%);
+    mask: radial-gradient(circle, transparent 52%, black 53%);
+    
+    /* Фейковое 3D вращение (сплющивание + затенение) */
+    animation: ring-spin-fake3d 2s linear infinite;
     z-index: -1;
 }
 
-/* 5. Глобальный блик по кольцам */
+/* 5. Глобальный блик по кольцам (теперь с мягким наложением) */
 .day-cell.sonic-cell .day-number::after {
     content: "";
     position: absolute;
-    top: -5px; bottom: -5px;
-    left: -20px; width: 15px;
-    background: rgba(255, 255, 255, 0.8);
+    top: -10px; bottom: -10px;
+    left: -30px; width: 25px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent);
     transform: skewX(-20deg);
+    mix-blend-mode: overlay; /* Делает блик красивым отражением, а не белой полосой */
     animation: ring-shine 3s linear infinite;
     /* Умная задержка: волна идёт по диагонали (x + y) */
     animation-delay: calc((var(--x) + var(--y)) * 0.15s);
@@ -589,14 +594,18 @@
     pointer-events: none;
 }
 
-@keyframes ring-spin-3d {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
+@keyframes ring-spin-fake3d {
+    0%   { transform: scaleX(1);   filter: brightness(1); }
+    25%  { transform: scaleX(0.15); filter: brightness(0.6); }
+    50%  { transform: scaleX(1);   filter: brightness(1); }
+    75%  { transform: scaleX(0.15); filter: brightness(0.6); }
+    100% { transform: scaleX(1);   filter: brightness(1); }
 }
 
 @keyframes ring-shine {
-    0%, 70% { left: -20px; }
-    100% { left: 40px; }
+    0%, 60% { left: -30px; opacity: 0; }
+    65% { opacity: 1; }
+    70%, 100% { left: 50px; opacity: 0; }
 }
 
 /* Скрываем обычную плашку со временем, делаем текст видимым */
@@ -658,9 +667,9 @@
     50% { transform: translate(-50%, 50%) scale(1.2); opacity: 1; }
 }
 
-/* 8. Отменённый стрим: Шипы (Spikes) */
+/* 8. Отменённый стрим: Потеря колец (Damage) */
 .day-cell.sonic-cell.canceled-day {
-    filter: grayscale(0.2);
+    filter: grayscale(0.5);
 }
 
 .day-cell.sonic-cell.canceled-day .stream-info {
@@ -668,41 +677,36 @@
     text-decoration: none;
 }
 .day-cell.sonic-cell.canceled-day .stream-info::after {
-    display: none; /* Убираем надпись ОТМЕНЕН */
+    display: none;
 }
 
 .day-cell.sonic-cell.canceled-day .day-number {
-    /* Ряд металлических шипов */
-    width: 36px; /* 3 шипа по 12px */
-    height: 25px;
-    transform: translate(-50%, 25%);
-    background: 
-        linear-gradient(to bottom right, transparent 49%, #eeeeee 50%),
-        linear-gradient(to bottom left, transparent 49%, #888888 50%);
-    background-size: 6px 25px, 6px 25px;
-    background-position: 0 0, 6px 0;
-    background-repeat: repeat-x;
-    
-    /* Очистка стилей кольца */
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
+    /* Прячем основное кольцо и текст */
     color: transparent !important;
     text-shadow: none;
 }
-.day-cell.sonic-cell.canceled-day .day-number::before {
-    /* Подставка для шипов */
+.day-cell.sonic-cell.canceled-day .day-number::before,
+.day-cell.sonic-cell.canceled-day .day-number::after {
+    display: none; /* Убираем главное кольцо и блик */
+}
+
+/* Анимация разлетающихся колец (урон) */
+.day-cell.sonic-cell.canceled-day::before {
     content: "";
     position: absolute;
-    bottom: -4px;
-    left: -2px; right: -2px;
-    height: 4px;
-    background: #444;
-    border-radius: 2px;
-    border: none;
-    box-shadow: none;
-    animation: none;
+    inset: 0;
+    background: 
+        radial-gradient(circle, transparent 35%, #ffcc00 40%, #ffcc00 55%, transparent 60%),
+        radial-gradient(circle, transparent 35%, #ffcc00 40%, #ffcc00 55%, transparent 60%),
+        radial-gradient(circle, transparent 35%, #ffcc00 40%, #ffcc00 55%, transparent 60%);
+    background-size: 20px 20px, 16px 16px, 18px 18px;
+    background-position: 10% 20%, 80% 30%, 40% 70%;
+    background-repeat: no-repeat;
+    z-index: 10;
+    animation: rings-scatter 1.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
-.day-cell.sonic-cell.canceled-day .day-number::after {
-    display: none; /* Убираем блик кольца */
+
+@keyframes rings-scatter {
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(30px) scale(1.2); opacity: 0; }
 }
