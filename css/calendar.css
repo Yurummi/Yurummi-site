@@ -430,3 +430,238 @@
 
 .vacation .period-text  { color: #ffe600; }
 .marathon .period-text  { color: #ff3385; }
+
+/* ==========================================
+   ЯЧЕЙКА — SONIC THEME (Острова и Кольца)
+   ========================================== */
+
+/* 1. Базовый остров (Земля Green Hill) */
+.day-cell.sonic-cell {
+    /* Паттерн клетчатой земли (коричневая и темно-коричневая) */
+    background: 
+        linear-gradient(45deg, #7c481d 25%, transparent 25%, transparent 75%, #7c481d 75%, #7c481d),
+        linear-gradient(45deg, #7c481d 25%, transparent 25%, transparent 75%, #7c481d 75%, #7c481d);
+    background-color: #5c3210;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    
+    border: none;
+    position: relative;
+    border-radius: 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    overflow: visible; /* Важно для шипов и травы */
+    transition: transform 0.2s, opacity 0.3s;
+}
+
+/* 2. Трава сверху (Пиксельная) */
+.day-cell.sonic-cell::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: #2dd81c;
+    /* Узор травы */
+    background-image: linear-gradient(135deg, transparent 25%, rgba(0,100,0,0.3) 25%, rgba(0,100,0,0.3) 50%, transparent 50%, transparent 75%, rgba(0,100,0,0.3) 75%, rgba(0,100,0,0.3));
+    background-size: 10px 10px;
+    border-top: 3px solid #6cff5c;
+    border-bottom: 3px solid #0b6900;
+    z-index: 1;
+}
+
+/* 3. Слияние островов */
+.day-cell.sonic-cell.island-single {
+    border-radius: 8px;
+}
+.day-cell.sonic-cell.island-single::before {
+    border-radius: 8px 8px 0 0;
+}
+
+.day-cell.sonic-cell.island-start {
+    border-radius: 8px 0 0 8px;
+    margin-right: -4px; /* Убираем gap грида */
+    padding-right: 4px;
+}
+.day-cell.sonic-cell.island-start::before {
+    border-radius: 8px 0 0 0;
+    right: -4px;
+}
+
+.day-cell.sonic-cell.island-mid {
+    border-radius: 0;
+    margin-left: -4px;
+    margin-right: -4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.day-cell.sonic-cell.island-mid::before {
+    left: -4px;
+    right: -4px;
+}
+
+.day-cell.sonic-cell.island-end {
+    border-radius: 0 8px 8px 0;
+    margin-left: -4px;
+    padding-left: 4px;
+}
+.day-cell.sonic-cell.island-end::before {
+    border-radius: 0 8px 0 0;
+    left: -4px;
+}
+
+/* При наведении немного приподнимаем */
+.day-cell.sonic-cell:hover {
+    transform: translateY(-3px);
+    z-index: 10;
+}
+
+/* 4. Золотое кольцо (Вместо номера дня) */
+.day-cell.sonic-cell .day-number {
+    top: auto;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: 5px solid #ffcc00;
+    border-radius: 50%;
+    color: transparent; /* Скрываем текст, но оставляем его в DOM */
+    box-shadow: 
+        inset 2px 2px 0px #ffe680,
+        inset -2px -2px 0px #b38f00,
+        2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 5;
+    position: absolute;
+    /* Анимация вращения кольца (сплющивание) */
+    animation: ring-spin 2s linear infinite;
+    overflow: hidden;
+}
+
+/* Псевдоэлемент для номера поверх кольца, если нужно */
+.day-cell.sonic-cell::after {
+    content: attr(data-day); /* Если захотим вернуть номер - нужно добавить data-day в js */
+}
+
+/* 5. Глобальный блик по кольцам (использует --x и --y) */
+.day-cell.sonic-cell .day-number::after {
+    content: "";
+    position: absolute;
+    top: -5px; bottom: -5px;
+    left: -20px; width: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    transform: skewX(-20deg);
+    animation: ring-shine 3s linear infinite;
+    /* Умная задержка: волна идёт по диагонали (x + y) */
+    animation-delay: calc((var(--x) + var(--y)) * 0.15s);
+}
+
+@keyframes ring-spin {
+    0% { transform: translate(-50%, 50%) scaleX(1); }
+    50% { transform: translate(-50%, 50%) scaleX(0.2); }
+    100% { transform: translate(-50%, 50%) scaleX(1); }
+}
+
+@keyframes ring-shine {
+    0%, 70% { left: -20px; }
+    100% { left: 40px; }
+}
+
+/* Скрываем обычную плашку со временем, чтобы не мешала кольцу */
+.day-cell.sonic-cell .stream-info {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    background: rgba(0,0,0,0.6);
+    font-size: 9px;
+    padding: 2px;
+    border-radius: 4px;
+    text-align: center;
+    border: none;
+    box-shadow: none;
+    z-index: 6;
+}
+
+/* 6. Сегодня: Чекпоинт (Star Post) */
+.day-cell.sonic-cell.today {
+    border: none !important;
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.6) !important;
+}
+
+.day-cell.sonic-cell.today .day-number {
+    /* Превращаем кольцо в шарик чекпоинта */
+    border-color: #ff3333;
+    border-width: 8px;
+    box-shadow: 0 0 15px #ff3333, inset 0 0 10px #aa0000;
+    animation: star-post-flash 0.5s alternate infinite;
+}
+.day-cell.sonic-cell.today .day-number::after {
+    display: none; /* Убираем белый блик кольца */
+}
+
+@keyframes star-post-flash {
+    from { background: #ffaaaa; }
+    to { background: #ff0000; }
+}
+
+/* 7. Прошедший стрим: Кольцо собрано (Искорки) */
+.day-cell.sonic-cell.past-stream {
+    filter: saturate(0.5);
+    opacity: 0.8;
+}
+
+.day-cell.sonic-cell.past-stream .day-number {
+    /* Кольцо заменяется на искры */
+    border: none;
+    box-shadow: none;
+    background: radial-gradient(circle, #ffe680 20%, transparent 60%);
+    animation: sparkles 1.5s infinite;
+}
+
+@keyframes sparkles {
+    0%, 100% { transform: translate(-50%, 50%) scale(0.5); opacity: 0.5; }
+    50% { transform: translate(-50%, 50%) scale(1.2); opacity: 1; }
+}
+
+/* 8. Отменённый стрим: Шипы (Spikes) */
+.day-cell.sonic-cell.canceled-day {
+    filter: grayscale(0.5);
+}
+
+.day-cell.sonic-cell.canceled-day .stream-info {
+    background: #aa0000;
+    text-decoration: none;
+}
+.day-cell.sonic-cell.canceled-day .stream-info::after {
+    display: none; /* Убираем надпись ОТМЕНЕН, т.к. шипы говорят сами за себя */
+}
+
+.day-cell.sonic-cell.canceled-day .day-number {
+    /* Превращаем в шип */
+    border: none;
+    background: none;
+    box-shadow: none;
+    animation: none;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 25px solid #cccccc; /* Серый металлический шип */
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
+    transform: translate(-50%, 20%);
+}
+.day-cell.sonic-cell.canceled-day .day-number::after {
+    /* Блик на шипе */
+    display: block;
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -2px;
+    width: 2px;
+    height: 15px;
+    background: rgba(255,255,255,0.7);
+    animation: none;
+    transform: none;
+}
