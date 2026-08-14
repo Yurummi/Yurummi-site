@@ -1,0 +1,168 @@
+/* ==========================================
+   СЕТКА ГАЛЕРЕИ
+   ========================================== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 15px;
+    text-align: center;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay h3 {
+    margin: 0 0 10px 0;
+    color: #ff3385;
+    font-size: 22px;
+}
+
+.gallery-overlay p {
+    margin: 0;
+    color: #fff;
+    font-size: 16px;
+}
+
+.gallery-subtitle {
+    text-align: center;
+    color: #b3b3b3;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.btn-more-arts {
+    display: block;
+    margin: 10px auto 40px;
+    background: transparent;
+    color: #ff3385;
+    border: 2px dashed #ff3385;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-more-arts:hover {
+    background: rgba(255, 51, 133, 0.1);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   ЛАЙТБОКС
+   ========================================== */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+.lightbox-caption {
+    margin-top: 15px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lightbox-close:hover {
+    color: #ff3385;
+}
+
+.music-hint {
+    display: inline-block;
+    margin-top: 10px;
+    color: #ffe600;
+    font-size: 14px;
+    font-style: italic;
+    animation: pulse-text 2s infinite;
+}
+
+/* Исправлено: keyframes для music-hint — отсутствовал в оригинале */
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+
+.lightbox-content.clickable-art {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lightbox-content.clickable-art:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 40px rgba(255, 51, 133, 0.8);
+}

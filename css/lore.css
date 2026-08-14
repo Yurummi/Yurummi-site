@@ -1,0 +1,420 @@
+/* ==========================================
+   КАРТОЧКИ ЛОРА
+   ========================================== */
+.lore-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.lore-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px;
+    background: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.lore-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 51, 133, 0.15);
+    border-color: #ff3385;
+}
+
+.lore-video {
+    flex: 1;
+    min-width: 320px;
+    max-width: 400px;
+    aspect-ratio: 16 / 9;
+    background: #0f0f0f;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+    color: #fff;
+    position: relative;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6);
+    transition: box-shadow 0.3s;
+}
+
+.video-placeholder:hover {
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+}
+
+.video-placeholder .play-btn {
+    font-size: 50px;
+    color: #ff3385;
+    transition: transform 0.3s, text-shadow 0.3s;
+    z-index: 2;
+}
+
+.video-placeholder:hover .play-btn {
+    transform: scale(1.1);
+    text-shadow: 0 0 15px #ff3385;
+}
+
+.video-overlay {
+    position: absolute;
+    bottom: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid #ff3385;
+}
+
+.lore-content {
+    flex: 2;
+    padding: 15px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.lore-title {
+    color: #ff3385;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 26px;
+}
+
+.lore-desc {
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ==========================================
+   ТУЛТИПЫ ПЕРСОНАЖЕЙ
+   ========================================== */
+.char-tooltip {
+    position: relative;
+    color: #a855f7;
+    border-bottom: 1px dashed #a855f7;
+    cursor: help;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.char-tooltip:hover {
+    color: #ff3385;
+    border-color: #ff3385;
+}
+
+/* Базовые стили для текстовых и видео-тултипов */
+.tooltip-content,
+.node-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: #1a1a1a !important;
+    border: 2px solid #a855f7;
+    padding: 15px;
+    border-radius: 12px;
+    width: 260px;
+    z-index: 99999 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+    transition:
+        opacity 0.3s ease 1s,
+        transform 0.3s ease 1s,
+        visibility 0s linear 1.3s;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Невидимый мостик, чтобы тултип не пропадал при переходе курсора */
+.tooltip-content::before,
+.node-tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 25px;
+}
+
+/* Показываем тултип при наведении (с задержкой) */
+.char-tooltip:hover .tooltip-content,
+.tooltip-content:hover,
+.h-node:hover .node-tooltip,
+.node-tooltip:hover {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    transition:
+        opacity 0.3s ease 0s,
+        transform 0.3s ease 0s,
+        visibility 0s linear 0s;
+}
+
+/* Стрелка вниз */
+.tooltip-content::after,
+.node-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #a855f7 transparent transparent transparent;
+}
+
+.tooltip-content img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #ff3385;
+    background: #333;
+}
+
+.tooltip-content strong {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.tooltip-content span {
+    color: #ccc;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+.node-tooltip video {
+    width: 100%;
+    border-radius: 8px;
+    background: #000;
+    outline: none;
+}
+
+/* ==========================================
+   СЕКРЕТНЫЙ ГЛИТЧ-ТУЛТИП (Отец Юрумми)
+   ========================================== */
+.char-tooltip.glitch-name {
+    color: #ef4444;
+    border-bottom: 1px dashed #ef4444;
+}
+
+.char-tooltip.glitch-name:hover {
+    color: #ff0000;
+    border-color: #ff0000;
+    animation: text-shake 0.2s infinite;
+}
+
+.tooltip-content.glitch-tooltip {
+    border-color: #ef4444 !important;
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2) !important;
+}
+
+.tooltip-content.glitch-tooltip::after {
+    border-color: #ef4444 transparent transparent transparent !important;
+}
+
+.glitch-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #000;
+    border: 2px solid #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ef4444;
+    font-size: 36px;
+    font-weight: 900;
+    font-family: monospace;
+    margin-bottom: 10px;
+    animation: glitch-anim-1 0.15s infinite;
+}
+
+.glitch-title {
+    color: #ef4444 !important;
+    font-family: monospace;
+    font-size: 24px !important;
+    letter-spacing: 5px;
+    animation: glitch-anim-2 0.3s infinite;
+}
+
+.glitch-desc {
+    color: #ff8888 !important;
+    font-family: monospace !important;
+    text-transform: uppercase;
+}
+
+.glitch-block {
+    background: #ef4444;
+    color: #ef4444; /* Скрываем текст — визуальная цензура */
+    display: inline-block;
+    margin: 0 2px;
+}
+
+@keyframes text-shake {
+    0%   { transform: translate(0); }
+    20%  { transform: translate(-2px, 1px); }
+    40%  { transform: translate(-1px, -1px); }
+    60%  { transform: translate(2px, 1px); }
+    80%  { transform: translate(1px, -1px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitch-anim-1 {
+    0%   { opacity: 1;   transform: scale(1); }
+    50%  { opacity: 0.8; transform: scale(1.05) skewX(5deg); }
+    100% { opacity: 1;   transform: scale(1); }
+}
+
+@keyframes glitch-anim-2 {
+    0%   { text-shadow:  3px 0 #00ffff, -3px 0 #ff00ff; }
+    50%  { text-shadow: -3px 0 #00ffff,  3px 0 #ff00ff; }
+    100% { text-shadow:  3px 0 #00ffff, -3px 0 #ff00ff; }
+}
+
+/* ==========================================
+   КАРТА ЛОРА (PAN & ZOOM)
+   ========================================== */
+.lore-tree-window {
+    width: 100%;
+    height: 350px;
+    background: #111;
+    border-radius: 16px;
+    border: 2px solid #2a2a2a;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+    touch-action: none; /* Запрещает скролл страницы при перетаскивании карты */
+}
+
+.lore-tree-window:active {
+    cursor: grabbing;
+}
+
+.tree-canvas {
+    position: absolute;
+    width: 1200px;
+    height: 100%;
+    transform-origin: 0 0;
+}
+
+/* ==========================================
+   УЗЛЫ КАРТЫ
+   ========================================== */
+.h-node {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #ff3385;
+    border-radius: 50%;
+    z-index: 2;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff3385;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.h-node:hover {
+    transform: scale(1.4);
+    box-shadow: 0 0 25px #ff3385;
+}
+
+.h-node.active {
+    background: #a855f7;
+    box-shadow: 0 0 15px #a855f7;
+}
+
+.h-node.active:hover {
+    box-shadow: 0 0 25px #a855f7;
+}
+
+.h-node.dead {
+    background: #444;
+    box-shadow: none;
+    cursor: default;
+}
+
+.h-node.dead:hover {
+    transform: none;
+}
+
+.h-node.future {
+    background: #151515;
+    border: none;
+    box-shadow: none;
+    cursor: default;
+    animation: none;
+}
+
+/* Вращающийся пунктирный ободок у будущих узлов */
+@keyframes spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.h-node.future::before {
+    content: '';
+    position: absolute;
+    top: -3px; bottom: -3px;
+    left: -3px; right: -3px;
+    border: 3px dashed #a855f7;
+    border-radius: 50%;
+    animation: spin 5s linear infinite;
+    display: block;
+    box-sizing: border-box;
+}
+
+.h-cross {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    pointer-events: none;
+}
+
+.h-label {
+    position: absolute;
+    white-space: nowrap;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: color 0.3s;
+    pointer-events: none;
+}
+
+.h-label.top    { top: -35px; }
+.h-label.bottom { bottom: -35px; }
+.h-label.dead-text { color: #666; }
+
+.h-node:hover .h-label:not(.dead-text) { color: #ff3385; }
+.h-node.active:hover .h-label { color: #a855f7; }
