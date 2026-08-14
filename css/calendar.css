@@ -559,28 +559,37 @@
     box-shadow: inset 0 2px 2px rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.2);
 }
 
-/* Центральный слой (самый широкий) */
-.day-cell.sonic-cell .ring-face[style*="--i: 2"] {
+/* Центральный слой (самый широкий, i=3) */
+.day-cell.sonic-cell .ring-face[style*="--i: 3"] {
     inset: 0px;
     border: 7px solid #ffd700;
     transform: translateZ(0px);
 }
 
-/* Промежуточные слои (чуть меньше, создают скругление) */
-.day-cell.sonic-cell .ring-face[style*="--i: 1"],
-.day-cell.sonic-cell .ring-face[style*="--i: 3"] {
+/* Внутренние-промежуточные слои (i=2, 4) */
+.day-cell.sonic-cell .ring-face[style*="--i: 2"],
+.day-cell.sonic-cell .ring-face[style*="--i: 4"] {
     inset: 1px;
     border: 6px solid #e6b800; /* Темнее для эффекта тени */
-    transform: translateZ(calc((var(--i) - 2) * 2px));
+    transform: translateZ(calc((var(--i) - 3) * 3px));
     box-shadow: none;
 }
 
-/* Внешние слои (самые узкие, завершают скругление) */
-.day-cell.sonic-cell .ring-face[style*="--i: 0"],
-.day-cell.sonic-cell .ring-face[style*="--i: 4"] {
+/* Внешние-промежуточные слои (i=1, 5) */
+.day-cell.sonic-cell .ring-face[style*="--i: 1"],
+.day-cell.sonic-cell .ring-face[style*="--i: 5"] {
     inset: 2px;
-    border: 5px solid #ffcc00;
-    transform: translateZ(calc((var(--i) - 2) * 2.5px)); /* Чуть дальше для плавности */
+    border: 5px solid #cc9900;
+    transform: translateZ(calc((var(--i) - 3) * 3px));
+    box-shadow: none;
+}
+
+/* Крайние слои (i=0, 6) завершают скругление торуса */
+.day-cell.sonic-cell .ring-face[style*="--i: 0"],
+.day-cell.sonic-cell .ring-face[style*="--i: 6"] {
+    inset: 3px;
+    border: 4px solid #ffcc00; /* Яркие по краям */
+    transform: translateZ(calc((var(--i) - 3) * 3px));
 }
 
 /* Номер дня поверх кольца */
@@ -603,21 +612,20 @@
 /* 5. Глобальный блик (применяется строго к форме переднего слоя кольца) */
 .day-cell.sonic-cell .ring-shine {
     position: absolute;
-    inset: 2px; /* Совпадает с размером переднего слоя (индекс 4) */
-    background: linear-gradient(135deg, transparent 20%, rgba(255, 255, 255, 0.7) 40%, rgba(255, 255, 255, 0.7) 60%, transparent 80%);
+    inset: 3px; /* Совпадает с размером крайнего слоя (индекс 6) */
+    background: linear-gradient(135deg, transparent 25%, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 1) 55%, transparent 75%);
     background-size: 300% 300%;
     background-position: 150% 150%;
     
-    /* Используем closest-side, чтобы 100% было краем квадрата, а не его углом.
-       Это идеально вырезает кольцо: прозрачный центр (0-70%), белое кольцо (72-98%), прозрачные углы (100%). */
-    -webkit-mask: radial-gradient(circle closest-side, transparent 70%, black 72%, black 98%, transparent 100%);
-    mask: radial-gradient(circle closest-side, transparent 70%, black 72%, black 98%, transparent 100%);
+    /* Маска для крайнего слоя: вырезаем внутреннюю дырку (transparent 77%) и внешние углы (transparent 100%) */
+    -webkit-mask: radial-gradient(circle closest-side, transparent 77%, black 79%, black 98%, transparent 100%);
+    mask: radial-gradient(circle closest-side, transparent 77%, black 79%, black 98%, transparent 100%);
     
     pointer-events: none;
     z-index: 5;
     
-    /* Сдвигаем блик чуть-чуть перед кольцом в 3D пространстве */
-    transform: translateZ(6px);
+    /* Сдвигаем блик чуть-чуть перед крайним слоем (который на 9px) */
+    transform: translateZ(10px);
     
     animation: ring-shine-slide 3s ease-in-out infinite;
     animation-delay: calc((var(--x) + var(--y)) * 0.15s);
