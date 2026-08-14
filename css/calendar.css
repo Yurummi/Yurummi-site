@@ -531,81 +531,91 @@
     z-index: 10;
 }
 
-/* 4. Золотое кольцо и номер дня */
-.day-cell.sonic-cell .day-number {
-    top: auto;
+/* 4. Обертка для кольца */
+.day-cell.sonic-cell .ring-wrapper {
+    position: absolute;
     bottom: 50%;
     left: 50%;
     transform: translate(-50%, 50%);
     width: 44px;
     height: 44px;
-    position: absolute;
     z-index: 5;
-    
-    /* Текст внутри кольца */
+    /* Настройка перспективы для дочерних 3D-элементов */
+    perspective: 200px;
+}
+
+/* Истинный 3D контейнер кольца */
+.day-cell.sonic-cell .ring-3d {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: ring-spin-true3d 2.5s linear infinite;
+}
+
+/* Слои (лица) из которых состоит кольцо в 3D */
+.day-cell.sonic-cell .ring-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 7px solid #ffd700;
+    /* Располагаем каждый слой по оси Z, от -4px до 4px (индекс 0..4) */
+    transform: translateZ(calc((var(--i) - 2) * 2px));
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.2);
+}
+
+/* Внутренние слои темнее для имитации тени глубины */
+.day-cell.sonic-cell .ring-face:not(:first-child):not(:last-child) {
+    border-color: #c99a00;
+    box-shadow: none;
+}
+
+/* Номер дня поверх кольца */
+.day-cell.sonic-cell .day-number {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #ffffff !important;
     font-size: 16px;
     font-weight: 900;
     text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 0 3px 5px rgba(0,0,0,0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    /* Убираем старые рамки с самого контейнера текста */
     background: none;
     border: none;
     box-shadow: none;
+    z-index: 10; /* Поверх кольца и блика */
 }
 
-/* Само кольцо 3D (металлический градиент + маска) */
-.day-cell.sonic-cell .day-number::before {
-    content: "";
+/* 5. Глобальный блик (применяется строго к форме кольца через маску) */
+.day-cell.sonic-cell .ring-shine {
     position: absolute;
-    inset: 0; /* Заполняет весь контейнер */
-    border-radius: 50%;
-    /* Создаём эффект золотого металла с помощью конического градиента */
-    background: conic-gradient(
-        from 0deg,
-        #ffc800 0%, #fff7b0 15%, #ffc800 30%, #a67c00 50%,
-        #ffc800 70%, #fff7b0 85%, #ffc800 100%
-    );
-    /* Вырезаем центр, чтобы получилось кольцо */
-    -webkit-mask: radial-gradient(circle, transparent 52%, black 53%);
-    mask: radial-gradient(circle, transparent 52%, black 53%);
+    inset: 0;
+    background: linear-gradient(135deg, transparent 20%, rgba(255, 255, 255, 0.9) 40%, rgba(255, 255, 255, 0.9) 60%, transparent 80%);
+    background-size: 300% 300%;
+    background-position: 150% 150%; /* Скрыт по умолчанию */
     
-    /* Фейковое 3D вращение (сплющивание + затенение) */
-    animation: ring-spin-fake3d 2s linear infinite;
-    z-index: -1;
-}
-
-/* 5. Глобальный блик по кольцам (теперь с мягким наложением) */
-.day-cell.sonic-cell .day-number::after {
-    content: "";
-    position: absolute;
-    top: -10px; bottom: -10px;
-    left: -30px; width: 25px;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent);
-    transform: skewX(-20deg);
-    mix-blend-mode: overlay; /* Делает блик красивым отражением, а не белой полосой */
-    animation: ring-shine 3s linear infinite;
+    /* Маска, которая идеально повторяет контур кольца */
+    -webkit-mask: radial-gradient(circle, transparent 48%, black 49%, black 65%, transparent 66%);
+    mask: radial-gradient(circle, transparent 48%, black 49%, black 65%, transparent 66%);
+    
+    mix-blend-mode: overlay; /* Мягкое наложение на золотой цвет */
+    pointer-events: none;
+    z-index: 5;
+    
+    animation: ring-shine-slide 3s ease-in-out infinite;
     /* Умная задержка: волна идёт по диагонали (x + y) */
     animation-delay: calc((var(--x) + var(--y)) * 0.15s);
-    z-index: 10;
-    pointer-events: none;
 }
 
-@keyframes ring-spin-fake3d {
-    0%   { transform: scaleX(1);   filter: brightness(1); }
-    25%  { transform: scaleX(0.15); filter: brightness(0.6); }
-    50%  { transform: scaleX(1);   filter: brightness(1); }
-    75%  { transform: scaleX(0.15); filter: brightness(0.6); }
-    100% { transform: scaleX(1);   filter: brightness(1); }
+@keyframes ring-spin-true3d {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
 }
 
-@keyframes ring-shine {
-    0%, 60% { left: -30px; opacity: 0; }
-    65% { opacity: 1; }
-    70%, 100% { left: 50px; opacity: 0; }
+@keyframes ring-shine-slide {
+    0%, 65% { background-position: 150% 150%; opacity: 0; }
+    75% { opacity: 1; }
+    85%, 100% { background-position: -50% -50%; opacity: 0; }
 }
 
 /* Скрываем обычную плашку со временем, делаем текст видимым */
@@ -632,34 +642,45 @@
     box-shadow: 0 5px 20px rgba(255, 0, 0, 0.6) !important;
 }
 
-.day-cell.sonic-cell.today .day-number {
+.day-cell.sonic-cell.today .ring-3d {
+    animation: star-post-spin 0.5s linear infinite;
+}
+
+.day-cell.sonic-cell.today .ring-face {
     /* Превращаем кольцо в шарик чекпоинта */
-    border-color: #ff3333;
-    border-width: 8px;
+    border-color: #ff3333 !important;
     box-shadow: 0 0 15px #ff3333, inset 0 0 10px #aa0000;
-    animation: star-post-flash 0.5s alternate infinite;
 }
-.day-cell.sonic-cell.today .day-number::after {
-    display: none; /* Убираем белый блик кольца */
-}
-
-@keyframes star-post-flash {
-    from { background: #ffaaaa; }
-    to { background: #ff0000; }
+.day-cell.sonic-cell.today .ring-shine {
+    display: none; /* Убираем блик кольца */
 }
 
-/* 7. Прошедший стрим: Кольцо собрано (Искорки) */
+@keyframes star-post-spin {
+    from { transform: rotateY(0deg) scale(1.1); filter: drop-shadow(0 0 10px red); }
+    to { transform: rotateY(360deg) scale(1.1); filter: drop-shadow(0 0 10px red); }
+}
+
+/* 7. Прошедший стрим: Собрано (Искорки) */
 .day-cell.sonic-cell.past-stream {
     filter: saturate(0.5);
     opacity: 0.8;
 }
 
-.day-cell.sonic-cell.past-stream .day-number {
-    /* Кольцо заменяется на искры */
-    border: none;
-    box-shadow: none;
+.day-cell.sonic-cell.past-stream .ring-wrapper {
+    /* Кольцо собрано, исчезает */
+    display: none;
+}
+
+.day-cell.sonic-cell.past-stream::after {
+    /* Искры */
+    content: "";
+    position: absolute;
+    width: 30px; height: 30px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
     background: radial-gradient(circle, #ffe680 20%, transparent 60%);
     animation: sparkles 1.5s infinite;
+    z-index: 10;
 }
 
 @keyframes sparkles {
@@ -667,7 +688,7 @@
     50% { transform: translate(-50%, 50%) scale(1.2); opacity: 1; }
 }
 
-/* 8. Отменённый стрим: Потеря колец (Damage) */
+/* 8. Отменённый стрим: Broken TV Monitor (Item Box) */
 .day-cell.sonic-cell.canceled-day {
     filter: grayscale(0.5);
 }
@@ -680,33 +701,44 @@
     display: none;
 }
 
-.day-cell.sonic-cell.canceled-day .day-number {
-    /* Прячем основное кольцо и текст */
-    color: transparent !important;
-    text-shadow: none;
-}
-.day-cell.sonic-cell.canceled-day .day-number::before,
-.day-cell.sonic-cell.canceled-day .day-number::after {
-    display: none; /* Убираем главное кольцо и блик */
+/* Корпус телевизора (Item Box) */
+.day-cell.sonic-cell.canceled-day .tv-monitor {
+    position: absolute;
+    bottom: 50%; left: 50%;
+    transform: translate(-50%, 50%);
+    width: 40px; height: 34px;
+    background: #333;
+    border-radius: 4px;
+    border: 3px solid #777;
+    box-shadow: inset 0 0 10px #000, 0 5px 10px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10;
 }
 
-/* Анимация разлетающихся колец (урон) */
-.day-cell.sonic-cell.canceled-day::before {
-    content: "";
+/* Экран со статическими помехами */
+.day-cell.sonic-cell.canceled-day .tv-static {
     position: absolute;
     inset: 0;
-    background: 
-        radial-gradient(circle, transparent 35%, #ffcc00 40%, #ffcc00 55%, transparent 60%),
-        radial-gradient(circle, transparent 35%, #ffcc00 40%, #ffcc00 55%, transparent 60%),
-        radial-gradient(circle, transparent 35%, #ffcc00 40%, #ffcc00 55%, transparent 60%);
-    background-size: 20px 20px, 16px 16px, 18px 18px;
-    background-position: 10% 20%, 80% 30%, 40% 70%;
-    background-repeat: no-repeat;
-    z-index: 10;
-    animation: rings-scatter 1.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    background: repeating-linear-gradient(0deg, #1a1a1a, #1a1a1a 2px, #444 2px, #444 4px);
+    opacity: 0.8;
+    z-index: 1;
 }
 
-@keyframes rings-scatter {
-    0% { transform: translateY(0) scale(0.5); opacity: 1; }
-    100% { transform: translateY(30px) scale(1.2); opacity: 0; }
+/* Красный крест (ошибка/отмена) */
+.day-cell.sonic-cell.canceled-day .tv-x {
+    position: relative;
+    color: #ff3333;
+    font-size: 24px;
+    font-weight: 900;
+    text-shadow: 0 0 5px #ff0000;
+    z-index: 2;
+    animation: tv-flicker 0.2s infinite;
+}
+
+@keyframes tv-flicker {
+    0%, 100% { opacity: 0.8; transform: skewX(0); }
+    50% { opacity: 1; transform: skewX(2deg); filter: brightness(1.2); }
 }

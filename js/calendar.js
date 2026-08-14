@@ -97,6 +97,25 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
         if (streamEvent.isSonic) {
             classes += ' sonic-cell stream-day';
 
+            if (streamEvent.isCanceled) {
+                // Изменённый контент для отменённого стрима: Broken TV Monitor
+                content = '<div class="tv-monitor"><div class="tv-static"></div><div class="tv-x">✖</div></div>';
+            } else {
+                // Контент для обычного Соник-стрима: Истинное 3D-кольцо
+                let ringFaces = '';
+                // 5 слоёв для придания объёма (толщины) кольцу
+                for (let i = 0; i < 5; i++) {
+                    ringFaces += '<div class="ring-face" style="--i: ' + i + '"></div>';
+                }
+                
+                content = 
+                    '<div class="ring-wrapper">' + 
+                        '<div class="ring-3d">' + ringFaces + '</div>' + 
+                        '<div class="ring-shine"></div>' +
+                        '<div class="day-number">' + day + '</div>' + 
+                    '</div>';
+            }
+
             // Проверяем соседние дни на наличие Соник-стримов для создания "островов"
             const prevDate = new Date(year, month, day - 1);
             const nextDate = new Date(year, month, day + 1);
