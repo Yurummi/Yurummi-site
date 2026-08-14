@@ -110,8 +110,10 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
                 
                 content = 
                     '<div class="ring-wrapper">' + 
-                        '<div class="ring-3d">' + ringFaces + '</div>' + 
-                        '<div class="ring-shine"></div>' +
+                        '<div class="ring-3d">' + 
+                            ringFaces + 
+                            '<div class="ring-shine"></div>' +
+                        '</div>' + 
                         '<div class="day-number">' + day + '</div>' + 
                     '</div>';
             }
