@@ -10,7 +10,7 @@
 // ============================================================
 const SLIDES_DATA = [
     {
-        file: 'img/arts/Фарочан ФИНАЛЛ.png',
+        file: 'img/arts/Фарочан ФИНАЛЛ.webp',
         badgeStyle: 'pink',
         badgeText: '💖 АРТ',
         textMain: 'Фарочан',
@@ -18,7 +18,7 @@ const SLIDES_DATA = [
         url: 'https://t.me/yurummiyt/728'
     },
     {
-        file: 'img/fanarts/СПИНА.jpg',
+        file: 'img/fanarts/СПИНА.webp',
         badgeStyle: 'pink',
         badgeText: '💖 АРТ',
         textMain: 'Фан арт от Маку',
@@ -26,7 +26,7 @@ const SLIDES_DATA = [
         url: 'https://t.me/maku_qq'
     },
     {
-        file: 'img/slider/vacation.jpg',
+        file: 'img/slider/vacation.webp',
         badgeStyle: 'none',
         badgeText: '',
         textMain: 'Отпуск📌',
@@ -34,7 +34,7 @@ const SLIDES_DATA = [
         url: 'https://t.me/yurummiyt/714'
     },
     {
-        file: 'img/slider/Ютубоснова.png',
+        file: 'img/slider/Ютубоснова.webp',
         badgeStyle: 'yellow',
         badgeText: 'NEW',
         textMain: 'Новый YouTube канал',
@@ -42,7 +42,7 @@ const SLIDES_DATA = [
         url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1'
     },
     {
-        file: 'img/arts/Тутрфинал.png',
+        file: 'img/arts/Тутрфинал.webp',
         badgeStyle: 'pink',
         badgeText: '💖 АРТ',
         textMain: '3/9',
@@ -50,7 +50,7 @@ const SLIDES_DATA = [
         url: 'https://t.me/yurummiyt/657'
     },
     {
-        file: 'img/slider/анонсвидео.png',
+        file: 'img/slider/анонсвидео.webp',
         badgeStyle: 'green',
         badgeText: 'АНОНС',
         textMain: 'Первое длинное видео для ютуба',
@@ -58,7 +58,7 @@ const SLIDES_DATA = [
         url: ''
     },
     {
-        file: 'img/arts/птицафинал.png',
+        file: 'img/arts/птицафинал.webp',
         badgeStyle: 'pink',
         badgeText: '💖 АРТ',
         textMain: '4/9',
@@ -66,7 +66,7 @@ const SLIDES_DATA = [
         url: 'https://t.me/yurummiyt/662'
     },
     {
-        file: 'img/slider/3.png',
+        file: 'img/slider/3.webp',
         badgeStyle: 'none',
         badgeText: '',
         textMain: 'Важный пост 📌',
