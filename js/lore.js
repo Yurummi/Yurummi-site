@@ -6,16 +6,16 @@
 (function () {
     'use strict';
 
-    var loreWindow = document.getElementById('loreWindow');
-    var loreCanvas = document.getElementById('loreCanvas');
+    const loreWindow = document.getElementById('loreWindow');
+    const loreCanvas = document.getElementById('loreCanvas');
 
     if (!loreWindow || !loreCanvas) return;
 
-    var isDragging = false;
-    var startX, startY;
-    var translateX = 80;
-    var translateY = 50;
-    var scale      = 1;
+    let isDragging = false;
+    let startX, startY;
+    let translateX = 80;
+    let translateY = 50;
+    let scale      = 1;
 
     function updateCanvas() {
         // Ограничиваем перемещение
@@ -83,17 +83,17 @@
     loreWindow.addEventListener('wheel', function (e) {
         e.preventDefault();
 
-        var rect   = loreWindow.getBoundingClientRect();
-        var mouseX = e.clientX - rect.left;
-        var mouseY = e.clientY - rect.top;
+        const rect   = loreWindow.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
 
-        var delta    = e.deltaY > 0 ? -0.15 : 0.15;
-        var newScale = Math.min(Math.max(0.4, scale + delta), 2.5);
+        const delta    = e.deltaY > 0 ? -0.15 : 0.15;
+        const newScale = Math.min(Math.max(0.4, scale + delta), 2.5);
 
         if (newScale !== scale) {
             // Масштабируем относительно позиции курсора
-            var canvasX = (mouseX - translateX) / scale;
-            var canvasY = (mouseY - translateY) / scale;
+            const canvasX = (mouseX - translateX) / scale;
+            const canvasY = (mouseY - translateY) / scale;
 
             scale      = newScale;
             translateX = mouseX - canvasX * scale;
@@ -102,5 +102,19 @@
             updateCanvas();
         }
     }, { passive: false });
+
+    // ==========================================
+    // КЛАВИАТУРА
+    // ==========================================
+    // Узлы карты с role="button" не активируются нативно по Enter/Space.
+    loreWindow.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+
+        const node = e.target.closest('.h-node[role="button"]');
+        if (!node) return;
+
+        e.preventDefault();
+        node.click();
+    });
 
 }());

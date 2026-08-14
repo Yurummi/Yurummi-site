@@ -102,6 +102,42 @@ h2.section-title {
 }
 
 /* ==========================================
+   ПОВТОРЯЮЩИЕСЯ ИНЛАЙН-ПАТТЕРНЫ
+   ========================================== */
+.subheading-pink {
+    color: #ff3385;
+}
+
+.subheading-white {
+    color: #fff;
+}
+
+.section-intro {
+    text-align: center;
+    color: #b3b3b3;
+    font-size: 16px;
+}
+
+.news-card {
+    max-width: 550px;
+    margin: 0 auto;
+    background-color: #1e1e1e;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.faq-card {
+    background: #2a2a2a;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* ==========================================
    АДАПТИВНОСТЬ
    ========================================== */
 @media (max-width: 600px) {
