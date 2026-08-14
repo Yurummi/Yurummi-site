@@ -8,6 +8,18 @@
 // --- ЛАЙТБОКС ---
 
 /**
+ * Экранирует спецсимволы HTML при вставке текста из DOM через innerHTML.
+ */
+function _escapeHtml(value) {
+    return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+/**
  * Открывает лайтбокс для переданного элемента галереи.
  * @param {HTMLElement} element — .gallery-item
  */
@@ -21,10 +33,11 @@ function openLightbox(element) {
     const p         = element.querySelector('p');
     const musicLink = element.getAttribute('data-music');
 
-    const title    = h3 ? h3.innerText : '';
-    const subtitle = p  ? p.innerText  : '';
+    const title    = _escapeHtml(h3 ? h3.innerText : '');
+    const subtitle = _escapeHtml(p  ? p.innerText  : '');
 
     lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt || '';
 
     if (musicLink) {
         lightboxCaption.innerHTML =
@@ -61,6 +74,20 @@ function closeLightbox(event) {
         lightboxImg.onclick = null;
     }
 }
+
+// --- КЛАВИАТУРА ---
+
+// .gallery-item — это <div role="button">, у которого нет нативной
+// активации по Enter/Space, поэтому эмулируем клик вручную.
+document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+
+    const item = event.target.closest('.gallery-item');
+    if (!item) return;
+
+    event.preventDefault();
+    item.click();
+});
 
 // --- КНОПКИ EXPAND / COLLAPSE ---
 

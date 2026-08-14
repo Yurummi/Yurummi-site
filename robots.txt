@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yurummi.github.io/Yurummi-site/sitemap.xml

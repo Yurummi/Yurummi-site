@@ -10,9 +10,9 @@
     // ==========================================
     // ПАСХАЛКА 1: Дождь из коробок
     // ==========================================
-    var secretBox   = document.getElementById('secret-box');
-    var boxClicks   = 0;
-    var rainActive  = false; // защита от спама
+    const secretBox = document.getElementById('secret-box');
+    let boxClicks   = 0;
+    let rainActive  = false; // защита от спама
 
     if (secretBox) {
         secretBox.addEventListener('click', function (e) {
@@ -38,9 +38,9 @@
     }
 
     function startBoxRain() {
-        for (var i = 0; i < 40; i++) {
+        for (let i = 0; i < 40; i++) {
             setTimeout((function () {
-                var box = document.createElement('div');
+                const box = document.createElement('div');
                 box.textContent = '📦';
                 box.className   = 'falling-box';
                 box.style.left  = Math.random() * 100 + 'vw';
@@ -54,7 +54,7 @@
     // ==========================================
     // ПАСХАЛКА 2: Режим seppuku
     // ==========================================
-    var seppukuBtn = document.getElementById('seppuku-btn');
+    const seppukuBtn = document.getElementById('seppuku-btn');
 
     if (seppukuBtn) {
         seppukuBtn.addEventListener('click', function () {
