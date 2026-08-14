@@ -604,13 +604,14 @@
 .day-cell.sonic-cell .ring-shine {
     position: absolute;
     inset: 2px; /* Совпадает с размером переднего слоя (индекс 4) */
+    border-radius: 50%; /* Срезает внешние углы квадрата, делая блик круглым */
     background: linear-gradient(135deg, transparent 20%, rgba(255, 255, 255, 0.7) 40%, rgba(255, 255, 255, 0.7) 60%, transparent 80%);
     background-size: 300% 300%;
     background-position: 150% 150%;
     
-    /* Маска, которая идеально повторяет контур переднего слоя кольца, обрезая и центр, и ВНЕШНИЕ УГЛЫ */
-    -webkit-mask: radial-gradient(circle, transparent 70%, black 72%, black 98%, transparent 100%);
-    mask: radial-gradient(circle, transparent 70%, black 72%, black 98%, transparent 100%);
+    /* Вырезаем внутреннюю дырку кольца */
+    -webkit-mask: radial-gradient(circle, transparent 70%, black 72%);
+    mask: radial-gradient(circle, transparent 70%, black 72%);
     
     pointer-events: none;
     z-index: 5;
