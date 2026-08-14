@@ -122,7 +122,7 @@ const STREAMS_LIST = [
     { date: '2026-08-07', time: '±20:00',  text: 'Стрим',               isSpecial: false, isCanceled: false },
     { date: '2026-08-09', time: '±20:00',  text: 'Рисование',           isArt: true,      isCanceled: false },
     { date: '2026-08-11', time: '±20:00',  text: 'Стрим',               isSpecial: false, isCanceled: false },
-    { date: '2026-08-14', time: '±20:00',  text: 'Стрим',               isSpecial: false, isCanceled: false },
+    { date: '2026-08-14', time: '±20:00',  text: 'Стрим',               isSpecial: false, isCanceled: true },
     { date: '2026-08-15', time: '±20:00',  text: 'Стрим',               isSpecial: false, isCanceled: false },
 
     // Периодические события
