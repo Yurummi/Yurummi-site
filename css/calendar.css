@@ -559,37 +559,43 @@
     box-shadow: inset 0 2px 2px rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.2);
 }
 
-/* Центральный слой (самый широкий, i=3) */
-.day-cell.sonic-cell .ring-face[style*="--i: 3"] {
+/* Центральный слой (самый широкий, i=6) */
+.day-cell.sonic-cell .ring-face[style*="--i: 6"] {
     inset: 0px;
     border: 7px solid #ffd700;
     transform: translateZ(0px);
 }
 
-/* Внутренние-промежуточные слои (i=2, 4) */
-.day-cell.sonic-cell .ring-face[style*="--i: 2"],
-.day-cell.sonic-cell .ring-face[style*="--i: 4"] {
+/* Внутренние-промежуточные слои (i=4, 5 и 7, 8) */
+.day-cell.sonic-cell .ring-face[style*="--i: 4"],
+.day-cell.sonic-cell .ring-face[style*="--i: 5"],
+.day-cell.sonic-cell .ring-face[style*="--i: 7"],
+.day-cell.sonic-cell .ring-face[style*="--i: 8"] {
     inset: 1px;
     border: 6px solid #e6b800; /* Темнее для эффекта тени */
-    transform: translateZ(calc((var(--i) - 3) * 1.5px));
+    transform: translateZ(calc((var(--i) - 6) * 0.75px));
     box-shadow: none;
 }
 
-/* Внешние-промежуточные слои (i=1, 5) */
-.day-cell.sonic-cell .ring-face[style*="--i: 1"],
-.day-cell.sonic-cell .ring-face[style*="--i: 5"] {
+/* Внешние-промежуточные слои (i=2, 3 и 9, 10) */
+.day-cell.sonic-cell .ring-face[style*="--i: 2"],
+.day-cell.sonic-cell .ring-face[style*="--i: 3"],
+.day-cell.sonic-cell .ring-face[style*="--i: 9"],
+.day-cell.sonic-cell .ring-face[style*="--i: 10"] {
     inset: 2px;
     border: 5px solid #cc9900;
-    transform: translateZ(calc((var(--i) - 3) * 1.5px));
+    transform: translateZ(calc((var(--i) - 6) * 0.75px));
     box-shadow: none;
 }
 
-/* Крайние слои (i=0, 6) завершают скругление торуса */
+/* Крайние слои (i=0, 1 и 11, 12) завершают скругление торуса */
 .day-cell.sonic-cell .ring-face[style*="--i: 0"],
-.day-cell.sonic-cell .ring-face[style*="--i: 6"] {
+.day-cell.sonic-cell .ring-face[style*="--i: 1"],
+.day-cell.sonic-cell .ring-face[style*="--i: 11"],
+.day-cell.sonic-cell .ring-face[style*="--i: 12"] {
     inset: 3px;
     border: 4px solid #ffcc00; /* Яркие по краям */
-    transform: translateZ(calc((var(--i) - 3) * 1.5px));
+    transform: translateZ(calc((var(--i) - 6) * 0.75px));
 }
 
 /* Номер дня поверх кольца */
@@ -624,8 +630,8 @@
     pointer-events: none;
     z-index: 5;
     
-    /* Сдвигаем блик чуть-чуть перед крайним слоем (который на 4.5px) */
-    transform: translateZ(6px);
+    /* Сдвигаем блик чуть-чуть перед крайним слоем (который на 6 * 0.75 = 4.5px) */
+    transform: translateZ(5.5px);
     
     animation: ring-shine-slide 3s ease-in-out infinite;
     animation-delay: calc((var(--x) + var(--y)) * 0.15s);
