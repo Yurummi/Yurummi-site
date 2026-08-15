@@ -101,17 +101,11 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
                 // Изменённый контент для отменённого стрима: Broken TV Monitor
                 content = '<div class="tv-monitor"><div class="tv-static"></div><div class="tv-x">✖</div></div>';
             } else {
-                // Контент для обычного Соник-стрима: Истинное 3D-кольцо (Торус из 7 слоёв)
-                let ringFaces = '';
-                for (let i = 0; i < 7; i++) {
-                    ringFaces += '<div class="ring-face" style="--i: ' + i + '"></div>';
-                }
-                
+                // Один элемент с богатыми box-shadow — имитация торуса
                 content = 
                     '<div class="ring-wrapper">' + 
                         '<div class="ring-3d">' + 
-                            ringFaces + 
-                            '<div class="ring-shine"></div>' +
+                            '<div class="ring-body"></div>' +
                         '</div>' + 
                         '<div class="day-number">' + day + '</div>' + 
                     '</div>';
