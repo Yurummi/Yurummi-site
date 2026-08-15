@@ -430,3 +430,339 @@
 
 .vacation .period-text  { color: #ffe600; }
 .marathon .period-text  { color: #ff3385; }
+
+/* ==========================================
+   ЯЧЕЙКА — SONIC THEME (Острова и Кольца)
+   ========================================== */
+
+/* 1. Базовый остров (Земля Green Hill) */
+.day-cell.sonic-cell {
+    /* Паттерн клетчатой земли (коричневая и темно-коричневая) */
+    background: 
+        linear-gradient(45deg, #7c481d 25%, transparent 25%, transparent 75%, #7c481d 75%, #7c481d),
+        linear-gradient(45deg, #7c481d 25%, transparent 25%, transparent 75%, #7c481d 75%, #7c481d);
+    background-color: #5c3210;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    
+    border: none;
+    position: relative;
+    border-radius: 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    overflow: visible; /* Важно для шипов и травы */
+    transition: transform 0.2s, opacity 0.3s;
+}
+
+/* 2. Трава сверху (Пиксельная и хаотичная) */
+.day-cell.sonic-cell::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 18px;
+    background-color: #2bd01a;
+    /* Вертикальные полосы для пиксельного эффекта Green Hill */
+    background-image: repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0,50,0,0.15) 10px, rgba(0,50,0,0.15) 20px);
+    border-top: 3px solid #a3ff99;
+    border-bottom: 3px solid #0b6900;
+    z-index: 2;
+}
+
+/* Свисающая неровная трава */
+.day-cell.sonic-cell::after {
+    content: "";
+    position: absolute;
+    top: 13px; /* Сразу под верхней границей */
+    left: 0; right: 0;
+    height: 8px;
+    background: 
+        linear-gradient(-45deg, #0b6900 25%, transparent 25%), 
+        linear-gradient(45deg, #0b6900 25%, transparent 25%);
+    background-size: 12px 12px;
+    background-position: 0 0, 0 0;
+    background-repeat: repeat-x;
+    z-index: 1;
+}
+
+/* 3. Слияние островов */
+.day-cell.sonic-cell.island-single {
+    border-radius: 8px;
+}
+.day-cell.sonic-cell.island-single::before {
+    border-radius: 8px 8px 0 0;
+}
+
+.day-cell.sonic-cell.island-start {
+    border-radius: 8px 0 0 8px;
+    margin-right: -4px; /* Убираем gap грида */
+    padding-right: 4px;
+}
+.day-cell.sonic-cell.island-start::before {
+    border-radius: 8px 0 0 0;
+    right: -4px;
+}
+
+.day-cell.sonic-cell.island-mid {
+    border-radius: 0;
+    margin-left: -4px;
+    margin-right: -4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.day-cell.sonic-cell.island-mid::before {
+    left: -4px;
+    right: -4px;
+}
+
+.day-cell.sonic-cell.island-end {
+    border-radius: 0 8px 8px 0;
+    margin-left: -4px;
+    padding-left: 4px;
+}
+.day-cell.sonic-cell.island-end::before {
+    border-radius: 0 8px 0 0;
+    left: -4px;
+}
+
+/* При наведении немного приподнимаем */
+.day-cell.sonic-cell:hover {
+    transform: translateY(-3px);
+    z-index: 10;
+}
+
+/* 4. Обертка для кольца */
+.day-cell.sonic-cell .ring-wrapper {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 44px;
+    height: 44px;
+    z-index: 5;
+    /* Настройка перспективы для дочерних 3D-элементов */
+    perspective: 200px;
+}
+
+/* Истинный 3D контейнер кольца */
+.day-cell.sonic-cell .ring-3d {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: ring-spin-true3d 2.5s linear infinite;
+}
+
+/* Слои (лица) из которых состоит кольцо в 3D (создаем форму ТОРА / Пончика) */
+.day-cell.sonic-cell .ring-face {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.2);
+}
+
+/* Центральный слой (самый широкий, i=3) */
+.day-cell.sonic-cell .ring-face[style*="--i: 3"] {
+    inset: 0px;
+    border: 7px solid #ffd700;
+    transform: translateZ(0px);
+}
+
+/* Внутренние-промежуточные слои (i=2, 4) */
+.day-cell.sonic-cell .ring-face[style*="--i: 2"],
+.day-cell.sonic-cell .ring-face[style*="--i: 4"] {
+    inset: 1px;
+    border: 6px solid #e6b800; /* Темнее для эффекта тени */
+    transform: translateZ(calc((var(--i) - 3) * 1.5px));
+    box-shadow: none;
+}
+
+/* Внешние-промежуточные слои (i=1, 5) */
+.day-cell.sonic-cell .ring-face[style*="--i: 1"],
+.day-cell.sonic-cell .ring-face[style*="--i: 5"] {
+    inset: 2px;
+    border: 5px solid #cc9900;
+    transform: translateZ(calc((var(--i) - 3) * 1.5px));
+    box-shadow: none;
+}
+
+/* Крайние слои (i=0, 6) завершают скругление торуса */
+.day-cell.sonic-cell .ring-face[style*="--i: 0"],
+.day-cell.sonic-cell .ring-face[style*="--i: 6"] {
+    inset: 3px;
+    border: 4px solid #ffcc00; /* Яркие по краям */
+    transform: translateZ(calc((var(--i) - 3) * 1.5px));
+}
+
+/* Номер дня поверх кольца */
+.day-cell.sonic-cell .day-number {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 900;
+    text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 0 3px 5px rgba(0,0,0,0.8);
+    background: none;
+    border: none;
+    box-shadow: none;
+    z-index: 10; /* Поверх кольца и блика */
+}
+
+/* 5. Глобальный блик (применяется строго к форме переднего слоя кольца) */
+.day-cell.sonic-cell .ring-shine {
+    position: absolute;
+    inset: 3px; /* Совпадает с размером крайнего слоя (индекс 6) */
+    background: linear-gradient(135deg, transparent 25%, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 1) 55%, transparent 75%);
+    background-size: 300% 300%;
+    background-position: 150% 150%;
+    
+    /* Маска для крайнего слоя: вырезаем внутреннюю дырку (transparent 77%) и внешние углы (transparent 100%) */
+    -webkit-mask: radial-gradient(circle closest-side, transparent 77%, black 79%, black 98%, transparent 100%);
+    mask: radial-gradient(circle closest-side, transparent 77%, black 79%, black 98%, transparent 100%);
+    
+    pointer-events: none;
+    z-index: 5;
+    
+    /* Сдвигаем блик чуть-чуть перед крайним слоем (который на 4.5px) */
+    transform: translateZ(6px);
+    
+    animation: ring-shine-slide 3s ease-in-out infinite;
+    animation-delay: calc((var(--x) + var(--y)) * 0.15s);
+}
+
+@keyframes ring-spin-true3d {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+@keyframes ring-shine-slide {
+    0%, 65% { background-position: 150% 150%; opacity: 0; }
+    75% { opacity: 1; }
+    85%, 100% { background-position: -50% -50%; opacity: 0; }
+}
+
+/* Скрываем обычную плашку со временем, делаем текст видимым */
+.day-cell.sonic-cell .stream-info {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    background: rgba(0,0,0,0.7);
+    color: #ffffff !important;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 4px;
+    text-align: center;
+    border: none;
+    box-shadow: none;
+    z-index: 6;
+}
+
+/* 6. Сегодня: Чекпоинт (Star Post) */
+.day-cell.sonic-cell.today {
+    border: none !important;
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.6) !important;
+}
+
+.day-cell.sonic-cell.today .ring-3d {
+    animation: star-post-spin 0.5s linear infinite;
+}
+
+.day-cell.sonic-cell.today .ring-face {
+    /* Превращаем кольцо в шарик чекпоинта */
+    border-color: #ff3333 !important;
+    box-shadow: 0 0 15px #ff3333, inset 0 0 10px #aa0000;
+}
+.day-cell.sonic-cell.today .ring-shine {
+    display: none; /* Убираем блик кольца */
+}
+
+@keyframes star-post-spin {
+    from { transform: rotateY(0deg) scale(1.1); filter: drop-shadow(0 0 10px red); }
+    to { transform: rotateY(360deg) scale(1.1); filter: drop-shadow(0 0 10px red); }
+}
+
+/* 7. Прошедший стрим: Собрано (Искорки) */
+.day-cell.sonic-cell.past-stream {
+    filter: saturate(0.5);
+    opacity: 0.8;
+}
+
+.day-cell.sonic-cell.past-stream .ring-wrapper {
+    /* Кольцо собрано, исчезает */
+    display: none;
+}
+
+.day-cell.sonic-cell.past-stream::after {
+    /* Искры */
+    content: "";
+    position: absolute;
+    width: 30px; height: 30px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, #ffe680 20%, transparent 60%);
+    animation: sparkles 1.5s infinite;
+    z-index: 10;
+}
+
+@keyframes sparkles {
+    0%, 100% { transform: translate(-50%, 50%) scale(0.5); opacity: 0.5; }
+    50% { transform: translate(-50%, 50%) scale(1.2); opacity: 1; }
+}
+
+/* 8. Отменённый стрим: Broken TV Monitor (Item Box) */
+.day-cell.sonic-cell.canceled-day {
+    filter: grayscale(0.5);
+}
+
+.day-cell.sonic-cell.canceled-day .stream-info {
+    background: #aa0000;
+    text-decoration: none;
+}
+.day-cell.sonic-cell.canceled-day .stream-info::after {
+    display: none;
+}
+
+/* Корпус телевизора (Item Box) */
+.day-cell.sonic-cell.canceled-day .tv-monitor {
+    position: absolute;
+    bottom: 50%; left: 50%;
+    transform: translate(-50%, 50%);
+    width: 40px; height: 34px;
+    background: #333;
+    border-radius: 4px;
+    border: 3px solid #777;
+    box-shadow: inset 0 0 10px #000, 0 5px 10px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* Экран со статическими помехами */
+.day-cell.sonic-cell.canceled-day .tv-static {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, #1a1a1a, #1a1a1a 2px, #444 2px, #444 4px);
+    opacity: 0.8;
+    z-index: 1;
+}
+
+/* Красный крест (ошибка/отмена) */
+.day-cell.sonic-cell.canceled-day .tv-x {
+    position: relative;
+    color: #ff3333;
+    font-size: 24px;
+    font-weight: 900;
+    text-shadow: 0 0 5px #ff0000;
+    z-index: 2;
+    animation: tv-flicker 0.2s infinite;
+}
+
+@keyframes tv-flicker {
+    0%, 100% { opacity: 0.8; transform: skewX(0); }
+    50% { opacity: 1; transform: skewX(2deg); filter: brightness(1.2); }
+}

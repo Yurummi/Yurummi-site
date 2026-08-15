@@ -71,10 +71,15 @@ function _findPeriodEvent(periods, dateStr) {
 /**
  * Строит HTML одной ячейки дня.
  */
-function _renderDayCell(year, month, day, todayStr, index) {
+function _renderDayCell(year, month, day, todayStr, index, firstDay) {
     const dateStr     = _dateStr(year, month + 1, day);
     const periodEvent = _findPeriodEvent(index.periods, dateStr);
     const streamEvent = index.byDate[dateStr];
+
+    // Вычисляем координаты ячейки в сетке для эффекта блика
+    const positionIndex = firstDay + (day - 1);
+    const x = positionIndex % 7;
+    const y = Math.floor(positionIndex / 7);
 
     let classes       = 'day-cell';
     let content       = '<div class="day-number">' + day + '</div>';
@@ -89,7 +94,54 @@ function _renderDayCell(year, month, day, todayStr, index) {
 
     } else if (streamEvent) {
         // Определяем тип ячейки
-        if (streamEvent.isNoir) {
+        if (streamEvent.isSonic) {
+            classes += ' sonic-cell stream-day';
+
+            if (streamEvent.isCanceled) {
+                // Изменённый контент для отменённого стрима: Broken TV Monitor
+                content = '<div class="tv-monitor"><div class="tv-static"></div><div class="tv-x">✖</div></div>';
+            } else {
+                // Контент для обычного Соник-стрима: Истинное 3D-кольцо (Торус из 7 слоёв)
+                let ringFaces = '';
+                for (let i = 0; i < 7; i++) {
+                    ringFaces += '<div class="ring-face" style="--i: ' + i + '"></div>';
+                }
+                
+                content = 
+                    '<div class="ring-wrapper">' + 
+                        '<div class="ring-3d">' + 
+                            ringFaces + 
+                            '<div class="ring-shine"></div>' +
+                        '</div>' + 
+                        '<div class="day-number">' + day + '</div>' + 
+                    '</div>';
+            }
+
+            // Проверяем соседние дни на наличие Соник-стримов для создания "островов"
+            const prevDate = new Date(year, month, day - 1);
+            const nextDate = new Date(year, month, day + 1);
+            const prevDateStr = _dateStr(prevDate.getFullYear(), prevDate.getMonth() + 1, prevDate.getDate());
+            const nextDateStr = _dateStr(nextDate.getFullYear(), nextDate.getMonth() + 1, nextDate.getDate());
+            
+            const prevEvent = index.byDate[prevDateStr];
+            const nextEvent = index.byDate[nextDateStr];
+            
+            const isPrevSonic = prevEvent && prevEvent.isSonic;
+            const isNextSonic = nextEvent && nextEvent.isSonic;
+            
+            if (isPrevSonic && isNextSonic) {
+                classes += ' island-mid';
+            } else if (isPrevSonic && !isNextSonic) {
+                classes += ' island-end';
+            } else if (!isPrevSonic && isNextSonic) {
+                classes += ' island-start';
+            } else {
+                classes += ' island-single';
+            }
+            
+            inlineStyles += '--x:' + x + ';--y:' + y + ';';
+            
+        } else if (streamEvent.isNoir) {
             classes += ' noir-day';
         } else if (streamEvent.isGlitch) {
             classes += ' glitch-day';
@@ -109,7 +161,7 @@ function _renderDayCell(year, month, day, todayStr, index) {
             const rot   = -6 + (day * 11) % 12;
             const shape = ART_SHAPES[day % ART_SHAPES.length];
 
-            inlineStyles =
+            inlineStyles +=
                 '--art-angle:' + angle + 'deg;' +
                 '--art-color1:hsl(' + hue1 + ',90%,65%);' +
                 '--art-color2:hsl(' + hue2 + ',90%,55%);' +
@@ -173,7 +225,7 @@ function renderCalendar() {
 
     // Ячейки дней
     for (let day = 1; day <= daysInMonth; day++) {
-        html.push(_renderDayCell(year, month, day, todayStr, index));
+        html.push(_renderDayCell(year, month, day, todayStr, index, firstDay));
     }
 
     daysContainer.innerHTML = html.join('');
