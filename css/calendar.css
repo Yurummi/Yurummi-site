@@ -559,42 +559,82 @@
     box-shadow: inset 0 2px 2px rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.2);
 }
 
-/* Центральный слой (самый широкий, i=12) */
+/* =============================================
+   ФОРМА ТОРА: центр широкий, края узкие
+   26 слоёв, центр i=12, шаг 0.38px
+   ============================================= */
+
+/* Центр (i=12) — самый широкий слой */
 .day-cell.sonic-cell .ring-face[style*="--i: 12"] {
     inset: 0px;
-    border: 7px solid #ffd700;
+    border: 9px solid #ffd700;
     transform: translateZ(0px);
 }
 
-/* Внутренние-промежуточные слои (i=9-11 и 13-15) */
-.day-cell.sonic-cell .ring-face[style*="--i: 9"],
-.day-cell.sonic-cell .ring-face[style*="--i: 10"],
+/* 1 слой от центра (i=11, 13) */
 .day-cell.sonic-cell .ring-face[style*="--i: 11"],
-.day-cell.sonic-cell .ring-face[style*="--i: 13"],
-.day-cell.sonic-cell .ring-face[style*="--i: 14"],
-.day-cell.sonic-cell .ring-face[style*="--i: 15"] {
+.day-cell.sonic-cell .ring-face[style*="--i: 13"] {
+    inset: 0px;
+    border: 8px solid #ffd700;
+    transform: translateZ(calc((var(--i) - 12) * 0.38px));
+    box-shadow: none;
+}
+
+/* 2 слоя от центра (i=10, 14) */
+.day-cell.sonic-cell .ring-face[style*="--i: 10"],
+.day-cell.sonic-cell .ring-face[style*="--i: 14"] {
     inset: 1px;
+    border: 7px solid #f0ca00;
+    transform: translateZ(calc((var(--i) - 12) * 0.38px));
+    box-shadow: none;
+}
+
+/* 3 слоя от центра (i=9, 15) */
+.day-cell.sonic-cell .ring-face[style*="--i: 9"],
+.day-cell.sonic-cell .ring-face[style*="--i: 15"] {
+    inset: 2px;
     border: 6px solid #e6b800;
     transform: translateZ(calc((var(--i) - 12) * 0.38px));
     box-shadow: none;
 }
 
-/* Средние слои (i=5-8 и 16-19) */
-.day-cell.sonic-cell .ring-face[style*="--i: 5"],
-.day-cell.sonic-cell .ring-face[style*="--i: 6"],
-.day-cell.sonic-cell .ring-face[style*="--i: 7"],
+/* 4 слоя от центра (i=8, 16) */
 .day-cell.sonic-cell .ring-face[style*="--i: 8"],
-.day-cell.sonic-cell .ring-face[style*="--i: 16"],
-.day-cell.sonic-cell .ring-face[style*="--i: 17"],
-.day-cell.sonic-cell .ring-face[style*="--i: 18"],
-.day-cell.sonic-cell .ring-face[style*="--i: 19"] {
-    inset: 2px;
-    border: 5px solid #cc9900;
+.day-cell.sonic-cell .ring-face[style*="--i: 16"] {
+    inset: 3px;
+    border: 5px solid #d4a800;
     transform: translateZ(calc((var(--i) - 12) * 0.38px));
     box-shadow: none;
 }
 
-/* Крайние слои (i=0-4 и 20-25) завершают скругление торуса */
+/* 5 слоёв от центра (i=7, 17) */
+.day-cell.sonic-cell .ring-face[style*="--i: 7"],
+.day-cell.sonic-cell .ring-face[style*="--i: 17"] {
+    inset: 4px;
+    border: 4px solid #c09500;
+    transform: translateZ(calc((var(--i) - 12) * 0.38px));
+    box-shadow: none;
+}
+
+/* 6 слоёв от центра (i=6, 18) */
+.day-cell.sonic-cell .ring-face[style*="--i: 6"],
+.day-cell.sonic-cell .ring-face[style*="--i: 18"] {
+    inset: 5px;
+    border: 3px solid #ad8200;
+    transform: translateZ(calc((var(--i) - 12) * 0.38px));
+    box-shadow: none;
+}
+
+/* 7 слоёв от центра (i=5, 19) */
+.day-cell.sonic-cell .ring-face[style*="--i: 5"],
+.day-cell.sonic-cell .ring-face[style*="--i: 19"] {
+    inset: 6px;
+    border: 2px solid #996e00;
+    transform: translateZ(calc((var(--i) - 12) * 0.38px));
+    box-shadow: none;
+}
+
+/* Крайние слои (i=0-4 и 20-25) — самые узкие, завершают скругление */
 .day-cell.sonic-cell .ring-face[style*="--i: 0"],
 .day-cell.sonic-cell .ring-face[style*="--i: 1"],
 .day-cell.sonic-cell .ring-face[style*="--i: 2"],
@@ -606,10 +646,12 @@
 .day-cell.sonic-cell .ring-face[style*="--i: 23"],
 .day-cell.sonic-cell .ring-face[style*="--i: 24"],
 .day-cell.sonic-cell .ring-face[style*="--i: 25"] {
-    inset: 3px;
-    border: 4px solid #ffcc00;
+    inset: 7px;
+    border: 1px solid #7a5800;
     transform: translateZ(calc((var(--i) - 12) * 0.38px));
+    box-shadow: none;
 }
+
 
 /* Номер дня поверх кольца */
 .day-cell.sonic-cell .day-number {
