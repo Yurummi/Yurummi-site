@@ -126,11 +126,11 @@ const STREAMS_LIST = [
     { date: '2026-08-15', time: '±20:00',  text: 'Стрим',               isSpecial: false, isCanceled: false },
     
     // Соник Марафон
-    { date: '2026-08-17', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: false },
-    { date: '2026-08-18', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: false },
-    { date: '2026-08-19', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: true },
-    { date: '2026-08-20', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: false },
-    { date: '2026-08-21', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: false },
+    //{ date: '2026-08-17', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: false },
+    //{ date: '2026-08-18', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: false },
+    //{ date: '2026-08-19', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: true },
+    //{ date: '2026-08-20', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: false },
+    //{ date: '2026-08-21', time: '±20:00',  text: 'Sonic Марафон',       isSonic: true, isCanceled: false },
 
     // Периодические события
     { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' }
