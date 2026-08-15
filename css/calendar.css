@@ -540,8 +540,8 @@
     width: 44px;
     height: 44px;
     z-index: 5;
-    /* Настройка перспективы для дочерних 3D-элементов — меньше = сильнее перспектива = лучше виден объём */
-    perspective: 80px;
+    /* Настройка перспективы для дочерних 3D-элементов */
+    perspective: 200px;
 }
 
 /* Истинный 3D контейнер кольца */
@@ -559,43 +559,56 @@
     box-shadow: inset 0 2px 2px rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.2);
 }
 
-/* Центральный слой (самый широкий, i=6) */
-.day-cell.sonic-cell .ring-face[style*="--i: 6"] {
+/* Центральный слой (самый широкий, i=12) */
+.day-cell.sonic-cell .ring-face[style*="--i: 12"] {
     inset: 0px;
     border: 7px solid #ffd700;
     transform: translateZ(0px);
 }
 
-/* Внутренние-промежуточные слои (i=4, 5 и 7, 8) */
-.day-cell.sonic-cell .ring-face[style*="--i: 4"],
-.day-cell.sonic-cell .ring-face[style*="--i: 5"],
-.day-cell.sonic-cell .ring-face[style*="--i: 7"],
-.day-cell.sonic-cell .ring-face[style*="--i: 8"] {
+/* Внутренние-промежуточные слои (i=9-11 и 13-15) */
+.day-cell.sonic-cell .ring-face[style*="--i: 9"],
+.day-cell.sonic-cell .ring-face[style*="--i: 10"],
+.day-cell.sonic-cell .ring-face[style*="--i: 11"],
+.day-cell.sonic-cell .ring-face[style*="--i: 13"],
+.day-cell.sonic-cell .ring-face[style*="--i: 14"],
+.day-cell.sonic-cell .ring-face[style*="--i: 15"] {
     inset: 1px;
     border: 6px solid #e6b800;
-    transform: translateZ(calc((var(--i) - 6) * 2.5px));
+    transform: translateZ(calc((var(--i) - 12) * 0.38px));
     box-shadow: none;
 }
 
-/* Внешние-промежуточные слои (i=2, 3 и 9, 10) */
-.day-cell.sonic-cell .ring-face[style*="--i: 2"],
-.day-cell.sonic-cell .ring-face[style*="--i: 3"],
-.day-cell.sonic-cell .ring-face[style*="--i: 9"],
-.day-cell.sonic-cell .ring-face[style*="--i: 10"] {
+/* Средние слои (i=5-8 и 16-19) */
+.day-cell.sonic-cell .ring-face[style*="--i: 5"],
+.day-cell.sonic-cell .ring-face[style*="--i: 6"],
+.day-cell.sonic-cell .ring-face[style*="--i: 7"],
+.day-cell.sonic-cell .ring-face[style*="--i: 8"],
+.day-cell.sonic-cell .ring-face[style*="--i: 16"],
+.day-cell.sonic-cell .ring-face[style*="--i: 17"],
+.day-cell.sonic-cell .ring-face[style*="--i: 18"],
+.day-cell.sonic-cell .ring-face[style*="--i: 19"] {
     inset: 2px;
     border: 5px solid #cc9900;
-    transform: translateZ(calc((var(--i) - 6) * 2.5px));
+    transform: translateZ(calc((var(--i) - 12) * 0.38px));
     box-shadow: none;
 }
 
-/* Крайние слои (i=0, 1 и 11, 12) завершают скругление торуса */
+/* Крайние слои (i=0-4 и 20-25) завершают скругление торуса */
 .day-cell.sonic-cell .ring-face[style*="--i: 0"],
 .day-cell.sonic-cell .ring-face[style*="--i: 1"],
-.day-cell.sonic-cell .ring-face[style*="--i: 11"],
-.day-cell.sonic-cell .ring-face[style*="--i: 12"] {
+.day-cell.sonic-cell .ring-face[style*="--i: 2"],
+.day-cell.sonic-cell .ring-face[style*="--i: 3"],
+.day-cell.sonic-cell .ring-face[style*="--i: 4"],
+.day-cell.sonic-cell .ring-face[style*="--i: 20"],
+.day-cell.sonic-cell .ring-face[style*="--i: 21"],
+.day-cell.sonic-cell .ring-face[style*="--i: 22"],
+.day-cell.sonic-cell .ring-face[style*="--i: 23"],
+.day-cell.sonic-cell .ring-face[style*="--i: 24"],
+.day-cell.sonic-cell .ring-face[style*="--i: 25"] {
     inset: 3px;
     border: 4px solid #ffcc00;
-    transform: translateZ(calc((var(--i) - 6) * 2.5px));
+    transform: translateZ(calc((var(--i) - 12) * 0.38px));
 }
 
 /* Номер дня поверх кольца */
@@ -630,8 +643,8 @@
     pointer-events: none;
     z-index: 5;
     
-    /* Сдвигаем блик чуть-чуть перед крайним слоем (крайний слой на 6 * 2.5 = 15px) */
-    transform: translateZ(16px);
+    /* Сдвигаем блик чуть-чуть перед крайним слоем (крайний слой на 12 * 0.38 = 4.56px) */
+    transform: translateZ(6px);
     
     animation: ring-shine-slide 3s ease-in-out infinite;
     animation-delay: calc((var(--x) + var(--y)) * 0.15s);
