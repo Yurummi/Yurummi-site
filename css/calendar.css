@@ -486,6 +486,14 @@
 }
 
 /* 3. Слияние островов */
+.day-cell.sonic-cell.island-single,
+.day-cell.sonic-cell.island-start,
+.day-cell.sonic-cell.island-mid,
+.day-cell.sonic-cell.island-end {
+    box-sizing: border-box;
+    align-self: stretch; /* все ячейки одной строки одинаковой высоты */
+}
+
 .day-cell.sonic-cell.island-single {
     border-radius: 8px;
 }
