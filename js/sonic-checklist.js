@@ -32,17 +32,26 @@ const SONIC_GAMES = [
 ];
 
 const totalGames = SONIC_GAMES.filter(g => !g.isCategory).length;
-let completedGames = JSON.parse(localStorage.getItem('sonicProgress') || '[]');
+// gameStates: { [id]: 'completed' | 'playing' | 'abandoned' }
+let gameStates = JSON.parse(localStorage.getItem('sonicProgressStates') || '{}');
+
+// Migrate old data if present
+const oldProgress = JSON.parse(localStorage.getItem('sonicProgress') || '[]');
+if (oldProgress.length > 0 && Object.keys(gameStates).length === 0) {
+    oldProgress.forEach(id => { gameStates[id] = 'completed'; });
+    localStorage.setItem('sonicProgressStates', JSON.stringify(gameStates));
+}
 
 function saveProgress() {
-    localStorage.setItem('sonicProgress', JSON.stringify(completedGames));
+    localStorage.setItem('sonicProgressStates', JSON.stringify(gameStates));
     updateProgressCounter();
 }
 
 function updateProgressCounter() {
     const progressEl = document.getElementById('sonic-progress');
     if (progressEl) {
-        progressEl.innerText = `${completedGames.length} / ${totalGames}`;
+        const completedCount = Object.values(gameStates).filter(s => s === 'completed').length;
+        progressEl.innerText = `${completedCount} / ${totalGames}`;
     }
 }
 
@@ -56,11 +65,32 @@ function renderChecklist() {
         if (game.isCategory) {
             html += `<h4 style="color: #ff3385; margin: 15px 0 5px; border-bottom: 1px solid #444; padding-bottom: 3px;">${game.title}</h4>`;
         } else {
-            const isChecked = completedGames.includes(game.id) ? 'checked' : '';
+            const state = gameStates[game.id] || 'empty';
+            let color = '#fff';
+            let circleColor = 'transparent';
+            let circleBorder = '#fff';
+            let textDecor = 'none';
+
+            if (state === 'completed') {
+                color = '#888';
+                circleColor = '#4ade80'; // green
+                circleBorder = '#4ade80';
+                textDecor = 'line-through';
+            } else if (state === 'playing') {
+                color = '#fbbf24'; // yellow
+                circleColor = '#fbbf24';
+                circleBorder = '#fbbf24';
+            } else if (state === 'abandoned') {
+                color = '#f87171'; // red
+                circleColor = '#f87171';
+                circleBorder = '#f87171';
+                textDecor = 'line-through';
+            }
+
             html += `
-                <div style="display: flex; align-items: center; margin-bottom: 5px; cursor: pointer;">
-                    <input type="checkbox" id="${game.id}" value="${game.id}" ${isChecked} style="margin-right: 10px; cursor: pointer; accent-color: #ffd700;" onchange="toggleGame('${game.id}')">
-                    <label for="${game.id}" style="cursor: pointer; color: ${isChecked ? '#888' : '#fff'}; text-decoration: ${isChecked ? 'line-through' : 'none'}; flex-grow: 1; transition: all 0.2s ease;">${game.title}</label>
+                <div style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer; user-select: none;" onclick="cycleGameState('${game.id}')">
+                    <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid ${circleBorder}; background-color: ${circleColor}; margin-right: 12px; flex-shrink: 0; transition: all 0.2s;"></div>
+                    <span style="color: ${color}; text-decoration: ${textDecor}; flex-grow: 1; transition: all 0.2s ease;">${game.title}</span>
                 </div>
             `;
         }
@@ -71,12 +101,19 @@ function renderChecklist() {
 }
 
 // Global scope for onclick
-window.toggleGame = function(gameId) {
-    if (completedGames.includes(gameId)) {
-        completedGames = completedGames.filter(id => id !== gameId);
+window.cycleGameState = function(gameId) {
+    const currentState = gameStates[gameId] || 'empty';
+    // Cycle: empty -> playing -> completed -> abandoned -> empty
+    if (currentState === 'empty') {
+        gameStates[gameId] = 'playing';
+    } else if (currentState === 'playing') {
+        gameStates[gameId] = 'completed';
+    } else if (currentState === 'completed') {
+        gameStates[gameId] = 'abandoned';
     } else {
-        completedGames.push(gameId);
+        delete gameStates[gameId];
     }
+    
     saveProgress();
     renderChecklist();
 };

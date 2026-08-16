@@ -125,10 +125,6 @@
             <div class="gallery-subtitle spaced">Фан-арты (От зрителей)</div>
             <div class="gallery-grid" id="fan-arts-grid">
                 <!-- НОВЕЙШЕЕ СВЕРХУ -->
-                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/комикс.jpg">
-                    <picture><source srcset="img/fanarts/комикс.webp" type="image/webp"><img src="img/fanarts/комикс.jpg" alt="Комикс от @Maku_q" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>Комикс</h3><p>От @Maku_q</p></div>
-                </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/lore/БУУУУУМ.png">
                     <picture><source srcset="img/lore/БУУУУУМ.webp" type="image/webp"><img src="img/lore/БУУУУУМ.png" alt="БУУУУУМ от @Maku_q" loading="lazy"></picture>
                     <div class="gallery-overlay"><h3>БУУУУУМ!</h3><p>От @Maku_q</p></div>
@@ -245,7 +241,7 @@
     <!--  РАСПИСАНИЕ — КАЛЕНДАРЬ                    -->
     <!-- ========================================== -->
     <section id="schedule">
-        <div class="content-container">
+        <div class="content-container" style="max-width: 1300px;">
             <h2 class="section-title">Расписание</h2>
             <div style="text-align: center;">
                 <div class="timezone-note">⏰ Время всех стримов указано по <strong>НЕМЕЦИИ (GMT+2)</strong></div>
@@ -253,7 +249,7 @@
 
             <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start;">
                 <!-- Календарь -->
-                <div class="calendar-wrapper" style="margin: 0; flex: 1 1 500px; max-width: 700px;">
+                <div class="calendar-wrapper" style="margin: 0; flex: 1 1 700px; max-width: 800px;">
                     <div class="calendar-header">
                         <button onclick="changeMonth(-1)">&#9664; Пред</button>
                         <h3 id="monthYearDisplay">Загрузка...</h3>
@@ -277,7 +273,7 @@
                     <h3 style="color: #ffd700; margin-top: 0; text-align: center; text-transform: uppercase; text-shadow: 1px 1px 0 #000, 0 0 5px rgba(255,215,0,0.5);">Марафон Соника</h3>
                     <p style="text-align: center; font-size: 14px; margin-bottom: 15px; color: #ccc;">Прогресс: <strong id="sonic-progress" style="color: #fff;">0 / 21</strong></p>
                     
-                    <div id="sonic-checklist-content" style="max-height: 400px; overflow-y: auto; padding-right: 10px; font-size: 14px;">
+                    <div id="sonic-checklist-content" style="max-height: 520px; overflow-y: auto; padding-right: 10px; font-size: 14px;">
                         <!-- Заполняется через JS -->
                     </div>
                 </div>
@@ -298,10 +294,11 @@
                 <h3 class="subheading-pink" style="margin-top: 30px;">А что за кошкодевочка? 🐱</h3>
                 <p>Всё течёт, всё меняется! Встречайте - <strong>Furummi (Фурумми)</strong>! Это «мой новый» маскот и альтер-эго на стримах. Коробка никуда не исчезла, мы просто добавили в наш суровый картонный мир немного ушек, милоты и уюта.</p>
                 <h3 class="subheading-pink" style="margin-top: 30px;">Особая благодарность 🎨</h3>
-                <div style="display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; margin-top: 15px; flex-wrap: wrap;">
-                    <img src="img/fanarts/комикс.webp" alt="Maku_q" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 2px solid #ff3385; flex-shrink: 0;">
-                    <div>
-                        <p style="margin-top: 0; margin-bottom: 10px;">Хочу сказать огромное спасибо художнице <strong><a href="https://t.me/maku_qq" target="_blank" style="color: #ff3385;">@Maku_q</a></strong>! Она стала автором огромного числа работ, которые вы видите на моём канале — от великолепных фан-артов и лорных комиксов до смайликов на Твиче. Маку уже стала большой частью меня и моего канала, и её поддержка невероятно важна.</p>
+                <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; margin-top: 15px; text-align: center;">
+                    <p style="margin-top: 0; margin-bottom: 20px; text-align: left;">Хочу сказать огромное спасибо художнице <strong><a href="https://t.me/maku_qq" target="_blank" style="color: #ff3385;">@Maku_q</a></strong>! Она стала автором огромного числа работ, которые вы видите на моём канале - от великолепных фан-артов до смайликов на Твиче. Маку уже стала большой частью меня и моего канала, и её поддержка невероятно важна.</p>
+                    
+                    <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/комикс.jpg" style="display: inline-block; width: 100%; max-width: 600px; border: 2px solid #ff3385; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                        <picture><source srcset="img/fanarts/комикс.webp" type="image/webp"><img src="img/fanarts/комикс.jpg" alt="Комикс от Maku_q" style="width: 100%; display: block;"></picture>
                     </div>
                 </div>
             </div>
