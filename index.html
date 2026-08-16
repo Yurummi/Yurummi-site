@@ -58,19 +58,118 @@
     <!--  НОВОСТИ                                   -->
     <!-- ========================================== -->
     <section id="news">
+        <style>
+            .newspaper-layout {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                background: #1c1c1c;
+                border: 2px solid #444;
+                padding: 25px;
+                border-radius: 8px;
+                position: relative;
+            }
+            .newspaper-layout::before {
+                content: '';
+                position: absolute;
+                top: 5px; left: 5px; right: 5px; bottom: 5px;
+                border: 1px solid #333;
+                pointer-events: none;
+            }
+            .news-header {
+                width: 100%;
+                text-align: center;
+                border-bottom: 4px double #555;
+                padding-bottom: 15px;
+                margin-bottom: 20px;
+            }
+            .news-header h3 {
+                font-family: 'Times New Roman', serif;
+                font-size: 36px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin: 0;
+                color: #e0e0e0;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+            .news-header p {
+                font-family: monospace;
+                color: #888;
+                font-size: 12px;
+                text-transform: uppercase;
+                margin: 5px 0 0 0;
+            }
+            .news-col-left {
+                flex: 1 1 400px;
+                border-right: 1px solid #444;
+                padding-right: 30px;
+                font-family: 'Georgia', serif;
+                color: #ccc;
+                line-height: 1.6;
+                text-align: justify;
+            }
+            .news-col-right {
+                flex: 1 1 300px;
+                max-width: 400px;
+            }
+            .dropcap {
+                float: left;
+                font-size: 60px;
+                line-height: 50px;
+                padding-top: 4px;
+                padding-right: 8px;
+                padding-left: 3px;
+                font-family: 'Times New Roman', serif;
+                color: #ff3385;
+            }
+            .news-article-title {
+                font-size: 24px;
+                color: #fff;
+                margin-top: 0;
+                margin-bottom: 15px;
+                border-bottom: 1px solid #444;
+                padding-bottom: 10px;
+                font-family: 'Times New Roman', serif;
+            }
+            @media (max-width: 768px) {
+                .news-col-left {
+                    border-right: none;
+                    padding-right: 0;
+                    border-bottom: 1px solid #444;
+                    padding-bottom: 20px;
+                }
+                .news-col-right {
+                    max-width: 100%;
+                }
+            }
+        </style>
         <div class="content-container">
             <h2 class="section-title">Новости</h2>
-            <div class="news-card">
-                <h3 class="subheading-white" style="margin-top: 0;">Последние события канала</h3>
-                <p style="color: #ff3385; font-size: 14px; margin-bottom: 20px;">
-                    ⚠️ Если у вас не работает VPN, виджет ниже может не загрузиться.
-                </p>
-                <div style="min-height: 100px; background: #2a2a2a; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
-                    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="yurummiyt/731" data-width="100%" data-dark="1"></script>
+            
+            <div class="newspaper-layout">
+                <div class="news-header">
+                    <h3>Yurummi Times</h3>
+                    <p>Ежедневный вестник картонного мира • Выпуск №1</p>
                 </div>
-                <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-da" style="font-size: 18px; padding: 15px; margin-top: 10px; width: 100%;">
-                    Читать все новости в Telegram ➔
-                </a>
+
+                <div class="news-col-left">
+                    <h4 class="news-article-title">ЭКСТРЕННЫЙ ВЫПУСК</h4>
+                    <p><span class="dropcap">Л</span>орем ипсум долор сит амет, консектетур адиписцинг элит. Сед до эиусмод темпор инцидидунт ут лаборе ет долоре магна аликвйа. Ут еним ад миним вениам, куис ноструд ехерцитатион улламцо лаборис ниси ут аликуип ех еа цоммодо цонсекуат. Дуис ауте ируре долор ин репрехендерит ин волуптате велит ессе циллум долоре еу фугиат нулла париатур.</p>
+                    <p>Ехцептеур синт оццаецат цупидатат нон проидент, сунт ин цулпа куи оффициа десерунт моллит аним ид ест лаборум. Цурабитур претиум тинцидунт лацус. Нулла гравида орци а одиа. Нуллам вариус, турпис ет цоммодо пхаретра, ест ерос бибендум елит, нец луцтус магна фелис соллицитудин маурис. Интегер ин маурис еу нибх еуисмод гравида.</p>
+                    <p>Аенеан лациниа бибендум нулла сед цонсецтетур. Вестибулум ид лигула порта фелис еуисмод семпер. Праесент цоммодо цурсус магна, вел сцелерискуе нисл цонсецтетур ет. Црас маттис цонсецтетур пурус сит амет ферментум.</p>
+                </div>
+
+                <div class="news-col-right">
+                    <p style="color: #ff3385; font-size: 14px; margin-top: 0; margin-bottom: 15px; font-family: sans-serif; text-align: center;">
+                        ⚠️ Лента Telegram (может нужен VPN)
+                    </p>
+                    <div style="min-height: 100px; background: #2a2a2a; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
+                        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="yurummiyt/740" data-width="100%" data-dark="1"></script>
+                    </div>
+                    <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 10px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
+                        Читать все новости ➔
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -331,8 +430,9 @@
                 <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; margin-top: 15px; text-align: center;">
                     <p style="margin-top: 0; margin-bottom: 20px; text-align: left;">Хочу сказать огромное спасибо художнице <strong><a href="https://t.me/maku_qq" target="_blank" style="color: #ff3385;">@Maku_q</a></strong>! Она стала автором огромного числа работ, которые вы видите на моём канале - от великолепных фан-артов до смайликов на Твиче. Маку уже стала большой частью меня и моего канала, и её поддержка невероятно важна.</p>
                     
-                    <div style="display: inline-block; width: 100%; max-width: 800px; border: 2px solid #ff3385; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                    <div onclick="openLightbox(this)" role="button" tabindex="0" style="display: inline-block; width: 100%; max-width: 800px; border: 2px solid #ff3385; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.2s;">
                         <picture><source srcset="img/fanarts/комикс.webp" type="image/webp"><img src="img/fanarts/комикс.jpg" alt="Комикс от Maku_q" style="width: 100%; height: auto; display: block;"></picture>
+                        <div style="display: none;"><h3>Комикс от Maku_q</h3><p>Особая благодарность</p></div>
                     </div>
                 </div>
             </div>
