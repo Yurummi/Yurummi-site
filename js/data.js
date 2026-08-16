@@ -126,6 +126,19 @@ const STREAMS_LIST = [
     { date: '2026-08-15', time: '±20:00',  text: 'Стрим',               isSpecial: false, isCanceled: false },
     
 
+    // Соник Марафон — Пн/Вт/Ср + Пт/Сб до конца августа
+    { date: '2026-08-17', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-18', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-19', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-21', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-22', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-24', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-25', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-26', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-28', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-29', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-31', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+
     // Периодические события
     { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' }
 ];
