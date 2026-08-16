@@ -241,15 +241,49 @@
     <!--  РАСПИСАНИЕ — КАЛЕНДАРЬ                    -->
     <!-- ========================================== -->
     <section id="schedule">
-        <div class="content-container" style="max-width: 1300px;">
+        <style>
+            .schedule-container {
+                position: relative;
+                max-width: 800px;
+                margin: 0 auto;
+                width: 100%;
+            }
+            .sonic-checklist-wrapper {
+                position: absolute;
+                left: calc(100% + 20px);
+                top: 0;
+                width: 300px;
+                background: #1e1e1e;
+                border-radius: 12px;
+                padding: 15px;
+                border: 2px solid #ffd700;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+                box-sizing: border-box;
+            }
+            @media (max-width: 1250px) {
+                .schedule-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .sonic-checklist-wrapper {
+                    position: static;
+                    margin-top: 20px;
+                    width: 100%;
+                    max-width: 400px;
+                }
+            }
+        </style>
+        <div class="content-container" style="max-width: 1000px;">
             <h2 class="section-title">Расписание</h2>
             <div style="text-align: center;">
                 <div class="timezone-note">⏰ Время всех стримов указано по <strong>НЕМЕЦИИ (GMT+2)</strong></div>
             </div>
 
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start;">
+            <div class="schedule-container">
                 <!-- Календарь -->
-                <div class="calendar-wrapper" style="margin: 0; flex: 1 1 700px; max-width: 800px;">
+                <div class="calendar-wrapper" style="margin: 0; width: 100%;">
                     <div class="calendar-header">
                         <button onclick="changeMonth(-1)">&#9664; Пред</button>
                         <h3 id="monthYearDisplay">Загрузка...</h3>
@@ -268,7 +302,7 @@
                 </div>
 
                 <!-- Чеклист Соника -->
-                <div class="sonic-checklist-wrapper" style="flex: 1 1 300px; max-width: 400px; background: #1e1e1e; border-radius: 12px; padding: 15px; border: 2px solid #ffd700; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                <div class="sonic-checklist-wrapper">
                     <div style="position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,215,0,0.1) 10px, rgba(255,215,0,0.1) 20px); pointer-events: none;"></div>
                     <h3 style="color: #ffd700; margin-top: 0; text-align: center; text-transform: uppercase; text-shadow: 1px 1px 0 #000, 0 0 5px rgba(255,215,0,0.5);">Марафон Соника</h3>
                     <p style="text-align: center; font-size: 14px; margin-bottom: 15px; color: #ccc;">Прогресс: <strong id="sonic-progress" style="color: #fff;">0 / 21</strong></p>
@@ -297,8 +331,8 @@
                 <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; margin-top: 15px; text-align: center;">
                     <p style="margin-top: 0; margin-bottom: 20px; text-align: left;">Хочу сказать огромное спасибо художнице <strong><a href="https://t.me/maku_qq" target="_blank" style="color: #ff3385;">@Maku_q</a></strong>! Она стала автором огромного числа работ, которые вы видите на моём канале - от великолепных фан-артов до смайликов на Твиче. Маку уже стала большой частью меня и моего канала, и её поддержка невероятно важна.</p>
                     
-                    <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/комикс.jpg" style="display: inline-block; width: 100%; max-width: 600px; border: 2px solid #ff3385; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-                        <picture><source srcset="img/fanarts/комикс.webp" type="image/webp"><img src="img/fanarts/комикс.jpg" alt="Комикс от Maku_q" style="width: 100%; display: block;"></picture>
+                    <div style="display: inline-block; width: 100%; max-width: 800px; border: 2px solid #ff3385; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                        <picture><source srcset="img/fanarts/комикс.webp" type="image/webp"><img src="img/fanarts/комикс.jpg" alt="Комикс от Maku_q" style="width: 100%; height: auto; display: block;"></picture>
                     </div>
                 </div>
             </div>

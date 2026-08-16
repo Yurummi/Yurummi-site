@@ -31,26 +31,18 @@ const SONIC_GAMES = [
     { id: "sonic-superstars", title: "Sonic Superstars" }
 ];
 
+// СОСТОЯНИЯ ИГР (задаются здесь вручную)
+// Возможные значения: 'playing' (жёлтый), 'completed' (зелёный), 'abandoned' (красный)
+const SONIC_GAME_STATES = {
+    "sonic-1991": "playing"
+};
+
 const totalGames = SONIC_GAMES.filter(g => !g.isCategory).length;
-// gameStates: { [id]: 'completed' | 'playing' | 'abandoned' }
-let gameStates = JSON.parse(localStorage.getItem('sonicProgressStates') || '{}');
-
-// Migrate old data if present
-const oldProgress = JSON.parse(localStorage.getItem('sonicProgress') || '[]');
-if (oldProgress.length > 0 && Object.keys(gameStates).length === 0) {
-    oldProgress.forEach(id => { gameStates[id] = 'completed'; });
-    localStorage.setItem('sonicProgressStates', JSON.stringify(gameStates));
-}
-
-function saveProgress() {
-    localStorage.setItem('sonicProgressStates', JSON.stringify(gameStates));
-    updateProgressCounter();
-}
 
 function updateProgressCounter() {
     const progressEl = document.getElementById('sonic-progress');
     if (progressEl) {
-        const completedCount = Object.values(gameStates).filter(s => s === 'completed').length;
+        const completedCount = Object.values(SONIC_GAME_STATES).filter(s => s === 'completed').length;
         progressEl.innerText = `${completedCount} / ${totalGames}`;
     }
 }
@@ -65,7 +57,7 @@ function renderChecklist() {
         if (game.isCategory) {
             html += `<h4 style="color: #ff3385; margin: 15px 0 5px; border-bottom: 1px solid #444; padding-bottom: 3px;">${game.title}</h4>`;
         } else {
-            const state = gameStates[game.id] || 'empty';
+            const state = SONIC_GAME_STATES[game.id] || 'empty';
             let color = '#fff';
             let circleColor = 'transparent';
             let circleBorder = '#fff';
@@ -88,9 +80,9 @@ function renderChecklist() {
             }
 
             html += `
-                <div style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer; user-select: none;" onclick="cycleGameState('${game.id}')">
-                    <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid ${circleBorder}; background-color: ${circleColor}; margin-right: 12px; flex-shrink: 0; transition: all 0.2s;"></div>
-                    <span style="color: ${color}; text-decoration: ${textDecor}; flex-grow: 1; transition: all 0.2s ease;">${game.title}</span>
+                <div style="display: flex; align-items: center; margin-bottom: 8px; user-select: none;">
+                    <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid ${circleBorder}; background-color: ${circleColor}; margin-right: 12px; flex-shrink: 0;"></div>
+                    <span style="color: ${color}; text-decoration: ${textDecor}; flex-grow: 1;">${game.title}</span>
                 </div>
             `;
         }
@@ -99,24 +91,6 @@ function renderChecklist() {
     container.innerHTML = html;
     updateProgressCounter();
 }
-
-// Global scope for onclick
-window.cycleGameState = function(gameId) {
-    const currentState = gameStates[gameId] || 'empty';
-    // Cycle: empty -> playing -> completed -> abandoned -> empty
-    if (currentState === 'empty') {
-        gameStates[gameId] = 'playing';
-    } else if (currentState === 'playing') {
-        gameStates[gameId] = 'completed';
-    } else if (currentState === 'completed') {
-        gameStates[gameId] = 'abandoned';
-    } else {
-        delete gameStates[gameId];
-    }
-    
-    saveProgress();
-    renderChecklist();
-};
 
 document.addEventListener('DOMContentLoaded', () => {
     renderChecklist();
