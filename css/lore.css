@@ -321,7 +321,7 @@
 
 .tree-canvas {
     position: absolute;
-    width: 1200px;
+    width: 1400px;
     height: 100%;
     transform-origin: 0 0;
 }
@@ -363,6 +363,29 @@
 
 .h-node.dead:hover {
     transform: none;
+}
+
+/* ==========================================
+   ИВЕНТОВЫЕ УЗЛЫ (Спец. события)
+   ========================================== */
+.h-node.event {
+    transform: scale(0.65);
+}
+
+.h-node.event:hover {
+    transform: scale(1);
+}
+
+/* Кастомный цвет для ивента Соника */
+.h-node.event.event-sonic {
+    background: #00bfff;
+    box-shadow: 0 0 15px #00bfff;
+}
+.h-node.event.event-sonic:hover {
+    box-shadow: 0 0 25px #00bfff;
+}
+.h-node.event.event-sonic:hover .h-label {
+    color: #00bfff !important;
 }
 
 .h-node.future {
