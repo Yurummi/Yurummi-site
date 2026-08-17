@@ -34,7 +34,8 @@ const SONIC_GAMES = [
 // СОСТОЯНИЯ ИГР (задаются здесь вручную)
 // Возможные значения: 'playing' (жёлтый), 'completed' (зелёный), 'abandoned' (красный)
 const SONIC_GAME_STATES = {
-    "sonic-1991": "playing"
+    "sonic-1991": "completed",
+    "sonic-2-1992": "playing"
 };
 
 const totalGames = SONIC_GAMES.filter(g => !g.isCategory).length;
