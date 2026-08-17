@@ -126,8 +126,17 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
             const prevEvent = index.byDate[prevDateStr];
             const nextEvent = index.byDate[nextDateStr];
             
-            const isPrevSonic = prevEvent && prevEvent.isSonic;
-            const isNextSonic = nextEvent && nextEvent.isSonic;
+            let isPrevSonic = prevEvent && prevEvent.isSonic;
+            let isNextSonic = nextEvent && nextEvent.isSonic;
+            
+            // Разрываем визуальную связь на стыке недель (Понедельник = 0, Воскресенье = 6)
+            const gridCol = (firstDay + day - 1) % 7;
+            if (gridCol === 0) {
+                isPrevSonic = false; // Понедельник не соединяется с Воскресеньем
+            }
+            if (gridCol === 6) {
+                isNextSonic = false; // Воскресенье не соединяется с Понедельником
+            }
             
             if (isPrevSonic && isNextSonic) {
                 classes += ' island-mid';

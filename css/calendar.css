@@ -708,32 +708,34 @@
     display: block; /* Оставляем блик */
 }
 
-/* 7. Прошедший стрим: Собрано (Искорки) */
+/* 7. Прошедший стрим: Собрано */
 .day-cell.sonic-cell.past-stream {
     filter: saturate(0.5);
     opacity: 0.8;
 }
 
-.day-cell.sonic-cell.past-stream .ring-wrapper {
-    /* Кольцо собрано, исчезает */
+.day-cell.sonic-cell.past-stream .ring-3d {
+    /* Кольцо собрано, исчезает 3D часть */
     display: none;
 }
 
-.day-cell.sonic-cell.past-stream::after {
-    /* Искры */
-    content: "";
+.day-cell.sonic-cell.past-stream .ring-wrapper::before {
+    /* Большая зелёная галочка на месте кольца */
+    content: "✔";
     position: absolute;
-    width: 30px; height: 30px;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, #ffe680 20%, transparent 60%);
-    animation: sparkles 1.5s infinite;
-    z-index: 10;
+    font-size: 32px;
+    color: #10ff00;
+    text-shadow: 0 0 10px #10ff00, 0 0 20px #000;
+    z-index: 5;
+    animation: pop-in 0.3s ease-out;
 }
 
-@keyframes sparkles {
-    0%, 100% { transform: translate(-50%, 50%) scale(0.5); opacity: 0.5; }
-    50% { transform: translate(-50%, 50%) scale(1.2); opacity: 1; }
+@keyframes pop-in {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    80% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
 /* 8. Отменённый стрим: Broken TV Monitor (Item Box) */
