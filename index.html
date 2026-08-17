@@ -151,10 +151,16 @@
             }
             #news-tg-container {
                 margin-bottom: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 width: 100%;
+                overflow: hidden;
+                border-radius: 12px; /* Скругляем углы обрезанного поста */
+                box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+                background: #1c242d; /* Примерный цвет фона виджета, чтобы не было дыр */
+            }
+            #news-tg-container iframe {
+                margin-left: -48px !important; /* Обрезаем аватарку и черную полосу */
+                width: calc(100% + 48px) !important; /* Растягиваем остаток на всю ширину */
+                display: block;
             }
             @media (max-width: 768px) {
                 .news-col-left {
