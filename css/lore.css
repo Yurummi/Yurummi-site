@@ -369,20 +369,18 @@
    ИВЕНТОВЫЕ УЗЛЫ (Спец. события)
    ========================================== */
 .h-node.event {
-    transform: scale(0.65);
-}
-
-.h-node.event:hover {
-    transform: scale(1);
+    /* Можно добавить общие стили для ивентов, если понадобятся */
 }
 
 /* Кастомный цвет для ивента Соника */
 .h-node.event.event-sonic {
-    background: #00bfff;
-    box-shadow: 0 0 15px #00bfff;
+    background: #a855f7; /* Цвет самой ветки */
+    box-shadow: 0 0 15px #00bfff, 0 0 30px #00bfff; /* Голубое свечение */
+    border: 3px solid #00bfff; /* Голубая обводка */
+    box-sizing: border-box; /* Чтобы обводка не ломала круг */
 }
 .h-node.event.event-sonic:hover {
-    box-shadow: 0 0 25px #00bfff;
+    box-shadow: 0 0 25px #00bfff, 0 0 45px #00bfff;
 }
 .h-node.event.event-sonic:hover .h-label {
     color: #00bfff !important;
