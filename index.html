@@ -392,6 +392,7 @@
                 overflow: hidden;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.5);
                 box-sizing: border-box;
+                transform: translateZ(0); /* Форсируем обрезку overflow в Safari/Chrome */
             }
             @media (max-width: 1250px) {
                 .schedule-container {
@@ -400,10 +401,12 @@
                     align-items: center;
                 }
                 .sonic-checklist-wrapper {
-                    position: static;
+                    position: relative; /* Не static, чтобы absolute внутри работал! */
                     margin-top: 20px;
                     width: 100%;
                     max-width: 400px;
+                    left: auto;
+                    top: auto;
                 }
             }
         </style>
