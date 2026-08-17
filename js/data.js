@@ -10,6 +10,14 @@
 // ============================================================
 const SLIDES_DATA = [
     {
+        file: 'img/sketches/Соник.webp',
+        badgeStyle: 'green',
+        badgeText: 'ИВЕНТ',
+        textMain: 'Соник',
+        textAuthor: 'Марафон',
+        url: 'https://t.me/yurummiyt/740'
+    },
+    {
         file: 'img/arts/Фарочан ФИНАЛЛ.webp',
         badgeStyle: 'pink',
         badgeText: '💖 АРТ',
@@ -35,8 +43,8 @@ const SLIDES_DATA = [
     },
     {
         file: 'img/slider/Ютубоснова.webp',
-        badgeStyle: 'yellow',
-        badgeText: 'NEW',
+        badgeStyle: 'none',
+        badgeText: '',
         textMain: 'Новый YouTube канал',
         textAuthor: '',
         url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1'
