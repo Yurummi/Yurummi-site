@@ -1,7 +1,7 @@
 const NEWS_ISSUES = [
     {
         issueNumber: 1,
-        date: "16 Августа 2026",
+        date: "17 Августа 2026",
         tgPostId: "740",
         content: `
             <h4 class="news-article-title">ОБНОВЛЕНИЕ ЭМОУТОВ</h4>
@@ -35,7 +35,7 @@ function renderNewsIssue(index) {
     const issue = NEWS_ISSUES[index];
     
     // Update header
-    document.getElementById('news-issue-number').innerText = `Ежедневный вестник картонного мира • Выпуск №${issue.issueNumber} • ${issue.date}`;
+    document.getElementById('news-issue-number').innerText = `Еженедельный вестник картонного мира • Выпуск №${issue.issueNumber} • ${issue.date}`;
     
     // Update left column content
     document.getElementById('news-content-area').innerHTML = issue.content;
