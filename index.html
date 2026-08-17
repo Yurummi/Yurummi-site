@@ -257,6 +257,10 @@
             <div class="gallery-subtitle spaced">Фан-арты (От зрителей)</div>
             <div class="gallery-grid" id="fan-arts-grid">
                 <!-- НОВЕЙШЕЕ СВЕРХУ -->
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/ммр абузер скетч.jpg">
+                    <picture><source srcset="img/fanarts/ммр абузер скетч.webp" type="image/webp"><img src="img/fanarts/ммр абузер скетч.jpg" alt="Фан-арт от @mmr_abuser" loading="lazy"></picture>
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @mmr_abuser</p></div>
+                </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/lore/БУУУУУМ.png">
                     <picture><source srcset="img/lore/БУУУУУМ.webp" type="image/webp"><img src="img/lore/БУУУУУМ.png" alt="БУУУУУМ от @Maku_q" loading="lazy"></picture>
                     <div class="gallery-overlay"><h3>БУУУУУМ!</h3><p>От @Maku_q</p></div>
@@ -264,6 +268,10 @@
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/СПИНА.jpg">
                     <picture><source srcset="img/fanarts/СПИНА.webp" type="image/webp"><img src="img/fanarts/СПИНА.jpg" alt="Фан-арт от @Maku_q" loading="lazy"></picture>
                     <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Maku_q</p></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/гиф лоу кортизол.MP4">
+                    <video src="img/fanarts/гиф лоу кортизол.MP4" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+                    <div class="gallery-overlay"><h3>Гифка</h3><p>Лоу кортизол</p></div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/слайд1.png">
                     <picture><source srcset="img/fanarts/слайд1.webp" type="image/webp"><img src="img/fanarts/слайд1.png" alt="Фан-арт от @Maku_q" loading="lazy"></picture>
@@ -317,10 +325,6 @@
                     <picture><source srcset="img/fanarts/акемо.webp" type="image/webp"><img src="img/fanarts/акемо.png" alt="Фан-арт от @akem0" loading="lazy"></picture>
                     <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @akem0</p></div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/ммр абузер скетч.jpg">
-                    <picture><source srcset="img/fanarts/ммр абузер скетч.webp" type="image/webp"><img src="img/fanarts/ммр абузер скетч.jpg" alt="Фан-арт от @mmr_abuser" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @mmr_abuser</p></div>
-                </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/ноунеймартстарый.png">
                     <picture><source srcset="img/fanarts/ноунеймартстарый.webp" type="image/webp"><img src="img/fanarts/ноунеймартстарый.png" alt="Фан-арт" loading="lazy"></picture>
                     <div class="gallery-overlay"><h3>Фан-арт</h3><p></p></div>
@@ -330,6 +334,10 @@
             <div class="gallery-subtitle spaced">Скетчи и наброски</div>
             <div class="gallery-grid" id="sketches-grid">
                 <!-- НОВЕЙШЕЕ СВЕРХУ -->
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/sketches/Маку Соник.png">
+                    <picture><source srcset="img/sketches/Маку Соник.webp" type="image/webp"><img src="img/sketches/Маку Соник.png" alt="Маку Соник" loading="lazy"></picture>
+                    <div class="gallery-overlay"><h3>Маку Соник</h3><p>Скетч от @Maku_q</p></div>
+                </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/sketches/Соник.png">
                     <picture><source srcset="img/sketches/Соник.webp" type="image/webp"><img src="img/sketches/Соник.png" alt="Соник скетч" loading="lazy"></picture>
                     <div class="gallery-overlay"><h3>Соник</h3><p>Скетч к марафону</p></div>
@@ -366,6 +374,7 @@
     <div id="myLightbox" class="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-content" id="lightbox-img" alt="">
+        <video class="lightbox-content" id="lightbox-video" autoplay loop muted playsinline style="display: none; width: 90%; max-width: 900px; height: auto; max-height: 80vh; margin: 0 auto; object-fit: contain;"></video>
         <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
 

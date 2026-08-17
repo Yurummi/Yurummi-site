@@ -26,9 +26,10 @@ function _escapeHtml(value) {
 function openLightbox(element) {
     const lightbox        = document.getElementById('myLightbox');
     const lightboxImg     = document.getElementById('lightbox-img');
+    const lightboxVideo   = document.getElementById('lightbox-video');
     const lightboxCaption = document.getElementById('lightbox-caption');
 
-    const img       = element.querySelector('img');
+    const media     = element.querySelector('img') || element.querySelector('video');
     const h3        = element.querySelector('h3');
     const p         = element.querySelector('p');
     const musicLink = element.getAttribute('data-music');
@@ -36,22 +37,42 @@ function openLightbox(element) {
     const title    = _escapeHtml(h3 ? h3.innerText : '');
     const subtitle = _escapeHtml(p  ? p.innerText  : '');
 
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt || '';
+    const src = media ? media.src || media.currentSrc : '';
+    
+    if (src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm')) {
+        lightboxImg.style.display = 'none';
+        lightboxVideo.style.display = 'block';
+        lightboxVideo.src = element.getAttribute('data-src') || src;
+        lightboxVideo.play();
+        
+        // Для видео обработка клика-ссылки пока отключена, так как видео само может принимать клики
+        lightboxVideo.onclick = null;
+        lightboxVideo.classList.remove('clickable-art');
+    } else {
+        lightboxVideo.style.display = 'none';
+        lightboxVideo.pause();
+        lightboxImg.style.display = 'block';
+        lightboxImg.src = element.getAttribute('data-src') || src;
+        lightboxImg.alt = media ? media.alt || '' : '';
+        
+        if (musicLink) {
+            lightboxImg.classList.add('clickable-art');
+            lightboxImg.onclick = function (event) {
+                event.stopPropagation();
+                window.open(musicLink, '_blank');
+            };
+        } else {
+            lightboxImg.classList.remove('clickable-art');
+            lightboxImg.onclick = null;
+        }
+    }
 
     if (musicLink) {
         lightboxCaption.innerHTML =
             '<strong>' + title + '</strong><br>' + subtitle +
             '<br><span class="music-hint">🎵 псс... кликни по самой картинке!</span>';
-        lightboxImg.classList.add('clickable-art');
-        lightboxImg.onclick = function (event) {
-            event.stopPropagation();
-            window.open(musicLink, '_blank');
-        };
     } else {
         lightboxCaption.innerHTML = '<strong>' + title + '</strong><br>' + subtitle;
-        lightboxImg.classList.remove('clickable-art');
-        lightboxImg.onclick = null;
     }
 
     lightbox.classList.add('active');
@@ -67,11 +88,16 @@ function closeLightbox(event) {
     const isClose    = event.target.classList.contains('lightbox-close');
 
     if (isBackdrop || isClose) {
-        const lightbox    = document.getElementById('myLightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+        const lightbox      = document.getElementById('myLightbox');
+        const lightboxImg   = document.getElementById('lightbox-img');
+        const lightboxVideo = document.getElementById('lightbox-video');
+        
         lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = '';
         lightboxImg.onclick = null;
+        if (lightboxVideo) {
+            lightboxVideo.pause();
+        }
     }
 }
 
