@@ -127,8 +127,6 @@ const STREAMS_LIST = [
     
 
     // Соник Марафон — Пн/Вт/Ср + Пт/Сб до конца августа
-    { date: '2026-08-13', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },    
-    { date: '2026-08-16', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
     { date: '2026-08-17', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
     { date: '2026-08-18', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
     { date: '2026-08-19', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
