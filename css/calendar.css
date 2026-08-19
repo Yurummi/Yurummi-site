@@ -489,34 +489,31 @@
 
 .day-cell.sonic-cell.island-start {
     border-radius: 8px 0 0 8px;
-    margin-right: -4px; /* Убираем gap грида */
-    padding-right: 4px;
+    margin-right: -5px; /* Точно закрываем половину gap (10px) */
+    padding-right: 5px;
 }
 .day-cell.sonic-cell.island-start::before {
     border-radius: 8px 0 0 0;
-    right: -4px;
 }
 
 .day-cell.sonic-cell.island-mid {
     border-radius: 0;
-    margin-left: -4px;
-    margin-right: -4px;
-    padding-left: 4px;
-    padding-right: 4px;
+    margin-left: -5px;
+    margin-right: -5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 .day-cell.sonic-cell.island-mid::before {
-    left: -4px;
-    right: -4px;
+    border-radius: 0;
 }
 
 .day-cell.sonic-cell.island-end {
     border-radius: 0 8px 8px 0;
-    margin-left: -4px;
-    padding-left: 4px;
+    margin-left: -5px;
+    padding-left: 5px;
 }
 .day-cell.sonic-cell.island-end::before {
     border-radius: 0 8px 0 0;
-    left: -4px;
 }
 
 /* При наведении немного приподнимаем */
