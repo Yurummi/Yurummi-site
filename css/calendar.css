@@ -517,10 +517,32 @@
     border-radius: 0 8px 0 0;
 }
 
-/* При наведении немного приподнимаем */
+/* Убираем transform родителя, чтобы не ломать единый fixed-паттерн земли.
+   Вместо этого при наведении "подпрыгивает" само кольцо внутри! */
 .day-cell.sonic-cell:hover {
-    transform: translateY(-3px);
+    transform: none;
     z-index: 10;
+    box-shadow: inset 0 0 30px rgba(255,255,255,0.1), 0 8px 20px rgba(0,0,0,0.7);
+}
+
+.day-cell.sonic-cell:hover .ring-wrapper {
+    transform: translate(-50%, 35%) scale(1.1);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.day-cell.sonic-cell .ring-wrapper {
+    transition: transform 0.2s;
+}
+
+/* Затемнение для прошедших и отменённых стримов (без использования filter, чтобы не ломать background-attachment: fixed) */
+.day-cell.sonic-cell.past-stream::after,
+.day-cell.sonic-cell.canceled-day::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 3;
+    pointer-events: none;
 }
 
 /* 4. Обертка для кольца */
