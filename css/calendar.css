@@ -534,15 +534,20 @@
     transition: transform 0.2s;
 }
 
-/* Затемнение для прошедших и отменённых стримов (без использования filter, чтобы не ломать background-attachment: fixed) */
-.day-cell.sonic-cell.past-stream::after,
-.day-cell.sonic-cell.canceled-day::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    z-index: 3;
-    pointer-events: none;
+/* Затемнение для прошедших и отменённых стримов (без использования filter и ::after, чтобы всё было идеально ровно) */
+.day-cell.sonic-cell.past-stream,
+.day-cell.sonic-cell.canceled-day {
+    background-color: #2e1908;
+    background-image: 
+        linear-gradient(45deg, #3e240f 25%, transparent 25%, transparent 75%, #3e240f 75%, #3e240f),
+        linear-gradient(45deg, #3e240f 25%, transparent 25%, transparent 75%, #3e240f 75%, #3e240f);
+}
+
+.day-cell.sonic-cell.past-stream::before,
+.day-cell.sonic-cell.canceled-day::before {
+    background-color: #17730e;
+    border-top-color: #4ce639;
+    border-bottom-color: #053300;
 }
 
 /* 4. Обертка для кольца */
