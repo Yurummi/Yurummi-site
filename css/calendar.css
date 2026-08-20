@@ -546,7 +546,7 @@
 .day-cell.sonic-cell.past-stream::before,
 .day-cell.sonic-cell.canceled-day::before {
     background-color: #17730e;
-    border-top-color: #4ce639;
+    border-top-color: #1c8c11; /* Сильно затемнили верхнюю грань */
     border-bottom-color: #053300;
 }
 
@@ -721,8 +721,8 @@
 
 /* 7. Прошедший стрим: Собрано */
 .day-cell.sonic-cell.past-stream {
-    filter: saturate(0.5);
-    opacity: 0.8;
+    /* Фильтр и прозрачность убраны, чтобы не ломать background-attachment: fixed */
+    opacity: 1 !important;
 }
 
 .day-cell.sonic-cell.past-stream .ring-3d {
@@ -753,6 +753,7 @@
 .day-cell.sonic-cell.canceled-day {
     /* Фильтр убран, чтобы не ломать единый паттерн земли.
        Отмена и так понятна по монитору и красному фону внизу. */
+    opacity: 1 !important;
 }
 
 .day-cell.sonic-cell.canceled-day .stream-info {
