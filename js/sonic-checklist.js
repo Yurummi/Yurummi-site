@@ -4,7 +4,8 @@ const SONIC_GAMES = [
     { id: "sonic-2-1992", title: "Sonic the Hedgehog 2 (1992)" },
     { id: "sonic-cd-1993", title: "Sonic CD (1993)" },
     { id: "sonic-3-knuckles", title: "Sonic 3 & Knuckles (1994)" },
-    { id: "sonic-4", title: "Sonic 4: Episode I + II" },
+    { id: "sonic-4-ep1", title: "Sonic 4: Episode I" },
+    { id: "sonic-4-ep2", title: "Sonic 4: Episode II" },
     
     { title: "Dreamcast", isCategory: true },
     { id: "sonic-adv-1", title: "Sonic Advance 1" },
@@ -37,7 +38,8 @@ const SONIC_GAME_STATES = {
     "sonic-1991": "completed",
     "sonic-2-1992": "completed",
     "sonic-cd-1993": "completed",
-    "sonic-3-knuckles": "playing"
+    "sonic-3-knuckles": "completed",
+    "sonic-4-ep1": "playing"
 };
 
 const totalGames = SONIC_GAMES.filter(g => !g.isCategory).length;
