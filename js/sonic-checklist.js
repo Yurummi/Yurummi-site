@@ -85,7 +85,7 @@ function renderChecklist() {
             }
 
             html += `
-                <div style="display: flex; align-items: center; margin-bottom: 8px; user-select: none;">
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
                     <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid ${circleBorder}; background-color: ${circleColor}; margin-right: 12px; flex-shrink: 0;"></div>
                     <span style="color: ${color}; text-decoration: ${textDecor}; flex-grow: 1;">${game.title}</span>
                 </div>
