@@ -48,10 +48,20 @@ const NEWS_ISSUES = [
                 <!-- Левая колонка с текстом (40%) -->
                 <div class="np-col-40">
                     <h3 class="np-title">ВЫРЕЗАНО СО СТРИМА</h3>
-                    <p class="np-text"><span class="dropcap">К</span>стати о шутках... В ходе одного из стримов родилась настолько специфичная паста, что её пришлось вырезать из официальных записей. Но наша редакция раздобыла оригинал:</p>
+                    <p class="np-text"><span class="dropcap">К</span>стати о шутках... В ходе марафона родились настолько специфичные пасты, что их пришлось вырезать из официальных записей. Но наша редакция раздобыла оригиналы:</p>
                     
-                    <div class="np-quote">
-                        «Соник взялся за свой огромный желатиновый стержень и начал неистово встряхивать его налево и направо, белая жидкость сочилась со всех щелей но он не останавливался и лишь с большим усилием сдавливал наконечник. И в момент когда пальцы его рук ощутили облегченение, пот и слезы полились по щекам бедного лисенка сидящего перед ним. Все было кончено.»
+                    <div id="quote-container">
+                        <div class="np-quote quote-slide" style="display: block;">
+                            «Соник взялся за свой огромный желатиновый стержень и начал неистово встряхивать его налево и направо, белая жидкость сочилась со всех щелей но он не останавливался и лишь с большим усилием сдавливал наконечник. И в момент когда пальцы его рук ощутили облегченение, пот и слезы полились по щекам бедного лисенка сидящего перед ним. Все было кончено.»
+                        </div>
+                        <div class="np-quote quote-slide" style="display: none;">
+                            «Соник дерётся со своим злейшим врагом, начинает проигрывать, но вдруг его накрывает волна воспоминаний о том что он сражается за то чтобы увидеть своих жён Юруми и Маку, которые вскоре должны родить ему детей. Тогда он собирает все силы в кулак и побеждает своего врага.»
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: -10px; margin-bottom: 25px; padding-right: 15px;">
+                        <button onclick="changeQuoteSlide(-1)" style="background: none; border: none; color: #ff3385; cursor: pointer; font-size: 18px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">&#10094; Пред.</button>
+                        <button onclick="changeQuoteSlide(1)" style="background: none; border: none; color: #ff3385; cursor: pointer; font-size: 18px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">След. &#10095;</button>
                     </div>
                     
                     <p class="np-text" style="font-size: 13px; color: #666; margin-bottom: 40px;">Редакция газеты отказывается давать комментарии по поводу прочитанного.</p>
@@ -149,9 +159,12 @@ function renderNewsIssue(index) {
     document.getElementById('news-btn-prev').disabled = (index >= NEWS_ISSUES.length - 1);
     document.getElementById('news-btn-next').disabled = (index <= 0);
     
-    // Reset timer
+    // Reset timer and quotes
     if (typeof startNewsSliderTimer === 'function') {
         startNewsSliderTimer();
+    }
+    if (typeof currentQuoteIndex !== 'undefined') {
+        currentQuoteIndex = 0;
     }
 }
 
@@ -195,6 +208,21 @@ function changeNewsSlide(direction) {
     if (newIndex >= slides.length) newIndex = 0;
     if (newIndex < 0) newIndex = slides.length - 1;
     setNewsSlide(newIndex);
+}
+
+// Slider logic for Quotes
+let currentQuoteIndex = 0;
+function changeQuoteSlide(direction) {
+    const slides = document.querySelectorAll('.quote-slide');
+    if (slides.length === 0) return;
+    
+    slides.forEach(s => s.style.display = 'none');
+    
+    currentQuoteIndex += direction;
+    if (currentQuoteIndex >= slides.length) currentQuoteIndex = 0;
+    if (currentQuoteIndex < 0) currentQuoteIndex = slides.length - 1;
+    
+    slides[currentQuoteIndex].style.display = 'block';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
