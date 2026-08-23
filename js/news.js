@@ -50,11 +50,11 @@ const NEWS_ISSUES = [
                     <h3 class="np-title">ВЫРЕЗАНО СО СТРИМА</h3>
                     <p class="np-text"><span class="dropcap">К</span>стати о шутках... В ходе марафона родились настолько специфичные пасты, что их пришлось вырезать из официальных записей. Но наша редакция раздобыла оригиналы:</p>
                     
-                    <div id="quote-container">
-                        <div class="np-quote quote-slide" style="display: block;">
+                    <div id="quote-container" style="display: grid;">
+                        <div class="np-quote quote-slide" style="grid-area: 1 / 1; opacity: 1; pointer-events: auto; transition: opacity 0.3s;">
                             «Соник взялся за свой огромный желатиновый стержень и начал неистово встряхивать его налево и направо, белая жидкость сочилась со всех щелей но он не останавливался и лишь с большим усилием сдавливал наконечник. И в момент когда пальцы его рук ощутили облегченение, пот и слезы полились по щекам бедного лисенка сидящего перед ним. Все было кончено.»
                         </div>
-                        <div class="np-quote quote-slide" style="display: none;">
+                        <div class="np-quote quote-slide" style="grid-area: 1 / 1; opacity: 0; pointer-events: none; transition: opacity 0.3s;">
                             «Соник дерётся со своим злейшим врагом, начинает проигрывать, но вдруг его накрывает волна воспоминаний о том что он сражается за то чтобы увидеть своих жён Юруми и Маку, которые вскоре должны родить ему детей. Тогда он собирает все силы в кулак и побеждает своего врага.»
                         </div>
                     </div>
@@ -216,13 +216,17 @@ function changeQuoteSlide(direction) {
     const slides = document.querySelectorAll('.quote-slide');
     if (slides.length === 0) return;
     
-    slides.forEach(s => s.style.display = 'none');
+    slides.forEach(s => {
+        s.style.opacity = '0';
+        s.style.pointerEvents = 'none';
+    });
     
     currentQuoteIndex += direction;
     if (currentQuoteIndex >= slides.length) currentQuoteIndex = 0;
     if (currentQuoteIndex < 0) currentQuoteIndex = slides.length - 1;
     
-    slides[currentQuoteIndex].style.display = 'block';
+    slides[currentQuoteIndex].style.opacity = '1';
+    slides[currentQuoteIndex].style.pointerEvents = 'auto';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
