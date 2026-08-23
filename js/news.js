@@ -16,6 +16,10 @@ const NEWS_ISSUES = [
                             <source srcset="img/news/news 24.08.2026 %232.webp" type="image/webp">
                             <img src="img/news/news 24.08.2026 %232.jpg" alt="Мем 2">
                         </picture>
+                        <picture class="np-slide" id="news2-slide-2" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                            <source srcset="img/news/news 24.08.2026 %234.webp" type="image/webp">
+                            <img src="img/news/news 24.08.2026 %234.jpg" alt="Мем 3">
+                        </picture>
                         
                         <div class="np-slider-nav">
                             <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
@@ -25,6 +29,7 @@ const NEWS_ISSUES = [
                         <div class="np-slider-dots">
                             <div class="np-dot active" id="news2-dot-0" onclick="setNewsSlide(0)"></div>
                             <div class="np-dot" id="news2-dot-1" onclick="setNewsSlide(1)"></div>
+                            <div class="np-dot" id="news2-dot-2" onclick="setNewsSlide(2)"></div>
                         </div>
                     </div>
                     <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">(Нажмите на картинку, чтобы увеличить. Листайте вправо, чтобы увидеть больше)</p>
