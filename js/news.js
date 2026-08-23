@@ -9,16 +9,16 @@ const NEWS_ISSUES = [
                 <div class="np-col-60" style="align-self: flex-start;">
                     <div class="np-slider">
                         <picture class="np-slide active" id="news2-slide-0" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news 24.08.2026 %231.webp" type="image/webp">
-                            <img src="img/news/news 24.08.2026 %231.jpg" alt="Мем 1">
+                            <source srcset="img/news/news_24_08_2026_1.webp" type="image/webp">
+                            <img src="img/news/news_24_08_2026_1.webp" alt="Мем 1">
                         </picture>
                         <picture class="np-slide" id="news2-slide-1" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news 24.08.2026 %232.webp" type="image/webp">
-                            <img src="img/news/news 24.08.2026 %232.jpg" alt="Мем 2">
+                            <source srcset="img/news/news_24_08_2026_2.webp" type="image/webp">
+                            <img src="img/news/news_24_08_2026_2.webp" alt="Мем 2">
                         </picture>
                         <picture class="np-slide" id="news2-slide-2" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news 24.08.2026 %234.webp" type="image/webp">
-                            <img src="img/news/news 24.08.2026 %234.jpg" alt="Мем 3">
+                            <source srcset="img/news/news_24_08_2026_4.webp" type="image/webp">
+                            <img src="img/news/news_24_08_2026_4.webp" alt="Мем 4">
                         </picture>
                         
                         <div class="np-slider-nav">
@@ -88,8 +88,8 @@ const NEWS_ISSUES = [
                 <div class="np-col-60" style="align-self: flex-start;">
                     <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
                         <picture style="width: 100%; display: block;">
-                            <source srcset="img/news/news 24.08.2026 %233.webp" type="image/webp">
-                            <img src="img/news/news 24.08.2026 %233.png" alt="Мем 3">
+                            <source srcset="img/news/news_24_08_2026_3.webp" type="image/webp">
+                            <img src="img/news/news_24_08_2026_3.webp" alt="Мем 3">
                         </picture>
                     </div>
                     <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">Блядь где я? - Юрумми замечен в городе.</p>
