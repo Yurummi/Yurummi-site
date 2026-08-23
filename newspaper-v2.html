@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yurummi - Газета V2</title>
-    <!-- Подключаем базовые стили сайта, чтобы сохранить общий вид -->
     <link rel="stylesheet" href="css/base.css">
     
     <style>
@@ -28,6 +27,7 @@
             font-family: 'Georgia', serif;
         }
 
+        /* Декоративная шапка */
         .np-header {
             text-align: center;
             border-bottom: 4px double #333;
@@ -41,6 +41,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Times New Roman', Times, serif;
+            color: #111;
         }
         
         .np-header p {
@@ -50,28 +51,12 @@
             text-transform: uppercase;
         }
 
-        /* Flexbox строки для пропорций 60/40 и 40/60 */
+        /* Flexbox строки для пропорций */
         .np-row {
             display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            flex-wrap: wrap; /* Для мобилок */
-        }
-
-        .np-box {
-            padding: 15px;
-            box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.4);
-        }
-
-        /* Красные блоки (Картинки) */
-        .np-box-red {
-            border: 3px solid #d32f2f;
-        }
-
-        /* Зелёные блоки (Текст) */
-        .np-box-green {
-            border: 3px solid #388e3c;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
 
         /* Пропорции колонок */
@@ -84,42 +69,59 @@
             min-width: 250px;
         }
 
-        /* Стили для текста */
+        /* Обычная газетная типографика */
         .np-title {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 22px;
+            font-size: 24px;
             margin-top: 0;
-            border-bottom: 1px solid #999;
-            padding-bottom: 5px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+            color: #111;
+            line-height: 1.3;
         }
 
         .np-text {
             font-size: 16px;
-            line-height: 1.5;
+            line-height: 1.6;
             text-align: justify;
             margin-bottom: 15px;
+            color: #222;
+        }
+        
+        .dropcap {
+            float: left;
+            font-size: 65px;
+            line-height: 55px;
+            padding-top: 8px;
+            padding-right: 10px;
+            padding-left: 2px;
+            font-family: 'Times New Roman', serif;
+            color: #ff3385; /* Акцентный цвет с сайта */
         }
         
         .np-quote {
             font-style: italic;
-            background: #e8e4d9;
-            padding: 10px;
-            border-left: 4px solid #388e3c;
+            padding: 10px 15px;
+            border-left: 4px solid #ff3385;
             margin: 15px 0;
             font-size: 15px;
+            color: #333;
+            background: rgba(0,0,0,0.03);
         }
 
-        /* Простой слайдер для первого красного блока */
+        /* Слайдер картинок */
         .np-slider {
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 300px;
+            min-height: 400px;
+            border: 2px solid #555;
             overflow: hidden;
-            background: #222;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #e8e4d9;
         }
         
         .np-slide {
@@ -128,33 +130,85 @@
             width: 100%; height: 100%;
             object-fit: contain;
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
         
         .np-slide.active {
             opacity: 1;
+            pointer-events: auto;
         }
         
+        /* Кнопки перелистывания */
+        .np-slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            box-sizing: border-box;
+            pointer-events: none; /* чтобы не перекрывали картинку */
+        }
+        
+        .np-slider-btn {
+            pointer-events: auto;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        
+        .np-slider-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
         .np-slider-dots {
             position: absolute;
-            bottom: 10px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
+            background: rgba(255,255,255,0.7);
+            padding: 5px 10px;
+            border-radius: 20px;
         }
         
         .np-dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #d32f2f;
+            background: #333;
             cursor: pointer;
-            opacity: 0.5;
+            opacity: 0.3;
         }
         
         .np-dot.active {
             opacity: 1;
+        }
+        
+        /* Блок одиночной картинки */
+        .np-image-box {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #555;
+            display: flex;
+            background: #e8e4d9;
+        }
+        
+        .np-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -165,44 +219,56 @@
     <!-- Шапка (Header) -->
     <div class="np-header">
         <h1>Вестник Картонного Мира</h1>
-        <p>Выпуск №2 • 24 Августа 2026 • Главные новости стримов</p>
+        <p>Выпуск №2 • 24 Августа 2026 • Экстренные новости</p>
     </div>
 
-    <!-- РЯД 1: Картинки (60%) + Текст (40%) -->
+    <!-- РЯД 1 -->
     <div class="np-row">
-        <!-- Левый красный блок с каруселью -->
-        <div class="np-box np-box-red np-col-60">
+        <!-- Левая колонка со слайдером (60%) -->
+        <div class="np-col-60">
             <div class="np-slider">
-                <img src="img/news/news 24.08.2026 %231.jpg" class="np-slide active" alt="Мем 1">
-                <img src="img/news/news 24.08.2026 %232.jpg" class="np-slide" alt="Мем 2">
+                <picture class="np-slide active">
+                    <source srcset="img/news/news 24.08.2026 %231.webp" type="image/webp">
+                    <img src="img/news/news 24.08.2026 %231.jpg" alt="Мем 1">
+                </picture>
+                <picture class="np-slide">
+                    <source srcset="img/news/news 24.08.2026 %232.webp" type="image/webp">
+                    <img src="img/news/news 24.08.2026 %232.jpg" alt="Мем 2">
+                </picture>
+                
+                <div class="np-slider-nav">
+                    <button class="np-slider-btn" onclick="changeSlide(-1)">&#10094;</button>
+                    <button class="np-slider-btn" onclick="changeSlide(1)">&#10095;</button>
+                </div>
                 
                 <div class="np-slider-dots">
                     <div class="np-dot active" onclick="setSlide(0)"></div>
                     <div class="np-dot" onclick="setSlide(1)"></div>
                 </div>
             </div>
+            <p style="text-align: center; font-size: 13px; color: #555; font-style: italic; margin-top: 8px;">(Листайте вправо, чтобы увидеть больше)</p>
         </div>
         
-        <!-- Правый зелёный блок -->
-        <div class="np-box np-box-green np-col-40">
+        <!-- Правая колонка с текстом (40%) -->
+        <div class="np-col-40">
             <h3 class="np-title">НЕЙРОСЛОП И МАРАФОН СОНИКА</h3>
-            <p class="np-text">Во время недавних трансляций марафона Соника произошло нечто невероятное. Чат сорвался с цепи и начал массово генерировать нейросетевые мемы.</p>
+            <p class="np-text"><span class="dropcap">В</span>о время недавних трансляций марафона Соника произошло нечто невероятное. Чат сорвался с цепи и начал массово генерировать нейросетевые мемы.</p>
             <p class="np-text">Шуток было так много, и они были настолько абсурдными, что наш дорогой стример буквально умирал со смеху в прямом эфире. Все дружно смеялись над бедным ежом, а эфир наполнился настоящим нейрослопом. Некоторые из лучших перлов вы можете увидеть на соседних кадрах.</p>
         </div>
     </div>
 
-    <!-- РЯД 2: Текст (40%) + Картинка (60%) -->
-    <div class="np-row">
-        <!-- Левый зелёный блок (Высокий) -->
-        <div class="np-box np-box-green np-col-40">
+    <!-- РЯД 2 -->
+    <div class="np-row" style="margin-top: 40px;">
+        <!-- Левая колонка с текстом (40%) -->
+        <div class="np-col-40">
             <h3 class="np-title">ВЫРЕЗАНО СО СТРИМА</h3>
-            <p class="np-text">В ходе одного из стримов родилась настолько специфичная паста, что её пришлось вырезать из официальных записей. Но наша редакция раздобыла оригинал:</p>
+            <p class="np-text"><span class="dropcap">К</span>стати о шутках... В ходе одного из стримов родилась настолько специфичная паста, что её пришлось вырезать из официальных записей. Но наша редакция раздобыла оригинал:</p>
             
             <div class="np-quote">
                 «Соник взялся за свой огромный желатиновый стержень и начал неистово встряхивать его налево и направо, белая жидкость сочилась со всех щелей но он не останавливался и лишь с большим усилием сдавливал наконечник. И в момент когда пальцы его рук ощутили облегченение, пот и слезы полились по щекам бедного лисенка сидящего перед ним. Все было кончено.»
             </div>
             
-            <p class="np-text" style="font-size: 13px; color: #666; margin-bottom: 30px;">Редакция газеты отказывается давать комментарии по поводу прочитанного.</p>
+            <p class="np-text" style="font-size: 13px; color: #666; margin-bottom: 40px;">Редакция газеты отказывается давать комментарии по поводу прочитанного.</p>
 
             <h3 class="np-title">РАБОТА: ИЩЕМ МОНТАЖЁРА</h3>
             <p class="np-text">Срочные новости из отдела кадров! Мы в поисках нового монтажёра, а возможно даже и нарезчика для канала.</p>
@@ -210,21 +276,24 @@
             <p class="np-text">Так что если ты умеешь резать видосы, не боишься желатиновых стержней и готов работать за респект — откликайся! Если никто не откликнется, то и ладно, сами как-нибудь склеим.</p>
         </div>
         
-        <!-- Правый красный блок -->
-        <div class="np-box np-box-red np-col-60">
-            <!-- Пока тут просто заглушка, так как для второго блока картинка не уточнялась -->
-            <div style="background: #222; width: 100%; height: 100%; min-height: 400px; display: flex; align-items: center; justify-content: center; color: #fff;">
-                <h3>Место для картинки 3</h3>
+        <!-- Правая колонка с картинкой 3 (60%) -->
+        <div class="np-col-60">
+            <div class="np-image-box">
+                <picture style="width: 100%; height: 100%;">
+                    <source srcset="img/news/news 24.08.2026 %233.webp" type="image/webp">
+                    <img src="img/news/news 24.08.2026 %233.png" alt="Мем 3">
+                </picture>
             </div>
+            <p style="text-align: center; font-size: 13px; color: #555; font-style: italic; margin-top: 8px;">Архивные кадры со стрима</p>
         </div>
     </div>
 
 </div>
 
 <script>
-    // Простой скрипт для переключения мемов
     const slides = document.querySelectorAll('.np-slide');
     const dots = document.querySelectorAll('.np-dot');
+    let currentIndex = 0;
     
     function setSlide(index) {
         slides.forEach(s => s.classList.remove('active'));
@@ -232,6 +301,14 @@
         
         slides[index].classList.add('active');
         dots[index].classList.add('active');
+        currentIndex = index;
+    }
+    
+    function changeSlide(direction) {
+        let newIndex = currentIndex + direction;
+        if (newIndex >= slides.length) newIndex = 0;
+        if (newIndex < 0) newIndex = slides.length - 1;
+        setSlide(newIndex);
     }
 </script>
 
