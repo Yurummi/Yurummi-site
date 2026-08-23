@@ -57,6 +57,13 @@ const NEWS_ISSUES = [
                         <div class="np-quote quote-slide" style="grid-area: 1 / 1; opacity: 0; pointer-events: none; transition: opacity 0.3s;">
                             «Соник дерётся со своим злейшим врагом, начинает проигрывать, но вдруг его накрывает волна воспоминаний о том что он сражается за то чтобы увидеть своих жён Юруми и Маку, которые вскоре должны родить ему детей. Тогда он собирает все силы в кулак и побеждает своего врага.»
                         </div>
+                        <div class="np-quote quote-slide" style="grid-area: 1 / 1; opacity: 0; pointer-events: none; transition: opacity 0.3s;">
+                            «— Теилз я хочу отойти пописать<br>
+                            — Делай это при мне»
+                        </div>
+                        <div class="np-quote quote-slide" style="grid-area: 1 / 1; opacity: 0; pointer-events: none; transition: opacity 0.3s;">
+                            «соник снял свой красный ботинок прямо перед желтохвостым п да rassom - зачем ты это делаешь соник - чаю?»
+                        </div>
                     </div>
                     
                     <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: -10px; margin-bottom: 25px; padding-right: 15px;">
