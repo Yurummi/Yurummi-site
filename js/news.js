@@ -1,27 +1,114 @@
 const NEWS_ISSUES = [
     {
+        issueNumber: 2,
+        date: "24 Августа 2026",
+        html: `
+            <!-- РЯД 1 -->
+            <div class="np-row">
+                <!-- Левая колонка со слайдером (60%) -->
+                <div class="np-col-60" style="align-self: flex-start;">
+                    <div class="np-slider">
+                        <picture class="np-slide active" id="news2-slide-0">
+                            <source srcset="img/news/news 24.08.2026 %231.webp" type="image/webp">
+                            <img src="img/news/news 24.08.2026 %231.jpg" alt="Мем 1">
+                        </picture>
+                        <picture class="np-slide" id="news2-slide-1">
+                            <source srcset="img/news/news 24.08.2026 %232.webp" type="image/webp">
+                            <img src="img/news/news 24.08.2026 %232.jpg" alt="Мем 2">
+                        </picture>
+                        
+                        <div class="np-slider-nav">
+                            <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
+                            <button class="np-slider-btn" onclick="changeNewsSlide(1)">&#10095;</button>
+                        </div>
+                        
+                        <div class="np-slider-dots">
+                            <div class="np-dot active" id="news2-dot-0" onclick="setNewsSlide(0)"></div>
+                            <div class="np-dot" id="news2-dot-1" onclick="setNewsSlide(1)"></div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">(Листайте вправо, чтобы увидеть больше)</p>
+                </div>
+                
+                <!-- Правая колонка с текстом (40%) -->
+                <div class="np-col-40">
+                    <h3 class="np-title">НЕЙРОСЛОП И МАРАФОН СОНИКА</h3>
+                    <p class="np-text"><span class="dropcap">В</span>о время недавних трансляций марафона Соника произошло нечто невероятное. Чат сорвался с цепи и начал массово генерировать нейросетевые мемы.</p>
+                    <p class="np-text">Шуток было так много, и они были настолько абсурдными, что наш дорогой стример буквально умирал со смеху в прямом эфире. Все дружно смеялись над бедным ежом, а эфир наполнился настоящим нейрослопом. Некоторые из лучших перлов вы можете увидеть на соседних кадрах.</p>
+                </div>
+            </div>
+
+            <!-- РЯД 2 -->
+            <div class="np-row" style="margin-top: 40px;">
+                <!-- Левая колонка с текстом (40%) -->
+                <div class="np-col-40">
+                    <h3 class="np-title">ВЫРЕЗАНО СО СТРИМА</h3>
+                    <p class="np-text"><span class="dropcap">К</span>стати о шутках... В ходе одного из стримов родилась настолько специфичная паста, что её пришлось вырезать из официальных записей. Но наша редакция раздобыла оригинал:</p>
+                    
+                    <div class="np-quote">
+                        «Соник взялся за свой огромный желатиновый стержень и начал неистово встряхивать его налево и направо, белая жидкость сочилась со всех щелей но он не останавливался и лишь с большим усилием сдавливал наконечник. И в момент когда пальцы его рук ощутили облегченение, пот и слезы полились по щекам бедного лисенка сидящего перед ним. Все было кончено.»
+                    </div>
+                    
+                    <p class="np-text" style="font-size: 13px; color: #666; margin-bottom: 40px;">Редакция газеты отказывается давать комментарии по поводу прочитанного.</p>
+
+                    <h3 class="np-title">РАБОТА: ИЩЕМ МОНТАЖЁРА</h3>
+                    <p class="np-text">Срочные новости из отдела кадров! Мы в поисках нового монтажёра, а возможно даже и нарезчика для канала.</p>
+                    <p class="np-text">Что случилось со старым, спросите вы? Ну... прошлый почему-то обиделся на нас и ушёл в закат. Хз когда вернётся и вернётся ли вообще.</p>
+                    <p class="np-text">Так что если ты умеешь резать видосы, не боишься желатиновых стержней и готов работать за респект — откликайся! Если никто не откликнется, то и ладно, сами как-нибудь склеим.</p>
+                </div>
+                
+                <!-- Правая колонка с картинкой 3 (60%) -->
+                <div class="np-col-60" style="align-self: flex-start;">
+                    <div class="np-image-box" style="height: auto; display: block;">
+                        <picture style="width: 100%; display: block;">
+                            <source srcset="img/news/news 24.08.2026 %233.webp" type="image/webp">
+                            <img src="img/news/news 24.08.2026 %233.png" alt="Мем 3" style="width: 100%; height: auto; display: block;">
+                        </picture>
+                    </div>
+                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">Архивные кадры со стрима</p>
+                </div>
+            </div>
+        `
+    },
+    {
         issueNumber: 1,
         date: "17 Августа 2026",
         tgPostId: "740",
-        content: `
-            <h4 class="news-article-title">ОБНОВЛЕНИЕ ЭМОУТОВ</h4>
-            <p><span class="dropcap">Н</span>а канале появились абсолютно новые эмоуты! Наша прекрасная художница Маку подготовила пак шикарных смайлов, которые вы уже можете использовать на стримах. Все они представлены на эксклюзивном превью ниже.</p>
-            
-            <div onclick="openLightbox(this)" role="button" tabindex="0" style="display: block; width: 100%; border: 2px solid #555; overflow: hidden; margin: 20px 0; cursor: pointer; transition: transform 0.2s;">
-                <picture>
-                    <source srcset="img/news/Маку смайлы.webp" type="image/webp">
-                    <img src="img/news/Маку смайлы.png" alt="Новые эмоуты от Маку" style="width: 100%; height: auto; display: block;">
-                </picture>
-                <div style="display: none;"><h3>Новые эмоуты</h3><p>Автор: @Maku_q</p></div>
+        html: `
+            <div style="display: flex; flex-wrap: wrap; gap: 30px;">
+                <div class="news-col-left">
+                    <h4 class="news-article-title">ОБНОВЛЕНИЕ ЭМОУТОВ</h4>
+                    <p><span class="dropcap">Н</span>а канале появились абсолютно новые эмоуты! Наша прекрасная художница Маку подготовила пак шикарных смайлов, которые вы уже можете использовать на стримах. Все они представлены на эксклюзивном превью ниже.</p>
+                    
+                    <div onclick="openLightbox(this)" role="button" tabindex="0" style="display: block; width: 100%; border: 2px solid #555; overflow: hidden; margin: 20px 0; cursor: pointer; transition: transform 0.2s;">
+                        <picture>
+                            <source srcset="img/news/Маку смайлы.webp" type="image/webp">
+                            <img src="img/news/Маку смайлы.png" alt="Новые эмоуты от Маку" style="width: 100%; height: auto; display: block;">
+                        </picture>
+                        <div style="display: none;"><h3>Новые эмоуты</h3><p>Автор: @Maku_q</p></div>
+                    </div>
+
+                    <h4 class="news-article-title" style="margin-top: 40px;">ИНЦИДЕНТ В 5 УТРА: ЮРУМИ ЗАСТИГНУТ ВРАСПЛОХ В СОБСТВЕННОЙ ПОСТЕЛИ</h4>
+                    <p><span class="dropcap">Э</span>то был обычный стримерский вечер, плавно переходящий в ночь. Но внезапно тишину разрезало зловещее жужжание. В мою комнату ворвался ОГРОМНЫЙ шершень. Я, как истинный герой, тактически отступил в коридор, чтобы надеть тяжёлую броню (накинуть кофту). Вооружившись мужеством, я выглянул в окно и увидел улетающего монстра. <em>«Победа!»</em> — подумал я и спокойно лёг спать.</p>
+                    <p>Но враг оказался коварен. Тот улетевший шершень был лишь приманкой — его другом! А основной диверсант всё это время сидел в засаде где-то в комнате. Ровно в 5 утра по германскому времени я проснулся от того самого жужжания прямо над ухом. К счастью, обошлось без жертв — я благополучно открыл окно и депортировал нелегала на улицу.</p>
+
+                    <h4 class="news-article-title" style="margin-top: 40px;">САЙТ СТАЛ ЕЩЁ ЛУЧШЕ</h4>
+                    <p><span class="dropcap">Е</span>сли вы читаете этот текст, значит вы уже оценили наше главное нововведение — полноценную систему новостей в стиле ретро-газеты! Теперь время от времени я смогу радовать вас свежими сводками и краткими пересказами важных историй.</p>
+                    <p>Кроме того, во вкладке <strong>Расписание</strong> рядом с календарём появился удобный чеклист марафона по Сонику, в котором я буду отмечать свой прогресс прохождения. А раздел <strong>Обо мне</strong> обзавёлся красивым блоком с особой благодарностью Маку. Оставайтесь на связи, впереди ещё много интересного!</p>
+                </div>
+                
+                <div class="news-col-right">
+                    <p style="color: #ff3385; font-size: 14px; margin-top: 0; margin-bottom: 15px; font-family: sans-serif; text-align: center;">
+                        ⚠️ Лента Telegram (может нужен VPN)
+                    </p>
+                    <div id="news-tg-container">
+                        <!-- Виджет загружается через JS -->
+                    </div>
+                    <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 10px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
+                        Читать все новости ➔
+                    </a>
+                </div>
             </div>
-
-            <h4 class="news-article-title" style="margin-top: 40px;">ИНЦИДЕНТ В 5 УТРА: ЮРУМИ ЗАСТИГНУТ ВРАСПЛОХ В СОБСТВЕННОЙ ПОСТЕЛИ</h4>
-            <p><span class="dropcap">Э</span>то был обычный стримерский вечер, плавно переходящий в ночь. Но внезапно тишину разрезало зловещее жужжание. В мою комнату ворвался ОГРОМНЫЙ шершень. Я, как истинный герой, тактически отступил в коридор, чтобы надеть тяжёлую броню (накинуть кофту). Вооружившись мужеством, я выглянул в окно и увидел улетающего монстра. <em>«Победа!»</em> — подумал я и спокойно лёг спать.</p>
-            <p>Но враг оказался коварен. Тот улетевший шершень был лишь приманкой — его другом! А основной диверсант всё это время сидел в засаде где-то в комнате. Ровно в 5 утра по германскому времени я проснулся от того самого жужжания прямо над ухом. К счастью, обошлось без жертв — я благополучно открыл окно и депортировал нелегала на улицу.</p>
-
-            <h4 class="news-article-title" style="margin-top: 40px;">САЙТ СТАЛ ЕЩЁ ЛУЧШЕ</h4>
-            <p><span class="dropcap">Е</span>сли вы читаете этот текст, значит вы уже оценили наше главное нововведение — полноценную систему новостей в стиле ретро-газеты! Теперь время от времени я смогу радовать вас свежими сводками и краткими пересказами важных историй.</p>
-            <p>Кроме того, во вкладке <strong>Расписание</strong> рядом с календарём появился удобный чеклист марафона по Сонику, в котором я буду отмечать свой прогресс прохождения. А раздел <strong>Обо мне</strong> обзавёлся красивым блоком с особой благодарностью Маку. Оставайтесь на связи, впереди ещё много интересного!</p>
         `
     }
 ];
@@ -35,24 +122,23 @@ function renderNewsIssue(index) {
     const issue = NEWS_ISSUES[index];
     
     // Update header
-    document.getElementById('news-issue-number').innerText = `Еженедельный вестник картонного мира • Выпуск №${issue.issueNumber} • ${issue.date}`;
+    document.getElementById('news-issue-number').innerText = \`Еженедельный вестник картонного мира • Выпуск №\${issue.issueNumber} • \${issue.date}\`;
     
-    // Update left column content
-    document.getElementById('news-content-area').innerHTML = issue.content;
+    // Update body content
+    document.getElementById('news-body').innerHTML = issue.html;
     
-    // Update Telegram Widget
+    // Update Telegram Widget (if the issue has it)
     const tgContainer = document.getElementById('news-tg-container');
-    tgContainer.innerHTML = ''; // Clear previous widget
-    
-    // Telegram widget requires creating a fresh script tag
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = "https://telegram.org/js/telegram-widget.js?22";
-    script.setAttribute('data-telegram-post', `yurummiyt/${issue.tgPostId}`);
-    script.setAttribute('data-width', '100%');
-    script.setAttribute('data-dark', '1');
-    
-    tgContainer.appendChild(script);
+    if (tgContainer && issue.tgPostId) {
+        tgContainer.innerHTML = ''; 
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = "https://telegram.org/js/telegram-widget.js?22";
+        script.setAttribute('data-telegram-post', \`yurummiyt/\${issue.tgPostId}\`);
+        script.setAttribute('data-width', '100%');
+        script.setAttribute('data-dark', '1');
+        tgContainer.appendChild(script);
+    }
     
     // Update pagination buttons state
     document.getElementById('news-btn-prev').style.visibility = (index < NEWS_ISSUES.length - 1) ? 'visible' : 'hidden'; // index + 1 is older
@@ -60,14 +146,37 @@ function renderNewsIssue(index) {
 }
 
 function changeNewsIssue(step) {
-    // step = -1 means previous (older) issue -> which is +1 in the array index (0 is newest)
-    // step = 1 means next (newer) issue -> which is -1 in the array index
     const newIndex = currentIssueIndex - step; 
     renderNewsIssue(newIndex);
 }
 
+// Slider logic for Issue 2
+let currentNewsSlideIndex = 0;
+function setNewsSlide(index) {
+    const slides = document.querySelectorAll('.np-slide');
+    const dots = document.querySelectorAll('.np-dot');
+    if (slides.length === 0) return;
+    
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    
+    if (slides[index]) slides[index].classList.add('active');
+    if (dots[index]) dots[index].classList.add('active');
+    currentNewsSlideIndex = index;
+}
+
+function changeNewsSlide(direction) {
+    const slides = document.querySelectorAll('.np-slide');
+    if (slides.length === 0) return;
+    
+    let newIndex = currentNewsSlideIndex + direction;
+    if (newIndex >= slides.length) newIndex = 0;
+    if (newIndex < 0) newIndex = slides.length - 1;
+    setNewsSlide(newIndex);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('news-content-area')) {
+    if (document.getElementById('news-body')) {
         renderNewsIssue(0); // 0 is always the latest issue
     }
 });

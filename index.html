@@ -173,6 +173,109 @@
                     max-width: 100%;
                 }
             }
+            
+            /* Новые стили для 2-го макета */
+            .np-row {
+                display: flex;
+                gap: 30px;
+                margin-bottom: 30px;
+                flex-wrap: wrap;
+            }
+            .np-col-60 { flex: 6; min-width: 300px; }
+            .np-col-40 { flex: 4; min-width: 250px; }
+            
+            .np-quote {
+                font-style: italic;
+                padding: 10px 15px;
+                border-left: 4px solid #ff3385;
+                margin: 15px 0;
+                font-size: 15px;
+                color: #333;
+                background: rgba(0,0,0,0.03);
+            }
+            
+            .np-slider {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                border: 1px solid #999;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #e8e4d9;
+            }
+            .np-slide {
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                opacity: 0;
+                transition: opacity 0.3s;
+                pointer-events: none;
+            }
+            .np-slide img {
+                width: 100%; height: 100%;
+                object-fit: contain;
+                display: block;
+            }
+            .np-slide.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .np-slider-nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding: 0 10px;
+                box-sizing: border-box;
+                pointer-events: none;
+            }
+            .np-slider-btn {
+                pointer-events: auto;
+                background: rgba(0,0,0,0.4);
+                color: white;
+                border: none;
+                width: 40px; height: 40px;
+                border-radius: 50%;
+                font-size: 20px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.2s;
+            }
+            .np-slider-btn:hover { background: rgba(0,0,0,0.8); }
+            .np-slider-dots {
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 8px;
+                background: rgba(255,255,255,0.7);
+                padding: 5px 10px;
+                border-radius: 20px;
+            }
+            .np-dot {
+                width: 10px; height: 10px;
+                border-radius: 50%;
+                background: #333;
+                cursor: pointer;
+                opacity: 0.3;
+            }
+            .np-dot.active { opacity: 1; }
+            .np-image-box {
+                width: 100%; height: 100%;
+                border: 1px solid #999;
+                display: flex;
+            }
+            .np-image-box img {
+                width: 100%; height: 100%;
+                object-fit: contain;
+            }
         </style>
         <div class="content-container">
             <h2 class="section-title">Новости</h2>
@@ -187,21 +290,8 @@
                     </div>
                 </div>
 
-                <div class="news-col-left" id="news-content-area">
-                    <!-- Контент загружается через JS -->
+                <div id="news-body">
                     <p style="text-align: center;">Загрузка свежих новостей...</p>
-                </div>
-
-                <div class="news-col-right">
-                    <p style="color: #ff3385; font-size: 14px; margin-top: 0; margin-bottom: 15px; font-family: sans-serif; text-align: center;">
-                        ⚠️ Лента Telegram (может нужен VPN)
-                    </p>
-                    <div id="news-tg-container">
-                        <!-- Виджет загружается через JS -->
-                    </div>
-                    <a href="https://t.me/yurummiyt" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 10px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
-                        Читать все новости ➔
-                    </a>
                 </div>
             </div>
         </div>
