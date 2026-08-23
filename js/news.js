@@ -122,7 +122,7 @@ function renderNewsIssue(index) {
     const issue = NEWS_ISSUES[index];
     
     // Update header
-    document.getElementById('news-issue-number').innerText = \`Еженедельный вестник картонного мира • Выпуск №\${issue.issueNumber} • \${issue.date}\`;
+    document.getElementById('news-issue-number').innerText = `Еженедельный вестник картонного мира • Выпуск №${issue.issueNumber} • ${issue.date}`;
     
     // Update body content
     document.getElementById('news-body').innerHTML = issue.html;
@@ -134,7 +134,7 @@ function renderNewsIssue(index) {
         const script = document.createElement('script');
         script.async = true;
         script.src = "https://telegram.org/js/telegram-widget.js?22";
-        script.setAttribute('data-telegram-post', \`yurummiyt/\${issue.tgPostId}\`);
+        script.setAttribute('data-telegram-post', `yurummiyt/${issue.tgPostId}`);
         script.setAttribute('data-width', '100%');
         script.setAttribute('data-dark', '1');
         tgContainer.appendChild(script);
