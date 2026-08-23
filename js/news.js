@@ -33,7 +33,7 @@ const NEWS_ISSUES = [
                 <!-- Правая колонка с текстом (40%) -->
                 <div class="np-col-40">
                     <h3 class="np-title">НЕЙРОСЛОП И МАРАФОН СОНИКА</h3>
-                    <p class="np-text"><span class="dropcap">В</span>о время недавних трансляций марафона Соника произошло нечто невероятное. Чат сорвался с цепи и начал массово генерировать нейросетевые мемы.</p>
+                    <p class="np-text"><span class="dropcap">Н</span>едавние трансляции марафона Соника обернулись чем-то невероятным. Чат сорвался с цепи и начал массово генерировать нейросетевые мемы.</p>
                     <p class="np-text">Шуток было так много, и они были настолько абсурдными, что наш дорогой стример буквально умирал со смеху в прямом эфире. Все дружно смеялись над бедным ежом, а эфир наполнился настоящим нейрослопом. Некоторые из лучших перлов вы можете увидеть на соседних кадрах.</p>
                 </div>
             </div>
@@ -53,8 +53,8 @@ const NEWS_ISSUES = [
 
                     <h3 class="np-title">РАБОТА: ИЩЕМ МОНТАЖЁРА</h3>
                     <p class="np-text">Срочные новости из отдела кадров! Мы в поисках нового монтажёра, а возможно даже и нарезчика для канала.</p>
-                    <p class="np-text">Что случилось со старым, спросите вы? Ну... прошлый почему-то обиделся на нас и ушёл в закат. Хз когда вернётся и вернётся ли вообще.</p>
-                    <p class="np-text">Так что если ты умеешь резать видосы, не боишься желатиновых стержней и готов работать за респект — откликайся! Если никто не откликнется, то и ладно, сами как-нибудь склеим.</p>
+                    <p class="np-text">Что случилось со старым, спросите вы? Ну... прошлый почему-то обиделся на нас и ушёл. Хз когда вернётся и вернётся ли вообще.</p>
+                    <p class="np-text">Так что если ты умеешь резать видосы, не боишься желатиновых стержней и готов работать за респект — откликайся! Если никто не откликнется, то и ладно, сами как-нибудь склеим. (Это замедлит выход нового контента, потому что придётся делать всё самому)</p>
                 </div>
                 
                 <!-- Правая колонка с картинкой 3 (60%) -->
@@ -143,6 +143,11 @@ function renderNewsIssue(index) {
     // Update pagination buttons state (keep them permanently visible)
     document.getElementById('news-btn-prev').disabled = (index >= NEWS_ISSUES.length - 1);
     document.getElementById('news-btn-next').disabled = (index <= 0);
+    
+    // Reset timer
+    if (typeof startNewsSliderTimer === 'function') {
+        startNewsSliderTimer();
+    }
 }
 
 function changeNewsIssue(step) {
@@ -152,6 +157,17 @@ function changeNewsIssue(step) {
 
 // Slider logic for Issue 2
 let currentNewsSlideIndex = 0;
+let newsSliderInterval;
+
+function startNewsSliderTimer() {
+    if (newsSliderInterval) clearInterval(newsSliderInterval);
+    newsSliderInterval = setInterval(() => {
+        if (document.querySelectorAll('.np-slide').length > 0) {
+            changeNewsSlide(1);
+        }
+    }, 15000);
+}
+
 function setNewsSlide(index) {
     const slides = document.querySelectorAll('.np-slide');
     const dots = document.querySelectorAll('.np-dot');
@@ -163,6 +179,7 @@ function setNewsSlide(index) {
     if (slides[index]) slides[index].classList.add('active');
     if (dots[index]) dots[index].classList.add('active');
     currentNewsSlideIndex = index;
+    startNewsSliderTimer(); // reset timer on manual change
 }
 
 function changeNewsSlide(direction) {
@@ -178,5 +195,6 @@ function changeNewsSlide(direction) {
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('news-body')) {
         renderNewsIssue(0); // 0 is always the latest issue
+        startNewsSliderTimer();
     }
 });
