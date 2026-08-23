@@ -8,11 +8,11 @@ const NEWS_ISSUES = [
                 <!-- Левая колонка со слайдером (60%) -->
                 <div class="np-col-60" style="align-self: flex-start;">
                     <div class="np-slider">
-                        <picture class="np-slide active" id="news2-slide-0">
+                        <picture class="np-slide active" id="news2-slide-0" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
                             <source srcset="img/news/news 24.08.2026 %231.webp" type="image/webp">
                             <img src="img/news/news 24.08.2026 %231.jpg" alt="Мем 1">
                         </picture>
-                        <picture class="np-slide" id="news2-slide-1">
+                        <picture class="np-slide" id="news2-slide-1" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
                             <source srcset="img/news/news 24.08.2026 %232.webp" type="image/webp">
                             <img src="img/news/news 24.08.2026 %232.jpg" alt="Мем 2">
                         </picture>
@@ -27,7 +27,7 @@ const NEWS_ISSUES = [
                             <div class="np-dot" id="news2-dot-1" onclick="setNewsSlide(1)"></div>
                         </div>
                     </div>
-                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">(Листайте вправо, чтобы увидеть больше)</p>
+                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">(Нажмите на картинку, чтобы увеличить. Листайте вправо, чтобы увидеть больше)</p>
                 </div>
                 
                 <!-- Правая колонка с текстом (40%) -->
@@ -59,13 +59,13 @@ const NEWS_ISSUES = [
                 
                 <!-- Правая колонка с картинкой 3 (60%) -->
                 <div class="np-col-60" style="align-self: flex-start;">
-                    <div class="np-image-box" style="height: auto; display: block;">
+                    <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
                         <picture style="width: 100%; display: block;">
                             <source srcset="img/news/news 24.08.2026 %233.webp" type="image/webp">
-                            <img src="img/news/news 24.08.2026 %233.png" alt="Мем 3" style="width: 100%; height: auto; display: block;">
+                            <img src="img/news/news 24.08.2026 %233.png" alt="Мем 3">
                         </picture>
                     </div>
-                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">Архивные кадры со стрима</p>
+                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">Блядь где я? - Юрумми замечен в городе.</p>
                 </div>
             </div>
         `
