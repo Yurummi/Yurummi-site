@@ -140,9 +140,9 @@ function renderNewsIssue(index) {
         tgContainer.appendChild(script);
     }
     
-    // Update pagination buttons state
-    document.getElementById('news-btn-prev').style.visibility = (index < NEWS_ISSUES.length - 1) ? 'visible' : 'hidden'; // index + 1 is older
-    document.getElementById('news-btn-next').style.visibility = (index > 0) ? 'visible' : 'hidden'; // index - 1 is newer
+    // Update pagination buttons state (keep them permanently visible)
+    document.getElementById('news-btn-prev').disabled = (index >= NEWS_ISSUES.length - 1);
+    document.getElementById('news-btn-next').disabled = (index <= 0);
 }
 
 function changeNewsIssue(step) {
