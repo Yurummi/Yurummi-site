@@ -39,7 +39,9 @@ const SONIC_GAME_STATES = {
     "sonic-2-1992": "completed",
     "sonic-cd-1993": "completed",
     "sonic-3-knuckles": "completed",
-    "sonic-4-ep1": "completed"
+    "sonic-4-ep1": "completed",
+    "sonic-4-ep2": "completed",
+    "sonic-adv-1": "playing"
 };
 
 const totalGames = SONIC_GAMES.filter(g => !g.isCategory).length;
