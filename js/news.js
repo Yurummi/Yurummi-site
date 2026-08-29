@@ -44,27 +44,27 @@ const NEWS_ISSUES = [
                     <div class="np-row" style="margin: 0;">
                         <!-- Слайдер бейджей -->
                         <div style="flex: 1; min-width: 200px;">
-                            <div class="np-slider">
-                                <div class="np-slide active" id="news3-slide-0" style="text-align: center;">
-                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: block;">
+                            <div class="np-slider" style="aspect-ratio: 1/1;">
+                                <div class="np-slide active" id="news3-slide-0">
+                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; padding-bottom: 40px; box-sizing: border-box;">
                                         <source srcset="img/news/news_29_08_2026_badge1.webp" type="image/webp">
-                                        <img src="img/news/news_29_08_2026_badge1.webp" alt="Бейдж Обычного Соника" style="width: 100%; max-width: 150px; margin: 0 auto;">
+                                        <img src="img/news/news_29_08_2026_badge1.webp" alt="Бейдж Обычного Соника" style="width: auto; height: 100%; max-width: 80%; object-fit: contain;">
                                     </picture>
-                                    <p style="font-size: 13px; color: #fff; margin-top: 10px; font-weight: bold;">Бейдж Соника: 12 часов просмотра</p>
+                                    <div style="position: absolute; bottom: 35px; left: 0; width: 100%; text-align: center; font-size: 13px; color: #333; font-weight: bold;">Бейдж Соника: 12 часов просмотра</div>
                                 </div>
-                                <div class="np-slide" id="news3-slide-1" style="text-align: center;">
-                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: block;">
+                                <div class="np-slide" id="news3-slide-1">
+                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; padding-bottom: 40px; box-sizing: border-box;">
                                         <source srcset="img/news/news_29_08_2026_badge2.webp" type="image/webp">
-                                        <img src="img/news/news_29_08_2026_badge2.webp" alt="Бейдж Супер Соника" style="width: 100%; max-width: 150px; margin: 0 auto;">
+                                        <img src="img/news/news_29_08_2026_badge2.webp" alt="Бейдж Супер Соника" style="width: auto; height: 100%; max-width: 80%; object-fit: contain;">
                                     </picture>
-                                    <p style="font-size: 13px; color: #ffeb3b; margin-top: 10px; font-weight: bold;">Супер Соник: 2 подарочные сабки</p>
+                                    <div style="position: absolute; bottom: 35px; left: 0; width: 100%; text-align: center; font-size: 13px; color: #333; font-weight: bold;">Супер Соник: 2 подарочные сабки</div>
                                 </div>
-                                <div class="np-slide" id="news3-slide-2" style="text-align: center;">
-                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: block;">
+                                <div class="np-slide" id="news3-slide-2">
+                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; padding-bottom: 40px; box-sizing: border-box;">
                                         <source srcset="img/news/news_29_08_2026_badge3.webp" type="image/webp">
-                                        <img src="img/news/news_29_08_2026_badge3.webp" alt="Бейдж Шэдоу" style="width: 100%; max-width: 150px; margin: 0 auto;">
+                                        <img src="img/news/news_29_08_2026_badge3.webp" alt="Бейдж Шэдоу" style="width: auto; height: 100%; max-width: 80%; object-fit: contain;">
                                     </picture>
-                                    <p style="font-size: 13px; color: #ff3385; margin-top: 10px; font-weight: bold;">Шэдоу: Топ-5 дарителям</p>
+                                    <div style="position: absolute; bottom: 35px; left: 0; width: 100%; text-align: center; font-size: 13px; color: #333; font-weight: bold;">Шэдоу: Топ-5 дарителям</div>
                                 </div>
                                 
                                 <div class="np-slider-nav">
