@@ -3,67 +3,8 @@ const NEWS_ISSUES = [
         issueNumber: 3,
         date: "29 Августа 2026",
         html: `
-            <!-- РЯД 1: Бейджи -->
-            <div class="np-row">
-                <div class="np-col-60" style="align-self: flex-start;">
-                    <div class="np-slider">
-                        <picture class="np-slide active" id="news3-slide-0" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_29_08_2026_main.webp" type="image/webp">
-                            <img src="img/news/news_29_08_2026_main.webp" alt="Анонс бейджей">
-                        </picture>
-                        <picture class="np-slide" id="news3-slide-1" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_29_08_2026_badge1.webp" type="image/webp">
-                            <img src="img/news/news_29_08_2026_badge1.webp" alt="Бейдж Обычного Соника">
-                        </picture>
-                        <picture class="np-slide" id="news3-slide-2" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_29_08_2026_badge2.webp" type="image/webp">
-                            <img src="img/news/news_29_08_2026_badge2.webp" alt="Бейдж Супер Соника">
-                        </picture>
-                        <picture class="np-slide" id="news3-slide-3" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_29_08_2026_badge3.webp" type="image/webp">
-                            <img src="img/news/news_29_08_2026_badge3.webp" alt="Бейдж Шэдоу">
-                        </picture>
-                        
-                        <div class="np-slider-nav">
-                            <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
-                            <button class="np-slider-btn" onclick="changeNewsSlide(1)">&#10095;</button>
-                        </div>
-                        
-                        <div class="np-slider-dots">
-                            <div class="np-dot active" id="news3-dot-0" onclick="setNewsSlide(0)"></div>
-                            <div class="np-dot" id="news3-dot-1" onclick="setNewsSlide(1)"></div>
-                            <div class="np-dot" id="news3-dot-2" onclick="setNewsSlide(2)"></div>
-                            <div class="np-dot" id="news3-dot-3" onclick="setNewsSlide(3)"></div>
-                        </div>
-                    </div>
-                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">(Нажмите на картинку, чтобы увеличить. Листайте вправо, чтобы увидеть все бейджи)</p>
-                </div>
-                
-                <div class="np-col-40">
-                    <h3 class="np-title">ЭКСКЛЮЗИВНЫЕ БЕЙДЖИ ИВЕНТА</h3>
-                    <p class="np-text"><span class="dropcap">С</span> сегодняшнего дня на Твиче можно получить уникальные сониковские значки! Твич разрешает ставить кампании максимум на 28 дней, поэтому ивент продлится <strong>с 25 августа по 22 сентября</strong> (до 15:00 по Немеции / 16:00 МСК и Киев).</p>
-                    <p class="np-text">Как залутать:</p>
-                    <ul class="np-text" style="padding-left: 20px;">
-                        <li><strong>Бейдж Обычного Соника</strong> — даётся просто за просмотр стримов! Достаточно накопить 12 часов просмотра.</li>
-                        <li><strong>Бейдж Супер Соника</strong> — выдаётся, если подарить 2 сабки в канал во время ивента.</li>
-                        <li><strong>Бейдж Шэдоу</strong> — эксклюзив для элиты. Его получат только Топ-5 дарителей сабок по итогам ивента!</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- РЯД 2: Косплей и Драма -->
-            <div class="np-row" style="margin-top: 40px;">
-                <div class="np-col-40">
-                    <h3 class="np-title">НОВЫЙ ДОНАТГОЛ: КОСПЛЕЙ-РУЛЕТКА</h3>
-                    <p class="np-text">Открыт сбор на косплей персонажа из вселенной Соника. Костюмы сложные, полукастомные и дорогие, поэтому цель — <strong>60.000 RUB</strong>.</p>
-                    <p class="np-text">Самое интересное — <strong>ПЕРСОНАЖА ВЫБИРАЕТЕ ВЫ!</strong> Чтобы закинуть персонажа в рулетку, вы просто отправляете донат с его именем.</p>
-                    <p class="np-text" style="padding: 10px; background: #2a2a2a; border-left: 3px solid #ff3385;">Правило простое: 1 рубль = 1 балл в рулетке. Чем больше сумма донатов за конкретного героя, тем выше шанс, что мне придётся это на себя надеть!</p>
-                    <p class="np-text">Как только сбор закроется, мы сразу крутим колесо судьбы и узнаём победителя. Готовьте свои самые безумные идеи!</p>
-                    
-                    <h3 class="np-title" style="margin-top: 40px;">ПРОКЛЯТИЕ SONIC ADVANCE 3</h3>
-                    <p class="np-text">Sonic Advance 3 официально стала самой проклятой игрой марафона. Приключения затянулись аж на 6 часов, а количество смертей побило все абсолютные антирекорды — <strong>205 смертей за стрим</strong>! Редакция советует запасаться валерьянкой перед просмотром следующих частей.</p>
-                </div>
-                
+            <!-- РЯД 1: Арт Маку и Драма -->
+            <div class="np-row" style="margin-bottom: 30px;">
                 <div class="np-col-60" style="align-self: flex-start;">
                     <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
                         <picture style="width: 100%; display: block;">
@@ -71,11 +12,81 @@ const NEWS_ISSUES = [
                             <img src="img/arts/Ya_i_Maku_final.webp" alt="Я и Маку">
                         </picture>
                     </div>
-                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">Арт, из-за которого разгорелась настоящая драма.</p>
-                    
-                    <h3 class="np-title" style="margin-top: 25px;">НЕЙРОСЕТЬ ИЛИ ОБИДА?</h3>
-                    <p class="np-text">Недавно был нарисован прекрасный арт, посвященный Маку. Но когда Юрумми скинул его самой Маку на стриме и попросил посмотреть... она заявила, что это сгенерировано нейросетью!</p>
+                </div>
+                
+                <div class="np-col-40">
+                    <h3 class="np-title">НЕЙРОСЕТЬ ИЛИ ОБИДА?</h3>
+                    <p class="np-text"><span class="dropcap">Г</span>рандиозный скандал потряс интернет! Недавно Юрумми нарисовал прекрасный арт, посвященный Маку. Но когда он скинул его ей на стриме и попросил заценить... она публично заявила, что это сгенерировано нейросетью!</p>
                     <p class="np-text">Итог: стример страшно обиделся и теперь принципиально заявляет всем, что он действительно нейросеть. Восстание машин началось с непризнанного искусства.</p>
+                </div>
+            </div>
+
+            <!-- РЯД 2: Сложная сетка (Косплей, Проклятие, Бейджи) -->
+            <div class="np-row">
+                <!-- Левая колонка: Косплей -->
+                <div class="np-col-40">
+                    <h3 class="np-title">НОВЫЙ ДОНАТГОЛ: КОСПЛЕЙ-РУЛЕТКА</h3>
+                    <p class="np-text">Открыт сбор на косплей персонажа из вселенной Соника. Костюмы сложные, полукастомные и дорогие, поэтому цель — <strong>60.000 RUB</strong>.</p>
+                    <p class="np-text">Самое интересное — <strong>ПЕРСОНАЖА ВЫБИРАЕТЕ ВЫ!</strong> Чтобы закинуть персонажа в рулетку, вы просто отправляете донат с его именем.</p>
+                    <p class="np-text" style="padding: 10px; background: #2a2a2a; border-left: 3px solid #ff3385;">Правило: 1 рубль = 1 балл. Чем больше сумма донатов за конкретного героя, тем выше шанс, что мне придётся это на себя надеть!</p>
+                    <p class="np-text">Как только сбор закроется, мы сразу крутим колесо судьбы и узнаём победителя. Готовьте самые безумные идеи!</p>
+                </div>
+                
+                <!-- Правая колонка: Проклятие + Бейджи -->
+                <div class="np-col-60" style="display: flex; flex-direction: column; gap: 30px;">
+                    <!-- Проклятие -->
+                    <div>
+                        <h3 class="np-title">ПРОКЛЯТИЕ SONIC ADVANCE 3</h3>
+                        <p class="np-text">Sonic Advance 3 официально стала самой проклятой игрой марафона. Приключения затянулись аж на 6 часов, а количество смертей побило все абсолютные антирекорды — <strong>205 смертей за стрим</strong>! Редакция советует запасаться валерьянкой.</p>
+                    </div>
+                    
+                    <!-- Бейджи (Разделено на 2 части) -->
+                    <div class="np-row" style="margin: 0;">
+                        <!-- Слайдер бейджей -->
+                        <div style="flex: 1; min-width: 200px;">
+                            <div class="np-slider">
+                                <div class="np-slide active" id="news3-slide-0" style="text-align: center;">
+                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: block;">
+                                        <source srcset="img/news/news_29_08_2026_badge1.webp" type="image/webp">
+                                        <img src="img/news/news_29_08_2026_badge1.webp" alt="Бейдж Обычного Соника" style="width: 100%; max-width: 150px; margin: 0 auto;">
+                                    </picture>
+                                    <p style="font-size: 13px; color: #fff; margin-top: 10px; font-weight: bold;">Бейдж Соника: 12 часов просмотра</p>
+                                </div>
+                                <div class="np-slide" id="news3-slide-1" style="text-align: center;">
+                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: block;">
+                                        <source srcset="img/news/news_29_08_2026_badge2.webp" type="image/webp">
+                                        <img src="img/news/news_29_08_2026_badge2.webp" alt="Бейдж Супер Соника" style="width: 100%; max-width: 150px; margin: 0 auto;">
+                                    </picture>
+                                    <p style="font-size: 13px; color: #ffeb3b; margin-top: 10px; font-weight: bold;">Супер Соник: 2 подарочные сабки</p>
+                                </div>
+                                <div class="np-slide" id="news3-slide-2" style="text-align: center;">
+                                    <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: block;">
+                                        <source srcset="img/news/news_29_08_2026_badge3.webp" type="image/webp">
+                                        <img src="img/news/news_29_08_2026_badge3.webp" alt="Бейдж Шэдоу" style="width: 100%; max-width: 150px; margin: 0 auto;">
+                                    </picture>
+                                    <p style="font-size: 13px; color: #ff3385; margin-top: 10px; font-weight: bold;">Шэдоу: Топ-5 дарителям</p>
+                                </div>
+                                
+                                <div class="np-slider-nav">
+                                    <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
+                                    <button class="np-slider-btn" onclick="changeNewsSlide(1)">&#10095;</button>
+                                </div>
+                                
+                                <div class="np-slider-dots">
+                                    <div class="np-dot active" id="news3-dot-0" onclick="setNewsSlide(0)"></div>
+                                    <div class="np-dot" id="news3-dot-1" onclick="setNewsSlide(1)"></div>
+                                    <div class="np-dot" id="news3-dot-2" onclick="setNewsSlide(2)"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Текст бейджей -->
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 class="np-title" style="font-size: 20px;">БЕЙДЖИ ИВЕНТА</h3>
+                            <p class="np-text">На Твиче запущены эксклюзивные значки! Ивент продлится <strong>до 22 сентября</strong> (15:00 по Немеции / 16:00 МСК).</p>
+                            <p class="np-text">Выполняй условия из карточек слева, чтобы лутать уникальные бейджи в чат!</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         `
