@@ -23,16 +23,10 @@ const NEWS_ISSUES = [
                 </div>
             </div>
 
-            <!-- РЯД 2: Бейджи -->
-            <div class="np-row" style="margin-bottom: 30px;">
-                <div class="np-col-60">
-                    <h3 class="np-title">БЕЙДЖИ ИВЕНТА</h3>
-                    <p class="np-text">На Твиче запущены эксклюзивные значки! Ивент продлится <strong>до 22 сентября</strong> (15:00 по Немеции / 16:00 МСК).</p>
-                    <p class="np-text">Выполняй условия из карточек справа, чтобы лутать уникальные бейджи в чат!</p>
-                </div>
-                
-                <div class="np-col-40">
-                    <!-- Слайдер бейджей -->
+            <!-- РЯД 2: Бейджи и Проклятие (Обтекание) -->
+            <div style="margin-bottom: 30px;">
+                <!-- Слайдер бейджей (Floated right) -->
+                <div style="float: right; width: 40%; min-width: 250px; margin-left: 20px; margin-bottom: 20px;">
                     <div class="np-slider" style="aspect-ratio: 1/1;">
                         <div class="np-slide active" id="news3-slide-0">
                             <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; padding-bottom: 40px; box-sizing: border-box;">
@@ -68,16 +62,18 @@ const NEWS_ISSUES = [
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- РЯД 3: Проклятие (на всю ширину) -->
-            <div class="np-row" style="margin-bottom: 30px;">
-                <div style="flex: 1; min-width: 100%;">
-                    <h3 class="np-title">ПРОКЛЯТИЕ SONIC ADVANCE 3</h3>
-                    <p class="np-text">Sonic Advance 3 официально стала самой проклятой игрой марафона. Приключения затянулись аж на 6 часов, а количество смертей побило все абсолютные антирекорды — <strong>205 смертей за стрим</strong>! Стример был совершенно убитый и отчаянно, из последних сил, допроходил финальные часы игры.</p>
-                    <p class="np-text">А что же будет дальше?.. Страшно даже представить, какие цифры мы увидим в следующих частях.</p>
-                    <p class="np-text" style="padding: 10px; background: #2a2a2a; border-left: 3px solid #ff3385;">И напоследок: марафонская неделя закончилась с устрашающим общим счётчиком в <strong>722 смерти</strong>. Редакция настоятельно советует запасаться валерьянкой.</p>
-                </div>
+                
+                <!-- Текст -->
+                <h3 class="np-title">БЕЙДЖИ ИВЕНТА</h3>
+                <p class="np-text">На Твиче запущены эксклюзивные значки! Ивент продлится <strong>до 22 сентября</strong> (15:00 по Немеции / 16:00 МСК).</p>
+                <p class="np-text">Выполняй условия из карточек справа, чтобы лутать уникальные бейджи в чат!</p>
+                
+                <h3 class="np-title" style="margin-top: 30px;">ПРОКЛЯТИЕ SONIC ADVANCE 3</h3>
+                <p class="np-text">Sonic Advance 3 официально стала самой проклятой игрой марафона. Приключения затянулись аж на 6 часов, а количество смертей побило все абсолютные антирекорды — <strong>205 смертей за стрим</strong>! Стример был совершенно убитый и отчаянно, из последних сил, допроходил финальные часы игры.</p>
+                <p class="np-text">А что же будет дальше?.. Страшно даже представить, какие цифры мы увидим в следующих частях.</p>
+                <p class="np-text" style="padding: 10px; background: #2a2a2a; border-left: 3px solid #ff3385;">И напоследок: марафонская неделя закончилась с устрашающим общим счётчиком в <strong>722 смерти</strong>. Редакция настоятельно советует запасаться валерьянкой.</p>
+                
+                <div style="clear: both;"></div>
             </div>
 
             <!-- РЯД 3: Арт Маку и Драма -->
