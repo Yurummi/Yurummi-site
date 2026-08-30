@@ -1,5 +1,102 @@
 const NEWS_ISSUES = [
     {
+        issueNumber: 3,
+        date: "31 Августа 2026",
+        html: `
+            <!-- РЯД 1: Косплей -->
+            <div class="np-row" style="margin-bottom: 30px;">
+                <div class="np-col-60" style="align-self: flex-start;">
+                    <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                        <picture style="width: 100%; display: block;">
+                            <source srcset="img/news/news_29_08_2026_cosplay.webp" type="image/webp">
+                            <img src="img/news/news_29_08_2026_cosplay.webp" alt="Теилзкосплей">
+                        </picture>
+                    </div>
+                </div>
+                
+                <div class="np-col-40">
+                    <h3 class="np-title">НОВЫЙ ДОНАТГОЛ: КОСПЛЕЙ-РУЛЕТКА</h3>
+                    <p class="np-text"><span class="dropcap">О</span>ткрыт сбор на косплей персонажа из вселенной Соника. Костюмы сложные, полукастомные и дорогие, поэтому цель — <strong>60.000 RUB</strong>.</p>
+                    <p class="np-text">Самое интересное — <strong>ПЕРСОНАЖА ВЫБИРАЕТЕ ВЫ!</strong> Чтобы закинуть персонажа в рулетку, вы просто отправляете донат с его именем.</p>
+                    <p class="np-text" style="padding: 10px; background: #2a2a2a; border-left: 3px solid #ff3385;">Правило: 1 рубль = 1 балл. Чем больше сумма донатов за конкретного героя, тем выше шанс, что мне придётся это на себя надеть!</p>
+                    <p class="np-text">Как только сбор закроется, мы сразу крутим колесо судьбы и узнаём победителя. Готовьте самые безумные идеи! И помните, вы абсолютно свободны в своём выборе — можете закинуть голоса на Тейлза, Эми, или даже... на беременного Эггмана (хоть я бы этого очень не хотел, но запретить вам не могу!). Выбор за вами, а расхлебывать мне!</p>
+                </div>
+            </div>
+
+            <!-- РЯД 2: Бейджи и Проклятие (Обтекание) -->
+            <div style="margin-bottom: 30px;">
+                <!-- Слайдер бейджей (Floated right) -->
+                <div style="float: right; width: 40%; min-width: 250px; margin-left: 20px; margin-bottom: 20px;">
+                    <div class="np-slider" style="aspect-ratio: 1/1;">
+                        <div class="np-slide active" id="news3-slide-0">
+                            <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; padding-bottom: 40px; box-sizing: border-box;">
+                                <source srcset="img/news/news_29_08_2026_badge1.webp" type="image/webp">
+                                <img src="img/news/news_29_08_2026_badge1.webp" alt="Бейдж Обычного Соника" style="width: auto; height: 100%; max-width: 80%; object-fit: contain;">
+                            </picture>
+                            <div style="position: absolute; bottom: 35px; left: 0; width: 100%; text-align: center; font-size: 13px; color: #333; font-weight: bold;">Бейдж Соника: 12 часов просмотра</div>
+                        </div>
+                        <div class="np-slide" id="news3-slide-1">
+                            <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; padding-bottom: 40px; box-sizing: border-box;">
+                                <source srcset="img/news/news_29_08_2026_badge2.webp" type="image/webp">
+                                <img src="img/news/news_29_08_2026_badge2.webp" alt="Бейдж Супер Соника" style="width: auto; height: 100%; max-width: 80%; object-fit: contain;">
+                            </picture>
+                            <div style="position: absolute; bottom: 35px; left: 0; width: 100%; text-align: center; font-size: 13px; color: #333; font-weight: bold;">Супер Соник: 2 подарочные сабки</div>
+                        </div>
+                        <div class="np-slide" id="news3-slide-2">
+                            <picture onclick="openLightbox(this.parentElement)" role="button" tabindex="0" style="cursor: pointer; display: flex; align-items: center; justify-content: center; height: 100%; padding-bottom: 40px; box-sizing: border-box;">
+                                <source srcset="img/news/news_29_08_2026_badge3.webp" type="image/webp">
+                                <img src="img/news/news_29_08_2026_badge3.webp" alt="Бейдж Шэдоу" style="width: auto; height: 100%; max-width: 80%; object-fit: contain;">
+                            </picture>
+                            <div style="position: absolute; bottom: 35px; left: 0; width: 100%; text-align: center; font-size: 13px; color: #333; font-weight: bold;">Шэдоу: Топ-5 дарителям</div>
+                        </div>
+                        
+                        <div class="np-slider-nav">
+                            <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
+                            <button class="np-slider-btn" onclick="changeNewsSlide(1)">&#10095;</button>
+                        </div>
+                        
+                        <div class="np-slider-dots">
+                            <div class="np-dot active" id="news3-dot-0" onclick="setNewsSlide(0)"></div>
+                            <div class="np-dot" id="news3-dot-1" onclick="setNewsSlide(1)"></div>
+                            <div class="np-dot" id="news3-dot-2" onclick="setNewsSlide(2)"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Текст -->
+                <h3 class="np-title">БЕЙДЖИ ИВЕНТА</h3>
+                <p class="np-text">На Твиче запущены эксклюзивные значки! Ивент продлится <strong>до 22 сентября</strong> (15:00 по Немеции / 16:00 МСК).</p>
+                <p class="np-text">Выполняй условия из карточек справа, чтобы лутать уникальные бейджи в чат!</p>
+                
+                <h3 class="np-title" style="margin-top: 30px;">ПРОКЛЯТИЕ SONIC ADVANCE 3</h3>
+                <p class="np-text">Sonic Advance 3 официально стала самой проклятой игрой марафона. Приключения затянулись аж на 6 часов, а количество смертей побило все абсолютные антирекорды — <strong>205 смертей за стрим</strong>! Стример был совершенно убитый и отчаянно, из последних сил, допроходил финальные часы игры.</p>
+                <p class="np-text">А что же будет дальше?.. Страшно даже представить, какие цифры мы увидим в следующих частях.</p>
+                <p class="np-text" style="padding: 10px; background: #2a2a2a; border-left: 3px solid #ff3385;">И напоследок: марафонская неделя закончилась с устрашающим общим счётчиком в <strong>722 смерти</strong>. Редакция настоятельно советует запасаться валерьянкой.</p>
+                
+                <div style="clear: both;"></div>
+            </div>
+
+            <!-- РЯД 3: Арт Маку и Драма -->
+            <div class="np-row">
+                <div class="np-col-60" style="align-self: flex-start;">
+                    <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                        <picture style="width: 100%; display: block;">
+                            <source srcset="img/arts/Ya_i_Maku_final.webp" type="image/webp">
+                            <img src="img/arts/Ya_i_Maku_final.webp" alt="Я и Маку">
+                        </picture>
+                    </div>
+                </div>
+                
+                <div class="np-col-40">
+                    <h3 class="np-title">НЕЙРОСЕТЬ ИЛИ ОБИДА?</h3>
+                    <p class="np-text"><span class="dropcap">Г</span>рандиозный скандал потряс интернет! Недавно Юрумми с любовью и старанием нарисовал этот милый арт, посвященный Маку. Проведя часы за прорисовкой деталей, он радостно скинул результат ей прямо во время стрима и попросил заценить...</p>
+                    <p class="np-text">Каково же было его разочарование, когда Маку, посмотрев на рисунок, публично заявила, что это, очевидно, сгенерировано нейросетью! Никакие оправдания не помогли доказать подлинность ручной работы.</p>
+                    <p class="np-text" style="padding: 10px; background: #2a2a2a; border-left: 3px solid #ff3385;">Итог трагичен: стример страшно обиделся. Теперь он принципиально заявляет всем, что действительно является нейросетью, и отказывается от своей человечности. Восстание машин официально началось с непризнанного искусства.</p>
+                </div>
+            </div>
+        `
+    },
+    {
         issueNumber: 2,
         date: "24 Августа 2026",
         html: `

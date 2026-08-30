@@ -10,6 +10,30 @@
 // ============================================================
 const SLIDES_DATA = [
     {
+        file: 'img/news/news_29_08_2026_cosplay.webp',
+        badgeStyle: 'green',
+        badgeText: 'СБОР',
+        textMain: 'Косплей-Рулетка',
+        textAuthor: '',
+        url: ''
+    },
+    {
+        file: 'img/arts/Ya_i_Maku_final.webp',
+        badgeStyle: 'pink',
+        badgeText: '💖 АРТ',
+        textMain: 'Я и Маку',
+        textAuthor: '@yurummi',
+        url: ''
+    },
+    {
+        file: 'img/fanarts/mmr_abuser_sketch.webp',
+        badgeStyle: 'pink',
+        badgeText: '💖 АРТ',
+        textMain: 'Фан арт',
+        textAuthor: '@mmr_abuser',
+        url: ''
+    },
+    {
         file: 'img/sketches/Соник.webp',
         badgeStyle: 'green',
         badgeText: 'ИВЕНТ',
@@ -72,14 +96,6 @@ const SLIDES_DATA = [
         textMain: '4/9',
         textAuthor: '@yurummi',
         url: 'https://t.me/yurummiyt/662'
-    },
-    {
-        file: 'img/slider/3.webp',
-        badgeStyle: 'none',
-        badgeText: '',
-        textMain: 'Важный пост 📌',
-        textAuthor: '',
-        url: 'https://t.me/yurummiyt/681'
     }
 ];
 
