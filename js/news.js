@@ -3,7 +3,6 @@ const NEWS_ISSUES = [
         issueNumber: 3,
         date: "29 Августа 2026",
         html: `
-        html: `
             <!-- РЯД 1: Косплей -->
             <div class="np-row" style="margin-bottom: 30px;">
                 <div class="np-col-60" style="align-self: flex-start;">
