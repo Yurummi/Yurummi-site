@@ -145,7 +145,11 @@ const STREAMS_LIST = [
     { date: '2026-08-26', time: '15:00', text: 'Соник', isSonic: true, isCanceled: false },
     { date: '2026-08-28', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
     { date: '2026-08-29', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
-    { date: '2026-08-31', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-08-31', time: '15:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-09-01', time: '15:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-09-02', time: '15:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-09-04', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-09-05', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
 
     // Периодические события
     { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' }
