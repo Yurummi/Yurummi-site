@@ -44,7 +44,7 @@ const SONIC_GAME_STATES = {
     "sonic-adv-1": "completed",
     "sonic-adv-2": "completed",
     "sonic-adv-3": "completed",
-    "sonic-adv-dx": "playing"
+    "sonic-adv-dx": "completed"
 };
 
 const totalGames = SONIC_GAMES.filter(g => !g.isCategory).length;
