@@ -2,7 +2,6 @@ const NEWS_ISSUES = [
     {
         issueNumber: 4,
         date: "07 Сентября 2026",
-        publishDate: "2026-09-07T00:00:00+03:00",
         html: `
             <!-- Вступление -->
             <div style="margin-bottom: 30px;">
@@ -353,73 +352,31 @@ const NEWS_ISSUES = [
 
 let currentIssueIndex = 0;
 
-function getLatestPublishedIssueIndex() {
-    if (window.location.search.includes('preview=1')) {
-        return 0; // В режиме превью сразу открываем самый новый выпуск, игнорируя даты
-    }
-    
-    const now = new Date();
-    for (let i = 0; i < NEWS_ISSUES.length; i++) {
-        if (!NEWS_ISSUES[i].publishDate) return i;
-        const pubDate = new Date(NEWS_ISSUES[i].publishDate);
-        if (now >= pubDate) return i;
-    }
-    return NEWS_ISSUES.length - 1; // Fallback to oldest if all are future
-}
-
 function renderNewsIssue(index) {
     if (index < 0 || index >= NEWS_ISSUES.length) return;
     
     currentIssueIndex = index;
     const issue = NEWS_ISSUES[index];
     
-    // Check if it's scheduled for the future
-    let isFuture = false;
-    if (issue.publishDate) {
-        const pubDate = new Date(issue.publishDate);
-        if (new Date() < pubDate) {
-            isFuture = true;
-        }
-    }
-    
-    // Allow previewing future posts if ?preview=1 is in URL
-    if (window.location.search.includes('preview=1')) {
-        isFuture = false;
-    }
-    
     // Update header
     document.getElementById('news-issue-number').innerText = `Еженедельный вестник картонного мира • Выпуск №${issue.issueNumber} • ${issue.date}`;
     
     // Update body content
+    document.getElementById('news-body').innerHTML = issue.html;
+    
+    // Update Telegram Widget (if the issue has it)
     const tgContainer = document.getElementById('news-tg-container');
-    if (isFuture) {
-        document.getElementById('news-body').innerHTML = `
-            <div style="text-align: center; padding: 100px 20px;">
-                <h2 style="color: #ff3385; font-family: 'Times New Roman', serif;">ВЫПУСК ЕЩЁ НЕ ВЫШЕЛ</h2>
-                <p style="color: #ccc; font-family: 'Georgia', serif; font-size: 18px; margin-top: 20px;">
-                    Этот выпуск газеты всё ещё находится в печати.<br>
-                    Он будет доступен для чтения <strong>${issue.date}</strong>.
-                </p>
-                <div style="font-size: 40px; margin-top: 30px;">⏳</div>
-            </div>
-        `;
-        if (tgContainer) tgContainer.innerHTML = '';
-    } else {
-        document.getElementById('news-body').innerHTML = issue.html;
-        
-        // Update Telegram Widget (if the issue has it)
-        if (tgContainer && issue.tgPostId) {
-            tgContainer.innerHTML = ''; 
-            const script = document.createElement('script');
-            script.async = true;
-            script.src = "https://telegram.org/js/telegram-widget.js?22";
-            script.setAttribute('data-telegram-post', `yurummiyt/${issue.tgPostId}`);
-            script.setAttribute('data-width', '100%');
-            script.setAttribute('data-dark', '1');
-            tgContainer.appendChild(script);
-        } else if (tgContainer) {
-            tgContainer.innerHTML = ''; 
-        }
+    if (tgContainer && issue.tgPostId) {
+        tgContainer.innerHTML = ''; 
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = "https://telegram.org/js/telegram-widget.js?22";
+        script.setAttribute('data-telegram-post', `yurummiyt/${issue.tgPostId}`);
+        script.setAttribute('data-width', '100%');
+        script.setAttribute('data-dark', '1');
+        tgContainer.appendChild(script);
+    } else if (tgContainer) {
+        tgContainer.innerHTML = '';
     }
     
     // Update pagination buttons state (keep them permanently visible)
@@ -427,7 +384,7 @@ function renderNewsIssue(index) {
     document.getElementById('news-btn-next').disabled = (index <= 0);
     
     // Reset timer and quotes
-    if (typeof startNewsSliderTimer === 'function' && !isFuture) {
+    if (typeof startNewsSliderTimer === 'function') {
         startNewsSliderTimer();
     }
     if (typeof currentQuoteIndex !== 'undefined') {
@@ -498,6 +455,7 @@ function changeQuoteSlide(direction) {
 
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('news-body')) {
-        renderNewsIssue(getLatestPublishedIssueIndex());
+        renderNewsIssue(0); // 0 is always the latest issue
+        startNewsSliderTimer();
     }
 });
