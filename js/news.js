@@ -97,7 +97,7 @@ const NEWS_ISSUES = [
             <!-- РЯД 4: Пропавшие стримы -->
             <div class="np-row" style="margin-bottom: 30px; border-top: 1px dashed #444; padding-top: 30px;">
                 <div style="flex: 1;">
-                    <h3 class="np-title" style="text-align: center; color: #ff9966;">КУДА ПРОПАЛИ СТРИМЫ? 🤒</h3>
+                    <h3 class="np-title" style="text-align: center;">КУДА ПРОПАЛИ СТРИМЫ? 🤒</h3>
                     <p class="np-text" style="text-align: center; max-width: 800px; margin: 0 auto;">На прошлой неделе мы потеряли целых два стрима. Один эфир сорвался из-за технических проблем с ПК, а вот субботний — по вине предательского вируса. Стример официально заболел.</p>
                     <p class="np-text" style="text-align: center; max-width: 800px; margin: 15px auto 0;">По этой причине расписание на новую неделю пришлось немного сдвинуть: <strong>в понедельник (7 сентября) стрима не будет</strong>, чтобы дать организму время восстановиться. Встречаемся во <strong>вторник, среду, пятницу и субботу</strong>. Пейте чай, кушайте витамины и не болейте!</p>
                 </div>
