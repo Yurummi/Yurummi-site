@@ -1,5 +1,74 @@
 const NEWS_ISSUES = [
     {
+        issueNumber: 4,
+        date: "06 Сентября 2026",
+        html: `
+            <!-- РЯД 1: Вступление и первые два комикса -->
+            <div class="np-row" style="margin-bottom: 30px; align-items: center;">
+                <div class="np-col-40">
+                    <h3 class="np-title">ХРОНИКИ БУДНЕЙ: МИНИ-КОМИКСЫ ОТ МАКУ</h3>
+                    <p class="np-text"><span class="dropcap">Н</span>аша любимая художница Маку внезапно порадовала целой серией из пяти мини-комиксов, зарисовав наши обычные (и не очень) стримерские будни! Эти квадратные шедевры идеально передают всю ту хаотичную энергию, которая постоянно царит между нашими персонажами.</p>
+                    <p class="np-text">Мы решили не прятать эту красоту и собрали для вас всю коллекцию прямо здесь, в новом выпуске газеты. Давайте посмотрим, как развивались события в этом блокбастере!</p>
+                </div>
+                
+                <div class="np-col-60" style="display: flex; gap: 15px;">
+                    <div style="flex: 1;">
+                        <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                            <picture style="width: 100%; display: block; aspect-ratio: 1/1;">
+                                <source srcset="img/news/news_06_09_2026_comic_1.webp" type="image/webp">
+                                <img src="img/news/news_06_09_2026_comic_1.webp" alt="Ты меня уважаешь?" style="width: 100%; height: 100%; object-fit: cover;">
+                            </picture>
+                        </div>
+                        <p style="text-align: center; font-size: 13px; margin-top: 8px; color: #555;"><i>Стадия 1: Серьёзный разговор</i></p>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                            <picture style="width: 100%; display: block; aspect-ratio: 1/1;">
+                                <source srcset="img/news/news_06_09_2026_comic_2.webp" type="image/webp">
+                                <img src="img/news/news_06_09_2026_comic_2.webp" alt="Обнимашки" style="width: 100%; height: 100%; object-fit: cover;">
+                            </picture>
+                        </div>
+                        <p style="text-align: center; font-size: 13px; margin-top: 8px; color: #555;"><i>Стадия 2: Тотальное уважение</i></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РЯД 2: Оставшиеся 3 комикса -->
+            <h3 class="np-title" style="margin-top: 40px; margin-bottom: 20px; text-align: center;">ПРОДОЛЖЕНИЕ БАНКЕТА</h3>
+            <div class="np-row" style="margin-bottom: 30px; gap: 15px;">
+                <div style="flex: 1;">
+                    <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                        <picture style="width: 100%; display: block; aspect-ratio: 1/1;">
+                            <source srcset="img/news/news_06_09_2026_comic_3.webp" type="image/webp">
+                            <img src="img/news/news_06_09_2026_comic_3.webp" alt="Радуга" style="width: 100%; height: 100%; object-fit: cover;">
+                        </picture>
+                    </div>
+                    <p style="text-align: center; font-size: 13px; margin-top: 8px; padding: 0 10px;">Когда переборщил с эмоциями (или с Соником). Маку остаётся лишь вздыхать.</p>
+                </div>
+                
+                <div style="flex: 1;">
+                    <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                        <picture style="width: 100%; display: block; aspect-ratio: 1/1;">
+                            <source srcset="img/news/news_06_09_2026_comic_4.webp" type="image/webp">
+                            <img src="img/news/news_06_09_2026_comic_4.webp" alt="УЭЭЭЭЭ" style="width: 100%; height: 100%; object-fit: cover;">
+                        </picture>
+                    </div>
+                    <p style="text-align: center; font-size: 13px; margin-top: 8px; padding: 0 10px;">Стримерская солидарность: коллективное нытьё после 200+ смертей.</p>
+                </div>
+
+                <div style="flex: 1;">
+                    <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                        <picture style="width: 100%; display: block; aspect-ratio: 1/1;">
+                            <source srcset="img/news/news_06_09_2026_comic_5.webp" type="image/webp">
+                            <img src="img/news/news_06_09_2026_comic_5.webp" alt="Наведение суеты" style="width: 100%; height: 100%; object-fit: cover;">
+                        </picture>
+                    </div>
+                    <p style="text-align: center; font-size: 13px; margin-top: 8px; padding: 0 10px;">А иногда Юрумыч просто наводит суету на ровном месте!</p>
+                </div>
+            </div>
+        `
+    },
+    {
         issueNumber: 3,
         date: "31 Августа 2026",
         html: `
