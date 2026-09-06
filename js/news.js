@@ -74,6 +74,34 @@ const NEWS_ISSUES = [
                     <p style="text-align: center; font-size: 13px; margin-top: 8px; padding: 0 10px; color: #bbb;">А в конце она красуется, пока Юрумыч тихо сидит и любуется.</p>
                 </div>
             </div>
+
+            <!-- РЯД 3: Сквад -->
+            <div class="np-row" style="margin-bottom: 30px; align-items: center; border-top: 1px dashed #444; padding-top: 30px;">
+                <div class="np-col-40">
+                    <h3 class="np-title">ДОЛГОЖДАННЫЙ ИНВАЙТ</h3>
+                    <p class="np-text">Недавно всё инфополе гудело: крупные СНГ-стримеры обратили внимание на витуберов и начали активно звать их в свои именитые сквады. Пока многие коллеги радовались приглашениям, я тихо сидел в стороне, оставшись совершенно незамеченным...</p>
+                    <p class="np-text">Но вот настал и мой звёздный час! На почту пришло ОНО. Первые ребята, которые разглядели во мне потенциал и прислали приглашение в команду.</p>
+                    <p class="np-text" style="padding: 10px; background: #2a2a2a; border-left: 3px solid #ff3385;">Кто же это? Сервис по накрутке ботов! Выглядит это, конечно, максимально жалко, но эй — зато мы тоже кому-то нужны! 😎</p>
+                </div>
+                
+                <div class="np-col-60">
+                    <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                        <picture style="width: 100%; display: block;">
+                            <source srcset="img/news/news_06_09_2026_squad.webp" type="image/webp">
+                            <img src="img/news/news_06_09_2026_squad.webp" alt="Приглашение в сквад накрутки">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РЯД 4: Пропавшие стримы -->
+            <div class="np-row" style="margin-bottom: 30px; border-top: 1px dashed #444; padding-top: 30px;">
+                <div style="flex: 1;">
+                    <h3 class="np-title" style="text-align: center; color: #ff9966;">КУДА ПРОПАЛИ СТРИМЫ? 🤒</h3>
+                    <p class="np-text" style="text-align: center; max-width: 800px; margin: 0 auto;">На прошлой неделе мы потеряли целых два стрима. Один эфир сорвался из-за технических проблем с ПК, а вот субботний — по вине предательского вируса. Стример официально заболел.</p>
+                    <p class="np-text" style="text-align: center; max-width: 800px; margin: 15px auto 0;">По этой причине расписание на новую неделю пришлось немного сдвинуть: <strong>в понедельник (7 сентября) стрима не будет</strong>, чтобы дать организму время восстановиться. Встречаемся во <strong>вторник, среду, пятницу и субботу</strong>. Пейте чай, кушайте витамины и не болейте!</p>
+                </div>
+            </div>
         `
     },
     {
