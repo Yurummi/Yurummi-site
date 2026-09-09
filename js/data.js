@@ -168,7 +168,7 @@ const STREAMS_LIST = [
     { date: '2026-09-05', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: true },
     { date: '2026-09-07', time: '15:00', text: 'Рисование', isSonic: false, isCanceled: false },
     { date: '2026-09-08', time: '15:00', text: 'Соник', isSonic: true, isCanceled: true },
-    { date: '2026-09-09', time: '15:00', text: 'Соник', isSonic: true, isCanceled: false },
+    { date: '2026-09-09', time: '15:00', text: 'Соник', isSonic: true, isCanceled: true },
     { date: '2026-09-11', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
     { date: '2026-09-12', time: '±20:00', text: 'Соник', isSonic: true, isCanceled: false },
 
