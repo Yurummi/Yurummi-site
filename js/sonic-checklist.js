@@ -29,7 +29,11 @@ const SONIC_GAMES = [
     { id: "sonic-mania", title: "Sonic Mania" },
     { id: "sonic-forces", title: "Sonic Forces" },
     { id: "sonic-frontiers", title: "Sonic Frontiers" },
-    { id: "sonic-superstars", title: "Sonic Superstars" }
+    { id: "sonic-superstars", title: "Sonic Superstars" },
+    
+    { title: "Фан-игры / Заказные", isCategory: true },
+    { id: "sonic-triple-trouble-16bit", title: "Sonic Triple Trouble 16-bit" },
+    { id: "sonic-time-twisted", title: "Sonic Time Twisted" }
 ];
 
 // СОСТОЯНИЯ ИГР (задаются здесь вручную)
@@ -45,7 +49,8 @@ const SONIC_GAME_STATES = {
     "sonic-adv-2": "completed",
     "sonic-adv-3": "completed",
     "sonic-adv-dx": "completed",
-    "sonic-adv-2-battle": "playing"
+    "sonic-adv-2-battle": "completed",
+    "sonic-triple-trouble-16bit": "abandoned"
 };
 
 const totalGames = SONIC_GAMES.filter(g => !g.isCategory).length;
