@@ -4,139 +4,135 @@ const NEWS_ISSUES = [
         date: "14 Сентября 2026",
         tgPostId: "788",
         html: `
-            <!-- РЯД 1: Слайдер и Текст -->
-            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 40px;">
-                <!-- Блок 1: Картинка (Слайдер) -->
-                <div style="flex: 1 1 55%; max-width: 60%;">
-                    <div class="np-slider" style="aspect-ratio: 2000/2210; background: transparent; border: none;">
-                        <picture class="np-slide active" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_1.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_1.webp" alt="Мем 1">
-                        </picture>
-                        <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_2.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_2.webp" alt="Мем 2">
-                        </picture>
-                        <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_3.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_3.webp" alt="Мем 3">
-                        </picture>
-                        <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_4.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_4.webp" alt="Мем 4">
-                        </picture>
-                        <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_5.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_5.webp" alt="Мем 5">
-                        </picture>
-                        <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_6.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_6.webp" alt="Мем 6">
-                        </picture>
-                        <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_7.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_7.webp" alt="Мем 7">
-                        </picture>
-                        <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_8.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_8.webp" alt="Мем 8">
-                        </picture>
-                        <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_comic_9.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_comic_9.webp" alt="Мем 9">
-                        </picture>
-                        
-                        <div class="np-slider-nav">
-                            <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
-                            <button class="np-slider-btn" onclick="changeNewsSlide(1)">&#10095;</button>
+            <div style="text-align: justify; color: #ccc;">
+                
+                <!-- БЛОК 1: КОМИКСЫ И МАГМА -->
+                <div style="margin-bottom: 20px;">
+                    <!-- Комикс слайдер (Обтекание слева) -->
+                    <div style="float: left; width: 45%; margin-right: 25px; margin-bottom: 15px;">
+                        <div class="np-slider" style="aspect-ratio: 2000/2210; background: transparent; border: none;">
+                            <picture class="np-slide active" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_1.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_1.webp" alt="Мем 1">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_2.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_2.webp" alt="Мем 2">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_3.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_3.webp" alt="Мем 3">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_4.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_4.webp" alt="Мем 4">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_5.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_5.webp" alt="Мем 5">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_6.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_6.webp" alt="Мем 6">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_7.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_7.webp" alt="Мем 7">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_8.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_8.webp" alt="Мем 8">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_9.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_9.webp" alt="Мем 9">
+                            </picture>
+                            
+                            <div class="np-slider-nav">
+                                <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
+                                <button class="np-slider-btn" onclick="changeNewsSlide(1)">&#10095;</button>
+                            </div>
+                            <div class="np-slider-dots">
+                                <div class="np-dot active" onclick="setNewsSlide(0)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(1)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(2)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(3)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(4)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(5)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(6)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(7)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(8)"></div>
+                            </div>
                         </div>
-                        
-                        <div class="np-slider-dots">
-                            <div class="np-dot active" onclick="setNewsSlide(0)"></div>
-                            <div class="np-dot" onclick="setNewsSlide(1)"></div>
-                            <div class="np-dot" onclick="setNewsSlide(2)"></div>
-                            <div class="np-dot" onclick="setNewsSlide(3)"></div>
-                            <div class="np-dot" onclick="setNewsSlide(4)"></div>
-                            <div class="np-dot" onclick="setNewsSlide(5)"></div>
-                            <div class="np-dot" onclick="setNewsSlide(6)"></div>
-                            <div class="np-dot" onclick="setNewsSlide(7)"></div>
-                            <div class="np-dot" onclick="setNewsSlide(8)"></div>
-                        </div>
+                        <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">(Нажмите, чтобы увеличить. Листайте вправо!)</p>
                     </div>
-                    <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">(Нажмите на картинку, чтобы увеличить. Листайте вправо, чтобы увидеть все 9 вариантов!)</p>
-                </div>
-                <!-- Блок 1: Текст -->
-                <div style="flex: 1 1 35%;">
-                    <h3 class="np-title">ТВОРЧЕСТВО ЧАТА: СМЕШНЫЕ ПОДПИСИ</h3>
+                    
+                    <h3 class="np-title" style="margin-top: 0;">ТВОРЧЕСТВО ЧАТА: СМЕШНЫЕ ПОДПИСИ</h3>
                     <p class="np-text"><span class="dropcap">Н</span>а этой неделе Юрумми запустил настоящий флешмоб! Наш стример нарисовал новый комикс с собой и Маку, оставив пустое облачко специально для зрителей. Редакция газеты просто в шоке от того, какую безграничную фантазию проявил чат — результаты получились шедевральными!</p>
-                    <p class="np-text">Первым идёт оригинальный вариант автора, а дальше — лучшие и самые забавные работы прямиком с трансляций. Кто-то решил пошутить про кружку, кто-то вспомнил классические мемы канала, а некоторые работы были настолько абсурдными, что вызвали приступ смеха у всей редакции. Такие интерактивы в очередной раз доказывают, насколько у нас креативное комьюнити!</p>
-                    <p class="np-text">Подобные мероприятия обязательно будут повторяться в будущем. Готовы посмеяться? Листайте слайдер и наслаждайтесь народным творчеством!</p>
-                </div>
-            </div>
-
-            <!-- РЯД 2: Текст и Магма-коллаб -->
-            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 40px; border-top: 1px dashed #444; padding-top: 30px;">
-                <!-- Блок 2: Текст -->
-                <div style="flex: 1 1 35%;">
-                    <h3 class="np-title">СПАСИТЕЛЬНЫЙ КОЛЛАБ В MAGMA</h3>
-                    <p class="np-text">Когда эфир находился на грани срыва, на помощь пришло искусство! Юрумми и Маку провели невероятно уютный совместный стрим в Magma, где решили поменяться ролями: художница рисовала нашего лиса, а он с огромным энтузиазмом взялся за её персонажа!</p>
-                    <p class="np-text">Результат превзошёл все ожидания! Посмотрите на эти шедевры (кликайте на стрелочки). Совместное творчество всегда рождает что-то уникальное и сближает, не так ли?</p>
-                </div>
-                <!-- Блок 2: Картинки (16:9 Слайдер) -->
-                <div style="flex: 1 1 60%;">
-                    <div class="np-slider" style="aspect-ratio: 16/9; background: transparent; border: none;">
-                        <picture id="magma-slide-0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.3s; pointer-events: auto;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_magma_1.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_magma_1.webp" alt="Магма 1" style="width: 100%; height: 100%; object-fit: contain;">
-                        </picture>
-                        <picture id="magma-slide-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s; pointer-events: none;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                            <source srcset="img/news/news_14_09_2026_magma_2.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_magma_2.webp" alt="Магма 2" style="width: 100%; height: 100%; object-fit: contain;">
-                        </picture>
-                        <div class="np-slider-nav">
-                            <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10094;</button>
-                            <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10095;</button>
+                    <p class="np-text">Первым идёт оригинальный вариант автора, а дальше — лучшие и самые забавные работы прямиком с трансляций. Кто-то решил пошутить про кружку, кто-то вспомнил классические мемы канала, а некоторые работы были настолько абсурдными, что вызвали приступ смеха у всей редакции. Такие интерактивы в очередной раз доказывают, насколько у нас креативное комьюнити! Готовы посмеяться? Листайте слайдер слева и наслаждайтесь народным творчеством!</p>
+                    
+                    <h3 class="np-title" style="margin-top: 30px;">СПАСИТЕЛЬНЫЙ КОЛЛАБ В MAGMA</h3>
+                    <p class="np-text">Когда один из эфиров находился на грани срыва, на помощь пришло искусство! Юрумми и Маку провели невероятно уютный совместный стрим в Magma, где решили поменяться ролями: художница рисовала нашего лиса, а он с огромным энтузиазмом взялся за её персонажа!</p>
+                    
+                    <!-- Магма слайдер (Обтекание справа) -->
+                    <div style="float: right; width: 45%; margin-left: 25px; margin-bottom: 15px; margin-top: 10px;">
+                        <div class="np-slider" style="aspect-ratio: 16/9; background: transparent; border: 1px solid #555;">
+                            <picture id="magma-slide-0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.3s; pointer-events: auto;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_magma_1.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_magma_1.webp" alt="Магма 1" style="width: 100%; height: 100%; object-fit: contain;">
+                            </picture>
+                            <picture id="magma-slide-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s; pointer-events: none;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_magma_2.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_magma_2.webp" alt="Магма 2" style="width: 100%; height: 100%; object-fit: contain;">
+                            </picture>
+                            <div class="np-slider-nav">
+                                <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10094;</button>
+                                <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10095;</button>
+                            </div>
                         </div>
                     </div>
+                    
+                    <p class="np-text">Результат превзошёл все ожидания! Посмотрите на эти шедевры (переключайте картинки справа). Совместное творчество всегда рождает что-то уникальное и сближает, не так ли? Зрители были в восторге от процесса, а итоговые работы заняли почетное место в нашем архиве.</p>
+                    
+                    <div style="clear: both;"></div>
                 </div>
-            </div>
-
-            <!-- РЯД 3: Картинка, Текст -->
-            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 20px; border-top: 1px dashed #444; padding-top: 30px;">
-                <!-- Блок 3: Картинка -->
-                <div style="flex: 1 1 35%; max-width: 40%;">
-                    <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
-                        <picture style="width: 100%; display: block;">
-                            <source srcset="img/news/news_14_09_2026_voice.webp" type="image/webp">
-                            <img src="img/news/news_14_09_2026_voice.webp" alt="Почему все путают нас с тобой">
-                        </picture>
+                
+                <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+                
+                <!-- БЛОК 2: СТРАННЫЙ СТРИМ И ПОСЫЛКА -->
+                <div style="margin-bottom: 20px;">
+                    
+                    <!-- Странный стрим картинка (Обтекание справа) -->
+                    <div style="float: right; width: 35%; margin-left: 25px; margin-bottom: 15px;">
+                        <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                            <picture style="width: 100%; display: block;">
+                                <source srcset="img/news/news_14_09_2026_voice.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_voice.webp" alt="Почему все путают нас с тобой" style="width: 100%; display: block; border: 1px solid #555;">
+                            </picture>
+                        </div>
                     </div>
-                </div>
-                <!-- Блок 3: Текст -->
-                <div style="flex: 1 1 50%;">
-                    <h3 class="np-title">ПОТЕРЯ ГРАНИЦ: ЧТО ЭТО БЫЛО?</h3>
+                    
+                    <h3 class="np-title" style="margin-top: 0;">ПОТЕРЯ ГРАНИЦ: ЧТО ЭТО БЫЛО?</h3>
                     <p class="np-text">Субботний вечер обещал быть обычным... но что-то пошло не так. Голос Юрумми вдруг стал звучать иначе, интонации изменились, а в поведении начали проскальзывать до боли знакомые, но чужие нотки. Зрители в чате буквально сходили с ума: <em>"Кто сейчас за микрофоном?!"</em>, <em>"Почему мы путаем вас?!"</em>.</p>
                     <p class="np-text">Что это было? Массовая галлюцинация? Сбой в матрице? Или, может, таинственный подменщик завладел эфиром, пока наш стример пытался восстановить сорванные связки? Редакция проводит собственное расследование, но интрига всё ещё висит в воздухе, и вопросов осталось больше, чем ответов...</p>
-                </div>
-            </div>
-
-            <!-- РЯД 4: Телеграм и Доп инфа -->
-            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 20px; border-top: 1px dashed #444; padding-top: 30px;">
-                <!-- Блок 4: Телеграм -->
-                <div style="flex: 1 1 35%; min-width: 300px; max-width: 40%;">
-                    <div id="news-tg-container" style="min-height: 200px;">
-                        <!-- Виджет загружается через JS -->
+                    
+                    <h3 class="np-title" style="margin-top: 40px;">ДОСТАВКА НОСТАЛЬГИИ ДЛЯ КУМЫЧА</h3>
+                    
+                    <!-- Телеграм виджет (Обтекание слева) -->
+                    <div style="float: left; width: 35%; min-width: 280px; margin-right: 25px; margin-bottom: 15px; margin-top: 5px;">
+                        <div id="news-tg-container" style="min-height: 200px;">
+                            <!-- Виджет загружается через JS -->
+                        </div>
+                        <a href="https://t.me/yurummiyt/788" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 15px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
+                            Читать в Telegram ➔
+                        </a>
                     </div>
-                    <a href="https://t.me/yurummiyt/788" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 15px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
-                        Читать в Telegram ➔
-                    </a>
-                </div>
-                <!-- Блок 4: Текст -->
-                <div style="flex: 1 1 50%;">
-                    <h3 class="np-title">ПОСЫЛКА, ОТ КОТОРОЙ СВЕЛО ОЛДСКУЛЫ</h3>
-                    <p class="np-text">Вы только посмотрите на это сокровище! Редакция не могла пройти мимо свежего поста в Telegram, где Юрумми похвастался неожиданным подгоном от подписчика. Картриджи с классическими играми про Соника, шикарные арты, наклейки, и, внимание... настоящие «Кириешки»!</p>
-                    <p class="np-text">Кажется, кто-то вычислил идеальную формулу того, как задобрить стримера и мотивировать его на новые ретро-прохождения. Заряд ностальгии получен, сухарики съедены, а значит, нас ждёт ещё больше эпичных (и горящих) эфиров.</p>
-                    <p class="np-text">Чтобы не пропускать такие внезапные анбоксинги и закулисье стримов, обязательно заглядывайте в уютный Telegram-канал нашего лиса. Там всегда происходит что-то интересное!</p>
+                    
+                    <p class="np-text">А теперь к по-настоящему душевным новостям! В свежем посте в Telegram Юрумми показал посылку, которую он заботливо собрал и отправил Кумычу — старому доброму другу и стримеру, с которым они вместе начинали свой путь в стриминге.</p>
+                    <p class="np-text">Внутри посылки оказались две пачки конфет (да-да, те самые цветастые коробки!) и две картины. Одна из них — это тот самый арт, который Юрумми рисовал ранее на своих трансляциях, и теперь этот шедевр доставлен прямо в руки адресату.</p>
+                    <p class="np-text">Такие жесты показывают, что несмотря на время, старая стримерская дружба остаётся крепкой. Ждём реакцию Кумыча на этот царский подгон!</p>
+                    
+                    <div style="clear: both;"></div>
                 </div>
             </div>
         `
