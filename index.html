@@ -533,6 +533,8 @@
     <!-- Лайтбокс -->
     <div id="myLightbox" class="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close">&times;</span>
+        <span class="lightbox-prev" onclick="changeLightboxSlide(event, -1)">&#10094;</span>
+        <span class="lightbox-next" onclick="changeLightboxSlide(event, 1)">&#10095;</span>
         <img class="lightbox-content" id="lightbox-img" alt="">
         <video class="lightbox-content" id="lightbox-video" autoplay loop muted playsinline style="display: none; width: 90%; max-width: 900px; height: auto; max-height: 80vh; margin: 0 auto; object-fit: contain;"></video>
         <div class="lightbox-caption" id="lightbox-caption"></div>

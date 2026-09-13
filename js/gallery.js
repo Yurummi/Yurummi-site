@@ -1,3 +1,6 @@
+let lightboxElements = [];
+let currentLightboxIndex = 0;
+
 /**
  * gallery.js — Лайтбокс и кнопки "Показать всё / Свернуть".
  *
@@ -28,8 +31,51 @@ function openLightbox(element) {
     const lightboxImg     = document.getElementById('lightbox-img');
     const lightboxVideo   = document.getElementById('lightbox-video');
     const lightboxCaption = document.getElementById('lightbox-caption');
+    const prevBtn         = document.querySelector('.lightbox-prev');
+    const nextBtn         = document.querySelector('.lightbox-next');
 
-    const media     = element.querySelector('img') || element.querySelector('video');
+    // Find siblings to create a gallery list
+    let parent = element.parentElement;
+    if (parent) {
+        // Find all clickable lightbox items in this container
+        let siblings = Array.from(parent.querySelectorAll('[onclick*="openLightbox"]'));
+        if (siblings.length < 2 && parent.parentElement) {
+             siblings = Array.from(parent.parentElement.querySelectorAll('[onclick*="openLightbox"]'));
+        }
+        if (siblings.length > 1) {
+            lightboxElements = siblings;
+            currentLightboxIndex = siblings.indexOf(element);
+            if(prevBtn) prevBtn.style.display = 'block';
+            if(nextBtn) nextBtn.style.display = 'block';
+        } else {
+            lightboxElements = [element];
+            currentLightboxIndex = 0;
+            if(prevBtn) prevBtn.style.display = 'none';
+            if(nextBtn) nextBtn.style.display = 'none';
+        }
+    }
+
+    _showLightboxElement(element);
+}
+
+function changeLightboxSlide(event, direction) {
+    event.stopPropagation(); // don't close lightbox
+    if (lightboxElements.length < 2) return;
+    
+    currentLightboxIndex += direction;
+    if (currentLightboxIndex < 0) currentLightboxIndex = lightboxElements.length - 1;
+    if (currentLightboxIndex >= lightboxElements.length) currentLightboxIndex = 0;
+    
+    _showLightboxElement(lightboxElements[currentLightboxIndex]);
+}
+
+function _showLightboxElement(element) {
+    const lightbox        = document.getElementById('myLightbox');
+    const lightboxImg     = document.getElementById('lightbox-img');
+    const lightboxVideo   = document.getElementById('lightbox-video');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    const media     = element.querySelector('img') || element.querySelector('video') || element.querySelector('source');
     const h3        = element.querySelector('h3');
     const p         = element.querySelector('p');
     const musicLink = element.getAttribute('data-music');
@@ -37,7 +83,16 @@ function openLightbox(element) {
     const title    = _escapeHtml(h3 ? h3.innerText : '');
     const subtitle = _escapeHtml(p  ? p.innerText  : '');
 
-    const src = media ? media.src || media.currentSrc : '';
+    // some sources are in picture->source srcset
+    let src = element.getAttribute('data-src');
+    if (!src && media) {
+        if (media.tagName.toLowerCase() === 'source') {
+            src = media.srcset || media.src;
+        } else {
+            src = media.src || media.currentSrc;
+        }
+    }
+    if (!src) src = '';
     
     if (src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm')) {
         lightboxImg.style.display = 'none';
