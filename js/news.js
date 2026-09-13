@@ -4,12 +4,12 @@ const NEWS_ISSUES = [
         date: "14 Сентября 2026",
         tgPostId: "788",
         html: `
-            <div style="text-align: justify; color: #ccc;">
+            <div style="color: #ccc;">
                 
-                <!-- БЛОК 1: КОМИКСЫ И МАГМА -->
-                <div style="margin-bottom: 20px;">
-                    <!-- Комикс слайдер (Обтекание слева) -->
-                    <div style="float: left; width: 45%; margin-right: 25px; margin-bottom: 15px;">
+                <!-- БЛОК 1: КОМИКСЫ -->
+                <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 40px;">
+                    <!-- Комикс слайдер (слева) -->
+                    <div style="flex: 1 1 40%; max-width: 45%;">
                         <div class="np-slider" style="aspect-ratio: 2000/2210; background: transparent; border: none;">
                             <picture class="np-slide active" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
                                 <source srcset="img/news/news_14_09_2026_comic_1.webp" type="image/webp">
@@ -67,43 +67,57 @@ const NEWS_ISSUES = [
                         <p style="text-align: center; font-size: 13px; color: #777; font-style: italic; margin-top: 8px;">(Нажмите, чтобы увеличить. Листайте вправо!)</p>
                     </div>
                     
-                    <h3 class="np-title" style="margin-top: 0;">ТВОРЧЕСТВО ЧАТА: СМЕШНЫЕ ПОДПИСИ</h3>
-                    <p class="np-text"><span class="dropcap">Н</span>а этой неделе Юрумми запустил настоящий флешмоб! Наш стример нарисовал новый комикс с собой и Маку, оставив пустое облачко специально для зрителей. Редакция газеты просто в шоке от того, какую безграничную фантазию проявил чат — результаты получились шедевральными!</p>
-                    <p class="np-text">Первым идёт оригинальный вариант автора, а дальше — лучшие и самые забавные работы прямиком с трансляций. Кто-то решил пошутить про кружку, кто-то вспомнил классические мемы канала, а некоторые работы были настолько абсурдными, что вызвали приступ смеха у всей редакции. Такие интерактивы в очередной раз доказывают, насколько у нас креативное комьюнити! Готовы посмеяться? Листайте слайдер слева и наслаждайтесь народным творчеством!</p>
-                    
-                    <h3 class="np-title" style="margin-top: 30px;">СПАСИТЕЛЬНЫЙ КОЛЛАБ В MAGMA</h3>
-                    <p class="np-text">Когда один из эфиров находился на грани срыва, на помощь пришло искусство! Юрумми и Маку провели невероятно уютный совместный стрим в Magma, где решили поменяться ролями: художница рисовала нашего лиса, а он с огромным энтузиазмом взялся за её персонажа!</p>
-                    
-                    <!-- Магма слайдер (Обтекание справа) -->
-                    <div style="float: right; width: 60%; margin-left: 25px; margin-bottom: 15px; margin-top: 10px;">
-                        <div class="np-slider" style="aspect-ratio: 16/9; background: transparent; border: 1px solid #555;">
-                            <picture id="magma-slide-0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.3s; pointer-events: auto;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_magma_1.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_magma_1.webp" alt="Магма 1" style="width: 100%; height: 100%; object-fit: contain;">
-                            </picture>
-                            <picture id="magma-slide-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s; pointer-events: none;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_magma_2.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_magma_2.webp" alt="Магма 2" style="width: 100%; height: 100%; object-fit: contain;">
-                            </picture>
-                            <div class="np-slider-nav">
-                                <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10094;</button>
-                                <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10095;</button>
-                            </div>
-                        </div>
+                    <!-- Текст комиксов (справа) -->
+                    <div style="flex: 1 1 50%;">
+                        <h3 class="np-title" style="margin-top: 0;">ТВОРЧЕСТВО ЧАТА: СМЕШНЫЕ ПОДПИСИ</h3>
+                        <p class="np-text"><span class="dropcap">Н</span>а этой неделе Юрумми запустил настоящий флешмоб! Наш стример нарисовал новый комикс с собой и Маку, оставив пустое облачко специально для зрителей. Редакция газеты просто в шоке от того, какую безграничную фантазию проявил чат — результаты получились шедевральными!</p>
+                        <p class="np-text">Первым идёт оригинальный вариант автора, а дальше — лучшие и самые забавные работы прямиком с трансляций. Кто-то решил пошутить про кружку, кто-то вспомнил классические мемы канала, а некоторые работы были настолько абсурдными, что вызвали приступ смеха у всей редакции.</p>
+                        <p class="np-text">Такие интерактивы в очередной раз доказывают, насколько у нас креативное комьюнити! Готовы посмеяться? Листайте слайдер слева и наслаждайтесь народным творчеством!</p>
                     </div>
-                    
-                    <p class="np-text">Результат превзошёл все ожидания! Посмотрите на эти шедевры (переключайте картинки справа). Совместное творчество всегда рождает что-то уникальное и сближает, не так ли? Зрители были в восторге от процесса, а итоговые работы заняли почетное место в нашем архиве.</p>
-                    
-                    <div style="clear: both;"></div>
                 </div>
                 
                 <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
                 
-                <!-- БЛОК 2: СТРАННЫЙ СТРИМ И ПОСЫЛКА -->
-                <div style="margin-bottom: 20px;">
-                    
-                    <!-- Странный стрим картинка (Обтекание справа) -->
-                    <div style="float: right; width: 35%; margin-left: 25px; margin-bottom: 15px;">
+                <!-- БЛОК 2: МАГМА КОЛЛАБ -->
+                <div style="margin-bottom: 40px;">
+                    <h3 class="np-title" style="margin-top: 0; margin-bottom: 20px;">СПАСИТЕЛЬНЫЙ КОЛЛАБ В MAGMA</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: flex-start;">
+                        <!-- Текст Магмы (слева) -->
+                        <div style="flex: 1 1 35%;">
+                            <p class="np-text" style="margin-top: 0;">Когда один из эфиров находился на грани срыва, на помощь пришло искусство! Юрумми и Маку провели невероятно уютный совместный стрим в Magma, где решили поменяться ролями: художница рисовала нашего лиса, а он с огромным энтузиазмом взялся за её персонажа!</p>
+                            <p class="np-text">Результат превзошёл все ожидания! Посмотрите на эти шедевры (переключайте картинки справа). Совместное творчество всегда рождает что-то уникальное и сближает, не так ли? Зрители были в восторге от процесса, а итоговые работы заняли почетное место в нашем архиве.</p>
+                        </div>
+                        
+                        <!-- Магма слайдер (справа) -->
+                        <div style="flex: 1 1 60%;">
+                            <div class="np-slider" style="aspect-ratio: 16/9; background: transparent; border: 1px solid #555;">
+                                <picture id="magma-slide-0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.3s; pointer-events: auto;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                    <source srcset="img/news/news_14_09_2026_magma_1.webp" type="image/webp">
+                                    <img src="img/news/news_14_09_2026_magma_1.webp" alt="Магма 1" style="width: 100%; height: 100%; object-fit: contain;">
+                                </picture>
+                                <picture id="magma-slide-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s; pointer-events: none;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                    <source srcset="img/news/news_14_09_2026_magma_2.webp" type="image/webp">
+                                    <img src="img/news/news_14_09_2026_magma_2.webp" alt="Магма 2" style="width: 100%; height: 100%; object-fit: contain;">
+                                </picture>
+                                <div class="np-slider-nav">
+                                    <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10094;</button>
+                                    <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10095;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+                
+                <!-- БЛОК 3: СТРАННЫЙ СТРИМ -->
+                <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 40px; align-items: center;">
+                    <div style="flex: 1 1 50%;">
+                        <h3 class="np-title" style="margin-top: 0;">ПОТЕРЯ ГРАНИЦ: ЧТО ЭТО БЫЛО?</h3>
+                        <p class="np-text">Субботний вечер обещал быть обычным... но что-то пошло не так. Голос Юрумми вдруг стал звучать иначе, интонации изменились, а в поведении начали проскальзывать до боли знакомые, но чужие нотки. Зрители в чате буквально сходили с ума: <em>"Кто сейчас за микрофоном?!"</em>, <em>"Почему мы путаем вас?!"</em>.</p>
+                        <p class="np-text">Что это было? Массовая галлюцинация? Сбой в матрице? Или, может, таинственный подменщик завладел эфиром, пока наш стример пытался восстановить сорванные связки? Редакция проводит собственное расследование, но интрига всё ещё висит в воздухе, и вопросов осталось больше, чем ответов...</p>
+                    </div>
+                    <div style="flex: 1 1 35%; max-width: 40%;">
                         <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
                             <picture style="width: 100%; display: block;">
                                 <source srcset="img/news/news_14_09_2026_voice.webp" type="image/webp">
@@ -111,32 +125,42 @@ const NEWS_ISSUES = [
                             </picture>
                         </div>
                     </div>
-                    
-                    <h3 class="np-title" style="margin-top: 0;">ПОТЕРЯ ГРАНИЦ: ЧТО ЭТО БЫЛО?</h3>
-                    <p class="np-text">Субботний вечер обещал быть обычным... но что-то пошло не так. Голос Юрумми вдруг стал звучать иначе, интонации изменились, а в поведении начали проскальзывать до боли знакомые, но чужие нотки. Зрители в чате буквально сходили с ума: <em>"Кто сейчас за микрофоном?!"</em>, <em>"Почему мы путаем вас?!"</em>.</p>
-                    <p class="np-text">Что это было? Массовая галлюцинация? Сбой в матрице? Или, может, таинственный подменщик завладел эфиром, пока наш стример пытался восстановить сорванные связки? Редакция проводит собственное расследование, но интрига всё ещё висит в воздухе, и вопросов осталось больше, чем ответов...</p>
-                    
-                    <h3 class="np-title" style="margin-top: 40px;">ДОСТАВКА НОСТАЛЬГИИ ДЛЯ КУМЫЧА</h3>
-                    
-                    <!-- Телеграм виджет (Обтекание слева) -->
-                    <div style="float: left; width: 35%; min-width: 280px; margin-right: 25px; margin-bottom: 15px; margin-top: 5px;">
-                        <div id="news-tg-container" style="min-height: 200px;">
-                            <!-- Виджет загружается через JS -->
+                </div>
+                
+                <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+                
+                <!-- БЛОК 4: ТЕЛЕГРАМ И СОНИК -->
+                <div style="margin-bottom: 20px;">
+                    <h3 class="np-title" style="margin-top: 0; margin-bottom: 20px;">ДОСТАВКА НОСТАЛЬГИИ ДЛЯ КУМЫЧА</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: flex-start;">
+                        
+                        <!-- Левая колонка: Телеграм виджет -->
+                        <div style="flex: 1 1 35%; min-width: 280px; max-width: 40%;">
+                            <div id="news-tg-container" style="min-height: 200px;">
+                                <!-- Виджет загружается через JS -->
+                            </div>
+                            <a href="https://t.me/yurummiyt/788" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 15px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
+                                Читать в Telegram ➔
+                            </a>
                         </div>
-                        <a href="https://t.me/yurummiyt/788" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 15px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
-                            Читать в Telegram ➔
-                        </a>
+                        
+                        <!-- Правая колонка: Тексты -->
+                        <div style="flex: 1 1 55%; display: flex; flex-direction: column; gap: 30px;">
+                            <!-- Посылка -->
+                            <div>
+                                <p class="np-text" style="margin-top: 0;">А теперь к по-настоящему душевным новостям! В свежем посте в Telegram Юрумми показал посылку, которую он заботливо собрал и отправил Кумычу — старому доброму другу и стримеру, с которым они вместе начинали свой путь в стриминге.</p>
+                                <p class="np-text">Внутри посылки оказались две пачки конфет (да-да, те самые цветастые коробки!) и две картины. Одна из них — это тот самый арт, который Юрумми рисовал ранее на своих трансляциях, и теперь этот шедевр доставлен прямо в руки адресату.</p>
+                                <p class="np-text">Такие жесты показывают, что несмотря на время, старая стримерская дружба остаётся крепкой. Ждём реакцию Кумыча на этот царский подгон!</p>
+                            </div>
+                            
+                            <!-- Соник -->
+                            <div>
+                                <h3 class="np-title" style="margin-top: 0; border-top: 1px dashed #444; padding-top: 20px;">БОЛЬ И СТРАДАНИЯ: ФИНАЛ SONIC ADVENTURE 2</h3>
+                                <p class="np-text">Раз уж мы заговорили про марафон, редакция не может не отметить, пожалуй, самую душную и утомительную часть прохождения на данный момент — Sonic Adventure 2. Нашему стримеру было невероятно лень её заканчивать, и, оглядываясь назад, решение заставлять себя проходить её до конца было фатальной ошибкой.</p>
+                                <p class="np-text">Целый час бессмысленной беготни, багов и потраченных нервов ради откровенно глупого и абсурдного сюжета. Зато этот опыт надолго останется в памяти (и в клипах на канале), как главное испытание на прочность нервной системы!</p>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <p class="np-text">А теперь к по-настоящему душевным новостям! В свежем посте в Telegram Юрумми показал посылку, которую он заботливо собрал и отправил Кумычу — старому доброму другу и стримеру, с которым они вместе начинали свой путь в стриминге.</p>
-                    <p class="np-text">Внутри посылки оказались две пачки конфет (да-да, те самые цветастые коробки!) и две картины. Одна из них — это тот самый арт, который Юрумми рисовал ранее на своих трансляциях, и теперь этот шедевр доставлен прямо в руки адресату.</p>
-                    <p class="np-text">Такие жесты показывают, что несмотря на время, старая стримерская дружба остаётся крепкой. Ждём реакцию Кумыча на этот царский подгон!</p>
-                    
-                    <h3 class="np-title" style="margin-top: 40px; clear: left;">БОЛЬ И СТРАДАНИЯ: ФИНАЛ SONIC ADVENTURE 2</h3>
-                    <p class="np-text">Раз уж мы заговорили про марафон, редакция не может не отметить, пожалуй, самую душную и утомительную часть прохождения на данный момент — Sonic Adventure 2. Нашему стримеру было невероятно лень её заканчивать, и, оглядываясь назад, решение заставлять себя проходить её до конца было фатальной ошибкой.</p>
-                    <p class="np-text">Целый час бессмысленной беготни, багов и потраченных нервов ради откровенно глупого и абсурдного сюжета. Зато этот опыт надолго останется в памяти (и в клипах на канале), как главное испытание на прочность нервной системы!</p>
-                    
-                    <div style="clear: both;"></div>
                 </div>
             </div>
         `
