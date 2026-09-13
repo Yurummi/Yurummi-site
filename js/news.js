@@ -141,6 +141,7 @@ const NEWS_ISSUES = [
             </div>
         `
     },
+    {
         issueNumber: 4,
         date: "07 Сентября 2026",
         html: `
