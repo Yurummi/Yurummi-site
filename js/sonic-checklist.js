@@ -50,7 +50,9 @@ const SONIC_GAME_STATES = {
     "sonic-adv-3": "completed",
     "sonic-adv-dx": "completed",
     "sonic-adv-2-battle": "completed",
-    "sonic-triple-trouble-16bit": "abandoned"
+    "sonic-triple-trouble-16bit": "abandoned",
+    "sonic-time-twisted": "abandoned",
+    "sonic-colors": "playing"
 };
 
 const totalGames = SONIC_GAMES.filter(g => !g.isCategory).length;
