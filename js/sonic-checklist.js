@@ -98,7 +98,7 @@ function renderChecklist() {
             }
 
             html += `
-                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <div ${state === 'playing' ? 'id="sonic-playing-game"' : ''} style="display: flex; align-items: center; margin-bottom: 8px;">
                     <div style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid ${circleBorder}; background-color: ${circleColor}; margin-right: 12px; flex-shrink: 0;"></div>
                     <span style="color: ${color}; text-decoration: ${textDecor}; flex-grow: 1;">${game.title}</span>
                 </div>
@@ -106,9 +106,27 @@ function renderChecklist() {
         }
     });
     
+
     container.innerHTML = html;
     updateProgressCounter();
+    
+    // Автоматическая прокрутка к активной (жёлтой) игре
+    setTimeout(() => {
+        const playingEl = document.getElementById('sonic-playing-game');
+        if (playingEl && container) {
+            // Вычисляем точное смещение элемента внутри контейнера
+            let offsetTop = playingEl.offsetTop;
+            let parent = playingEl.offsetParent;
+            while (parent && parent !== container && parent !== document.body) {
+                offsetTop += parent.offsetTop;
+                parent = parent.offsetParent;
+            }
+            // Прокручиваем контейнер так, чтобы элемент был по центру
+            container.scrollTop = offsetTop - (container.clientHeight / 2) + (playingEl.clientHeight / 2);
+        }
+    }, 200);
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     renderChecklist();
