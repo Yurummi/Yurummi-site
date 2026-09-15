@@ -88,22 +88,6 @@ const SLIDES_DATA = [
         textMain: '3/9',
         textAuthor: '@yurummi',
         url: 'https://t.me/yurummiyt/657'
-    },
-    {
-        file: 'img/slider/анонсвидео.webp',
-        badgeStyle: 'green',
-        badgeText: 'АНОНС',
-        textMain: 'Первое длинное видео для ютуба',
-        textAuthor: '',
-        url: ''
-    },
-    {
-        file: 'img/arts/птицафинал.webp',
-        badgeStyle: 'pink',
-        badgeText: '💖 АРТ',
-        textMain: '4/9',
-        textAuthor: '@yurummi',
-        url: 'https://t.me/yurummiyt/662'
     }
 ];
 
