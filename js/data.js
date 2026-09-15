@@ -10,7 +10,7 @@
 // ============================================================
 const SLIDES_DATA = [
     {
-        file: 'img/slider/превью.png',
+        file: 'img/slider/дурдом.png',
         badgeStyle: 'pink',
         badgeText: '🎥 ВИДЕО',
         textMain: 'Новое видео на канале!',
