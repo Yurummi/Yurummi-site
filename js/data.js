@@ -73,14 +73,7 @@ const SLIDES_DATA = [
         textAuthor: '@Maku_q',
         url: 'https://t.me/maku_qq'
     },
-    {
-        file: 'img/slider/vacation.webp',
-        badgeStyle: 'none',
-        badgeText: '',
-        textMain: 'Отпуск📌',
-        textAuthor: '',
-        url: 'https://t.me/yurummiyt/714'
-    },
+
     {
         file: 'img/slider/Ютубоснова.webp',
         badgeStyle: 'none',
