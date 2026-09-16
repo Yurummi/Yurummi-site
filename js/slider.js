@@ -24,25 +24,7 @@
         // Слайд
         const slide = document.createElement('div');
         slide.className = 'slide' + (index === 0 ? ' active' : '');
-        if (item.gallery && item.gallery.length > 0) {
-            slide.classList.add('clickable');
-            const hiddenContainer = document.createElement('div');
-            hiddenContainer.style.display = 'none';
-            const hiddenWrappers = [];
-            item.gallery.forEach(function(src) {
-                const wrapper = document.createElement('div');
-                wrapper.setAttribute('onclick', 'openLightbox(this)');
-                const img = document.createElement('img');
-                img.src = src;
-                wrapper.appendChild(img);
-                hiddenContainer.appendChild(wrapper);
-                hiddenWrappers.push(wrapper);
-            });
-            slide.appendChild(hiddenContainer);
-            slide.addEventListener('click', function () {
-                openLightbox(hiddenWrappers[0]);
-            });
-        } else if (item.url) {
+        if (item.url) {
             slide.classList.add('clickable');
             slide.addEventListener('click', function () { window.open(item.url, '_blank'); });
         }
