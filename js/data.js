@@ -10,7 +10,7 @@
 // ============================================================
 const SLIDES_DATA = [
     {
-        file: 'img/slider/дурдом.png',
+        file: 'img/slider/durdom.png',
         badgeStyle: 'pink',
         badgeText: '🎥 ВИДЕО',
         textMain: 'Новое видео на канале!',
@@ -88,6 +88,20 @@ const SLIDES_DATA = [
         textMain: '3/9',
         textAuthor: '@yurummi',
         url: 'https://t.me/yurummiyt/657'
+    },
+    {
+        file: 'img/fanarts/Широк фан арт от ямады.jpg',
+        badgeStyle: 'pink',
+        badgeText: '💖 АРТ',
+        textMain: 'Фан арт от ямады',
+        textAuthor: '',
+        url: '',
+        gallery: [
+            'img/fanarts/Широк фан арт от ямады.jpg',
+            'img/fanarts/полнорост фан арт от ямады.png',
+            'img/fanarts/полнорост фан арт от ямады прозрачный.png',
+            'img/fanarts/полнорост фан арт от ямады белый.png'
+        ]
     }
 ];
 
