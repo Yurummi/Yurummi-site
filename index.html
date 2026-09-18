@@ -52,20 +52,20 @@
     <!-- ПАНИК-ОВЕРЛЕЙ -->
     <style>
     @keyframes panic-glitch-anim {
-      0% { transform: translate(0) }
-      20% { transform: translate(-2px, 2px) }
-      40% { transform: translate(-2px, -2px) }
-      60% { transform: translate(2px, 2px) }
-      80% { transform: translate(2px, -2px) }
-      100% { transform: translate(0) }
+      0% { transform: translate(0); opacity: 1; }
+      20% { transform: translate(-1px, 0); opacity: 0.8; }
+      40% { transform: translate(0, -1px); opacity: 0.9; }
+      60% { transform: translate(1px, 0); opacity: 0.6; }
+      80% { transform: translate(0, 1px); opacity: 0.8; }
+      100% { transform: translate(0); opacity: 1; }
     }
     .panic-glitch-text {
       position: relative;
       font-size: 1.2rem;
       font-weight: bold;
       line-height: 1.6;
-      animation: panic-glitch-anim 0.3s infinite;
-      text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff;
+      animation: panic-glitch-anim 0.8s infinite;
+      text-shadow: 1px 0 rgba(0, 255, 255, 0.4), -1px 0 rgba(255, 0, 255, 0.4);
       max-width: 800px;
     }
     </style>
