@@ -3,229 +3,88 @@ const NEWS_ISSUES = [
         issueNumber: 6,
         date: "28 Сентября 2026",
         tgPostId: "",
-        html: `
+        html: 
             <div style="color: #ccc; text-align: justify; padding-bottom: 20px;">
                 
-                <!-- Заголовок и шутка про глитчи -->
-                <div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px dashed #444;">
-                    <span class="dropcap">Э</span><h3 class="news-article-title" style="border:none; margin-bottom:5px; padding-bottom:0;">кстренное включение редакции!</h3>
-                    <p class="np-text">Дорогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Стример куда-то пропал, сайт жил своей жизнью, но сейчас вроде всё починили. Возвращаемся к нормальным (насколько это возможно) новостям!</p>
-                </div>
+                <!-- Газетные колонки -->
+                <div style="column-count: 2; column-gap: 40px; margin-bottom: 30px;" class="news-columns">
+                    <style>
+                        @media (max-width: 768px) { .news-columns { column-count: 1 !important; } }
+                        .news-block { break-inside: avoid; margin-bottom: 25px; }
+                        .news-block img { width: 100%; height: auto; border-radius: 4px; border: 1px solid #444; }
+                    </style>
+                    
+                    <!-- Блок: Вступление -->
+                    <div class="news-block" style="border-bottom: 1px dashed #555; padding-bottom: 15px;">
+                        <span class="dropcap">Э</span><h3 class="news-article-title" style="border:none; margin-bottom:5px; padding-bottom:0;">кстренное включение!</h3>
+                        <p class="np-text">Дорогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Стример куда-то пропал, сайт жил своей жизнью, но сейчас вроде всё починили. Возвращаемся к нормальным новостям!</p>
+                    </div>
 
-                <!-- Блок про Ямаду (Floated Right) -->
-                <div style="margin-bottom: 30px; clear: both;">
-                    <div style="float: right; width: 60%; min-width: 350px; margin-left: 25px; margin-bottom: 15px; border: 1px solid #555; padding: 5px; background: #222;">
-                        <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; height: auto; display: block; border-radius: 4px; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
+                    <!-- Блок: Ямада -->
+                    <div class="news-block" style="background: #222; padding: 10px; border: 1px solid #444;">
+                        <h3 class="news-article-title" style="font-size: 18px; margin-bottom: 10px; text-align: center;">Ямада снова бьёт рекорды</h3>
+                        <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
                         <div style="text-align: center; font-size: 12px; color: #888; margin-top: 5px;">Прекрасное ТРИО</div>
+                        <p class="np-text" style="margin-top: 10px; font-size: 14px;">Пока сайт лихорадило, в раздел Фан-артов подвезли свежую партию шедевров! Обязательно загляните, чтобы посмотреть работу во всей красе.</p>
                     </div>
-                    <h3 class="news-article-title">Ямада снова бьёт рекорды шикарности</h3>
-                    <p class="np-text">Пока сайт лихорадило, в наш раздел <strong>Фан-артов</strong> подвезли свежую партию шедевров! Ямада не перестаёт радовать нас своим талантом. Обязательно загляните во вкладку артов, чтобы посмотреть работу <em>«ЛУЧШЕЕ ТРИО»</em> во всей красе. Там целая мини-галерея вариантов, так что не забудьте покликать!</p>
-                </div>
 
-                <!-- Блок про ЛОР -->
-                <div style="margin-bottom: 30px; clear: both; background: rgba(168, 85, 247, 0.1); border-left: 4px solid #a855f7; padding: 15px; border-radius: 4px;">
-                    <h3 class="news-article-title" style="color: #a855f7; border-bottom: none; margin-bottom: 10px;">🌌 Интерактивный ЛОР канала</h3>
-                    <p class="np-text" style="margin: 0;">Вы просили, мы сделали! Вкладка ЛОРа получила колоссальное обновление. Теперь хронология событий — это не просто статичная картинка, а настоящая <strong>интерактивная паутина</strong>! Узлы можно таскать мышкой, приближать колёсиком, а по клику вас сразу перебросит к подробному описанию ивента. Изучать историю канала стало ещё интереснее!</p>
-                </div>
-                <!-- Блок про Экзамен -->
-                <div style="margin-bottom: 30px; clear: both;">
-                    <h3 class="news-article-title">Экзамен близко... Но кому какое дело?</h3>
-                    <p class="np-text">Уже в этот четверг, 1 октября, нас ждёт великий и ужасный экзамен B2 по немецкому. Редакция хотела бы заявить, что стример усердно готовится, днями и ночами зубрит билеты и вообще молодец... Но мы же честная газета! На самом деле Юрумми вызвался на пересдачу, героически об этом вспомнил и... благополучно забил. Так что морально готовимся к тому, что на вечернем стриме после экзамена кто-то будет долго и упорно ныть о том, как всё было сложно. Пожелайте удачи!</p>
-                </div>
-
-                <!-- Блок Погоды / Филлер -->
-                <div style="margin-bottom: 30px; clear: both; text-align: center;">
-                    <img src="img/news/weather.webp" alt="Weather" style="width: 100%; max-width: 300px; height: auto; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-                    <h3 class="news-article-title" style="text-align: center; border-bottom: none; margin-bottom: 10px;">🍂 Прогноз погоды в Картонном Мире</h3>
-                    <p class="np-text" style="text-align: center; margin-bottom: 0;">Осень официально вступила в свои права. Ожидаются кратковременные осадки в виде лени, местами сильные порывы желания спать до обеда. Ближе к середине октября синоптики прогнозируют стабильный циклон под названием «ОТПУСК». Рекомендуется запасаться чаем, теплыми пледами и приходить греться на вечерние трансляции!</p>
-                </div>
-
-                <!-- Блок Хэллоуина -->
-                <div style="margin-bottom: 40px; clear: both; padding: 20px; background: rgba(255, 102, 0, 0.1); border-left: 4px solid #ff6600; border-radius: 8px;">
-                    <h3 class="news-article-title" style="color: #ff6600; border-bottom: none; margin-bottom: 10px;">🎃 Месяц Страшилок Объявляется Открытым!</h3>
-                    <p class="np-text" style="margin: 0;">Октябрь — это не просто осень, это время жутких историй, тыкв и призраков! Мы объявляем Хэллоуинский месяц на канале. Наше расписание уже примерило на себя мрачные декорации: теперь стримы превратились в маленькие надгробия с привидениями. Готовьте свои страшные костюмы и запасайтесь конфетами, это будет страшно весело!</p>
-                </div>
-
-
-                <!-- Блок про Соника и мем (Floated Left) -->
-                <div style="margin-bottom: 40px; clear: both;">
-                    <div style="float: left; width: 45%; min-width: 260px; margin-right: 25px; margin-bottom: 15px;">
-                        <img src="img/news/sonic-meme.webp" alt="Sonic Meme" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid #444;">
+                    <!-- Блок: Экзамен -->
+                    <div class="news-block">
+                        <h3 class="news-article-title" style="font-size: 20px;">Экзамен близко... Кому какое дело?</h3>
+                        <p class="np-text">Уже в этот четверг, 1 октября, нас ждёт великий и ужасный экзамен B2 по немецкому. Редакция хотела бы заявить, что стример усердно готовится... Но мы же честная газета! Юрумми вызвался на пересдачу, героически об этом вспомнил и благополучно забил. Готовимся к тому, что на вечернем стриме после экзамена кто-то будет долго и упорно ныть о том, как всё было сложно.</p>
                     </div>
-                    <h3 class="news-article-title">Ёж, микрофоны и абсолютный рандом</h3>
-                    <p class="np-text">А теперь к главной премьере! Как-то вечером возникла абсолютно спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Сказано — сделано! Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания (особенно в плане меметичности, просто посмотрите на картинку слева).</p>
-                    <p class="np-text">Из-за авторских прав заливать это добро на YouTube было бы самоубийством, поэтому мы загрузили серии на сверхсекретный Google Диск. А ещё их можно посмотреть в нашем <a href="https://t.me/yurummiplums" target="_blank" style="color: #00d2ff;">специальном Telegram-канале (Секретный Архив)</a>, который был создан как раз для того, чтобы раз в миллион лет публиковать туда всякие рандомные секретные файлы!</p>
+
+                    <!-- Блок: Мем Соника -->
+                    <div class="news-block">
+                        <img src="img/news/sonic-meme.webp" alt="Sonic Meme">
+                        <h3 class="news-article-title" style="font-size: 18px; margin-top: 15px;">Ёж, микрофоны и рандом</h3>
+                        <p class="np-text">Как-то вечером возникла спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания! (особенно в плане меметичности, см. фото).</p>
+                    </div>
+
+                    <!-- Блок: Погода -->
+                    <div class="news-block" style="text-align: center;">
+                        <img src="img/news/weather.webp" alt="Weather" style="max-width: 80%; border: none; box-shadow: none;">
+                        <h3 class="news-article-title" style="text-align: center; border: none; font-size: 18px; margin-bottom: 5px;">🍂 Прогноз погоды</h3>
+                        <p class="np-text" style="font-size: 14px;">Ожидаются кратковременные осадки в виде лени. Ближе к середине октября синоптики прогнозируют стабильный циклон «ОТПУСК». Рекомендуется запасаться чаем и приходить греться на трансляции!</p>
+                    </div>
+
+                    <!-- Блок: Хэллоуин -->
+                    <div class="news-block" style="padding: 15px; border: 2px dashed #ff6600; background: rgba(255, 102, 0, 0.05);">
+                        <h3 class="news-article-title" style="color: #ff6600; border: none; text-align: center; margin-bottom: 5px;">🎃 Месяц Страшилок!</h3>
+                        <p class="np-text" style="margin: 0; text-align: center;">Октябрь объявляется открытым! Расписание уже примерило мрачные декорации: стримы превратились в надгробия с привидениями. Готовьте костюмы!</p>
+                    </div>
+
                 </div>
 
-                <!-- Встроенные плееры Соника -->
-                <div style="clear: both; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px dashed #00d2ff; text-align: center;">
-                    <h4 style="color: #00d2ff; margin-top: 0; font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 20px;">🎬 Эксклюзивная премьера в Yurummi Times</h4>
+                <!-- Классический Газетный Блок Плеера -->
+                <div style="clear: both; background: #e8e4d9; color: #111; padding: 20px; border: 4px double #333; text-align: center; font-family: 'Georgia', serif; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); border-radius: 2px;">
+                    <h4 style="font-family: 'Times New Roman', serif; font-size: 26px; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;">Эксклюзивная премьера</h4>
                     
-                    
+                    <p style="font-size: 15px; max-width: 600px; margin: 0 auto 15px; line-height: 1.5; color: #333;">Видео загружены в <a href="https://t.me/yurummiplums" target="_blank" style="color: #555; text-decoration: underline; font-weight: bold;">Секретный Архив (Telegram)</a>, чтобы избежать блокировок от YouTube.</p>
+
                     <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
-                        <button class="news-ep-btn" onclick="switchNewsSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Соник<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Эми')" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Лихорадка в хижине</button>
-                        <button class="news-ep-btn" onclick="switchNewsSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Тейлз<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Зоуи и Эггман')" style="background: rgba(0, 210, 255, 0.1); color: #00d2ff; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Влюблённый Тейлз</button>
+                        <button class="news-ep-btn" onclick="switchNewsSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<strong>Юрумми:</strong> Соник<br><strong>Маку:</strong> Эми')" style="background: #333; color: #e8e4d9; border: 1px solid #333; padding: 6px 16px; cursor: pointer; font-family: 'Georgia', serif; font-size: 14px; transition: 0.2s;">Лихорадка в хижине</button>
+                        
+                        <button class="news-ep-btn" onclick="switchNewsSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<strong>Юрумми:</strong> Тейлз<br><strong>Маку:</strong> Зоуи и Эггман')" style="background: transparent; color: #333; border: 1px solid #333; padding: 6px 16px; cursor: pointer; font-family: 'Georgia', serif; font-size: 14px; transition: 0.2s;">Влюблённый Тейлз</button>
                     </div>
                     
-                    <div style="position: relative; width: 100%; max-width: 600px; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                    <div style="position: relative; width: 100%; max-width: 600px; aspect-ratio: 16 / 9; background: #000; border: 2px solid #333; overflow: hidden; margin: 0 auto; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
                         <iframe id="news-sonic-player" src="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" style="position: absolute; top: 0; left: 0;"></iframe>
                     </div>
                     
-                    <div id="news-sonic-cast" style="max-width: 600px; margin: 20px auto 0; font-size: 0.95rem; text-align: left; padding: 15px; background: rgba(0, 0, 0, 0.3); border: 1px solid #333; border-left: 3px solid #00d2ff; border-radius: 8px; line-height: 1.6;">
-                        <strong style="color: #00d2ff; display: block; margin-bottom: 8px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">🎙️ Роли озвучивали</strong>
+                    <div id="news-sonic-cast" style="max-width: 600px; margin: 15px auto 0; font-size: 15px; text-align: left; padding: 10px; border-top: 1px dashed #333; border-bottom: 1px dashed #333; line-height: 1.6;">
+                        <strong style="display: block; margin-bottom: 5px; text-transform: uppercase; font-family: 'Times New Roman', serif; letter-spacing: 1px;">Роли озвучивали:</strong>
                         <div id="news-sonic-cast-content">
-                            <span style="color: #ff3385;">Юрумми:</span> Соник<br>
-                            <span style="color: #a855f7;">Маку:</span> Эми
+                            <strong>Юрумми:</strong> Соник<br>
+                            <strong>Маку:</strong> Эми
                         </div>
                     </div>
-                    <p style="font-size: 12px; color: #888; margin-top: 15px;">(Если видео не грузится — попробуйте <a href="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/view" target="_blank" style="color: #00d2ff;">открыть на диске</a>)</p>
                 </div>
 
             </div>
-        `
+        
     },
     
-    {
-        issueNumber: 5,
-        date: "14 Сентября 2026",
-        tgPostId: "788",
-        html: `
-            <div style="color: #ccc; text-align: justify;">
-                
-                <!-- БЛОК 1: КОМИКСЫ (Floated Left) -->
-                <div style="margin-bottom: 40px;">
-                    <div style="float: left; width: 45%; min-width: 280px; margin-right: 25px; margin-bottom: 15px;">
-                        <div class="np-slider" style="aspect-ratio: 2000/2210; background: transparent; border: none;">
-                            <picture class="np-slide active" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_1.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_1.webp" alt="Мем 1">
-                            </picture>
-                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_2.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_2.webp" alt="Мем 2">
-                            </picture>
-                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_3.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_3.webp" alt="Мем 3">
-                            </picture>
-                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_4.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_4.webp" alt="Мем 4">
-                            </picture>
-                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_5.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_5.webp" alt="Мем 5">
-                            </picture>
-                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_6.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_6.webp" alt="Мем 6">
-                            </picture>
-                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_7.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_7.webp" alt="Мем 7">
-                            </picture>
-                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_8.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_8.webp" alt="Мем 8">
-                            </picture>
-                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_comic_9.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_comic_9.webp" alt="Мем 9">
-                            </picture>
-                            
-                            <div class="np-slider-nav">
-                                <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
-                                <button class="np-slider-btn" onclick="changeNewsSlide(1)">&#10095;</button>
-                            </div>
-                            <div class="np-slider-dots">
-                                <div class="np-dot active" onclick="setNewsSlide(0)"></div>
-                                <div class="np-dot" onclick="setNewsSlide(1)"></div>
-                                <div class="np-dot" onclick="setNewsSlide(2)"></div>
-                                <div class="np-dot" onclick="setNewsSlide(3)"></div>
-                                <div class="np-dot" onclick="setNewsSlide(4)"></div>
-                                <div class="np-dot" onclick="setNewsSlide(5)"></div>
-                                <div class="np-dot" onclick="setNewsSlide(6)"></div>
-                                <div class="np-dot" onclick="setNewsSlide(7)"></div>
-                                <div class="np-dot" onclick="setNewsSlide(8)"></div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
-                    <h3 class="np-title" style="margin-top: 0;">ТВОРЧЕСТВО ЧАТА: СМЕШНЫЕ ПОДПИСИ</h3>
-                    <p class="np-text"><span class="dropcap">Н</span>а этой неделе Юрумми запустил настоящий флешмоб! Наш стример нарисовал новый комикс с собой и Маку, оставив пустое облачко специально для зрителей. Редакция газеты просто в шоке от того, какую безграничную фантазию проявил чат — результаты получились шедевральными!</p>
-                    <p class="np-text">Первым идёт оригинальный вариант автора, а дальше — лучшие и самые забавные работы прямиком с трансляций. Кто-то решил пошутить про кружку, кто-то вспомнил классические мемы канала, а некоторые работы были настолько абсурдными, что вызвали приступ смеха у всей редакции.</p>
-                    <p class="np-text">Такие интерактивы в очередной раз доказывают, насколько у нас креативное комьюнити! Готовы посмеяться? Листайте слайдер и наслаждайтесь народным творчеством!</p>
-                    <div style="clear: both;"></div>
-                </div>
-                
-                <!-- БЛОК 2: МАГМА КОЛЛАБ (Floated Right, width 60%) -->
-                <div style="margin-bottom: 40px;">
-                    <div style="float: right; width: 60%; min-width: 300px; margin-left: 25px; margin-bottom: 15px; margin-top: 5px;">
-                        <div class="np-slider" style="aspect-ratio: 16/9; background: transparent; border: 1px solid #555;">
-                            <picture id="magma-slide-0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.3s; pointer-events: auto;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_magma_1.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_magma_1.webp" alt="Магма 1" style="width: 100%; height: 100%; object-fit: contain;">
-                            </picture>
-                            <picture id="magma-slide-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s; pointer-events: none;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
-                                <source srcset="img/news/news_14_09_2026_magma_2.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_magma_2.webp" alt="Магма 2" style="width: 100%; height: 100%; object-fit: contain;">
-                            </picture>
-                            <div class="np-slider-nav">
-                                <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10094;</button>
-                                <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10095;</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h3 class="np-title" style="margin-top: 0;">СПАСИТЕЛЬНЫЙ КОЛЛАБ В MAGMA</h3>
-                    <p class="np-text">Когда один из эфиров находился на грани срыва, на помощь пришло искусство! Юрумми и Маку провели невероятно уютный совместный стрим в Magma, где решили поменяться ролями: художница рисовала нашего лиса, а он с огромным энтузиазмом взялся за её персонажа!</p>
-                    <p class="np-text">Результат превзошёл все ожидания! Посмотрите на эти шедевры. Совместное творчество всегда рождает что-то уникальное и сближает, не так ли? Зрители были в восторге от процесса, а итоговые работы заняли почетное место в нашем архиве.</p>
-                    <div style="clear: both;"></div>
-                </div>
-                
-                <!-- БЛОК 3: СТРАННЫЙ СТРИМ (Floated Right) -->
-                <div style="margin-bottom: 40px;">
-                    <div style="float: right; width: 40%; min-width: 250px; margin-left: 25px; margin-bottom: 15px; margin-top: 5px;">
-                        <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
-                            <picture style="width: 100%; display: block;">
-                                <source srcset="img/news/news_14_09_2026_voice.webp" type="image/webp">
-                                <img src="img/news/news_14_09_2026_voice.webp" alt="Почему все путают нас с тобой" style="width: 100%; display: block; border: 1px solid #555;">
-                            </picture>
-                        </div>
-                    </div>
-                    
-                    <h3 class="np-title" style="margin-top: 0;">СЮРПРИЗ НА СТРИМЕ: ЧТО ЭТО БЫЛО?</h3>
-                    <p class="np-text">Субботний вечер обещал быть обычным... но что-то явно пошло не так. Подготовка к эфиру с треском провалилась, а сам Юрумми вел себя крайне странно. Вроде бы это он, но голос и интонации звучали совершенно иначе, да и поведение было подозрительно милым. Редакция до сих пор в замешательстве и не может понять, что именно произошло и кто на самом деле сидел за микрофоном!</p>
-                    <p class="np-text">Хаос на этом не закончился: вместо продолжения марафона, этот таинственный "кто-то" пошёл играть в одну из частей Соника, которую настоящий Юрумми уже давно осилил. И хотя прохождение выглядело довольно нелепо, это было невероятно забавно! Весь чат просто умирал со смеху, наблюдая за этими хаотичными стараниями.</p>
-                    <p class="np-text">Для тех, кто пропустил этот спонтанный перформанс — хорошие новости! Уже на этой неделе на одном из наших YouTube-каналов выйдет новое видео с нарезкой тех самых смешных и загадочных моментов со стрима. Вы сможете воочию увидеть весь этот очаровательный хаос и посмеяться вместе с нами. Ждём с нетерпением!</p>
-                    <div style="clear: both;"></div>
-                </div>
-                
-                <!-- БЛОК 4: ТЕЛЕГРАМ И СОНИК (Floated Left) -->
-                <div style="margin-bottom: 20px;">
-                    <div style="float: left; width: 35%; min-width: 280px; max-width: 350px; margin-right: 25px; margin-bottom: 15px; margin-top: 5px;">
-                        <div id="news-tg-container" style="min-height: 200px;">
-                            <!-- Виджет загружается через JS -->
-                        </div>
-                        <a href="https://t.me/yurummiyt/788" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 15px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
-                            Читать в Telegram ➔
-                        </a>
-                    </div>
-                    
-                    <h3 class="np-title" style="margin-top: 0;">ДОСТАВКА НОСТАЛЬГИИ ДЛЯ КУМЫЧА</h3>
-                    <p class="np-text">А теперь к по-настоящему душевным новостям! В свежем посте в Telegram Юрумми показал посылку, которую он заботливо собрал и отправил Кумычу — старому доброму другу и стримеру, с которым они вместе начинали свой путь в стриминге.</p>
-                    <p class="np-text">Внутри посылки оказались две пачки конфет и две картины. Одна из них — это тот самый арт, который Юрумми рисовал ранее на своих трансляциях, и теперь этот шедевр доставлен прямо в руки адресату.</p>
-                    <p class="np-text">Такие жесты показывают, что несмотря на время, старая стримерская дружба остаётся крепкой. Кумыч уже успел оценить подарок и отметил, что вживую картина выглядит куда круче, чем на фото!</p>
-                    
-                    <h3 class="np-title" style="margin-top: 30px;">БОЛЬ И СТРАДАНИЯ: ФИНАЛ SONIC ADVENTURE 2</h3>
-                    <p class="np-text">Раз уж мы заговорили про марафон, редакция не может не отметить, пожалуй, самую душную и утомительную часть прохождения на данный момент — Sonic Adventure 2. Нашему стримеру было невероятно лень её заканчивать, и, оглядываясь назад, решение заставлять себя проходить её до конца было фатальной ошибкой.</p>
-                    <p class="np-text">Целый час бессмысленной беготни, багов и потраченных нервов ради откровенно глупого и абсурдного сюжета. Зато этот опыт надолго останется в памяти как главное испытание на прочность нервной системы!</p>
-                    <div style="clear: both;"></div>
-                </div>
-            </div>
-        `
-    },
     {
         issueNumber: 4,
         date: "07 Сентября 2026",
