@@ -807,6 +807,7 @@
 }
 
 
+
 /* ==========================================
    HALLOWEEN THEME (October)
    ========================================== */
@@ -821,7 +822,6 @@
     color: #a8b0c0 !important;
 }
 
-/* Tombstone engraving effect */
 .halloween-month .stream-day .day-number,
 .halloween-month .special .day-number {
     color: #4a505c !important;
@@ -831,7 +831,6 @@
     z-index: 2;
 }
 
-/* RIP Text */
 .halloween-month .stream-day::before,
 .halloween-month .special::before {
     content: "R.I.P.";
@@ -847,10 +846,9 @@
     pointer-events: none;
 }
 
-/* Ghost Emoji */
 .halloween-month .stream-day::after,
 .halloween-month .special::after {
-    content: "👻";
+    content: "\1F47B"; /* ghost */
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -865,10 +863,9 @@
     50% { transform: translateY(-5px); }
 }
 
-/* Spider webs on corners */
 .halloween-month .stream-day .stream-info::before,
 .halloween-month .special .stream-info::before {
-    content: "🕸️";
+    content: "\1F578"; /* cobweb */
     position: absolute;
     top: -5px;
     left: -5px;
@@ -883,16 +880,14 @@
     z-index: 2;
     background: transparent !important;
     border: none !important;
-    margin-top: 15px; /* Push down to avoid RIP text */
+    margin-top: 15px;
     text-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
     color: #ff8c42 !important;
 }
 
-/* Blood drip for specials */
 .halloween-month .special {
     border-color: #8b0000 !important;
 }
 .halloween-month .special::after {
-    content: "🧛";
+    content: "\1F9DB"; /* vampire */
 }
-
