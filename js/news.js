@@ -1,9 +1,9 @@
 const NEWS_ISSUES = [
-    {
+            {
         issueNumber: 6,
         date: "28 Сентября 2026",
         tgPostId: "",
-        html: 
+        html: `
             <div style="color: #ccc; text-align: justify; padding-bottom: 20px;">
                 
                 <!-- Газетные колонки -->
@@ -82,9 +82,150 @@ const NEWS_ISSUES = [
                 </div>
 
             </div>
-        
+        `
     },
     
+    {
+        issueNumber: 5,
+        date: "14 Сентября 2026",
+        tgPostId: "788",
+        html: `
+            <div style="color: #ccc; text-align: justify;">
+                
+                <!-- БЛОК 1: КОМИКСЫ (Floated Left) -->
+                <div style="margin-bottom: 40px;">
+                    <div style="float: left; width: 45%; min-width: 280px; margin-right: 25px; margin-bottom: 15px;">
+                        <div class="np-slider" style="aspect-ratio: 2000/2210; background: transparent; border: none;">
+                            <picture class="np-slide active" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_1.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_1.webp" alt="Мем 1">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_2.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_2.webp" alt="Мем 2">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_3.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_3.webp" alt="Мем 3">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_4.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_4.webp" alt="Мем 4">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_5.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_5.webp" alt="Мем 5">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_6.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_6.webp" alt="Мем 6">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_7.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_7.webp" alt="Мем 7">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_8.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_8.webp" alt="Мем 8">
+                            </picture>
+                            <picture class="np-slide" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_comic_9.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_comic_9.webp" alt="Мем 9">
+                            </picture>
+                            
+                            <div class="np-slider-nav">
+                                <button class="np-slider-btn" onclick="changeNewsSlide(-1)">&#10094;</button>
+                                <button class="np-slider-btn" onclick="changeNewsSlide(1)">&#10095;</button>
+                            </div>
+                            <div class="np-slider-dots">
+                                <div class="np-dot active" onclick="setNewsSlide(0)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(1)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(2)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(3)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(4)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(5)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(6)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(7)"></div>
+                                <div class="np-dot" onclick="setNewsSlide(8)"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <h3 class="np-title" style="margin-top: 0;">ТВОРЧЕСТВО ЧАТА: СМЕШНЫЕ ПОДПИСИ</h3>
+                    <p class="np-text"><span class="dropcap">Н</span>а этой неделе Юрумми запустил настоящий флешмоб! Наш стример нарисовал новый комикс с собой и Маку, оставив пустое облачко специально для зрителей. Редакция газеты просто в шоке от того, какую безграничную фантазию проявил чат — результаты получились шедевральными!</p>
+                    <p class="np-text">Первым идёт оригинальный вариант автора, а дальше — лучшие и самые забавные работы прямиком с трансляций. Кто-то решил пошутить про кружку, кто-то вспомнил классические мемы канала, а некоторые работы были настолько абсурдными, что вызвали приступ смеха у всей редакции.</p>
+                    <p class="np-text">Такие интерактивы в очередной раз доказывают, насколько у нас креативное комьюнити! Готовы посмеяться? Листайте слайдер и наслаждайтесь народным творчеством!</p>
+                    <div style="clear: both;"></div>
+                </div>
+                
+                <!-- БЛОК 2: МАГМА КОЛЛАБ (Floated Right, width 60%) -->
+                <div style="margin-bottom: 40px;">
+                    <div style="float: right; width: 60%; min-width: 300px; margin-left: 25px; margin-bottom: 15px; margin-top: 5px;">
+                        <div class="np-slider" style="aspect-ratio: 16/9; background: transparent; border: 1px solid #555;">
+                            <picture id="magma-slide-0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.3s; pointer-events: auto;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_magma_1.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_magma_1.webp" alt="Магма 1" style="width: 100%; height: 100%; object-fit: contain;">
+                            </picture>
+                            <picture id="magma-slide-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s; pointer-events: none;" onclick="openLightbox(this)" role="button" tabindex="0" style="cursor: pointer;">
+                                <source srcset="img/news/news_14_09_2026_magma_2.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_magma_2.webp" alt="Магма 2" style="width: 100%; height: 100%; object-fit: contain;">
+                            </picture>
+                            <div class="np-slider-nav">
+                                <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10094;</button>
+                                <button class="np-slider-btn" onclick="let s0=document.getElementById('magma-slide-0'); let s1=document.getElementById('magma-slide-2'); let isS0 = s0.style.opacity=='1'; s0.style.opacity=isS0?0:1; s0.style.pointerEvents=isS0?'none':'auto'; s1.style.opacity=isS0?1:0; s1.style.pointerEvents=isS0?'auto':'none';">&#10095;</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="np-title" style="margin-top: 0;">СПАСИТЕЛЬНЫЙ КОЛЛАБ В MAGMA</h3>
+                    <p class="np-text">Когда один из эфиров находился на грани срыва, на помощь пришло искусство! Юрумми и Маку провели невероятно уютный совместный стрим в Magma, где решили поменяться ролями: художница рисовала нашего лиса, а он с огромным энтузиазмом взялся за её персонажа!</p>
+                    <p class="np-text">Результат превзошёл все ожидания! Посмотрите на эти шедевры. Совместное творчество всегда рождает что-то уникальное и сближает, не так ли? Зрители были в восторге от процесса, а итоговые работы заняли почетное место в нашем архиве.</p>
+                    <div style="clear: both;"></div>
+                </div>
+                
+                <!-- БЛОК 3: СТРАННЫЙ СТРИМ (Floated Right) -->
+                <div style="margin-bottom: 40px;">
+                    <div style="float: right; width: 40%; min-width: 250px; margin-left: 25px; margin-bottom: 15px; margin-top: 5px;">
+                        <div class="np-image-box" onclick="openLightbox(this)" role="button" tabindex="0">
+                            <picture style="width: 100%; display: block;">
+                                <source srcset="img/news/news_14_09_2026_voice.webp" type="image/webp">
+                                <img src="img/news/news_14_09_2026_voice.webp" alt="Почему все путают нас с тобой" style="width: 100%; display: block; border: 1px solid #555;">
+                            </picture>
+                        </div>
+                    </div>
+                    
+                    <h3 class="np-title" style="margin-top: 0;">СЮРПРИЗ НА СТРИМЕ: ЧТО ЭТО БЫЛО?</h3>
+                    <p class="np-text">Субботний вечер обещал быть обычным... но что-то явно пошло не так. Подготовка к эфиру с треском провалилась, а сам Юрумми вел себя крайне странно. Вроде бы это он, но голос и интонации звучали совершенно иначе, да и поведение было подозрительно милым. Редакция до сих пор в замешательстве и не может понять, что именно произошло и кто на самом деле сидел за микрофоном!</p>
+                    <p class="np-text">Хаос на этом не закончился: вместо продолжения марафона, этот таинственный "кто-то" пошёл играть в одну из частей Соника, которую настоящий Юрумми уже давно осилил. И хотя прохождение выглядело довольно нелепо, это было невероятно забавно! Весь чат просто умирал со смеху, наблюдая за этими хаотичными стараниями.</p>
+                    <p class="np-text">Для тех, кто пропустил этот спонтанный перформанс — хорошие новости! Уже на этой неделе на одном из наших YouTube-каналов выйдет новое видео с нарезкой тех самых смешных и загадочных моментов со стрима. Вы сможете воочию увидеть весь этот очаровательный хаос и посмеяться вместе с нами. Ждём с нетерпением!</p>
+                    <div style="clear: both;"></div>
+                </div>
+                
+                <!-- БЛОК 4: ТЕЛЕГРАМ И СОНИК (Floated Left) -->
+                <div style="margin-bottom: 20px;">
+                    <div style="float: left; width: 35%; min-width: 280px; max-width: 350px; margin-right: 25px; margin-bottom: 15px; margin-top: 5px;">
+                        <div id="news-tg-container" style="min-height: 200px;">
+                            <!-- Виджет загружается через JS -->
+                        </div>
+                        <a href="https://t.me/yurummiyt/788" target="_blank" class="btn-donate btn-da" style="font-size: 16px; padding: 12px; margin-top: 15px; width: 100%; box-sizing: border-box; display: block; text-align: center;">
+                            Читать в Telegram ➔
+                        </a>
+                    </div>
+                    
+                    <h3 class="np-title" style="margin-top: 0;">ДОСТАВКА НОСТАЛЬГИИ ДЛЯ КУМЫЧА</h3>
+                    <p class="np-text">А теперь к по-настоящему душевным новостям! В свежем посте в Telegram Юрумми показал посылку, которую он заботливо собрал и отправил Кумычу — старому доброму другу и стримеру, с которым они вместе начинали свой путь в стриминге.</p>
+                    <p class="np-text">Внутри посылки оказались две пачки конфет и две картины. Одна из них — это тот самый арт, который Юрумми рисовал ранее на своих трансляциях, и теперь этот шедевр доставлен прямо в руки адресату.</p>
+                    <p class="np-text">Такие жесты показывают, что несмотря на время, старая стримерская дружба остаётся крепкой. Кумыч уже успел оценить подарок и отметил, что вживую картина выглядит куда круче, чем на фото!</p>
+                    
+                    <h3 class="np-title" style="margin-top: 30px;">БОЛЬ И СТРАДАНИЯ: ФИНАЛ SONIC ADVENTURE 2</h3>
+                    <p class="np-text">Раз уж мы заговорили про марафон, редакция не может не отметить, пожалуй, самую душную и утомительную часть прохождения на данный момент — Sonic Adventure 2. Нашему стримеру было невероятно лень её заканчивать, и, оглядываясь назад, решение заставлять себя проходить её до конца было фатальной ошибкой.</p>
+                    <p class="np-text">Целый час бессмысленной беготни, багов и потраченных нервов ради откровенно глупого и абсурдного сюжета. Зато этот опыт надолго останется в памяти как главное испытание на прочность нервной системы!</p>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        `
+    },
     {
         issueNumber: 4,
         date: "07 Сентября 2026",
