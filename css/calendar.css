@@ -805,3 +805,94 @@
     0%, 100% { opacity: 0.8; transform: skewX(0); }
     50% { opacity: 1; transform: skewX(2deg); filter: brightness(1.2); }
 }
+
+
+/* ==========================================
+   HALLOWEEN THEME (October)
+   ========================================== */
+.halloween-month .stream-day,
+.halloween-month .special {
+    background: #1a1c23 !important;
+    border: 2px solid #5a6270 !important;
+    border-radius: 40px 40px 8px 8px !important; /* Tombstone shape */
+    box-shadow: inset 0 -15px 25px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.5) !important;
+    position: relative;
+    overflow: hidden;
+    color: #a8b0c0 !important;
+}
+
+/* Tombstone engraving effect */
+.halloween-month .stream-day .day-number,
+.halloween-month .special .day-number {
+    color: #4a505c !important;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.1), -1px -1px 2px rgba(0,0,0,0.8);
+    font-family: 'Times New Roman', serif;
+    font-size: 20px;
+    z-index: 2;
+}
+
+/* RIP Text */
+.halloween-month .stream-day::before,
+.halloween-month .special::before {
+    content: "R.I.P.";
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Times New Roman', serif;
+    font-size: 11px;
+    color: #4a505c;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.1), -1px -1px 1px rgba(0,0,0,0.8);
+    pointer-events: none;
+}
+
+/* Ghost Emoji */
+.halloween-month .stream-day::after,
+.halloween-month .special::after {
+    content: "👻";
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 18px;
+    opacity: 0.7;
+    pointer-events: none;
+    animation: floatGhost 3s ease-in-out infinite;
+}
+
+@keyframes floatGhost {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Spider webs on corners */
+.halloween-month .stream-day .stream-info::before,
+.halloween-month .special .stream-info::before {
+    content: "🕸️";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    font-size: 24px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.halloween-month .stream-day .stream-info,
+.halloween-month .special .stream-info {
+    position: relative;
+    z-index: 2;
+    background: transparent !important;
+    border: none !important;
+    margin-top: 15px; /* Push down to avoid RIP text */
+    text-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+    color: #ff8c42 !important;
+}
+
+/* Blood drip for specials */
+.halloween-month .special {
+    border-color: #8b0000 !important;
+}
+.halloween-month .special::after {
+    content: "🧛";
+}
+
