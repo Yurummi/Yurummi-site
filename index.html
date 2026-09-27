@@ -887,12 +887,12 @@
                         </p>
                         
                         <!-- Блок с озвучкой (разворачивающийся) -->
-                        <div id="sonic-dubbing-details" style="margin-top: 25px; width: 100%; box-sizing: border-box; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-                            <div style="background: linear-gradient(90deg, rgba(0,210,255,0.15), transparent); padding: 15px 20px; border-bottom: 1px solid #333;">
-                                <h4 style="color: #00d2ff; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
-                                    🎙️ Секретный Архив: Озвучка
+                        <details id="sonic-dubbing-details" style="margin-top: 25px; width: 100%; box-sizing: border-box; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                            <summary style="background: linear-gradient(90deg, rgba(0,210,255,0.15), transparent); padding: 15px 20px; border-bottom: 1px solid #333; cursor: pointer; list-style: none; outline: none;">
+                                <h4 style="color: #00d2ff; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; pointer-events: none;">
+                                    🎙️ Секретный Архив: Озвучка (Развернуть)
                                 </h4>
-                            </div>
+                            </summary>
                             
                             <div style="padding: 20px;">
                                 <p style="margin-top: 0; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; line-height: 1.6;">Мы с Маку решили сделать фанатскую озвучку двух случайных серий мультсериала! Видео хранятся в архиве Google Диска, чтобы избежать блокировок. <br>Кстати, все наши секретные материалы иногда всплывают в <a href="https://t.me/yurummiplums" target="_blank" style="color: #00d2ff; text-decoration: underline;">Секретном Архиве (Telegram)</a>.</p>
@@ -913,9 +913,9 @@
                                 
                                 <!-- Переключатель серий -->
                                 <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-                                    <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<span style=\'color: #ff3385;\'>Юрумми:</span> Соник<br><span style=\'color: #a855f7;\'>Маку:</span> Эми')" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px;">Лихорадка в хижине</button>
+                                    <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Соник<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Эми')" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px;">Лихорадка в хижине</button>
                                     
-                                    <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<span style=\'color: #ff3385;\'>Юрумми:</span> Тейлз<br><span style=\'color: #a855f7;\'>Маку:</span> Зоуи и Эггман')" style="background: rgba(0, 210, 255, 0.1); color: #00d2ff; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px;">Влюблённый Тейлз</button>
+                                    <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Тейлз<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Зоуи и Эггман')" style="background: rgba(0, 210, 255, 0.1); color: #00d2ff; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px;">Влюблённый Тейлз</button>
                                 </div>
                                 
                                 <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
@@ -930,7 +930,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </details>
                     </div>
                 </div>
 
