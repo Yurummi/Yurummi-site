@@ -3,7 +3,7 @@ const NEWS_ISSUES = [
         issueNumber: 6,
         date: "28 Сентября 2026",
         tgPostId: "",
-        html: 
+        html: `
             <div style="color: #ccc; text-align: justify; padding-bottom: 20px;">
                 
                 <!-- Заголовок и шутка про глитчи -->
