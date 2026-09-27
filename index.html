@@ -689,11 +689,20 @@
                     🖱️ Зажми и тащи / Колесико для зума
                 </div>
 
-                <div class="tree-canvas" id="loreCanvas">
+                
+                <button id="lore-fullscreen-btn" onclick="toggleLoreFullscreen()" style="position: absolute; top: 15px; right: 15px; z-index: 10; background: rgba(0,0,0,0.8); color: #fff; border: 1px solid #555; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 14px; display: flex; gap: 8px; align-items: center; transition: 0.2s;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    Интерактивная карта (На весь экран)
+                </button>
+                <div id="lore-network-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 5; background: #0a0a0a;"></div>
+
+                <div class="tree-canvas" id="loreCanvas" style="display: none;">
                     <svg width="100%" height="100%" style="position:absolute; top:0; left:0; z-index:1; pointer-events:none;">
                         <path d="M 50 125 L 550 125"                      stroke="#ff3385" stroke-width="4" fill="none" stroke-linecap="round"/>
                         <path d="M 550 125 L 630 60  L 750 60"            stroke="#444"    stroke-width="4" fill="none" stroke-linecap="round"/>
                         <path d="M 550 125 L 630 190 L 1250 190"          stroke="#a855f7" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <!-- Ветка озвучки Соника -->
+                        <path d="M 1030 190 L 1030 250 L 1150 250" stroke="#00d2ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="6,6"/>
                     </svg>
 
                     <div class="h-node" style="top:113px; left:38px;" onclick="document.getElementById('card-intro').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
@@ -727,8 +736,12 @@
                     <div class="h-node active event" style="top:178px; left:868px;" onclick="document.getElementById('card-act4').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
                         <div class="h-label top">Ивент: Горничная</div>
                     </div>
-                    <div class="h-node active event event-sonic" style="top:178px; left:1018px;">
+                    <div class="h-node active event event-sonic" style="top:178px; left:1018px;" onclick="document.getElementById('card-sonic').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
                         <div class="h-label bottom">Ивент: Соник</div>
+                    </div>
+                    
+                    <div class="h-node active" style="top:238px; left:1118px;" onclick="document.getElementById('sonic-dubbing-details').open = true; document.getElementById('card-sonic').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
+                        <div class="h-label bottom" style="color:#00d2ff; width: 140px; text-align: center; left: -50px;">Озвучка Соник Бум<br><span style="font-size:10px;">(Сайд-квест)</span></div>
                     </div>
                     <div class="h-node future" style="top:178px; left:1168px;">
                         <div class="h-label top" style="color:#a855f7;">...Загрузка...</div>
@@ -860,6 +873,63 @@
                     </div>
                 </div>
 
+                <div id="card-sonic" class="lore-card" style="align-items: flex-start;">
+                    <div class="lore-video">
+                        <!-- Плейсхолдер для Соника -->
+                        <div class="video-placeholder" style="background-image: url('img/lore/Sonic-marathon.webp'), url('img/lore/Sonic-marathon.png');">
+                            <div class="video-overlay" style="background: rgba(0,0,0,0.7);">МАРАФОН СОНИКА</div>
+                        </div>
+                    </div>
+                    <div class="lore-content">
+                        <h3 class="lore-title" style="color:#00d2ff;">Марафон Соника (Приостановлен)</h3>
+                        <p class="lore-desc">
+                            Мы начали грандиозный марафон по играм серии Sonic, но из-за непредвиденных технических сложностей его пришлось временно отложить. Но на этом сониковский контент не закончился!
+                        </p>
+                        
+                        <!-- Блок с озвучкой (разворачивающийся) -->
+                        <details id="sonic-dubbing-details" style="margin-top: 20px; width: 100%; box-sizing: border-box; background: rgba(0, 210, 255, 0.05); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 8px; padding: 10px;">
+                            <summary style="color: #00d2ff; font-weight: bold; cursor: pointer; padding: 5px; user-select: none;">
+                                🎙️ Доп. Ивент: Озвучка "Соник Бум" (Развернуть)
+                            </summary>
+                            <div style="margin-top: 15px; font-size: 0.95rem; line-height: 1.5;">
+                                <p style="margin-bottom: 15px;">Мы с Маку решили сделать фанатскую озвучку двух случайных серий мультсериала Соник Бум! Так как YouTube может заблокировать нас за авторские права, видео будут загружены в наш Telegram или на другой плеер.</p>
+                                
+                                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 6px; text-align: center; border: 1px dashed rgba(255,255,255,0.2);">
+                                    <script>
+                                    function switchSonicEpisode(btn, url, castHTML) {
+                                        document.getElementById('sonic-player').src = url;
+                                        document.getElementById('sonic-cast-content').innerHTML = castHTML;
+                                        var btns = document.querySelectorAll('.sonic-ep-btn');
+                                        btns.forEach(b => {
+                                            b.style.background = 'transparent';
+                                            b.style.color = '#00d2ff';
+                                        });
+                                        btn.style.background = '#00d2ff';
+                                        btn.style.color = '#000';
+                                    }
+                                    </script>
+                                    
+                                    <!-- Переключатель серий -->
+                                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap;">
+                                        <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<span style=\'color: #ff3385;\'>Юрумми:</span> Соник<br><span style=\'color: #a855f7;\'>Маку:</span> Эми')" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px;">Лихорадка в хижине</button>
+                                        
+                                        <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<span style=\'color: #ff3385;\'>Юрумми:</span> Тейлз<br><span style=\'color: #a855f7;\'>Маку:</span> Зоуи и Эггман')" style="background: transparent; color: #00d2ff; border: 1px solid #00d2ff; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px;">Влюблённый Тейлз</button>
+                                    </div>
+                                    
+                                    <iframe id="sonic-player" src="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview" width="100%" height="360" frameborder="0" allow="autoplay; fullscreen" style="border-radius: 8px; background: #000;"></iframe>
+                                    <div id="sonic-cast" style="margin-top: 15px; font-size: 0.95rem; text-align: left; padding: 12px; background: rgba(0, 210, 255, 0.05); border-left: 3px solid #00d2ff; border-radius: 4px; line-height: 1.6;">
+                                        <strong style="color: #00d2ff; display: block; margin-bottom: 5px;">🎙️ Роли озвучивали:</strong>
+                                        <div id="sonic-cast-content">
+                                            <span style="color: #ff3385;">Юрумми:</span> Соник<br>
+                                            <span style="color: #a855f7;">Маку:</span> Эми
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -950,5 +1020,128 @@
     <script src="js/lore.js"></script>
     <script src="js/easter.js"></script>
 
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+    <script>
+    // --- LORE INTERACTIVE NETWORK ---
+    document.addEventListener("DOMContentLoaded", function() {
+        if (!document.getElementById('lore-network-container')) return;
+        
+        var nodes = new vis.DataSet([
+            { id: 'intro', label: 'Начало', shape: 'dot', color: '#ff3385', size: 15 },
+            { id: 'act1', label: 'Акт I\nИИ', image: 'img/lore/akt1.webp', shape: 'circularImage', size: 30 },
+            { id: 'act2', label: 'Акт II\nЗащита', image: 'img/lore/akt2.webp', shape: 'circularImage', size: 30 },
+            { id: 'act3', label: 'Акт III\nСудьба', image: 'img/lore/akt3.webp', shape: 'circularImage', size: 30 },
+            { id: 'dead', label: 'Стереть\nданные', shape: 'dot', color: '#444', size: 15 },
+            { id: 'act4_save', label: 'Сохранить\nФурумми', shape: 'dot', color: '#a855f7', size: 15 },
+            { id: 'maid', label: 'Вирус\nГорничной', image: 'img/lore/maid.webp', shape: 'circularImage', size: 35 },
+            { id: 'sonic', label: 'Марафон\nСоника', image: 'img/lore/Sonic-marathon.webp', shape: 'circularImage', size: 30 },
+            { id: 'sonic_dub', label: 'Озвучка\nСоник Бум', shape: 'box', color: '#0055ff', font: {color: '#fff'} },
+            { id: 'future', label: '???\n(Загрузка...)', shape: 'dot', color: '#555', size: 15 }
+        ]);
+
+        var edges = new vis.DataSet([
+            { from: 'intro', to: 'act1', color: {color: '#ff3385'} },
+            { from: 'act1', to: 'act2', color: {color: '#ff3385'} },
+            { from: 'act2', to: 'act3', color: {color: '#ff3385'} },
+            { from: 'act3', to: 'dead', color: {color: '#444'}, dashes: true },
+            { from: 'act3', to: 'act4_save', color: {color: '#a855f7'} },
+            { from: 'act4_save', to: 'maid', color: {color: '#a855f7'} },
+            { from: 'maid', to: 'sonic', color: {color: '#a855f7'} },
+            { from: 'sonic', to: 'sonic_dub', color: {color: '#00d2ff'}, dashes: true },
+            { from: 'sonic', to: 'future', color: {color: '#555'}, dashes: true }
+        ]);
+
+        var container = document.getElementById('lore-network-container');
+        var data = { nodes: nodes, edges: edges };
+        var options = {
+            nodes: {
+                borderWidth: 2,
+                borderWidthSelected: 4,
+                font: { color: '#ffffff', size: 14, strokeWidth: 3, strokeColor: '#000000' }
+            },
+            edges: {
+                width: 2,
+                smooth: { type: 'continuous' }
+            },
+            physics: {
+                solver: 'forceAtlas2Based',
+                forceAtlas2Based: {
+                    gravitationalConstant: -100,
+                    centralGravity: 0.01,
+                    springLength: 100,
+                    springConstant: 0.08
+                },
+                maxVelocity: 50,
+                minVelocity: 0.1,
+                timestep: 0.5
+            },
+            interaction: {
+                hover: true,
+                zoomView: true,
+                dragView: true
+            }
+        };
+        var network = new vis.Network(container, data, options);
+
+        // Click event to scroll to cards
+        network.on("click", function (params) {
+            if (params.nodes.length > 0) {
+                var nodeId = params.nodes[0];
+                var cardMap = {
+                    'intro': 'card-intro',
+                    'act1': 'card-act1',
+                    'act2': 'card-act2',
+                    'act3': 'card-act3',
+                    'act4_save': 'card-act4',
+                    'maid': 'card-act4',
+                    'sonic': 'card-sonic',
+                    'sonic_dub': 'card-sonic'
+                };
+                
+                if (nodeId === 'sonic_dub') {
+                    var details = document.getElementById('sonic-dubbing-details');
+                    if(details) details.open = true;
+                }
+                
+                var targetId = cardMap[nodeId];
+                if (targetId) {
+                    var el = document.getElementById(targetId);
+                    if (el) {
+                        el.scrollIntoView({behavior:'smooth', block:'center'});
+                        // if fullscreen, close it to see the card
+                        if(document.getElementById('loreWindow').classList.contains('fullscreen-lore')) {
+                            toggleLoreFullscreen();
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    function toggleLoreFullscreen() {
+        var win = document.getElementById('loreWindow');
+        var btn = document.getElementById('lore-fullscreen-btn');
+        if (win.classList.contains('fullscreen-lore')) {
+            win.classList.remove('fullscreen-lore');
+            win.style.position = 'relative';
+            win.style.height = '400px';
+            win.style.width = '100%';
+            win.style.zIndex = '1';
+            btn.textContent = '🔍 На весь экран';
+            document.body.style.overflow = 'auto';
+        } else {
+            win.classList.add('fullscreen-lore');
+            win.style.position = 'fixed';
+            win.style.top = '0';
+            win.style.left = '0';
+            win.style.width = '100vw';
+            win.style.height = '100vh';
+            win.style.zIndex = '99999';
+            btn.textContent = '✖ Закрыть';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    </script>
 </body>
 </html>
