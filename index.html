@@ -881,16 +881,31 @@
                         </div>
                     </div>
                     <div class="lore-content">
-                        <h3 class="lore-title" style="color:#00d2ff;">Марафон Соника (Приостановлен)</h3>
+                        <h3 class="lore-title" style="color:#00d2ff;">Марафон Соника</h3>
                         <p class="lore-desc">
                             Мы начали грандиозный марафон по играм серии Sonic, но из-за непредвиденных технических сложностей его пришлось временно отложить. Но на этом сониковский контент не закончился!
                         </p>
                         
                         <!-- Блок с озвучкой (разворачивающийся) -->
                         <details id="sonic-dubbing-details" style="margin-top: 25px; width: 100%; box-sizing: border-box; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-                            <summary style="background: linear-gradient(90deg, rgba(0,210,255,0.15), transparent); padding: 15px 20px; border-bottom: 1px solid #333; cursor: pointer; list-style: none; outline: none;">
-                                <h4 style="color: #00d2ff; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; pointer-events: none;">
-                                    🎙️ Секретный Архив: Озвучка (Развернуть)
+                            <style>
+                                #sonic-dubbing-details summary::after {
+                                    content: '▼';
+                                    color: #00d2ff;
+                                    font-size: 1.1rem;
+                                    margin-left: auto;
+                                    transition: transform 0.3s;
+                                }
+                                #sonic-dubbing-details[open] summary::after {
+                                    transform: rotate(180deg);
+                                }
+                                #sonic-dubbing-details summary::-webkit-details-marker {
+                                    display: none;
+                                }
+                            </style>
+                            <summary style="background: linear-gradient(90deg, rgba(0,210,255,0.15), transparent); padding: 15px 20px; border-bottom: 1px solid #333; cursor: pointer; list-style: none; outline: none; display: flex; align-items: center; justify-content: space-between;">
+                                <h4 style="color: #00d2ff; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
+                                    🎙️ Секретный Архив: Озвучка
                                 </h4>
                             </summary>
                             
@@ -898,6 +913,17 @@
                                 <p style="margin-top: 0; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; line-height: 1.6;">Мы с Маку решили сделать фанатскую озвучку двух случайных серий мультсериала! Видео хранятся в архиве Google Диска, чтобы избежать блокировок. <br>Кстати, все наши секретные материалы иногда всплывают в <a href="https://t.me/yurummiplums" target="_blank" style="color: #00d2ff; text-decoration: underline;">Секретном Архиве (Telegram)</a>.</p>
                                 
                                 <script>
+                                function switchNewsSonicEpisode(btn, url, castHTML) {
+                                    document.getElementById('news-sonic-player').src = url;
+                                    document.getElementById('news-sonic-cast-content').innerHTML = castHTML;
+                                    var btns = document.querySelectorAll('.news-ep-btn');
+                                    btns.forEach(b => {
+                                        b.style.background = 'rgba(0, 210, 255, 0.1)';
+                                        b.style.color = '#00d2ff';
+                                    });
+                                    btn.style.background = '#00d2ff';
+                                    btn.style.color = '#000';
+                                }
                                 function switchSonicEpisode(btn, url, castHTML) {
                                     document.getElementById('sonic-player').src = url;
                                     document.getElementById('sonic-cast-content').innerHTML = castHTML;

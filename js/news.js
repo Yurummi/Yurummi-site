@@ -42,19 +42,7 @@ const NEWS_ISSUES = [
                 <div style="clear: both; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px dashed #00d2ff; text-align: center;">
                     <h4 style="color: #00d2ff; margin-top: 0; font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 20px;">🎬 Эксклюзивная премьера в Yurummi Times</h4>
                     
-                    <script>
-                    function switchNewsSonicEpisode(btn, url, castHTML) {
-                        document.getElementById('news-sonic-player').src = url;
-                        document.getElementById('news-sonic-cast-content').innerHTML = castHTML;
-                        var btns = document.querySelectorAll('.news-ep-btn');
-                        btns.forEach(b => {
-                            b.style.background = 'rgba(0, 210, 255, 0.1)';
-                            b.style.color = '#00d2ff';
-                        });
-                        btn.style.background = '#00d2ff';
-                        btn.style.color = '#000';
-                    }
-                    </script>
+                    
                     <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
                         <button class="news-ep-btn" onclick="switchNewsSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Соник<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Эми')" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Лихорадка в хижине</button>
                         <button class="news-ep-btn" onclick="switchNewsSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Тейлз<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Зоуи и Эггман')" style="background: rgba(0, 210, 255, 0.1); color: #00d2ff; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Влюблённый Тейлз</button>
