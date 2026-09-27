@@ -1,59 +1,53 @@
 const NEWS_ISSUES = [
-                {
+                    {
         issueNumber: 6,
         date: "28 Сентября 2026",
         tgPostId: "",
         html: `
             <div style="color: #ccc; text-align: justify; padding-bottom: 20px;">
                 
-                <!-- Intro (Full width) -->
-                <div style="border-bottom: 1px dashed #555; padding-bottom: 15px; margin-bottom: 20px;">
+                <!-- ROW 1: Intro (Full Width) -->
+                <div style="border-bottom: 1px dashed #555; padding-bottom: 15px; margin-bottom: 25px;">
                     <span class="dropcap">Э</span><h3 class="news-article-title" style="border:none; margin-bottom:5px; padding-bottom:0;">кстренное включение!</h3>
-                    <p class="np-text">Дорогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Стример куда-то пропал, сайт жил своей жизнью, но сейчас вроде всё починили. Возвращаемся к нормальным новостям!</p>
+                    <p class="np-text">Дорогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Возвращаемся к нормальным новостям!</p>
                 </div>
 
-                <!-- Yamada Art (Float Right, Big) -->
-                <div style="float: right; width: 55%; min-width: 300px; margin-left: 25px; margin-bottom: 15px; border: 1px solid #444; padding: 10px; background: #222;">
-                    <h3 class="news-article-title" style="font-size: 18px; margin-bottom: 10px; text-align: center; border-bottom: none;">Ямада снова бьёт рекорды</h3>
-                    <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
-                    <div style="text-align: center; font-size: 12px; color: #888; margin-top: 5px;">Прекрасное ТРИО</div>
-                </div>
-
-                <!-- Exam (Float Left, flowing around Yamada) -->
-                <div style="margin-bottom: 20px;">
-                    <h3 class="news-article-title" style="font-size: 20px; border-bottom: none;">Экзамен близко... Кому какое дело?</h3>
-                    <p class="np-text">Уже в этот четверг, 1 октября, нас ждёт великий и ужасный экзамен B2 по немецкому. Редакция хотела бы заявить, что стример усердно готовится... Но мы же честная газета! Юрумми вызвался на пересдачу, героически об этом вспомнил и благополучно забил. Готовимся к тому, что на вечернем стриме после экзамена кто-то будет долго и упорно ныть о том, как всё было сложно.</p>
-                </div>
-
-                <!-- Sonic Meme (Float Left, medium) -->
-                <div style="float: left; width: 40%; min-width: 200px; margin-right: 25px; margin-bottom: 15px;">
-                    <img src="img/news/sonic-meme.webp" alt="Sonic Meme" style="width: 100%; border-radius: 8px; border: 1px solid #555;">
-                </div>
-
-                <!-- Sonic Text (Flows around Sonic Meme) -->
-                <div style="margin-bottom: 20px;">
-                    <h3 class="news-article-title" style="font-size: 18px; border-bottom: none;">Ёж, микрофоны и рандом</h3>
-                    <p class="np-text">Как-то вечером возникла спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания! Серии получились настолько смешными, что это просто незаконно.</p>
-                </div>
-
-                <!-- Weather (Float Right, small) -->
-                <div style="float: right; width: 35%; min-width: 180px; margin-left: 20px; margin-bottom: 15px; text-align: center;">
-                    <img src="img/news/weather.webp" alt="Weather" style="width: 100%; border-radius: 8px; border: 1px solid #444;">
-                </div>
-
-                <!-- Weather Text & Halloween (Flows around Weather) -->
-                <div style="margin-bottom: 20px;">
-                    <h3 class="news-article-title" style="font-size: 18px; border-bottom: none; color: #aaa;">🍂 Прогноз погоды</h3>
-                    <p class="np-text">Ожидаются кратковременные осадки в виде лени. Ближе к середине октября синоптики прогнозируют стабильный циклон «ОТПУСК». Рекомендуется запасаться чаем и приходить греться на трансляции!</p>
-                    
-                    <div style="margin-top: 20px; padding: 15px; border-left: 4px solid #ff6600; background: rgba(255, 102, 0, 0.05);">
-                        <h3 class="news-article-title" style="color: #ff6600; border: none; margin-bottom: 5px;">🎃 Месяц Страшилок!</h3>
-                        <p class="np-text" style="margin: 0;">Октябрь объявляется открытым! Расписание уже примерило мрачные декорации: стримы превратились в надгробия с привидениями. Готовьте костюмы!</p>
+                <!-- ROW 2: Yamada Art (Right) & Texts (Left) -->
+                <div style="clear: both; margin-bottom: 30px; overflow: hidden;">
+                    <div style="float: right; width: 45%; min-width: 250px; margin-left: 20px; margin-bottom: 15px; border: 1px solid #444; padding: 10px; background: #222;">
+                        <h3 class="news-article-title" style="font-size: 16px; margin-bottom: 10px; text-align: center; border-bottom: none;">Прекрасное ТРИО</h3>
+                        <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
                     </div>
+                    
+                    <h3 class="news-article-title" style="font-size: 20px; border-bottom: none; margin-top: 0;">Шедевры от Ямады!</h3>
+                    <p class="np-text">Пока сайт лихорадило, наша потрясающая Ямада принесла в раздел Фан-артов новые работы! Хотим выразить огромную благодарность за невероятный труд и поддержку. Арты просто шикарные, детализированные и бесконечно милые! Мы настоятельно рекомендуем зайти во вкладку «Арты» на сайте и насладиться всеми версиями этого шедевра. Спасибо тебе, Ямада, за то, что продолжаешь радовать нас такой красотой!</p>
+
+                    <h3 class="news-article-title" style="font-size: 20px; border-bottom: none; margin-top: 25px;">Экзамен близко... Кому какое дело?</h3>
+                    <p class="np-text">Уже в этот четверг, 1 октября, нас ждёт великий и ужасный экзамен B2 по немецкому. Редакция хотела бы заявить, что стример усердно готовится... Но мы же честная газета! Юрумми вызвался на пересдачу, героически об этом вспомнил и благополучно забил. Так что морально готовимся к тому, что на вечернем стриме кто-то будет долго ныть о том, как всё было сложно.</p>
                 </div>
 
-                <!-- Clear all floats before the player -->
-                <div style="clear: both;"></div>
+                <!-- ROW 3: Sonic Meme (Left), Weather (Right), Texts (Middle) -->
+                <div style="clear: both; margin-bottom: 30px; overflow: hidden;">
+                    <div style="float: left; width: 35%; min-width: 220px; margin-right: 20px; margin-bottom: 15px;">
+                        <img src="img/news/sonic-meme.webp" alt="Sonic Meme" style="width: 100%; border-radius: 8px; border: 1px solid #555;">
+                    </div>
+
+                    <h3 class="news-article-title" style="font-size: 18px; border-bottom: none; margin-top: 0;">Ёж, микрофоны и рандом</h3>
+                    <p class="np-text">Как-то вечером возникла спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания! Серии получились настолько смешными, что это просто незаконно.</p>
+                    
+                    <div style="float: right; width: 30%; min-width: 180px; margin-left: 20px; margin-bottom: 15px; margin-top: 15px;">
+                        <img src="img/news/weather.webp" alt="Weather" style="width: 100%; border-radius: 8px; border: 1px solid #444;">
+                    </div>
+
+                    <h3 class="news-article-title" style="font-size: 18px; border-bottom: none; color: #aaa; margin-top: 25px;">🍂 Прогноз погоды</h3>
+                    <p class="np-text">Ожидаются осадки в виде лени. Ближе к середине октября синоптики прогнозируют циклон «ОТПУСК». Запасайтесь чаем!</p>
+                </div>
+
+                <!-- ROW 4: Halloween (Clear both) -->
+                <div style="clear: both; margin-bottom: 30px; padding: 15px; border-left: 4px solid #ff6600; background: rgba(255, 102, 0, 0.05);">
+                    <h3 class="news-article-title" style="color: #ff6600; border: none; margin-bottom: 5px; margin-top: 0;">🎃 Месяц Страшилок!</h3>
+                    <p class="np-text" style="margin: 0;">Октябрь объявляется открытым! Расписание уже примерило мрачные декорации: стримы превратились в надгробия с привидениями. Готовьте костюмы!</p>
+                </div>
 
                 <!-- Классический Газетный Блок Плеера -->
                 <div style="clear: both; background: #e8e4d9; color: #111; padding: 20px; border: 4px double #333; text-align: center; font-family: 'Georgia', serif; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); border-radius: 2px;">
