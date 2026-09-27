@@ -52,7 +52,7 @@ const NEWS_ISSUES = [
                 </div>
 
             </div>
-        
+        `
     },
     
     {
