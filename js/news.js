@@ -16,7 +16,7 @@ const NEWS_ISSUES = [
                 <div style="margin-bottom: 30px; clear: both;">
                     <div style="float: right; width: 60%; min-width: 350px; margin-left: 25px; margin-bottom: 15px; border: 1px solid #555; padding: 5px; background: #222;">
                         <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; height: auto; display: block; border-radius: 4px; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
-                        <div style="text-align: center; font-size: 12px; color: #888; margin-top: 5px;">Арт: Ямада</div>
+                        <div style="text-align: center; font-size: 12px; color: #888; margin-top: 5px;">Прекрасное ТРИО</div>
                     </div>
                     <h3 class="news-article-title">Ямада снова бьёт рекорды шикарности</h3>
                     <p class="np-text">Пока сайт лихорадило, в наш раздел <strong>Фан-артов</strong> подвезли свежую партию шедевров! Ямада не перестаёт радовать нас своим талантом. Обязательно загляните во вкладку артов, чтобы посмотреть работу <em>«ЛУЧШЕЕ ТРИО»</em> во всей красе. Там целая мини-галерея вариантов, так что не забудьте покликать!</p>
@@ -35,20 +35,43 @@ const NEWS_ISSUES = [
                     </div>
                     <h3 class="news-article-title">Ёж, микрофоны и абсолютный рандом</h3>
                     <p class="np-text">А теперь к главной премьере! Как-то вечером возникла абсолютно спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Сказано — сделано! Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания (особенно в плане меметичности, просто посмотрите на картинку слева).</p>
-                    <p class="np-text">Из-за авторских прав заливать это добро на YouTube было бы самоубийством, поэтому мы загрузили серии на сверхсекретный Google Диск. А ещё их можно посмотреть в нашем <a href="https://t.me/yurummiplums" target="_blank" style="color: #00d2ff;">специальном Telegram-канале (Подсобка)</a>, который был создан как раз для того, чтобы раз в миллион лет публиковать туда всякие рандомные секретные файлы!</p>
+                    <p class="np-text">Из-за авторских прав заливать это добро на YouTube было бы самоубийством, поэтому мы загрузили серии на сверхсекретный Google Диск. А ещё их можно посмотреть в нашем <a href="https://t.me/yurummiplums" target="_blank" style="color: #00d2ff;">специальном Telegram-канале (Секретный Архив)</a>, который был создан как раз для того, чтобы раз в миллион лет публиковать туда всякие рандомные секретные файлы!</p>
                 </div>
 
                 <!-- Встроенные плееры Соника -->
                 <div style="clear: both; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px dashed #00d2ff; text-align: center;">
                     <h4 style="color: #00d2ff; margin-top: 0; font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 20px;">🎬 Эксклюзивная премьера в Yurummi Times</h4>
                     
-                    <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap;">
-                        <button onclick="document.getElementById('news-sonic-player').src='https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview'" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Лихорадка в хижине</button>
-                        <button onclick="document.getElementById('news-sonic-player').src='https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview'" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Влюблённый Тейлз</button>
+                    <script>
+                    function switchNewsSonicEpisode(btn, url, castHTML) {
+                        document.getElementById('news-sonic-player').src = url;
+                        document.getElementById('news-sonic-cast-content').innerHTML = castHTML;
+                        var btns = document.querySelectorAll('.news-ep-btn');
+                        btns.forEach(b => {
+                            b.style.background = 'rgba(0, 210, 255, 0.1)';
+                            b.style.color = '#00d2ff';
+                        });
+                        btn.style.background = '#00d2ff';
+                        btn.style.color = '#000';
+                    }
+                    </script>
+                    <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="news-ep-btn" onclick="switchNewsSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<span style=\'color: #ff3385;\'>Юрумми:</span> Соник<br><span style=\'color: #a855f7;\'>Маку:</span> Эми')" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Лихорадка в хижине</button>
+                        <button class="news-ep-btn" onclick="switchNewsSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<span style=\'color: #ff3385;\'>Юрумми:</span> Тейлз<br><span style=\'color: #a855f7;\'>Маку:</span> Зоуи и Эггман')" style="background: rgba(0, 210, 255, 0.1); color: #00d2ff; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Влюблённый Тейлз</button>
                     </div>
                     
-                    <iframe id="news-sonic-player" src="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview" width="100%" height="400" frameborder="0" allow="autoplay; fullscreen" style="border-radius: 8px; background: #000; max-width: 600px; margin: 0 auto; display: block;"></iframe>
-                    <p style="font-size: 12px; color: #888; margin-top: 10px;">(Если видео не грузится — попробуйте <a href="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/view" target="_blank" style="color: #00d2ff;">открыть на диске</a>)</p>
+                    <div style="position: relative; width: 100%; max-width: 600px; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                        <iframe id="news-sonic-player" src="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" style="position: absolute; top: 0; left: 0;"></iframe>
+                    </div>
+                    
+                    <div id="news-sonic-cast" style="max-width: 600px; margin: 20px auto 0; font-size: 0.95rem; text-align: left; padding: 15px; background: rgba(0, 0, 0, 0.3); border: 1px solid #333; border-left: 3px solid #00d2ff; border-radius: 8px; line-height: 1.6;">
+                        <strong style="color: #00d2ff; display: block; margin-bottom: 8px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">🎙️ Роли озвучивали</strong>
+                        <div id="news-sonic-cast-content">
+                            <span style="color: #ff3385;">Юрумми:</span> Соник<br>
+                            <span style="color: #a855f7;">Маку:</span> Эми
+                        </div>
+                    </div>
+                    <p style="font-size: 12px; color: #888; margin-top: 15px;">(Если видео не грузится — попробуйте <a href="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/view" target="_blank" style="color: #00d2ff;">открыть на диске</a>)</p>
                 </div>
 
             </div>
