@@ -14,7 +14,7 @@ const NEWS_ISSUES = [
 
                 <!-- Блок про Ямаду (Floated Right) -->
                 <div style="margin-bottom: 30px; clear: both;">
-                    <div style="float: right; width: 40%; min-width: 250px; margin-left: 25px; margin-bottom: 15px; border: 1px solid #555; padding: 5px; background: #222;">
+                    <div style="float: right; width: 60%; min-width: 350px; margin-left: 25px; margin-bottom: 15px; border: 1px solid #555; padding: 5px; background: #222;">
                         <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; height: auto; display: block; border-radius: 4px; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
                         <div style="text-align: center; font-size: 12px; color: #888; margin-top: 5px;">Арт: Ямада</div>
                     </div>
@@ -35,7 +35,7 @@ const NEWS_ISSUES = [
                     </div>
                     <h3 class="news-article-title">Ёж, микрофоны и абсолютный рандом</h3>
                     <p class="np-text">А теперь к главной премьере! Как-то вечером возникла абсолютно спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Сказано — сделано! Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания (особенно в плане меметичности, просто посмотрите на картинку слева).</p>
-                    <p class="np-text">Из-за авторских прав заливать это добро на YouTube было бы самоубийством, поэтому мы загрузили серии на сверхсекретный Google Диск.</p>
+                    <p class="np-text">Из-за авторских прав заливать это добро на YouTube было бы самоубийством, поэтому мы загрузили серии на сверхсекретный Google Диск. А ещё их можно посмотреть в нашем <a href="https://t.me/yurummiplums" target="_blank" style="color: #00d2ff;">специальном Telegram-канале (Подсобка)</a>, который был создан как раз для того, чтобы раз в миллион лет публиковать туда всякие рандомные секретные файлы!</p>
                 </div>
 
                 <!-- Встроенные плееры Соника -->
