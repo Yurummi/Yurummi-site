@@ -1,5 +1,61 @@
 const NEWS_ISSUES = [
     {
+        issueNumber: 6,
+        date: "28 Сентября 2026",
+        tgPostId: "",
+        html: 
+            <div style="color: #ccc; text-align: justify; padding-bottom: 20px;">
+                
+                <!-- Заголовок и шутка про глитчи -->
+                <div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px dashed #444;">
+                    <span class="dropcap">Э</span><h3 class="news-article-title" style="border:none; margin-bottom:5px; padding-bottom:0;">кстренное включение редакции!</h3>
+                    <p class="np-text">Дорогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Стример куда-то пропал, сайт жил своей жизнью, но сейчас вроде всё починили. Возвращаемся к нормальным (насколько это возможно) новостям!</p>
+                </div>
+
+                <!-- Блок про Ямаду (Floated Right) -->
+                <div style="margin-bottom: 30px; clear: both;">
+                    <div style="float: right; width: 40%; min-width: 250px; margin-left: 25px; margin-bottom: 15px; border: 1px solid #555; padding: 5px; background: #222;">
+                        <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; height: auto; display: block; border-radius: 4px; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
+                        <div style="text-align: center; font-size: 12px; color: #888; margin-top: 5px;">Арт: Ямада</div>
+                    </div>
+                    <h3 class="news-article-title">Ямада снова бьёт рекорды шикарности</h3>
+                    <p class="np-text">Пока сайт лихорадило, в наш раздел <strong>Фан-артов</strong> подвезли свежую партию шедевров! Ямада не перестаёт радовать нас своим талантом. Обязательно загляните во вкладку артов, чтобы посмотреть работу <em>«ЛУЧШЕЕ ТРИО»</em> во всей красе. Там целая мини-галерея вариантов, так что не забудьте покликать!</p>
+                </div>
+
+                <!-- Блок про ЛОР -->
+                <div style="margin-bottom: 30px; clear: both; background: rgba(168, 85, 247, 0.1); border-left: 4px solid #a855f7; padding: 15px; border-radius: 4px;">
+                    <h3 class="news-article-title" style="color: #a855f7; border-bottom: none; margin-bottom: 10px;">🌌 Интерактивный ЛОР канала</h3>
+                    <p class="np-text" style="margin: 0;">Вы просили, мы сделали! Вкладка ЛОРа получила колоссальное обновление. Теперь хронология событий — это не просто статичная картинка, а настоящая <strong>интерактивная паутина</strong>! Узлы можно таскать мышкой, приближать колёсиком, а по клику вас сразу перебросит к подробному описанию ивента. Изучать историю канала стало ещё интереснее!</p>
+                </div>
+
+                <!-- Блок про Соника и мем (Floated Left) -->
+                <div style="margin-bottom: 40px; clear: both;">
+                    <div style="float: left; width: 45%; min-width: 260px; margin-right: 25px; margin-bottom: 15px;">
+                        <img src="img/news/sonic-meme.webp" alt="Sonic Meme" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid #444;">
+                    </div>
+                    <h3 class="news-article-title">Ёж, микрофоны и абсолютный рандом</h3>
+                    <p class="np-text">А теперь к главной премьере! Как-то вечером возникла абсолютно спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Сказано — сделано! Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания (особенно в плане меметичности, просто посмотрите на картинку слева).</p>
+                    <p class="np-text">Из-за авторских прав заливать это добро на YouTube было бы самоубийством, поэтому мы загрузили серии на сверхсекретный Google Диск.</p>
+                </div>
+
+                <!-- Встроенные плееры Соника -->
+                <div style="clear: both; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px dashed #00d2ff; text-align: center;">
+                    <h4 style="color: #00d2ff; margin-top: 0; font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 20px;">🎬 Эксклюзивная премьера в Yurummi Times</h4>
+                    
+                    <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap;">
+                        <button onclick="document.getElementById('news-sonic-player').src='https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview'" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Лихорадка в хижине</button>
+                        <button onclick="document.getElementById('news-sonic-player').src='https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview'" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">Влюблённый Тейлз</button>
+                    </div>
+                    
+                    <iframe id="news-sonic-player" src="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview" width="100%" height="400" frameborder="0" allow="autoplay; fullscreen" style="border-radius: 8px; background: #000; max-width: 600px; margin: 0 auto; display: block;"></iframe>
+                    <p style="font-size: 12px; color: #888; margin-top: 10px;">(Если видео не грузится — попробуйте <a href="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/view" target="_blank" style="color: #00d2ff;">открыть на диске</a>)</p>
+                </div>
+
+            </div>
+        
+    },
+    
+    {
         issueNumber: 5,
         date: "14 Сентября 2026",
         tgPostId: "788",
