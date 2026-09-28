@@ -76,6 +76,13 @@ const NEWS_ISSUES = [
                         <iframe id="news-sonic-player" src="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" style="position: absolute; top: 0; left: 0;"></iframe>
                     </div>
                     
+                    <!-- Fallback buttons for mobile users experiencing Google Drive errors -->
+                    <div style="max-width: 600px; margin: 10px auto 0; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <a id="news-sonic-ext-link" href="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/view" target="_blank" style="font-size: 13px; color: #555; text-decoration: underline;">Открыть в новой вкладке (Google Drive)</a>
+                        <span style="color: #777;">|</span>
+                        <a href="https://t.me/yurummiplums" target="_blank" style="font-size: 13px; color: #ff6600; text-decoration: underline;">Смотреть в Telegram</a>
+                    </div>
+                    
                     <div id="news-sonic-cast" style="max-width: 600px; margin: 15px auto 0; font-size: 15px; text-align: left; padding: 10px; border-top: 1px dashed #333; border-bottom: 1px dashed #333; line-height: 1.6;">
                         <strong style="display: block; margin-bottom: 5px; text-transform: uppercase; font-family: 'Times New Roman', serif; letter-spacing: 1px;">Роли озвучивали:</strong>
                         <div id="news-sonic-cast-content">
