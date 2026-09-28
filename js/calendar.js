@@ -93,13 +93,6 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
         content += '<div class="period-text">' + _escapeHtml(periodEvent.text) + '</div>';
 
     } else if (streamEvent) {
-        // HALLOWEEN RANDOM TYPES
-        if (month === 9) {
-            const hTypes = ['tomb-round', 'tomb-cross', 'pumpkin', 'ghost'];
-            const hType = hTypes[day % hTypes.length];
-            classes += ' ' + hType;
-        }
-        
         // Определяем тип ячейки
         if (streamEvent.isSonic) {
             classes += ' sonic-cell stream-day';

@@ -8,8 +8,8 @@ const NEWS_ISSUES = [
                 
                 <!-- ROW 1: Intro (Full Width) -->
                 <div style="margin-bottom: 25px;">
-                    <h3 class="news-article-title" style="margin-bottom:10px; padding-bottom:5px; text-transform: uppercase; clear: both; overflow: hidden;"><span class="dropcap" style="float: left; margin-right: 5px; font-size: 1.5em; line-height: 0.8; color: #ff0055;">Э</span>кстренное включение!</h3>
-                    <p class="np-text">Дорогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Возвращаемся к нормальным новостям!</p>
+                    <h3 class="news-article-title" style="margin-bottom:10px; padding-bottom:5px; text-transform: uppercase;">Экстренное включение!</h3>
+                    <p class="np-text"><span class="dropcap">Д</span>орогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Возвращаемся к нормальным новостям!</p>
                 </div>
 
                 <!-- ROW 2: Yamada Art (Right) & Texts (Left) -->
