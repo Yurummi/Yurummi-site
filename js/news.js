@@ -1,5 +1,5 @@
 const NEWS_ISSUES = [
-                        {
+                            {
         issueNumber: 6,
         date: "28 Сентября 2026",
         tgPostId: "",
@@ -12,39 +12,50 @@ const NEWS_ISSUES = [
                     <p class="np-text"><span class="dropcap">Д</span>орогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Возвращаемся к нормальным новостям!</p>
                 </div>
 
-                <!-- ROW 2: Yamada Art (Right) & Texts (Left) -->
-                <div style="clear: both; margin-bottom: 30px; overflow: hidden;">
-                    <div style="float: right; width: 45%; min-width: 250px; margin-left: 20px; margin-bottom: 15px; border: 1px solid #444; padding: 10px; background: #222;">
+                <!-- ROW 2: Yamada (Left text, Right image) -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: flex-start;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <h3 class="news-article-title" style="font-size: 20px; margin-top: 0; text-transform: uppercase;">Шедевры от Ямады!</h3>
+                        <p class="np-text">Пока сайт лихорадило, наша потрясающая Ямада принесла в раздел Фан-артов новые работы! Хотим выразить огромную благодарность за невероятный труд и поддержку. Арты просто шикарные, детализированные и бесконечно милые! Мы настоятельно рекомендуем зайти во вкладку «Арты» на сайте и насладиться всеми версиями этого шедевра. Спасибо тебе, Ямада, за то, что продолжаешь радовать нас такой красотой!</p>
+                    </div>
+                    <div style="flex: 1; min-width: 250px; border: 1px solid #444; padding: 10px; background: #222;">
                         <h3 class="news-article-title" style="font-size: 16px; margin-bottom: 10px; text-align: center; border-bottom: none; text-transform: uppercase;">Прекрасное ТРИО</h3>
                         <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
                     </div>
-                    
-                    <h3 class="news-article-title" style="font-size: 20px; margin-top: 0; text-transform: uppercase;">Шедевры от Ямады!</h3>
-                    <p class="np-text">Пока сайт лихорадило, наша потрясающая Ямада принесла в раздел Фан-артов новые работы! Хотим выразить огромную благодарность за невероятный труд и поддержку. Арты просто шикарные, детализированные и бесконечно милые! Мы настоятельно рекомендуем зайти во вкладку «Арты» на сайте и насладиться всеми версиями этого шедевра. Спасибо тебе, Ямада, за то, что продолжаешь радовать нас такой красотой!</p>
-
-                    <h3 class="news-article-title" style="font-size: 20px; margin-top: 25px; text-transform: uppercase;">Экзамен близко... Кому какое дело?</h3>
-                    <p class="np-text">Уже в этот четверг, 1 октября, нас ждёт великий и ужасный экзамен B2 по немецкому. Редакция хотела бы заявить, что стример усердно готовится... Но мы же честная газета! Юрумми вызвался на пересдачу, героически об этом вспомнил и благополучно забил. Так что морально готовимся к тому, что на вечернем стриме кто-то будет долго ныть о том, как всё было сложно.</p>
                 </div>
 
-                <!-- ROW 3: Sonic Meme (Left), Weather (Right), Texts (Middle) -->
-                <div style="clear: both; margin-bottom: 30px; overflow: hidden;">
-                    <div style="float: left; width: 35%; min-width: 220px; margin-right: 20px; margin-bottom: 15px;">
+                <!-- ROW 3: Sonic Meme (Left), Exam + Sonic Dub (Right) -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: flex-start;">
+                    <div style="flex: 1; min-width: 250px;">
                         <img src="img/news/sonic-meme.webp" alt="Sonic Meme" style="width: 100%; border-radius: 8px; border: 1px solid #555;">
                     </div>
-
-                    <h3 class="news-article-title" style="font-size: 18px; margin-top: 0; text-transform: uppercase;">Ёж, микрофоны и рандом</h3>
-                    <p class="np-text">Как-то вечером возникла спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания! Серии получились настолько смешными, что это просто незаконно.</p>
                     
-                    <div style="float: right; width: 30%; min-width: 180px; margin-left: 20px; margin-bottom: 15px; margin-top: 15px;">
-                        <img src="img/news/weather.webp" alt="Weather" style="width: 100%; border-radius: 8px; border: 1px solid #444;">
+                    <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 20px;">
+                        <div>
+                            <h3 class="news-article-title" style="font-size: 20px; margin-top: 0; text-transform: uppercase;">Экзамен близко... Кому какое дело?</h3>
+                            <p class="np-text">Уже в этот четверг, 1 октября, нас ждёт великий и ужасный экзамен B2 по немецкому. Редакция хотела бы заявить, что стример усердно готовится... Но мы же честная газета! Юрумми вызвался на пересдачу, героически об этом вспомнил и благополучно забил. Так что морально готовимся к тому, что на вечернем стриме кто-то будет долго ныть о том, как всё было сложно.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="news-article-title" style="font-size: 18px; margin-top: 0; text-transform: uppercase;">Ёж, микрофоны и рандом</h3>
+                            <p class="np-text">Как-то вечером возникла спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания! Серии получились настолько смешными, что это просто незаконно. Обязательно посмотрите этот шедевр в <strong>плеере в самом конце газеты</strong>, или загляните в наш <a href="https://t.me/yurummiplums" target="_blank" style="color: #ff6600; text-decoration: underline;">Секретный Архив в Telegram</a>, если хотите посмотреть там!</p>
+                        </div>
                     </div>
-
-                    <h3 class="news-article-title" style="font-size: 18px; color: #aaa; margin-top: 25px; text-transform: uppercase;">🍂 Прогноз погоды</h3>
-                    <p class="np-text">Осень окончательно вступила в свои права! На этой неделе ожидаются затяжные осадки в виде лени и сильные порывы желания спать до обеда. Атмосферное давление скачет из-за подготовки к экзаменам, а температурный фон стремительно падает. Ближе к середине октября синоптики прогнозируют мощный, но стабильный циклон под названием «ОТПУСК», который принесёт долгожданный отдых. Рекомендуется запасаться чаем, укутываться в тёплые пледы и приходить греться на наши вечерние трансляции. Не дайте осенней хандре себя захватить!</p>
                 </div>
 
-                <!-- ROW 4: Halloween (Clear both) -->
-                <div style="clear: both; margin-bottom: 30px; padding: 15px; border-left: 4px solid #ff6600; background: rgba(255, 102, 0, 0.05);">
+                <!-- ROW 4: Weather Image (Left), Weather Text (Right) -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: center;">
+                    <div style="flex: 0 0 35%; min-width: 200px;">
+                        <img src="img/news/weather.webp" alt="Weather" style="width: 100%; border-radius: 8px; border: 1px solid #444;">
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <h3 class="news-article-title" style="font-size: 18px; color: #aaa; margin-top: 0; text-transform: uppercase;">🍂 Прогноз погоды</h3>
+                        <p class="np-text">Осень окончательно вступила в свои права! На этой неделе ожидаются затяжные осадки в виде лени и сильные порывы желания спать до обеда. Атмосферное давление скачет из-за подготовки к экзаменам, а температурный фон стремительно падает. Ближе к середине октября синоптики прогнозируют мощный, но стабильный циклон под названием «ОТПУСК», который принесёт долгожданный отдых. Рекомендуется запасаться чаем, укутываться в тёплые пледы и приходить греться на наши вечерние трансляции. Не дайте осенней хандре себя захватить!</p>
+                    </div>
+                </div>
+
+                <!-- ROW 5: Halloween (Full width) -->
+                <div style="margin-bottom: 30px; padding: 15px; border-left: 4px solid #ff6600; background: rgba(255, 102, 0, 0.05);">
                     <h3 class="news-article-title" style="color: #ff6600; margin-bottom: 10px; margin-top: 0; text-transform: uppercase;">🎃 Подготовка к Месяцу Страшилок!</h3>
                     <p class="np-text" style="margin: 0;">Сентябрь подходит к концу, а значит, на пороге Октябрь — время жутких историй, тыкв и зловещих теней. На грядущий месяц у нас грандиозные планы: будем играть в самые разные мрачные игры и знатно щекотать себе нервишки! Начинайте потихоньку готовить костюмы, запасайтесь конфетами и валерьянкой — будет страшно весело!</p>
                 </div>
