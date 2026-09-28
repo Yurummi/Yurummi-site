@@ -1,5 +1,5 @@
 const NEWS_ISSUES = [
-                    {
+                        {
         issueNumber: 6,
         date: "28 Сентября 2026",
         tgPostId: "",
@@ -7,22 +7,22 @@ const NEWS_ISSUES = [
             <div style="color: #ccc; text-align: justify; padding-bottom: 20px;">
                 
                 <!-- ROW 1: Intro (Full Width) -->
-                <div style="border-bottom: 1px dashed #555; padding-bottom: 15px; margin-bottom: 25px;">
-                    <span class="dropcap">Э</span><h3 class="news-article-title" style="border:none; margin-bottom:5px; padding-bottom:0;">кстренное включение!</h3>
+                <div style="margin-bottom: 25px;">
+                    <span class="dropcap">Э</span><h3 class="news-article-title" style="margin-bottom:10px; padding-bottom:5px; text-transform: uppercase;">кстренное включение!</h3>
                     <p class="np-text">Дорогие читатели, мы пропустили пару недель, но поверьте, у нас есть оправдание! Последнее время на сайте творилась какая-то чертовщина: глитчи, криповые извинения на весь экран и прочие аномалии. Официально заявляем: <strong>редакция тут ни при чём!</strong> Мы сами сидели под столами в замешательстве. Возвращаемся к нормальным новостям!</p>
                 </div>
 
                 <!-- ROW 2: Yamada Art (Right) & Texts (Left) -->
                 <div style="clear: both; margin-bottom: 30px; overflow: hidden;">
                     <div style="float: right; width: 45%; min-width: 250px; margin-left: 20px; margin-bottom: 15px; border: 1px solid #444; padding: 10px; background: #222;">
-                        <h3 class="news-article-title" style="font-size: 16px; margin-bottom: 10px; text-align: center; border-bottom: none;">Прекрасное ТРИО</h3>
+                        <h3 class="news-article-title" style="font-size: 16px; margin-bottom: 10px; text-align: center; border-bottom: none; text-transform: uppercase;">Прекрасное ТРИО</h3>
                         <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
                     </div>
                     
-                    <h3 class="news-article-title" style="font-size: 20px; border-bottom: none; margin-top: 0;">Шедевры от Ямады!</h3>
+                    <h3 class="news-article-title" style="font-size: 20px; margin-top: 0; text-transform: uppercase;">Шедевры от Ямады!</h3>
                     <p class="np-text">Пока сайт лихорадило, наша потрясающая Ямада принесла в раздел Фан-артов новые работы! Хотим выразить огромную благодарность за невероятный труд и поддержку. Арты просто шикарные, детализированные и бесконечно милые! Мы настоятельно рекомендуем зайти во вкладку «Арты» на сайте и насладиться всеми версиями этого шедевра. Спасибо тебе, Ямада, за то, что продолжаешь радовать нас такой красотой!</p>
 
-                    <h3 class="news-article-title" style="font-size: 20px; border-bottom: none; margin-top: 25px;">Экзамен близко... Кому какое дело?</h3>
+                    <h3 class="news-article-title" style="font-size: 20px; margin-top: 25px; text-transform: uppercase;">Экзамен близко... Кому какое дело?</h3>
                     <p class="np-text">Уже в этот четверг, 1 октября, нас ждёт великий и ужасный экзамен B2 по немецкому. Редакция хотела бы заявить, что стример усердно готовится... Но мы же честная газета! Юрумми вызвался на пересдачу, героически об этом вспомнил и благополучно забил. Так что морально готовимся к тому, что на вечернем стриме кто-то будет долго ныть о том, как всё было сложно.</p>
                 </div>
 
@@ -32,21 +32,21 @@ const NEWS_ISSUES = [
                         <img src="img/news/sonic-meme.webp" alt="Sonic Meme" style="width: 100%; border-radius: 8px; border: 1px solid #555;">
                     </div>
 
-                    <h3 class="news-article-title" style="font-size: 18px; border-bottom: none; margin-top: 0;">Ёж, микрофоны и рандом</h3>
+                    <h3 class="news-article-title" style="font-size: 18px; margin-top: 0; text-transform: uppercase;">Ёж, микрофоны и рандом</h3>
                     <p class="np-text">Как-то вечером возникла спонтанная идея: <em>«А почему бы не озвучить случайные серии Соник Бум?»</em>. Юрумми и Маку взялись за микрофоны, и результат превзошёл все ожидания! Серии получились настолько смешными, что это просто незаконно.</p>
                     
                     <div style="float: right; width: 30%; min-width: 180px; margin-left: 20px; margin-bottom: 15px; margin-top: 15px;">
                         <img src="img/news/weather.webp" alt="Weather" style="width: 100%; border-radius: 8px; border: 1px solid #444;">
                     </div>
 
-                    <h3 class="news-article-title" style="font-size: 18px; border-bottom: none; color: #aaa; margin-top: 25px;">🍂 Прогноз погоды</h3>
-                    <p class="np-text">Ожидаются осадки в виде лени. Ближе к середине октября синоптики прогнозируют циклон «ОТПУСК». Запасайтесь чаем!</p>
+                    <h3 class="news-article-title" style="font-size: 18px; color: #aaa; margin-top: 25px; text-transform: uppercase;">🍂 Прогноз погоды</h3>
+                    <p class="np-text">Осень окончательно вступила в свои права! На этой неделе ожидаются затяжные осадки в виде лени и сильные порывы желания спать до обеда. Атмосферное давление скачет из-за подготовки к экзаменам, а температурный фон стремительно падает. Ближе к середине октября синоптики прогнозируют мощный, но стабильный циклон под названием «ОТПУСК», который принесёт долгожданный отдых. Рекомендуется запасаться чаем, укутываться в тёплые пледы и приходить греться на наши вечерние трансляции. Не дайте осенней хандре себя захватить!</p>
                 </div>
 
                 <!-- ROW 4: Halloween (Clear both) -->
                 <div style="clear: both; margin-bottom: 30px; padding: 15px; border-left: 4px solid #ff6600; background: rgba(255, 102, 0, 0.05);">
-                    <h3 class="news-article-title" style="color: #ff6600; border: none; margin-bottom: 5px; margin-top: 0;">🎃 Месяц Страшилок!</h3>
-                    <p class="np-text" style="margin: 0;">Октябрь объявляется открытым! Расписание уже примерило мрачные декорации: стримы превратились в надгробия с привидениями. Готовьте костюмы!</p>
+                    <h3 class="news-article-title" style="color: #ff6600; margin-bottom: 10px; margin-top: 0; text-transform: uppercase;">🎃 Месяц Страшилок!</h3>
+                    <p class="np-text" style="margin: 0;">Октябрь объявляется официально открытым! Это не просто середина осени, это время жутких историй, тыкв и зловещих теней. В этом месяце мы планируем играть в самые разные мрачные игры и щекотать себе нервишки! Готовьте свои страшные костюмы, запасайтесь конфетами и валерьянкой — будет страшно весело!</p>
                 </div>
 
                 <!-- Классический Газетный Блок Плеера -->
