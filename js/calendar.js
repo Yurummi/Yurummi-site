@@ -212,6 +212,14 @@ function renderCalendar() {
 
     monthYearEl.innerText = MONTH_NAMES[month] + ' ' + year;
 
+    // HALLOWEEN CHECK
+    if (month === 9) {
+        daysContainer.classList.add('halloween-month');
+    } else {
+        daysContainer.classList.remove('halloween-month');
+    }
+
+
     // Первый день месяца (0=вс → приводим к пн=0)
     let firstDay = new Date(year, month, 1).getDay();
     firstDay = firstDay === 0 ? 6 : firstDay - 1;
