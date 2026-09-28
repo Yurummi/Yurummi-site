@@ -812,6 +812,7 @@
 
 
 
+
 /* ==========================================
    HALLOWEEN THEME (October)
    ========================================== */
@@ -819,68 +820,88 @@
 /* Make cells visible outside bounds to allow big pumpkins */
 .halloween-month .stream-day,
 .halloween-month .special {
-    background: transparent !important;
+    background: #000 !important; /* Solid black flat pumpkin */
     border: none !important;
     box-shadow: none !important;
     overflow: visible !important;
     position: relative;
     z-index: 10;
+    border-radius: 40% 40% 30% 30% !important; /* Pumpkin shape */
 }
 .halloween-month .stream-day:hover,
 .halloween-month .special:hover {
     z-index: 50;
 }
 
-/* Pumpkin Image */
-.halloween-month .stream-day::before,
-.halloween-month .special::before {
-    content: "";
-    position: absolute;
-    top: -30px; bottom: -20px; left: -15px; right: -15px;
-    background-image: url('../img/news/pumpkin.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    z-index: -1;
-    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.8));
-}
-
-/* Orange glow behind the pumpkin to light up the eyes/mouth */
+/* Pumpkin Stem */
 .halloween-month .stream-day::after,
 .halloween-month .special::after {
     content: "";
     position: absolute;
-    top: -5px; bottom: -5px; left: 5px; right: 5px;
-    background: radial-gradient(circle, #ffaa00 0%, #ff3300 70%);
-    border-radius: 50%;
-    z-index: -2;
-    box-shadow: 0 0 20px #ff3300;
+    top: -15px; left: 50%; transform: translateX(-50%) rotate(15deg);
+    width: 10px; height: 20px;
+    background: #000; /* Black stem */
+    border-radius: 5px 5px 0 0;
+    z-index: -1;
 }
 
-/* Text styling */
+/* Scary Eyes (Sharp Triangles) */
+.halloween-month .stream-day::before,
+.halloween-month .special::before {
+    content: "";
+    position: absolute;
+    top: 25px; left: 15%;
+    width: 0; height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 12px solid #fff; /* White eyes */
+    filter: drop-shadow(40px 0 0 #fff); /* Second eye */
+    transform: rotate(-10deg);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Text styling (Date) */
 .halloween-month .stream-day .day-number,
 .halloween-month .special .day-number {
-    position: relative;
+    position: absolute;
+    top: -5px; left: 50%; transform: translateX(-50%);
     z-index: 20;
-    color: #ffcc00 !important;
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0 0 10px #ff0000 !important;
-    font-size: 18px;
+    color: #000 !important; /* Day number blends with stem or top */
+    background: #fff;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 12px;
     font-weight: bold;
 }
 
+/* Scary Mouth (Text inside) */
 .halloween-month .stream-info {
-    position: relative;
+    position: absolute;
+    bottom: 5px; left: 5px; right: 5px;
     z-index: 20;
-    background: transparent !important;
-    border: none !important;
-    color: #fff !important;
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0 0 10px #ff0000 !important;
+    background: #fff !important; /* White mouth */
+    color: #000 !important; /* Black text inside mouth */
     font-weight: bold;
-    margin-top: 10px; /* Adjust text position inside the pumpkin */
+    padding: 10px 2px 2px 2px;
+    border-radius: 0 0 20px 20px;
+    /* Jagged top teeth effect */
+    clip-path: polygon(0 20%, 15% 0, 30% 25%, 50% 0, 70% 25%, 85% 0, 100% 20%, 100% 100%, 0 100%);
+    text-align: center;
+    font-size: 11px;
 }
 
 /* Special Highlighting */
+.halloween-month .special {
+    background: #2a0000 !important; /* dark red for specials */
+}
 .halloween-month .special::after {
-    background: radial-gradient(circle, #ff0000 0%, #8b0000 70%);
-    box-shadow: 0 0 20px #ff0000;
+    background: #2a0000;
+}
+.halloween-month .special::before {
+    border-bottom-color: #ff3333;
+    filter: drop-shadow(40px 0 0 #ff3333);
+}
+.halloween-month .special .stream-info {
+    background: #ff3333 !important;
 }
