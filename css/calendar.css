@@ -809,129 +809,186 @@
 
 
 
+
 /* ==========================================
    HALLOWEEN THEME (October)
    ========================================== */
-/* The Graveyard Background */
 .halloween-month {
     background: 
-        radial-gradient(circle at 85% 15%, #ffebcd 0%, #ffebcd 5%, rgba(255,235,205,0.2) 8%, transparent 15%), /* Moon */
+        radial-gradient(circle at 85% 15%, #ffebcd 0%, #ffebcd 5%, rgba(255,235,205,0.2) 8%, transparent 15%),
         linear-gradient(to bottom, #0a0a1a 0%, #1a1025 60%, #0d1a0d 100%) !important;
     border: 2px solid #3a2a4a;
     box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+    overflow: hidden; /* keep graveyard inside the calendar */
 }
 
-/* Make empty cells darker and slightly transparent so the graveyard is visible */
+/* Base styles for all cells */
 .halloween-month .day-cell {
     background: rgba(0,0,0,0.4) !important;
     border-color: rgba(255,255,255,0.05) !important;
+    overflow: visible !important; /* Allow shapes to overlap! */
+    position: relative;
+    z-index: 1;
+}
+.halloween-month .day-cell:hover {
+    z-index: 50; /* Bring hovered cell to front */
 }
 
-/* Base styles for stream days in October */
 .halloween-month .stream-day,
 .halloween-month .special {
-    position: relative;
-    overflow: hidden;
-    color: #a8b0c0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    z-index: 2;
-}
-
-.halloween-month .stream-day .stream-info,
-.halloween-month .special .stream-info {
-    position: relative;
-    z-index: 5;
     background: transparent !important;
     border: none !important;
-    margin-top: 15px;
+    box-shadow: none !important;
+    z-index: 10; /* Stream days sit above empty days */
 }
 
 .halloween-month .stream-day .day-number,
 .halloween-month .special .day-number {
     position: relative;
-    z-index: 5;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    z-index: 20;
+    color: #fff !important;
+    text-shadow: 1px 1px 3px #000;
 }
 
-/* --- TYPE 1: Tombstone (Round) --- */
-.halloween-month .tomb-round {
-    background: linear-gradient(to bottom, #2a2c33, #1a1c23) !important;
-    border: 2px solid #5a6270 !important;
-    border-radius: 40px 40px 8px 8px !important;
-    box-shadow: inset 0 -15px 25px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.5) !important;
+.halloween-month .stream-info {
+    position: relative;
+    z-index: 20;
+    background: transparent !important;
+    border: none !important;
+    margin-top: 20px;
 }
+
+/* ==========================================
+   1. TOMBSTONE (ROUND)
+   ========================================== */
 .halloween-month .tomb-round::before {
-    content: "R.I.P.";
+    content: "";
     position: absolute;
-    top: 5px; left: 50%; transform: translateX(-50%);
-    font-family: 'Times New Roman', serif; font-size: 11px;
-    color: #4a505c; letter-spacing: 2px;
+    top: -20px; bottom: -5px; left: 0; right: 0; /* overflows top */
+    background: linear-gradient(to bottom, #555, #222);
+    border: 3px solid #111;
+    border-radius: 40px 40px 5px 5px;
+    z-index: -1;
+    box-shadow: inset 0 5px 15px rgba(255,255,255,0.1), 5px 5px 10px rgba(0,0,0,0.8);
 }
 .halloween-month .tomb-round::after {
-    content: "\1F578"; /* cobweb */
-    position: absolute; top: -5px; left: -5px; font-size: 20px; opacity: 0.3;
-}
-
-/* --- TYPE 2: Tombstone (Cross) --- */
-.halloween-month .tomb-cross {
-    background: linear-gradient(to bottom, #1f1f1f, #111) !important;
-    border: 2px solid #444 !important;
-    border-radius: 10px 10px 4px 4px !important;
-    box-shadow: inset 0 -15px 25px rgba(0,0,0,0.9) !important;
-}
-.halloween-month .tomb-cross::before {
-    content: "✝";
+    content: "R.I.P.";
     position: absolute;
-    top: 2px; left: 50%; transform: translateX(-50%);
-    font-size: 24px; color: #555;
+    top: -5px; left: 50%; transform: translateX(-50%);
+    font-family: 'Times New Roman', serif;
+    font-size: 16px; color: #111;
+    text-shadow: 1px 1px 0px #666;
+    z-index: 5;
+    letter-spacing: 2px;
 }
 
-/* --- TYPE 3: Pumpkin --- */
-.halloween-month .pumpkin {
-    background: radial-gradient(circle at center, #d85700, #803000) !important;
-    border: 2px solid #ff7a00 !important;
-    border-radius: 50% 50% 30% 30% !important;
-    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.8), 0 0 10px rgba(255, 120, 0, 0.4) !important;
-    color: #ffe0b2 !important;
+/* ==========================================
+   2. TOMBSTONE (CROSS)
+   ========================================== */
+.halloween-month .tomb-cross::before {
+    content: ""; /* Vertical beam */
+    position: absolute;
+    top: -30px; bottom: 0px; left: 35%; right: 35%;
+    background: linear-gradient(to right, #333, #555, #333);
+    border: 2px solid #111;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    z-index: -2;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.8);
 }
-.halloween-month .pumpkin .stream-info {
-    color: #fff !important;
-    text-shadow: 0 0 5px rgba(0,0,0,0.8);
+.halloween-month .tomb-cross::after {
+    content: ""; /* Horizontal beam */
+    position: absolute;
+    top: -5px; height: 25px; left: 5%; right: 5%;
+    background: linear-gradient(to bottom, #444, #222);
+    border: 2px solid #111;
+    border-radius: 5px;
+    z-index: -1;
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.8);
+}
+.halloween-month .tomb-cross .stream-info {
+    margin-top: 40px; /* push text down below crossbeam */
+    background: rgba(0,0,0,0.7) !important;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+/* ==========================================
+   3. PUMPKIN (WITH MOUTH & TEETH)
+   ========================================== */
+.halloween-month .pumpkin::before {
+    content: ""; /* Pumpkin Body */
+    position: absolute;
+    top: -10px; bottom: -10px; left: -10px; right: -10px; /* Huge pumpkin */
+    background: radial-gradient(circle at 30% 30%, #ff8c00, #b34700);
+    border: 3px solid #5a2000;
+    border-radius: 50% 50% 40% 40%;
+    z-index: -2;
+    box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 5px 5px 15px rgba(0,0,0,0.8);
 }
 .halloween-month .pumpkin::after {
-    content: "\1F383"; /* jack-o-lantern */
-    position: absolute; bottom: 3px; right: 3px; font-size: 18px; opacity: 0.8;
+    content: ""; /* Stem */
+    position: absolute;
+    top: -25px; left: 50%; transform: translateX(-50%);
+    width: 15px; height: 25px;
+    background: #2a5a19;
+    border-radius: 5px 5px 0 0;
+    border: 2px solid #112200;
+    z-index: -3;
+}
+.halloween-month .pumpkin .stream-info {
+    /* The Mouth */
+    margin: 30px -5px 0 -5px;
+    padding: 10px 5px;
+    background: #110000 !important;
+    border-radius: 0 0 40px 40px;
+    border-top: 4px dashed #ff9900 !important; /* simple teeth */
+    color: #ffcc00 !important;
+    box-shadow: inset 0 10px 15px #000;
+    text-shadow: 0 0 5px #ff0000;
+    font-weight: bold;
 }
 
-/* --- TYPE 4: Ghost --- */
-.halloween-month .ghost {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 2px dashed #aaa !important;
-    border-radius: 40px 40px 10px 10px !important;
-    box-shadow: 0 0 15px rgba(255,255,255,0.1) !important;
-    backdrop-filter: blur(2px);
-}
-.halloween-month .ghost .stream-info {
-    color: #fff !important;
+/* ==========================================
+   4. GHOST
+   ========================================== */
+.halloween-month .ghost::before {
+    content: ""; /* Ghost body */
+    position: absolute;
+    top: -25px; bottom: -15px; left: -5px; right: -5px;
+    background: rgba(230, 230, 255, 0.9);
+    border-radius: 50px 50px 0 0;
+    z-index: -2;
+    /* jagged bottom effect using linear-gradient repeating */
+    mask-image: linear-gradient(to top, transparent 5px, black 5px);
+    border: 2px solid rgba(255,255,255,0.5);
+    box-shadow: 0 0 30px rgba(255,255,255,0.4);
+    animation: floatGhostBody 4s infinite ease-in-out;
 }
 .halloween-month .ghost::after {
-    content: "\1F47B"; /* ghost */
-    position: absolute; bottom: 5px; right: 5px; font-size: 20px;
-    animation: floatGhost 3s infinite;
+    content: ""; /* Ghost eyes */
+    position: absolute;
+    top: -5px; left: 30%; width: 10px; height: 15px;
+    background: #000;
+    border-radius: 50%;
+    box-shadow: 25px 0 0 #000;
+    z-index: -1;
+    animation: floatGhostBody 4s infinite ease-in-out;
+}
+.halloween-month .ghost .stream-info {
+    margin-top: 40px;
+    color: #000 !important;
+    text-shadow: none !important;
+    font-weight: bold;
 }
 
-@keyframes floatGhost {
+@keyframes floatGhostBody {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
 }
 
-/* Highlight for specials stays red */
-.halloween-month .special {
-    border-color: #8b0000 !important;
-    box-shadow: 0 0 15px rgba(139,0,0,0.8) !important;
-}
-.halloween-month .special::after {
-    content: "\1F9DB"; /* vampire */
-    position: absolute; bottom: 5px; right: 5px; font-size: 18px;
+/* Special Highlighting */
+.halloween-month .special .stream-info {
+    border: 2px solid #ff0000 !important; /* make specials stand out in graveyard */
+    box-shadow: 0 0 15px red inset !important;
 }
