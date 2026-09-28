@@ -73,7 +73,7 @@ const NEWS_ISSUES = [
                     </div>
                     
                     <div style="position: relative; width: 100%; max-width: 600px; aspect-ratio: 16 / 9; background: #000; border: 2px solid #333; overflow: hidden; margin: 0 auto; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
-                        <video id="news-sonic-player" src="https://drive.google.com/uc?export=download&id=1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7" width="100%" height="100%" controls controlsList="nodownload" style="position: absolute; top: 0; left: 0; outline: none; background: #000;"></video>
+                        <iframe id="news-sonic-player" src="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" style="position: absolute; top: 0; left: 0;"></iframe>
                     </div>
                     
                     <!-- Fallback buttons for mobile users experiencing Google Drive errors -->
