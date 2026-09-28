@@ -14,11 +14,11 @@ const NEWS_ISSUES = [
 
                 <!-- ROW 2: Yamada (Left text, Right image) -->
                 <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: stretch;">
-                    <div style="flex: 0 0 33%; min-width: 220px; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: center;">
                         <h3 class="news-article-title" style="font-size: 20px; margin-top: 0; text-transform: uppercase;">Шедевры от Ямады!</h3>
                         <p class="np-text">Пока сайт лихорадило, наша потрясающая Ямада принесла в раздел Фан-артов новые работы! Хотим выразить огромную благодарность за невероятный труд и поддержку. Арты просто шикарные, детализированные и бесконечно милые! Мы настоятельно рекомендуем зайти во вкладку «Арты» на сайте и насладиться всеми версиями этого шедевра. Спасибо тебе, Ямада, за то, что продолжаешь радовать нас такой красотой!</p>
                     </div>
-                    <div style="flex: 1; min-width: 250px; border: 1px solid #444; padding: 10px; background: #222;">
+                    <div style="flex: 1.5; min-width: 250px; border: 1px solid #444; padding: 10px; background: #222;">
                         <h3 class="news-article-title" style="font-size: 16px; margin-bottom: 10px; text-align: center; border-bottom: none; text-transform: uppercase;">Прекрасное ТРИО</h3>
                         <img src="img/fanarts/us3.webp" alt="Ямада Арт" style="width: 100%; cursor: pointer;" onclick="openLightbox(this)" data-src="img/fanarts/us3.png">
                     </div>
