@@ -358,8 +358,11 @@
 
             <div class="gallery-subtitle">Мои арты (Полноценные)</div>
             <div class="gallery-grid" id="main-arts-grid">
-                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/КУМИ.png">
-                    <img src="img/arts/КУМИ.png" alt="Подарок для Куми" loading="lazy">
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/КУМИ.webp">
+                    <picture>
+                        <source srcset="img/arts/КУМИ.webp" type="image/webp">
+                        <img src="img/arts/КУМИ.png" alt="Подарок для Куми" loading="lazy">
+                    </picture>
                     <div class="gallery-overlay">
                         <h3>С Днём Рождения, Куми! 🎉</h3>
                         <p>Подарок на ДР. Канал: <a href="https://t.me/kumimp3" target="_blank" style="color: #ff99bb; text-decoration: underline; font-weight: bold;" onclick="event.stopPropagation()">@kumimp3</a></p>
