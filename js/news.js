@@ -1,4 +1,73 @@
 const NEWS_ISSUES = [
+    {
+        issueNumber: 7,
+        date: "05 Октября 2026",
+        tgPostId: "",
+        html: `
+
+            <div style="color: #ccc; text-align: justify; padding-bottom: 20px;">
+                
+                <!-- ROW 1: Concert (Left video, Right text + tickets) -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: stretch;">
+                    <div style="flex: 1; min-width: 250px; display: flex; align-items: stretch; justify-content: center;">
+                        <video src="img/news/good_kid_video.mp4" controls style="width: 100%; height: auto; background: transparent; border-radius: 8px; border: 1px solid #444; outline: none; box-shadow: 0 10px 20px rgba(0,0,0,0.3);"></video>
+                    </div>
+                    
+                    <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: center; gap: 15px;">
+                        <div>
+                            <h3 class="news-article-title" style="margin-top: 0; text-transform: uppercase;">Концерт Good Kid!</h3>
+                            <p class="np-text"><span class="dropcap">Н</span>едавно Юрумми побывал на долгожданном концерте группы Good Kid! По его словам, эмоции просто зашкаливали. Нашей редакции даже удалось раздобыть эксклюзивный кусочек видео с его любимой песней — можете заценить атмосферу в плеере слева!</p>
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+                            <!-- Tickets -->
+                            <img src="img/news/good_kid_tickets.jpg" alt="Билеты Good Kid" style="width: 48%; max-width: 240px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; border: 3px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transform: rotate(-5deg); cursor: pointer; transition: transform 0.2s; z-index: 4;" onclick="openLightbox(this)" data-src="img/news/good_kid_tickets.jpg" onmouseover="this.style.zIndex=10; this.style.transform='scale(1.1) rotate(0deg)'" onmouseout="this.style.zIndex=4; this.style.transform='rotate(-5deg)'">
+                            
+                            <!-- Photo 1 -->
+                            <img src="img/news/good_kid_photo1.jpg" alt="Концерт 1" style="width: 48%; max-width: 240px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; border: 3px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transform: rotate(6deg) translateY(-5px); cursor: pointer; transition: transform 0.2s; z-index: 3;" onclick="openLightbox(this)" data-src="img/news/good_kid_photo1.jpg" onmouseover="this.style.zIndex=10; this.style.transform='scale(1.1) rotate(0deg)'" onmouseout="this.style.zIndex=3; this.style.transform='rotate(6deg) translateY(-5px)'">
+
+                            <!-- Photo 2 -->
+                            <img src="img/news/good_kid_photo2.png" alt="Концерт 2" style="width: 48%; max-width: 240px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; border: 3px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transform: rotate(-7deg) translateY(-10px); cursor: pointer; transition: transform 0.2s; z-index: 2;" onclick="openLightbox(this)" data-src="img/news/good_kid_photo2.png" onmouseover="this.style.zIndex=10; this.style.transform='scale(1.1) rotate(0deg)'" onmouseout="this.style.zIndex=2; this.style.transform='rotate(-7deg) translateY(-10px)'">
+
+                            <!-- Photo 3 -->
+                            <img src="img/news/good_kid_photo3.png" alt="Концерт 3" style="width: 48%; max-width: 240px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; border: 3px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transform: rotate(4deg) translateY(-5px); cursor: pointer; transition: transform 0.2s; z-index: 1;" onclick="openLightbox(this)" data-src="img/news/good_kid_photo3.png" onmouseover="this.style.zIndex=10; this.style.transform='scale(1.1) rotate(0deg)'" onmouseout="this.style.zIndex=1; this.style.transform='rotate(4deg) translateY(-5px)'">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 2: Anime Quiz -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: stretch;">
+                    <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: center;">
+                        <h3 class="news-article-title" style="margin-top: 0; text-transform: uppercase;">СВОЯ ИГРА: АНИМЕ КВИЗ</h3>
+                        <p class="np-text">Готовьтесь к СУПЕР МЕГА СИГМА АНИМЕ ДРУЖЕСТВЕННОМУ КВИЗУ ДЛЯ КРУТЫХ! Старый добрый друг Юрумми захостил невероятный квиз в стиле "Своей игры", который ребята проходили дружной компанией. По секретным данным, было мега весело, смешно и моментами очень глупо.</p>
+                        <p class="np-text">Предупреждаем: концентрация абсурда, нелепых ответов и отборного кринжа превышает все допустимые нормы! Уровень безумия зашкаливает настолько, что редакция настоятельно советует пристегнуть ремни перед просмотром. Кликайте по картинке справа, чтобы лично окунуться в этот часовой хаос!</p>
+                    </div>
+                    <div style="flex: 1; min-width: 250px; display: flex; align-items: center;">
+                        <a href="https://youtu.be/wcKhnvOBlq4" target="_blank" style="display: block; width: 100%;">
+                            <img src="img/news/anime_quiz.png" alt="Аниме Квиз" style="width: 100%; border-radius: 8px; border: 1px solid #555; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ROW 3: Kumi Art -->
+                <div style="margin-bottom: 30px; padding: 15px; border-left: 4px solid #ff99bb; background: rgba(255, 153, 187, 0.05); display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <h3 class="news-article-title" style="color: #ff99bb; margin-bottom: 10px; margin-top: 0; text-transform: uppercase;">🎉 С Днём Рождения, Куми!</h3>
+                        <p class="np-text" style="margin: 0;">Кстати, Юрумми нарисовал новый арт — это подарок на День Рождения для великолепной Куми! Редакция нашей газеты от всей души поздравляет её с праздником! Можете нажать на картинку справа, чтобы рассмотреть арт, или заглянуть во вкладку "Арты". И не забудьте подписаться на её канал <a href="https://t.me/kumimp3" target="_blank" style="color: #ff99bb; text-decoration: underline; font-weight: bold;">@kumimp3</a>!</p>
+                    </div>
+                    <div style="flex: 0 0 250px; min-width: 200px; margin: 0 auto;">
+                        <img src="img/arts/КУМИ.webp" alt="Арт Куми" style="width: 100%; border-radius: 8px; border: 1px solid #ff99bb; box-shadow: 0 0 10px rgba(255, 153, 187, 0.2); cursor: pointer; transition: transform 0.2s;" onclick="openLightbox(this)" data-src="img/arts/КУМИ.webp" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                </div>
+
+                <!-- ROW 4: Nothing else to report -->
+                <div style="text-align: center; margin-top: 40px; border-top: 1px dashed #444; padding-top: 20px;">
+                    <p class="np-text" style="color: #888; font-style: italic;">Больше на этой неделе глобально ничего не происходило. Спокойная жизнь — тоже хорошая жизнь! Увидимся на стримах!</p>
+                </div>
+
+            </div>
+
+        `
+    },
                             {
         issueNumber: 6,
         date: "28 Сентября 2026",
@@ -15,7 +84,7 @@ const NEWS_ISSUES = [
                 <!-- ROW 2: Yamada (Left text, Right image) -->
                 <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: stretch;">
                     <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: center;">
-                        <h3 class="news-article-title" style="font-size: 20px; margin-top: 0; text-transform: uppercase;">Шедевры от Ямады!</h3>
+                        <h3 class="news-article-title" style="margin-top: 0; text-transform: uppercase;">Шедевры от Ямады!</h3>
                         <p class="np-text">Пока сайт лихорадило, наша потрясающая Ямада принесла в раздел Фан-артов новые работы! Хотим выразить огромную благодарность за невероятный труд и поддержку. Арты просто шикарные, детализированные и бесконечно милые! Мы настоятельно рекомендуем зайти во вкладку «Арты» на сайте и насладиться всеми версиями этого шедевра. Спасибо тебе, Ямада, за то, что продолжаешь радовать нас такой красотой!</p>
                     </div>
                     <div style="flex: 1.5; min-width: 250px; border: 1px solid #444; padding: 10px; background: #222;">
@@ -32,7 +101,7 @@ const NEWS_ISSUES = [
                     
                     <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 20px;">
                         <div>
-                            <h3 class="news-article-title" style="font-size: 20px; margin-top: 0; text-transform: uppercase;">Экзамен близко... Кому какое дело?</h3>
+                            <h3 class="news-article-title" style="margin-top: 0; text-transform: uppercase;">Экзамен близко... Кому какое дело?</h3>
                             <p class="np-text">Уже в этот четверг, 1 октября, нас ждёт великий и ужасный экзамен B2 по немецкому. Редакция хотела бы заявить, что стример усердно готовится... Но мы же честная газета! Юрумми вызвался на пересдачу, героически об этом вспомнил и благополучно забил. Так что морально готовимся к тому, что на вечернем стриме кто-то будет долго ныть о том, как всё было сложно.</p>
                         </div>
                         
