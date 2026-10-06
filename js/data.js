@@ -173,7 +173,6 @@ const STREAMS_LIST = [
 
     { date: '2026-10-06', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
     { date: '2026-10-09', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
-    { date: '2026-10-10', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
     // Периодические события
     { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' },
     { startDate: '2026-10-12', endDate: '2026-10-16', text: 'ОТПУСК 🍂🍁', type: 'vacation' }
