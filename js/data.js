@@ -42,14 +42,6 @@ const SLIDES_DATA = [
         url: 'https://youtu.be/LHvpBAOjHys?si=9j_AK5zFEFE1t0kt'
     },
     {
-        file: 'img/news/news_29_08_2026_cosplay.webp',
-        badgeStyle: 'green',
-        badgeText: 'СБОР',
-        textMain: 'Косплей-Рулетка',
-        textAuthor: '',
-        url: ''
-    },
-    {
         file: 'img/arts/Ya_i_Maku_final.webp',
         badgeStyle: 'pink',
         badgeText: '💖 АРТ',
