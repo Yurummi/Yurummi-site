@@ -20,7 +20,7 @@ const SLIDES_DATA = [
     {
         file: 'img/arts/КУМИ.webp',
         badgeStyle: 'pink',
-        badgeText: 'ФАН-АРТ',
+        badgeText: '💖 АРТ',
         textMain: 'С Днём Рождения, Куми!',
         textAuthor: '@kumimp3',
         url: 'https://t.me/kumimp3'
@@ -28,7 +28,7 @@ const SLIDES_DATA = [
     {
         file: 'img/fanarts/Широк фан арт от ямады.jpg',
         badgeStyle: 'pink',
-        badgeText: '💖 АРТ',
+        badgeText: 'ФАН-АРТ',
         textMain: 'Фан арт от ямады',
         textAuthor: '',
         url: ''
