@@ -10,6 +10,22 @@
 // ============================================================
 const SLIDES_DATA = [
     {
+        file: 'img/news/anime_quiz.png',
+        badgeStyle: 'pink',
+        badgeText: 'НОВОЕ ВИДЕО',
+        textMain: 'СВОЯ ИГРА: АНИМЕ КВИЗ',
+        textAuthor: 'Юрумми+',
+        url: 'https://youtu.be/wcKhnvOBlq4'
+    },
+    {
+        file: 'img/arts/КУМИ.webp',
+        badgeStyle: 'pink',
+        badgeText: 'ФАН-АРТ',
+        textMain: 'С Днём Рождения, Куми!',
+        textAuthor: '@kumimp3',
+        url: 'https://t.me/kumimp3'
+    },
+    {
         file: 'img/fanarts/Широк фан арт от ямады.jpg',
         badgeStyle: 'pink',
         badgeText: '💖 АРТ',
@@ -73,7 +89,6 @@ const SLIDES_DATA = [
         textAuthor: '@Maku_q',
         url: 'https://t.me/maku_qq'
     },
-
     {
         file: 'img/slider/Ютубоснова.webp',
         badgeStyle: 'none',
@@ -81,14 +96,6 @@ const SLIDES_DATA = [
         textMain: 'Новый YouTube канал',
         textAuthor: '',
         url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1'
-    },
-    {
-        file: 'img/arts/Тутрфинал.webp',
-        badgeStyle: 'pink',
-        badgeText: '💖 АРТ',
-        textMain: '3/9',
-        textAuthor: '@yurummi',
-        url: 'https://t.me/yurummiyt/657'
     }
 ];
 
