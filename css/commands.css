@@ -49,7 +49,7 @@
 .cmd-item {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .cmd-item:last-child {
@@ -59,20 +59,47 @@
 .cmd-name {
     background: #ff3385;
     color: #fff;
-    padding: 4px 10px;
+    padding: 6px 10px;
     border-radius: 6px;
     font-family: monospace;
     font-weight: bold;
-    font-size: 16px;
-    margin-right: 15px;
-    min-width: 100px;
+    font-size: 15px;
+    margin-right: 18px;
+    width: 135px;
+    min-width: 135px;
+    max-width: 135px;
+    flex-shrink: 0;
     text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(255, 51, 133, 0.25);
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cmd-name:hover {
+    background: #ff1a75;
+    box-shadow: 0 0 12px rgba(255, 51, 133, 0.55);
+    transform: translateY(-1px);
+}
+
+.cmd-name:active {
+    transform: translateY(0);
+}
+
+.cmd-name.copied {
+    background: #10b981 !important;
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.7) !important;
 }
 
 .cmd-desc {
-    color: #ccc;
-    font-size: 15px;
+    color: #cbd5e1;
+    font-size: 14.5px;
     line-height: 1.4;
+    flex: 1;
 }
 
 /* ==========================================
@@ -129,9 +156,9 @@
 .links-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 14px;
     width: 100%;
-    max-width: 600px;
+    max-width: 680px;
     margin: 0 auto 20px;
 }
 
@@ -140,4 +167,240 @@
     max-width: none;
     padding: 15px 10px;
     font-size: 16px;
+}
+
+/* ==========================================
+   СТИЛЬНЫЕ КНОПКИ СОЦСЕТЕЙ И ССЫЛОК
+   ========================================== */
+.social-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    font-size: 15.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.social-link-btn .social-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.social-link-btn .social-label {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.social-link-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.social-link-btn:hover .social-icon {
+    transform: scale(1.12);
+}
+
+/* Индивидуальные акценты платформ */
+/* Twitch */
+.social-link-btn.btn-twitch {
+    border-color: rgba(145, 70, 255, 0.35);
+}
+.social-link-btn.btn-twitch .social-icon {
+    color: #9146ff;
+}
+.social-link-btn.btn-twitch:hover {
+    background: rgba(145, 70, 255, 0.12);
+    border-color: #9146ff;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(145, 70, 255, 0.35);
+}
+
+/* Telegram */
+.social-link-btn.btn-telegram {
+    border-color: rgba(34, 158, 217, 0.35);
+}
+.social-link-btn.btn-telegram .social-icon {
+    color: #229ED9;
+}
+.social-link-btn.btn-telegram:hover {
+    background: rgba(34, 158, 217, 0.12);
+    border-color: #229ED9;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(34, 158, 217, 0.35);
+}
+
+/* YouTube Main */
+.social-link-btn.btn-youtube-main {
+    border-color: rgba(255, 0, 0, 0.35);
+}
+.social-link-btn.btn-youtube-main .social-icon {
+    color: #FF0000;
+}
+.social-link-btn.btn-youtube-main:hover {
+    background: rgba(255, 0, 0, 0.12);
+    border-color: #FF0000;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.35);
+}
+
+/* YouTube Plus */
+.social-link-btn.btn-youtube-plus {
+    border-color: rgba(255, 51, 133, 0.35);
+}
+.social-link-btn.btn-youtube-plus .social-icon {
+    color: #ff3385;
+}
+.social-link-btn.btn-youtube-plus:hover {
+    background: rgba(255, 51, 133, 0.12);
+    border-color: #ff3385;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(255, 51, 133, 0.35);
+}
+
+/* Discord */
+.social-link-btn.btn-discord {
+    border-color: rgba(88, 101, 242, 0.35);
+}
+.social-link-btn.btn-discord .social-icon {
+    color: #5865F2;
+}
+.social-link-btn.btn-discord:hover {
+    background: rgba(88, 101, 242, 0.12);
+    border-color: #5865F2;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35);
+}
+
+/* Twitter / X */
+.social-link-btn.btn-x-twitter {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+.social-link-btn.btn-x-twitter .social-icon {
+    color: #ffffff;
+}
+.social-link-btn.btn-x-twitter:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+}
+
+/* Ko-fi */
+.social-link-btn.btn-kofi {
+    border-color: rgba(255, 94, 91, 0.35);
+}
+.social-link-btn.btn-kofi .social-icon {
+    color: #FF5E5B;
+}
+.social-link-btn.btn-kofi:hover {
+    background: rgba(255, 94, 91, 0.12);
+    border-color: #FF5E5B;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(255, 94, 91, 0.35);
+}
+
+/* Instagram */
+.social-link-btn.btn-instagram {
+    border-color: rgba(225, 48, 108, 0.35);
+}
+.social-link-btn.btn-instagram .social-icon {
+    color: #E1306C;
+}
+.social-link-btn.btn-instagram:hover {
+    background: rgba(225, 48, 108, 0.12);
+    border-color: #E1306C;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(225, 48, 108, 0.35);
+}
+
+/* Inactive TikTok */
+.social-link-btn.btn-tiktok-inactive {
+    border-color: rgba(255, 255, 255, 0.08);
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.015);
+    color: #94a3b8;
+}
+.social-link-btn.btn-tiktok-inactive .social-icon {
+    color: #64748b;
+}
+.social-link-btn.btn-tiktok-inactive:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+}
+.social-link-btn.btn-tiktok-inactive:hover .social-icon {
+    transform: none;
+}
+
+/* Inactive badge */
+.social-badge-inactive {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(148, 163, 184, 0.12);
+    color: #94a3b8;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    margin-left: auto;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+/* Active TikTok (например для Aniwex) */
+.social-link-btn.btn-tiktok-active {
+    border-color: rgba(0, 242, 254, 0.3);
+}
+.social-link-btn.btn-tiktok-active .social-icon {
+    color: #00f2fe;
+}
+.social-link-btn.btn-tiktok-active:hover {
+    background: rgba(0, 242, 254, 0.1);
+    border-color: #00f2fe;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(0, 242, 254, 0.3);
+}
+
+/* Center span item in 2-column grid */
+.social-link-btn.span-center {
+    grid-column: 1 / -1;
+    max-width: 330px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Email for Cooperation */
+.social-link-btn.btn-coop-email {
+    width: 100%;
+    max-width: 680px;
+    justify-content: center;
+    border-color: rgba(0, 242, 254, 0.3);
+    color: #cbd5e1;
+    margin: 0 auto;
+}
+.social-link-btn.btn-coop-email .social-icon {
+    color: #00f2fe;
+}
+.social-link-btn.btn-coop-email:hover {
+    background: rgba(0, 242, 254, 0.1);
+    border-color: #00f2fe;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(0, 242, 254, 0.3);
 }

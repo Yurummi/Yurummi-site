@@ -48,8 +48,8 @@ const SONIC_GAME_STATES = {
     "sonic-adv-1": "completed",
     "sonic-adv-2": "completed",
     "sonic-adv-3": "completed",
-    "sonic-adv-dx": "completed",
-    "sonic-adv-2-battle": "completed",
+    "sonic-adv-dx": "abandoned",
+    "sonic-adv-2-battle": "abandoned",
     "sonic-triple-trouble-16bit": "abandoned",
     "sonic-time-twisted": "abandoned",
     "sonic-colors": "playing"

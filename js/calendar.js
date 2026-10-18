@@ -69,12 +69,44 @@ function _findPeriodEvent(periods, dateStr) {
 }
 
 /**
+ * Конвертирует время стрима из времени стримера (Германия, Europe/Berlin)
+ * в точный объект Date (с учетом часового пояса зрителя).
+ */
+function _getStreamLocalDateTime(dateStr, timeStr) {
+    if (!dateStr || !timeStr) return null;
+    const timeClean = String(timeStr).replace(/[^\d:]/g, '').trim();
+    if (!timeClean.includes(':')) return null;
+    const [h, m] = timeClean.split(':').map(Number);
+
+    try {
+        const utcGuess = new Date(`${dateStr}T${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:00Z`);
+        const berlinDate = new Date(utcGuess.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+        const diff = utcGuess.getTime() - berlinDate.getTime();
+        return new Date(utcGuess.getTime() + diff);
+    } catch (e) {
+        return null;
+    }
+}
+
+function _formatStreamCellTime(streamEvent, dateStr) {
+    if (!streamEvent || !streamEvent.time) return '';
+    const exactDate = _getStreamLocalDateTime(dateStr, streamEvent.time);
+    if (!exactDate) return _escapeHtml(streamEvent.time);
+
+    const userH = String(exactDate.getHours()).padStart(2, '0');
+    const userM = String(exactDate.getMinutes()).padStart(2, '0');
+    const prefix = streamEvent.time.includes('±') ? '±' : '';
+    return prefix + `${userH}:${userM}`;
+}
+
+/**
  * Строит HTML одной ячейки дня.
  */
 function _renderDayCell(year, month, day, todayStr, index, firstDay) {
     const dateStr     = _dateStr(year, month + 1, day);
     const periodEvent = _findPeriodEvent(index.periods, dateStr);
     const streamEvent = index.byDate[dateStr];
+    const isOctober   = (month === 9);
 
     // Вычисляем координаты ячейки в сетке для эффекта блика
     const positionIndex = firstDay + (day - 1);
@@ -86,6 +118,26 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
     let inlineStyles  = '';
 
     if (dateStr === todayStr) classes += ' today';
+
+    // Хеллоуинские украшения для Октября
+    if (isOctober) {
+        if (day >= 18) {
+            // Последние 2 недели: Хеллоуинский сезон
+            classes += ' spooky-cell';
+            if (day === 31) {
+                classes += ' halloween-boss';
+            }
+            const SPOOKY_STAMPS = {
+                18: '🦇', 19: '🕷️', 20: '🎃', 21: '👻', 22: '🍬',
+                23: '🕯️', 24: '🕸️', 25: '🦇', 26: '🕷️', 27: '🧙‍♀️',
+                28: '👻', 29: '🍬', 30: '🕯️', 31: '🎃'
+            };
+            const stamp = SPOOKY_STAMPS[day] || '🎃';
+            content += '<div class="spooky-stamp" title="Хеллоуин">' + stamp + '</div>';
+        } else {
+            classes += ' october-cell';
+        }
+    }
 
     if (periodEvent) {
         // Периодическое событие (отпуск, марафон)
@@ -187,12 +239,19 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
 
         // Содержимое плашки
         const specialClass = streamEvent.isSpecial ? 'special' : '';
-        const infoHtml = _escapeHtml(streamEvent.time) + '<br>' + _escapeHtml(streamEvent.text);
+        const timeDisplay = _formatStreamCellTime(streamEvent, dateStr);
+        const timeTooltip = 'Время стримера: ' + _escapeHtml(streamEvent.time) + ' (Германия)';
+        const infoHtml = '<span class="cell-time" title="' + timeTooltip + '">' + timeDisplay + '</span><br>' + _escapeHtml(streamEvent.text);
         if (streamEvent.isCanceled) {
             classes += ' canceled-day';
             content += '<div class="stream-info">' + infoHtml + '</div>';
         } else {
             content += '<div class="stream-info ' + specialClass + '">' + infoHtml + '</div>';
+        }
+    } else {
+        // День без стримов: на 31 октября вешаем праздничный тег Хеллоуина
+        if (isOctober && day === 31) {
+            content += '<div class="stream-info halloween-tag">🎃 ХЕЛЛОУИН</div>';
         }
     }
 
@@ -209,8 +268,20 @@ function renderCalendar() {
 
     const year  = _calendarDate.getFullYear();
     const month = _calendarDate.getMonth();
+    const isOctober = (month === 9);
 
-    monthYearEl.innerText = MONTH_NAMES[month] + ' ' + year;
+    // Добавляем или убираем хеллоуинскую тему обёртки
+    const calendarWrapper = document.querySelector('.calendar-wrapper');
+    if (calendarWrapper) {
+        calendarWrapper.classList.toggle('halloween-theme', isOctober);
+    }
+
+    if (isOctober) {
+        monthYearEl.innerHTML = '<span class="hw-spiderweb">🕸️</span> <span class="hw-title">Октябрь ' + year + '</span> <span class="hw-pumpkin">🎃</span>';
+    } else {
+        monthYearEl.innerText = MONTH_NAMES[month] + ' ' + year;
+    }
+
     // Первый день месяца (0=вс → приводим к пн=0)
     let firstDay = new Date(year, month, 1).getDay();
     firstDay = firstDay === 0 ? 6 : firstDay - 1;
@@ -237,6 +308,28 @@ function renderCalendar() {
     }
 
     daysContainer.innerHTML = html.join('');
+
+    // Обновляем плашку часового пояса под зрителя
+    const tzNote = document.querySelector('.timezone-note');
+    if (tzNote) {
+        try {
+            const tzOffsetMin = -new Date().getTimezoneOffset();
+            const tzSign = tzOffsetMin >= 0 ? '+' : '-';
+            const tzHours = Math.floor(Math.abs(tzOffsetMin) / 60);
+            const tzMins = Math.abs(tzOffsetMin) % 60;
+            const tzStr = `UTC${tzSign}${tzHours}` + (tzMins > 0 ? `:${String(tzMins).padStart(2, '0')}` : '');
+
+            const now = new Date();
+            const berlinNow = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+            const diffHours = Math.round((now.getTime() - berlinNow.getTime()) / (1000 * 60 * 60));
+
+            if (diffHours === 0) {
+                tzNote.innerHTML = `⏰ Время стримов указано по вашему местному времени (<strong>${tzStr}</strong>, Германия / Европа)`;
+            } else {
+                tzNote.innerHTML = `⏰ Время стримов адаптировано под ваш часовой пояс (<strong>${tzStr}</strong>) • Время стримера: 20:00 (Германия, GMT+2)`;
+            }
+        } catch (e) {}
+    }
 }
 
 /**

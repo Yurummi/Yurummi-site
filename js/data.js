@@ -8,7 +8,33 @@
 //  badgeStyle: 'yellow' | 'green' | 'pink' | 'none'
 //  url: '' — слайд без ссылки (не кликабельный)
 // ============================================================
-const SLIDES_DATA = [
+// ============================================================
+//  ФЛАГ АКТИВАЦИИ МЕДИА-ХАБА ("🎮 ИГРОВАЯ")
+//  false = на официальном сайте кнопка и слайд скрыты до команды со стрима (видны локально или с ?preview=1)
+//  true = активировано у всех зрителей на сайте
+// ============================================================
+const IS_MEDIA_HUB_ACTIVE = false;
+
+const isMediaHubVisible = (typeof window !== 'undefined') && (
+    IS_MEDIA_HUB_ACTIVE ||
+    window.location.hostname === 'localhost' || 
+    window.location.hostname === '127.0.0.1' || 
+    window.location.protocol === 'file:' || 
+    (window.location.search && window.location.search.includes('preview'))
+);
+
+const ALL_SLIDES = [
+    {
+        file: 'img/slider/yurummi_maid_arcade.jpg',
+        badgeStyle: 'pink',
+        badgeText: '🎮 ИГРОВАЯ',
+        textMain: 'ИГРОВАЯ & МЕДИАТЕКА: 320+ Игр, Аниме, Фильмы и Рандомайзер',
+        textAuthor: 'Заглянуть в комнату ➔',
+        authorPrefix: '✨',
+        url: 'stats.html',
+        target: '_self',
+        isMediaHubSlide: true
+    },
     {
         file: 'img/news/anime_quiz.png',
         badgeStyle: 'pink',
@@ -90,6 +116,9 @@ const SLIDES_DATA = [
         url: 'https://www.youtube.com/@itsYurummi?sub_confirmation=1'
     }
 ];
+
+// Если хаб ещё не анонсирован публично, скрываем промо-слайд на живом сайте
+const SLIDES_DATA = isMediaHubVisible ? ALL_SLIDES : ALL_SLIDES.filter(s => !s.isMediaHubSlide);
 
 // ============================================================
 //  РАСПИСАНИЕ СТРИМОВ
@@ -173,7 +202,17 @@ const STREAMS_LIST = [
 
     { date: '2026-10-06', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
     { date: '2026-10-09', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+        { date: '2026-10-20', time: '20:00', text: 'Стрим возвращение 🔥', isSpecial: true, isCanceled: false },
+    { date: '2026-10-23', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+    { date: '2026-10-24', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+    { date: '2026-10-27', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+    { date: '2026-10-31', time: '20:00', text: 'Хэллоуинский стрим 🎃👻', isSpecial: true, isCanceled: false },
     // Периодические события
     { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' },
     { startDate: '2026-10-10', endDate: '2026-10-17', text: 'Отпуск 🍁', type: 'vacation' },
 ];
+
+if (typeof window !== 'undefined') {
+    window.STREAMS_LIST = STREAMS_LIST;
+    window.SLIDES_DATA = SLIDES_DATA;
+}

@@ -806,6 +806,259 @@
     50% { opacity: 1; transform: skewX(2deg); filter: brightness(1.2); }
 }
 
+/* ==========================================
+   ХЕЛЛОУИНСКАЯ ТЕМА — ОКТЯБРЬ
+   ========================================== */
+.calendar-wrapper.halloween-theme {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at top, #241336 0%, #160c21 65%, #0e0714 100%);
+    border: 2px solid rgba(255, 117, 24, 0.45);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 117, 24, 0.2), inset 0 0 35px rgba(138, 43, 226, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Паутина в углах календаря */
+.calendar-wrapper.halloween-theme::before {
+    content: "🕸️";
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    font-size: 26px;
+    opacity: 0.6;
+    pointer-events: none;
+    transform: rotate(-15deg);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+    z-index: 1;
+}
+
+.calendar-wrapper.halloween-theme::after {
+    content: "🕸️";
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 26px;
+    opacity: 0.6;
+    pointer-events: none;
+    transform: scaleX(-1) rotate(-15deg);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+    z-index: 1;
+}
+
+/* Кнопки переключения месяцев */
+.calendar-wrapper.halloween-theme .calendar-header button {
+    background: #2b143f;
+    color: #ff8833;
+    border: 1.5px solid rgba(255, 117, 24, 0.35);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    transition: all 0.25s ease;
+}
+
+.calendar-wrapper.halloween-theme .calendar-header button:hover {
+    background: #3c1c58;
+    color: #ffaa44;
+    border-color: #ff7518;
+    box-shadow: 0 0 15px rgba(255, 117, 24, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Заголовок месяца */
+.calendar-wrapper.halloween-theme .calendar-header h3 {
+    color: #ff9933;
+    text-shadow: 0 0 15px rgba(255, 117, 24, 0.6), 0 0 30px rgba(168, 85, 247, 0.4);
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calendar-wrapper.halloween-theme .hw-pumpkin {
+    display: inline-block;
+    animation: pumpkin-bounce 2s infinite ease-in-out;
+}
+
+@keyframes pumpkin-bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(8deg); }
+}
+
+/* Дни недели */
+.calendar-wrapper.halloween-theme .weekday {
+    color: #c084fc;
+}
+.calendar-wrapper.halloween-theme .weekday:nth-child(6),
+.calendar-wrapper.halloween-theme .weekday:nth-child(7) {
+    color: #ff9933;
+}
+
+/* Базовые октябрьские ячейки (1-17 октября) */
+.day-cell.october-cell {
+    background: #1c1126;
+    border-color: rgba(168, 85, 247, 0.18);
+    transition: all 0.25s ease;
+}
+
+.day-cell.october-cell:hover {
+    border-color: rgba(255, 117, 24, 0.4);
+    background: #241632;
+    box-shadow: 0 0 12px rgba(255, 117, 24, 0.25);
+    transform: translateY(-2px);
+}
+
+.day-cell.october-cell .day-number {
+    color: #e9d5ff;
+}
+
+/* Отпуск в октябре */
+.calendar-wrapper.halloween-theme .day-cell.vacation {
+    background-color: rgba(255, 117, 24, 0.12);
+    border-color: rgba(255, 117, 24, 0.35);
+}
+.calendar-wrapper.halloween-theme .vacation .period-text {
+    color: #fdba74;
+}
+
+/* Сегодня в октябре */
+.calendar-wrapper.halloween-theme .day-cell.today {
+    border-color: #00f2fe !important;
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.7), inset 0 0 10px rgba(0, 242, 254, 0.25) !important;
+}
+
+/* ==========================================
+   ПОСЛЕДНИЕ 2 НЕДЕЛИ: ХЕЛЛОУИНСКИЙ СЕЗОН (18-31)
+   ========================================== */
+.day-cell.spooky-cell {
+    background: linear-gradient(145deg, #241138 0%, #150921 100%);
+    border: 2px solid rgba(255, 117, 24, 0.45);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(255, 117, 24, 0.08);
+    position: relative;
+    overflow: visible;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.day-cell.spooky-cell .day-number {
+    color: #ffaa44;
+    text-shadow: 0 0 8px rgba(255, 117, 24, 0.6);
+    opacity: 0.95;
+}
+
+.day-cell.spooky-cell:hover {
+    transform: translateY(-4px) scale(1.06);
+    z-index: 15;
+    border-color: #ff7518;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.8), 0 0 22px rgba(255, 117, 24, 0.65), inset 0 0 15px rgba(255, 117, 24, 0.25);
+}
+
+/* Маркерная печать в углу ячейки */
+.spooky-stamp {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 16px;
+    line-height: 1;
+    z-index: 3;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+    pointer-events: none;
+}
+
+.day-cell.spooky-cell:hover .spooky-stamp {
+    transform: scale(1.35) rotate(-12deg);
+    animation: spooky-wobble 0.6s ease infinite alternate;
+}
+
+@keyframes spooky-wobble {
+    0% { transform: scale(1.35) rotate(-12deg); }
+    100% { transform: scale(1.35) rotate(12deg); }
+}
+
+/* Стримы на хеллоуинских ячейках */
+.day-cell.spooky-cell.stream-day {
+    background: linear-gradient(145deg, #2d1345 0%, #1c0a2c 100%);
+    border-color: #ff7518;
+}
+
+.day-cell.spooky-cell.stream-day .stream-info {
+    background: linear-gradient(135deg, #ff7518, #ff3385);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(255, 117, 24, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.day-cell.spooky-cell.stream-day .stream-info.special {
+    background: linear-gradient(135deg, #ff5500, #9333ea);
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 85, 0, 0.7);
+}
+
+/* ==========================================
+   31 ОКТЯБРЯ — ГЛАВНАЯ НОЧЬ ХЕЛЛОУИНА
+   ========================================== */
+.day-cell.halloween-boss {
+    background: radial-gradient(circle at 50% 30%, #3d1759 0%, #1f0b2e 70%, #11051c 100%) !important;
+    border: 2px solid #ff7518 !important;
+    box-shadow: 0 0 25px rgba(255, 117, 24, 0.6), inset 0 0 15px rgba(255, 117, 24, 0.3) !important;
+    animation: halloween-boss-pulse 2.5s infinite alternate ease-in-out;
+}
+
+.day-cell.halloween-boss .day-number {
+    color: #ffaa00 !important;
+    text-shadow: 0 0 12px #ff6600, 0 0 20px #ff3300 !important;
+    opacity: 1 !important;
+    font-size: clamp(16px, 2.2vw, 22px);
+}
+
+.day-cell.halloween-boss .spooky-stamp {
+    font-size: 22px;
+    animation: jack-glow 1.5s infinite alternate ease-in-out;
+}
+
+.halloween-tag {
+    background: linear-gradient(135deg, #ff5500, #a855f7) !important;
+    color: #fff !important;
+    font-size: clamp(9px, 1.1vw, 11px) !important;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 800;
+    box-shadow: 0 0 12px rgba(255, 85, 0, 0.8) !important;
+    border: 1px solid rgba(255, 215, 0, 0.6) !important;
+    animation: halloween-tag-blink 2s infinite alternate;
+}
+
+@keyframes halloween-boss-pulse {
+    0% {
+        border-color: #ff7518;
+        box-shadow: 0 0 18px rgba(255, 117, 24, 0.5), inset 0 0 10px rgba(255, 117, 24, 0.2);
+    }
+    100% {
+        border-color: #ff9933;
+        box-shadow: 0 0 30px rgba(255, 117, 24, 0.9), 0 0 15px rgba(168, 85, 247, 0.6), inset 0 0 20px rgba(255, 117, 24, 0.4);
+    }
+}
+
+@keyframes jack-glow {
+    0% { transform: scale(1) rotate(-5deg); filter: drop-shadow(0 0 3px #ff7518); }
+    100% { transform: scale(1.25) rotate(8deg); filter: drop-shadow(0 0 10px #ff3300); }
+}
+
+@keyframes halloween-tag-blink {
+    0% { opacity: 0.9; }
+    100% { opacity: 1; filter: brightness(1.15); }
+}
+
+@media (max-width: 600px) {
+    .spooky-stamp {
+        font-size: 13px;
+        top: 3px;
+        right: 3px;
+    }
+    .calendar-wrapper.halloween-theme::before,
+    .calendar-wrapper.halloween-theme::after {
+        font-size: 20px;
+    }
+}
+
 
 
 

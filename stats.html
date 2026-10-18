@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yurummi — Игровая зона & Медиатека</title>
+    <meta name="description" content="Личный игровой и медиа хаб Yurummi: коллекция Steam, аниме, фильмы, сериалы, мультики и манга.">
+    <link rel="canonical" href="https://yurummi.github.io/Yurummi-site/stats.html">
+    <link rel="icon" type="image/png" href="img/logo.png">
+
+    <!-- Стили -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/stats.css">
+
+    <!-- Мгновенное восстановление активной зоны хаба (без моргания при перезагрузке) -->
+    <script>
+        (function() {
+            try {
+                var hash = (window.location.hash || '').replace('#', '').toLowerCase();
+                var saved = localStorage.getItem('yurummi_stats_active_zone');
+                var isGames = hash === 'games' || hash === 'steam' || (!hash && saved === 'games');
+                if (isGames) {
+                    document.documentElement.classList.add('init-zone-games');
+                }
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--  НАВИГАЦИЯ (единая с основным сайтом)  -->
+    <!-- ═══════════════════════════════════════ -->
+    <nav>
+        <a href="index.html#home">Главная</a>
+        <a href="index.html#news">Новости</a>
+        <a href="index.html#arts">Арты</a>
+        <a href="index.html#schedule">Расписание</a>
+        <a href="index.html#faq">Обо мне</a>
+        <a href="index.html#lore">Лор</a>
+        <a href="index.html#commands">Команды</a>
+        <a href="index.html#support">Ссылки и Поддержка</a>
+        <a href="stats.html" style="color:#00f2fe; text-shadow:0 0 10px rgba(0,242,254,0.5); font-weight:700;">🎮 Игровая</a>
+        <a id="nav-live-pill" href="https://twitch.tv/yurummi" target="_blank" rel="noopener" class="nav-live-pill offline" title="Twitch канал Yurummi">
+            <span class="nlp-dot"></span>
+            <span class="nlp-text">Оффлайн</span>
+        </a>
+        <div id="scroll-progress" class="scroll-progress-bar"></div>
+    </nav>
+
+    <div class="stats-page">
+        <div class="container">
+
+            <!-- ══════════════════════════════════ -->
+            <!--  ШАПКА ХАБА «ИГРОВАЯ»              -->
+            <!-- ══════════════════════════════════ -->
+            <div class="stats-header">
+                <div class="stats-header-top">
+                    <h1>🎮 Игровая <span>зона</span></h1>
+                </div>
+                <p class="hub-hero-subtitle">Интерактивный хаб развлечений Yurummi: выберите медиатеку кино и аниме или игровую комнату Steam</p>
+
+                <!-- ══════════════════════════════════ -->
+                <!--  НЕОНОВЫЕ КУБЫ / ПОРТАЛЫ ВЫБОРА    -->
+                <!-- ══════════════════════════════════ -->
+                <div class="hub-cubes-portal" id="hub-cubes-portal">
+                    <div class="hub-cubes-grid">
+                        
+                        <!-- КУБ 1: МЕДИАТЕКА (ЧТО ПОСМОТРЕТЬ) -->
+                        <div class="neon-cube cube-media active" id="cube-media" role="button" tabindex="0" title="Открыть каталог: Аниме, Фильмы, Сериалы">
+                            <div class="cube-ambient-glow"></div>
+                            <div class="cube-inner">
+                                <div class="cube-top-row">
+                                    <span class="cube-badge"><span class="pulse-dot"></span> 856 тайтлов</span>
+                                    <span class="cube-icon-tag">🎬</span>
+                                </div>
+                                <h2 class="cube-title">Что посмотреть</h2>
+                                <p class="cube-desc">Аниме • Фильмы • Сериалы • Мультики • Манга</p>
+                                <div class="cube-tags-row">
+                                    <span class="cube-mini-tag">👑 Шедевры 100+</span>
+                                    <span class="cube-mini-tag">⭐ Оценки & Отзывы</span>
+                                    <span class="cube-mini-tag">🎭 Мульти-жанры</span>
+                                </div>
+
+                                <!-- Сплошная плавная лента постеров (infinite ticker tape с рандомного старта) -->
+                                <div class="cube-ticker-wrap mosaic-media" id="mosaic-media" aria-label="Лента тайтлов">
+                                    <div class="cube-ticker-track track-media" id="ticker-track-media">
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/57334.jpg?1716838813');" title="Дандадан"><span class="ticker-rating-pill">40</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://image.tmdb.org/t/p/w500/abfNImrqZsZnM2Ob4ES3Zkn9V6N.jpg');" title="Аркейн"><span class="ticker-rating-pill">👑 100</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/mangas/original/144267.jpg?1712757061');" title="Благоухающий цветок"><span class="ticker-rating-pill">90</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/54857.jpg?1711969854');" title="Ре:Зеро 3"><span class="ticker-rating-pill">⭐ 10</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg');" title="Человек-паук: Паутина вселенных"><span class="ticker-rating-pill">👑 100</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/50594.jpg');" title="Судзумэ"><span class="ticker-rating-pill">80</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/32281.jpg');" title="Твоё имя"><span class="ticker-rating-pill">👑 100</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/42310.jpg');" title="Киберпанк: Бегущие по краю"><span class="ticker-rating-pill">85</span></div>
+                                        <!-- Дубликат для бесшовного зацикливания -->
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/57334.jpg?1716838813');" title="Дандадан"><span class="ticker-rating-pill">40</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://image.tmdb.org/t/p/w500/kVioUjk1SXGWblJNaKsIJcBqUcY.jpg');" title="Аркейн"><span class="ticker-rating-pill">👑 100</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/mangas/original/144267.jpg?1712757061');" title="Благоухающий цветок"><span class="ticker-rating-pill">90</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/54857.jpg?1711969854');" title="Ре:Зеро 3"><span class="ticker-rating-pill">⭐ 10</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg');" title="Человек-паук: Паутина вселенных"><span class="ticker-rating-pill">👑 100</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/50594.jpg');" title="Судзумэ"><span class="ticker-rating-pill">80</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/32281.jpg');" title="Твоё имя"><span class="ticker-rating-pill">👑 100</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shikimori.one/system/animes/original/42310.jpg');" title="Киберпанк: Бегущие по краю"><span class="ticker-rating-pill">85</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="cube-cta">
+                                    <span>Смотреть каталог</span>
+                                    <span class="cube-arrow">→</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- КУБ 2: ИГРЫ (STEAM КОМНАТА) -->
+                        <div class="neon-cube cube-games" id="cube-games" role="button" tabindex="0" title="Открыть игровую комнату: Steam библиотека Yurummi">
+                            <div class="cube-ambient-glow"></div>
+                            <div class="cube-inner">
+                                <div class="cube-top-row">
+                                    <span class="cube-badge badge-steam"><span class="pulse-dot"></span> Steam Lvl 37 • 313 игр</span>
+                                    <span class="cube-icon-tag">🎮</span>
+                                </div>
+                                <h2 class="cube-title">Steam комната</h2>
+                                <p class="cube-desc">313 игр в каталоге • Часы • Достижения • Обзоры</p>
+                                <div class="cube-tags-row">
+                                    <span class="cube-mini-tag">🔥 13,081 ч в Dota 2</span>
+                                    <span class="cube-mini-tag">🏆 25 Идеальных (100%)</span>
+                                    <span class="cube-mini-tag">💬 12 Обзоров</span>
+                                </div>
+
+                                <!-- Сплошная плавная лента обложек игр (infinite ticker tape с рандомного старта) -->
+                                <div class="cube-ticker-wrap mosaic-games" id="mosaic-games" aria-label="Лента игр Steam">
+                                    <div class="cube-ticker-track track-games" id="ticker-track-games">
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/570/library_600x900.jpg');" title="Dota 2"><span class="ticker-hours-pill">🔥 13k ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('img/games/minecraft_cover.jpg');" title="Minecraft"><span class="ticker-hours-pill">🔥 8k ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/library_600x900.jpg');" title="Counter-Strike 2"><span class="ticker-hours-pill">🔥 2k ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/library_600x900.jpg');" title="Apex Legends"><span class="ticker-hours-pill">🏆 100%</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/library_600x900.jpg');" title="Grand Theft Auto V"><span class="ticker-hours-pill">🔥 523 ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2527500/library_600x900.jpg');" title="MiSide"><span class="ticker-hours-pill">🏆 100%</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/383870/library_600x900.jpg');" title="Firewatch"><span class="ticker-hours-pill">🏆 100%</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2138710/library_600x900.jpg');" title="Sifu"><span class="ticker-hours-pill">🔥 64 ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/library_600x900.jpg');" title="Baldur's Gate 3"><span class="ticker-hours-pill">🔥 44 ч</span></div>
+                                        <!-- Дубликат для бесшовного зацикливания -->
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/570/library_600x900.jpg');" title="Dota 2"><span class="ticker-hours-pill">🔥 13k ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('img/games/minecraft_cover.jpg');" title="Minecraft"><span class="ticker-hours-pill">🔥 8k ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/library_600x900.jpg');" title="Counter-Strike 2"><span class="ticker-hours-pill">🔥 2k ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/library_600x900.jpg');" title="Apex Legends"><span class="ticker-hours-pill">🏆 100%</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/library_600x900.jpg');" title="Grand Theft Auto V"><span class="ticker-hours-pill">🔥 523 ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2527500/library_600x900.jpg');" title="MiSide"><span class="ticker-hours-pill">🏆 100%</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/383870/library_600x900.jpg');" title="Firewatch"><span class="ticker-hours-pill">🏆 100%</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2138710/library_600x900.jpg');" title="Sifu"><span class="ticker-hours-pill">🔥 64 ч</span></div>
+                                        <div class="ticker-card mosaic-card" style="background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/library_600x900.jpg');" title="Baldur's Gate 3"><span class="ticker-hours-pill">🔥 44 ч</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="cube-cta">
+                                    <span>Войти в игровую</span>
+                                    <span class="cube-arrow">→</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ══════════════════════════════════ -->
+                <!--  ПЕРЕКЛЮЧАТЕЛЬ ЗОН ХАБА            -->
+                <!-- ══════════════════════════════════ -->
+                <div class="hub-zone-switcher" id="hub-zone-switcher">
+                    <button type="button" class="hub-zone-btn active" data-zone="media" id="btn-zone-media">
+                        <span class="hz-icon">🎬</span>
+                        <span class="hz-label">Что посмотреть</span>
+                        <span class="hz-count" id="hz-media-count">856</span>
+                    </button>
+                    <button type="button" class="hub-zone-btn" data-zone="games" id="btn-zone-games">
+                        <span class="hz-icon">🎮</span>
+                        <span class="hz-label">Игровая комната</span>
+                        <span class="hz-count" id="hz-games-count">326</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- ══════════════════════════════════ -->
+            <!--  ЗОНА 1: МЕДИАТЕКА (КИНО И АНИМЕ)  -->
+            <!-- ══════════════════════════════════ -->
+            <div id="section-media" class="hub-zone-section active">
+
+                <!-- ══════════════════════════════════ -->
+                <!--  РЕКОМЕНДАЦИЯ НЕДЕЛИ ОТ YURUMMI    -->
+                <!-- ══════════════════════════════════ -->
+                <div class="weekly-highlight-card" id="weekly-highlight-card">
+                    <div class="whc-header">
+                        <span class="whc-badge">✨ Рекомендация недели от Yurummi</span>
+                        <span class="whc-fire-badge">🔥 Советую глянуть</span>
+                    </div>
+                    <div class="whc-body">
+                        <div class="whc-poster-wrap">
+                            <img id="whc-poster-img" class="whc-poster-img" src="https://shikimori.one/system/animes/original/37987.jpg?1711979789" alt="Вайолет Эвергарден. Фильм">
+                            <span class="whc-rating-pill" id="whc-rating-pill">👑 100</span>
+                        </div>
+                        <div class="whc-content">
+                            <div class="whc-meta-row">
+                                <span class="whc-meta-cat" id="whc-meta-cat">🎌 Аниме</span>
+                                <span class="whc-meta-year" id="whc-meta-year">2020</span>
+                                <span class="whc-meta-status" id="whc-meta-status">✅ Просмотрено</span>
+                            </div>
+                            <h2 class="whc-title" id="whc-title">Вайолет Эвергарден. Фильм</h2>
+                            <div class="whc-genres" id="whc-genres">
+                                <span class="whc-genre-tag">Полнометражка</span>
+                                <span class="whc-genre-tag">Драма</span>
+                                <span class="whc-genre-tag">Фэнтези</span>
+                            </div>
+                            <div class="whc-quote" id="whc-quote">
+                                «Невероятно трогательная и глубокая история. Потрясающая визуальная работа студии Kyoto Animation, одна из лучших эмоциональных драм, заслужившая оценку 100 баллов!»
+                            </div>
+                            <div class="whc-actions">
+                                <button type="button" class="btn-whc-action" id="btn-whc-open">
+                                    <span>📖 Открыть карточку тайтла</span>
+                                    <span class="bwa-arrow">→</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Легенда шкалы оценок Юрумми -->
+                <div class="scale-legend-box">
+                    <div class="scale-legend-title">⚡ Шкала эмоций Юрумми:</div>
+                    <div class="scale-pills">
+                        <span class="scale-pill pill-100">👑 <b>100+</b> — Шедевр (превзошло всё!)</span>
+                        <span class="scale-pill pill-20">🚀 <b>20–90</b> — Выше ожиданий</span>
+                        <span class="scale-pill pill-10">⭐ <b>10</b> — База / Ок (выдало что нужно)</span>
+                        <span class="scale-pill pill-norm">👍 <b>8–9.5</b> — Хорошо</span>
+                        <span class="scale-pill pill-norm">😐 <b>5–7</b> — Проходняк</span>
+                    </div>
+                </div>
+
+            <!-- ══════════════════════════════════ -->
+            <!--  ДЭШБОРД (Кликабельный)           -->
+            <!-- ══════════════════════════════════ -->
+            <div class="stats-dashboard">
+                <div class="dash-grid">
+                    <div class="dash-card" data-filter-type="tab" data-filter-target="all" title="Все тайтлы">
+                        <span class="dc-icon">🗂️</span>
+                        <div class="dc-num" id="stat-total">—</div>
+                        <div class="dc-label">Всего</div>
+                    </div>
+                    <div class="dash-card dash-masterpiece" data-filter-type="filter" data-filter-target="masterpiece" title="Оценка 100+">
+                        <span class="dc-icon">👑</span>
+                        <div class="dc-num" id="stat-masterpiece">—</div>
+                        <div class="dc-label">Шедевры 100+</div>
+                    </div>
+                    <div class="dash-card" data-filter-type="filter" data-filter-target="watched" title="Просмотрено">
+                        <span class="dc-icon">✅</span>
+                        <div class="dc-num" id="stat-watched">—</div>
+                        <div class="dc-label">Просмотрено</div>
+                    </div>
+                    <div class="dash-card" data-filter-type="filter" data-filter-target="watching" title="В процессе просмотра">
+                        <span class="dc-icon">▶️</span>
+                        <div class="dc-num" id="stat-watching">—</div>
+                        <div class="dc-label">Смотрю</div>
+                    </div>
+                    <div class="dash-card" data-filter-type="filter" data-filter-target="planned" title="В списке планов">
+                        <span class="dc-icon">📋</span>
+                        <div class="dc-num" id="stat-planned">—</div>
+                        <div class="dc-label">В планах</div>
+                    </div>
+                    <div class="dash-card" data-filter-type="tab" data-filter-target="anime" title="Аниме">
+                        <span class="dc-icon">🎌</span>
+                        <div class="dc-num" id="stat-anime">—</div>
+                        <div class="dc-label">Аниме</div>
+                    </div>
+                    <div class="dash-card" data-filter-type="tab" data-filter-target="film" title="Фильмы">
+                        <span class="dc-icon">🎬</span>
+                        <div class="dc-num" id="stat-films">—</div>
+                        <div class="dc-label">Фильмы</div>
+                    </div>
+                    <div class="dash-card dash-marvel" data-filter-type="tab" data-filter-target="marvel" title="Киновселенная Marvel">
+                        <span class="dc-icon">🦸‍♂️</span>
+                        <div class="dc-num" id="stat-marvel">—</div>
+                        <div class="dc-label">Marvel</div>
+                    </div>
+                    <div class="dash-card dash-dc" data-filter-type="tab" data-filter-target="dc" title="Вселенная DC">
+                        <span class="dc-icon">🦇</span>
+                        <div class="dc-num" id="stat-dc">—</div>
+                        <div class="dc-label">DC</div>
+                    </div>
+                    <div class="dash-card" data-filter-type="tab" data-filter-target="series" title="Сериалы">
+                        <span class="dc-icon">📺</span>
+                        <div class="dc-num" id="stat-series">—</div>
+                        <div class="dc-label">Сериалы</div>
+                    </div>
+                    <div class="dash-card" data-filter-type="tab" data-filter-target="cartoon" title="Мультики">
+                        <span class="dc-icon">🎨</span>
+                        <div class="dc-num" id="stat-cartoons">—</div>
+                        <div class="dc-label">Мультики</div>
+                    </div>
+                    <div class="dash-card" data-filter-type="tab" data-filter-target="manga" title="Манга">
+                        <span class="dc-icon">📖</span>
+                        <div class="dc-num" id="stat-manga">—</div>
+                        <div class="dc-label">Манга</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════ -->
+            <!--  ТАБЫ КАТЕГОРИЙ                   -->
+            <!-- ══════════════════════════════════ -->
+            <div class="stats-tabs">
+                <button class="tab-btn active" data-tab="all">🗂️ Всё</button>
+                <button class="tab-btn" data-tab="anime">🎌 Аниме</button>
+                <button class="tab-btn" data-tab="film">🎬 Фильмы</button>
+                <button class="tab-btn tab-shelf" data-tab="shelf" title="Фильмы, которые Юрумми хочет посмотреть (Полка ожидания)">🍿 Хочу глянуть</button>
+                <button class="tab-btn tab-marvel" data-tab="marvel">🦸‍♂️ Marvel</button>
+                <button class="tab-btn tab-dc" data-tab="dc">🦇 DC</button>
+                <button class="tab-btn" data-tab="series">📺 Сериалы</button>
+                <button class="tab-btn" data-tab="cartoon">🎨 Мультики</button>
+                <button class="tab-btn" data-tab="manga">📖 Манга</button>
+            </div>
+
+            <!-- ══════════════════════════════════ -->
+            <!--  ФИЛЬТРЫ, ПОИСК И СОРТИРОВКА      -->
+            <!-- ══════════════════════════════════ -->
+            <div class="stats-controls">
+                <input
+                    type="text"
+                    id="search-input"
+                    class="search-box"
+                    placeholder="🔍  Поиск по названию или отзыву..."
+                >
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="masterpiece">👑 Шедевры (100+)</button>
+                    <button class="filter-btn" data-filter="ongoing">🔥 Онгоинги сезона</button>
+                    <button class="filter-btn" data-filter="exceeded">🚀 Выше ожиданий (20+)</button>
+                    <button class="filter-btn" data-filter="solid">⭐ База (10)</button>
+                    <button class="filter-btn" data-filter="reviews">💬 С отзывами</button>
+                    <button class="filter-btn" data-filter="watched">✅ Просмотрено</button>
+                    <button class="filter-btn" data-filter="watching">▶️ Смотрю</button>
+                    <button class="filter-btn" data-filter="planned">📋 В планах</button>
+                </div>
+                <select id="sort-select" class="sort-select">
+                    <option value="rating-desc">👑 Сначала лучшие (100 → ...)</option>
+                    <option value="chrono">⏳ Хронологический порядок вселенной</option>
+                    <option value="rating-asc">⬇️ Сначала низкие оценки</option>
+                    <option value="title-asc">🔤 А → Я</option>
+                    <option value="title-desc">🔤 Я → А</option>
+                </select>
+                <button type="button" id="btn-random-media" class="btn-random btn-random-media" title="Случайный тайтл из текущей выборки">
+                    <span class="br-icon">🎲</span>
+                    <span class="br-text">Мне повезёт!</span>
+                </button>
+            </div>
+
+            <!-- ══════════════════════════════════ -->
+            <!--  БЛОК МУЛЬТИ-ВЫБОРА ЖАНРОВ        -->
+            <!-- ══════════════════════════════════ -->
+            <div class="genre-filter-panel" id="genre-filter-panel">
+                <div class="genre-panel-top">
+                    <div class="genre-panel-title">
+                        <span class="gpt-icon">🎭</span>
+                        <span class="gpt-text">Жанры:</span>
+                        <span class="genre-selected-badge" id="genre-selected-count" style="display:none">0 выбрано</span>
+                    </div>
+                    <div class="genre-panel-controls">
+                        <div class="genre-search-wrap">
+                            <input
+                                type="text"
+                                id="genre-search-input"
+                                class="genre-search-box"
+                                placeholder="🔍 Поиск по жанрам..."
+                            >
+                            <button type="button" id="genre-search-clear" class="genre-search-clear" style="display:none">✕</button>
+                        </div>
+                        <div class="genre-mode-toggle" title="Логика объединения жанров">
+                            <button type="button" class="genre-mode-btn active" data-mode="and" title="Показывать тайтлы, у которых есть ВСЕ выбранные жанры">И (все)</button>
+                            <button type="button" class="genre-mode-btn" data-mode="or" title="Показывать тайтлы, у которых есть ЛЮБОЙ из выбранных жанров">ИЛИ (любой)</button>
+                        </div>
+                        <button type="button" id="genre-reset-btn" class="genre-reset-btn" style="display:none">✕ Сбросить</button>
+                    </div>
+                </div>
+                <div class="genre-chips-cloud" id="genre-chips-cloud">
+                    <!-- Заполняется динамически -->
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════ -->
+            <!--  СЕТКА КАРТОЧЕК                   -->
+            <!-- ══════════════════════════════════ -->
+            <div class="results-count" id="results-count"></div>
+            <div class="media-grid" id="media-grid"></div>
+            <div id="pagination-container"></div>
+            </div><!-- /#section-media -->
+
+            <!-- ══════════════════════════════════ -->
+            <!--  ЗОНА 2: STEAM КОМНАТА             -->
+            <!-- ══════════════════════════════════ -->
+            <div id="section-games" class="hub-zone-section" style="display:none;">
+
+                <!-- Визитка профиля Steam & Коллекции Yurummi -->
+                <div class="steam-profile-card">
+                    <div class="sp-avatar-box">
+                        <img src="https://avatars.fastly.steamstatic.com/bfec7c31bfc752be3b932f9dc58b398522252e99_full.jpg" alt="Yurummi Steam Avatar" class="sp-avatar">
+                        <span class="sp-status-dot" title="Игровые платформы Юрумми"></span>
+                    </div>
+                    <div class="sp-info">
+                        <div class="sp-top-line">
+                            <span class="sp-name">Yurummi</span>
+                            <span class="sp-level-badge">⭐ Уровень 37</span>
+                            <span class="sp-role-tag">Steam: Yurummi</span>
+                        </div>
+                        <p class="sp-bio">Полная игровая библиотека: Steam, Epic Games, Minecraft (8000+ ч.), ретро-консоли (GBA) и марафонные игры.</p>
+                        <div class="sp-stats-row">
+                            <span class="sp-stat-pill">🎮 <b>326</b> игр в коллекции</span>
+                            <span class="sp-stat-pill pill-perfect">🏆 <b>25</b> идеальных (100% ачивок в Steam)</span>
+                            <span class="sp-stat-pill">💬 <b>14</b> обзоров</span>
+                            <span class="sp-stat-pill pill-dota">🔥 <b>13,081 ч.</b> в Dota 2</span>
+                            <span class="sp-stat-pill pill-mc">⛏️ <b>8000+ ч.</b> в Minecraft</span>
+                        </div>
+                    </div>
+                    <div class="sp-action">
+                        <a href="https://steamcommunity.com/id/yurummi" target="_blank" rel="noopener" class="btn-steam-profile">
+                            <span class="bsp-icon">🎮</span>
+                            <span>Профиль в Steam</span>
+                            <span class="bsp-arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Контролы фильтрации и поиска по играм -->
+                <div class="stats-controls steam-controls">
+                    <input
+                        type="text"
+                        id="steam-search-input"
+                        class="search-box steam-search-box"
+                        placeholder="🔍  Поиск по названию игры или жанру..."
+                    >
+                    <div class="filter-group steam-filter-group">
+                        <button class="filter-btn active" data-steam-filter="all">Все игры (326)</button>
+                        <button class="filter-btn" data-steam-filter="non-steam">⭐ Вне Steam / EGS (13)</button>
+                        <button class="filter-btn" data-steam-filter="perfect">🏆 100% Идеальные (25)</button>
+                        <button class="filter-btn" data-steam-filter="hours">🔥 Топ по часам</button>
+                        <button class="filter-btn" data-steam-filter="reviewed">💬 С отзывами (14)</button>
+                    </div>
+                    <select id="steam-sort-select" class="sort-select steam-sort-select">
+                        <option value="hours-desc">🔥 По часам (больше → меньше)</option>
+                        <option value="perfect-first">🏆 Сначала идеальные (100%)</option>
+                        <option value="hltb-asc">⏱️ Длительность HLTB (быстрые → долгие)</option>
+                        <option value="hltb-desc">⏳ Длительность HLTB (долгие → быстрые)</option>
+                        <option value="title-asc">🔤 По названию (А → Я)</option>
+                    </select>
+                    <button type="button" id="btn-random-steam" class="btn-random btn-random-steam" title="Случайная игра из текущей библиотеки">
+                        <span class="br-icon">🎲</span>
+                        <span class="br-text">Мне повезёт!</span>
+                    </button>
+                </div>
+
+                <!-- ══════════════════════════════════ -->
+                <!--  БЛОК МУЛЬТИ-ВЫБОРА ЖАНРОВ STEAM   -->
+                <!-- ══════════════════════════════════ -->
+                <div class="genre-filter-panel steam-genre-panel" id="steam-genre-filter-panel">
+                    <div class="genre-panel-top">
+                        <div class="genre-panel-title">
+                            <span class="gpt-icon">🎮</span>
+                            <span class="gpt-text">Жанры игр:</span>
+                            <span class="genre-selected-badge steam-genre-selected-badge" id="steam-genre-selected-count" style="display:none">0 выбрано</span>
+                        </div>
+                        <div class="genre-panel-controls">
+                            <div class="genre-search-wrap">
+                                <input
+                                    type="text"
+                                    id="steam-genre-search-input"
+                                    class="genre-search-box steam-genre-search-box"
+                                    placeholder="🔍 Поиск по жанрам игр..."
+                                >
+                                <button type="button" id="steam-genre-search-clear" class="genre-search-clear" style="display:none">✕</button>
+                            </div>
+                            <div class="genre-mode-toggle steam-genre-mode-toggle" title="Логика объединения жанров игр">
+                                <button type="button" class="genre-mode-btn steam-genre-mode-btn active" data-steam-mode="and" title="Показывать игры со ВСЕМИ выбранными жанрами">И (все)</button>
+                                <button type="button" class="genre-mode-btn steam-genre-mode-btn" data-steam-mode="or" title="Показывать игры с ЛЮБЫМ из выбранных жанров">ИЛИ (любой)</button>
+                            </div>
+                            <button type="button" id="steam-genre-reset-btn" class="genre-reset-btn" style="display:none">✕ Сбросить</button>
+                        </div>
+                    </div>
+                    <div class="genre-chips-cloud steam-genre-chips-cloud" id="steam-genre-chips-cloud">
+                        <!-- Заполняется динамически -->
+                    </div>
+                </div>
+
+                <!-- Счётчик игр -->
+                <div class="results-count steam-results-count" id="steam-results-count"></div>
+
+                <!-- Сетка карточек игр Steam -->
+                <div class="steam-grid" id="steam-grid"></div>
+
+            </div><!-- /#section-games -->
+
+        </div><!-- /container -->
+    </div><!-- /stats-page -->
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--  МОДАЛЬНОЕ ОКНО ТАЙТЛА                 -->
+    <!-- ═══════════════════════════════════════ -->
+    <div id="media-modal" class="modal-backdrop" aria-hidden="true">
+        <div class="modal-dialog">
+            <button id="modal-close-btn" class="modal-close-btn" title="Закрыть (Esc)">✕</button>
+            <div class="modal-body">
+                <div class="modal-poster-col">
+                    <div class="modal-poster-box">
+                        <img id="modal-poster-img" class="modal-poster-img" src="" alt="" style="display:none">
+                        <div id="modal-poster-fallback" class="modal-poster-fallback">
+                            <span id="modal-fallback-icon" class="mfb-icon">🎌</span>
+                            <span class="mfb-label">Yurummi Stats</span>
+                        </div>
+                    </div>
+                    <div id="modal-rating-badge-container" class="modal-rating-box"></div>
+                </div>
+                <div class="modal-details-col">
+                    <div class="modal-meta-row">
+                        <span id="modal-cat-tag" class="modal-tag"></span>
+                        <span id="modal-subcat-tag" class="modal-tag" style="display:none"></span>
+                        <span id="modal-universe-tag" class="modal-tag" style="display:none"></span>
+                        <span id="modal-status-tag" class="modal-tag modal-tag-status"></span>
+                        <span id="modal-episodes-tag" class="modal-tag modal-tag-episodes" style="display:none"></span>
+                    </div>
+                    <div id="modal-genres-row" class="modal-genres-row" style="display:none"></div>
+
+                    <h2 id="modal-title" class="modal-title"></h2>
+
+                    <!-- Блок франшизы и сезонов -->
+                    <div id="modal-franchise-block" class="modal-section modal-section-franchise" style="display:none">
+                        <div class="modal-franchise-header">
+                            <div class="mfh-left">
+                                <span class="mfh-icon">📺</span>
+                                <span class="mfh-title" id="modal-franchise-title">Франшиза</span>
+                            </div>
+                            <div class="mfh-stats-badge" id="modal-franchise-stats-badge">Сезоны</div>
+                        </div>
+                        <div class="modal-franchise-seasons-track" id="modal-franchise-seasons-track">
+                            <!-- Карточки сезонов заполняются динамически -->
+                        </div>
+                    </div>
+
+                    <!-- Отзыв Юрумми -->
+                    <div id="modal-review-block" class="modal-section modal-section-review" style="display:none">
+                        <div class="modal-section-title">💬 Мнение Юрумми:</div>
+                        <div id="modal-review-text" class="modal-review-quote"></div>
+                    </div>
+
+                    <!-- Описание сюжета -->
+                    <div id="modal-desc-block" class="modal-section modal-section-desc">
+                        <div class="modal-section-title">📖 О тайтле:</div>
+                        <div id="modal-desc-text" class="modal-desc-content"></div>
+                    </div>
+
+                    <div class="modal-footer-links">
+                        <a id="modal-external-link" class="btn-modal-link" href="#" target="_blank" rel="noopener">
+                            🔎 Найти подробнее в сети
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--  МОДАЛЬНОЕ ОКНО ИГРЫ STEAM             -->
+    <!-- ═══════════════════════════════════════ -->
+    <div id="steam-game-modal" class="modal-backdrop steam-modal-backdrop" aria-hidden="true">
+        <div class="modal-dialog steam-modal-dialog">
+            <button id="steam-modal-close-btn" class="modal-close-btn steam-modal-close-btn" title="Закрыть (Esc)">✕</button>
+            <div class="steam-modal-header-banner" id="steam-modal-banner">
+                <div class="smh-overlay"></div>
+                <div class="smh-content">
+                    <img id="steam-modal-cover" class="smh-cover-img" src="" alt="">
+                    <div class="smh-info">
+                        <div class="smh-badges-row">
+                            <span id="steam-modal-hours-badge" class="smh-badge smh-badge-hours">🔥 0 ч.</span>
+                            <span id="steam-modal-hltb-badge" class="smh-badge smh-badge-hltb" style="display:none">⏱️ HLTB</span>
+                            <span id="steam-modal-perfect-badge" class="smh-badge smh-badge-perfect" style="display:none">🏆 100% Идеальная</span>
+                            <span id="steam-modal-appid-badge" class="smh-badge smh-badge-appid">App #0</span>
+                        </div>
+                        <h2 id="steam-modal-title" class="steam-modal-title">Название игры</h2>
+                        <div id="steam-modal-genres" class="steam-modal-genres"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="steam-modal-body">
+                <!-- Блок достижений -->
+                <div id="steam-modal-ach-block" class="steam-modal-section steam-modal-ach-block" style="display:none">
+                    <div class="sm-ach-header">
+                        <span class="sm-ach-title">🏆 Достижения в игре</span>
+                        <span id="steam-modal-ach-counts" class="sm-ach-counts">0 / 0 (0%)</span>
+                    </div>
+                    <div class="sm-ach-progress-track">
+                        <div id="steam-modal-ach-bar" class="sm-ach-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Отзыв Юрумми -->
+                <div id="steam-modal-review-block" class="steam-modal-section steam-modal-review-section" style="display:none">
+                    <div class="sm-section-label">
+                        <span class="sm-review-icon">💬</span>
+                        <span class="sm-review-heading">Мнение и отзыв Yurummi:</span>
+                        <span class="sm-rec-badge">👍 Рекомендовано</span>
+                    </div>
+                    <div id="steam-modal-review-text" class="steam-modal-review-text"></div>
+                </div>
+
+                <!-- Блок времени прохождения HowLongToBeat -->
+                <div id="steam-modal-hltb-block" class="steam-modal-section steam-modal-hltb-section">
+                    <div class="sm-section-label">
+                        <span class="sm-hltb-icon">⏱️</span>
+                        <span class="sm-hltb-heading">Длительность игры (HowLongToBeat):</span>
+                        <a id="steam-modal-hltb-link" href="#" target="_blank" rel="noopener" class="sm-hltb-ext-btn" title="Открыть игру на HowLongToBeat.com">
+                            <span>HowLongToBeat</span>
+                            <span class="sm-hltb-ext-arr">↗</span>
+                        </a>
+                    </div>
+                    <div class="sm-hltb-cards-grid" id="steam-modal-hltb-cards"></div>
+                    <div class="sm-hltb-compare-box" id="steam-modal-hltb-compare" style="display:none"></div>
+                </div>
+
+                <!-- Описание игры из Steam -->
+                <div id="steam-modal-desc-block" class="steam-modal-section steam-modal-desc-section">
+                    <div class="sm-section-label">
+                        <span class="sm-desc-icon">📖</span>
+                        <span>Об этой игре:</span>
+                    </div>
+                    <div id="steam-modal-desc-text" class="steam-modal-desc-text"></div>
+                </div>
+
+                <!-- Кнопки перехода -->
+                <div class="steam-modal-actions">
+                    <a id="steam-modal-store-link" class="btn-steam-modal-cta" href="#" target="_blank" rel="noopener">
+                        <span class="bsm-icon">🎮</span>
+                        <span>Открыть страницу в магазине Steam</span>
+                        <span class="bsm-arrow">↗</span>
+                    </a>
+                    <a id="steam-modal-profile-link" class="btn-steam-modal-profile" href="https://steamcommunity.com/id/yurummi" target="_blank" rel="noopener">
+                        <span class="bsm-icon">👤</span>
+                        <span>Профиль Yurummi</span>
+                        <span class="bsm-arrow">↗</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Плавающая кнопка "Наверх" -->
+    <button id="back-to-top" class="back-to-top" title="Наверх" aria-label="Вернуться наверх">↑</button>
+
+    <!-- Всплывающий тост уведомлений -->
+    <div id="site-toast" class="toast-notice"></div>
+
+    <!-- Данные загружаются синхронно — 100% автономно на file:// и на GitHub Pages -->
+    <script src="js/media-data.js"></script>
+    <script src="js/steam-data.js"></script>
+    <script src="js/custom-games-data.js"></script>
+    <script src="js/hltb-data.js"></script>
+    <script src="js/stream-status.js"></script>
+    <script src="js/stats.js"></script>
+</body>
+</html>

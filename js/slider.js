@@ -26,7 +26,13 @@
         slide.className = 'slide' + (index === 0 ? ' active' : '');
         if (item.url) {
             slide.classList.add('clickable');
-            slide.addEventListener('click', function () { window.open(item.url, '_blank'); });
+            slide.addEventListener('click', function () {
+                if (item.target === '_self' || item.url.endsWith('.html') || item.url.startsWith('#')) {
+                    window.location.href = item.url;
+                } else {
+                    window.open(item.url, '_blank');
+                }
+            });
         }
 
         const blurBg = document.createElement('div');
@@ -47,7 +53,7 @@
                 html += '<div class="caption-title">' + item.textMain + '</div>';
             }
             if (item.textAuthor) {
-                const prefix = item.textAuthor.includes('@') ? '🎨 Автор:' : '💡';
+                const prefix = item.authorPrefix || (item.textAuthor.includes('@') ? '🎨 Автор:' : '💡');
                 html += '<div class="caption-author">' + prefix + ' <span>' + item.textAuthor + '</span></div>';
             }
             caption.innerHTML = html;
