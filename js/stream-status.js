@@ -177,10 +177,28 @@ function initStreamHeroBanner() {
             const [hours, minutes] = (timeStr.includes(':') ? timeStr.split(':') : [timeStr, '00']).map(Number);
             
             // Находим точный момент в UTC по времени Europe/Berlin:
-            const utcGuess = new Date(`${s.date}T${pad(hours || 20)}:${pad(minutes || 0)}:00Z`);
-            const berlinDate = new Date(utcGuess.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
-            const diff = utcGuess.getTime() - berlinDate.getTime();
-            const streamDate = new Date(utcGuess.getTime() + diff);
+            const [y, mon, d] = s.date.split('-').map(Number);
+            const targetUtc = new Date(Date.UTC(y, mon - 1, d, hours || 20, minutes || 0));
+
+            const berlinFormatter = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Europe/Berlin',
+                year: 'numeric', month: 'numeric', day: 'numeric',
+                hour: 'numeric', minute: 'numeric',
+                hourCycle: 'h23'
+            });
+
+            const parts = berlinFormatter.formatToParts(targetUtc);
+            const p = {};
+            for (const part of parts) p[part.type] = part.value;
+            const berlinHour = parseInt(p.hour, 10);
+            const berlinMinute = parseInt(p.minute, 10);
+            const berlinDay = parseInt(p.day, 10);
+
+            let berlinOffsetMin = (berlinHour * 60 + berlinMinute) - ((hours || 20) * 60 + (minutes || 0));
+            if (berlinDay > d) berlinOffsetMin += 24 * 60;
+            if (berlinDay < d) berlinOffsetMin -= 24 * 60;
+
+            const streamDate = new Date(targetUtc.getTime() - berlinOffsetMin * 60 * 1000);
 
             if (streamDate > now) {
                 const userH = String(streamDate.getHours()).padStart(2, '0');

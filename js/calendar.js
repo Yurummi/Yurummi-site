@@ -79,10 +79,29 @@ function _getStreamLocalDateTime(dateStr, timeStr) {
     const [h, m] = timeClean.split(':').map(Number);
 
     try {
-        const utcGuess = new Date(`${dateStr}T${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:00Z`);
-        const berlinDate = new Date(utcGuess.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
-        const diff = utcGuess.getTime() - berlinDate.getTime();
-        return new Date(utcGuess.getTime() + diff);
+        const [y, mon, d] = dateStr.split('-').map(Number);
+        const targetUtc = new Date(Date.UTC(y, mon - 1, d, h, m));
+
+        const berlinFormatter = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Europe/Berlin',
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric',
+            hourCycle: 'h23'
+        });
+
+        const parts = berlinFormatter.formatToParts(targetUtc);
+        const p = {};
+        for (const part of parts) p[part.type] = part.value;
+        const berlinHour = parseInt(p.hour, 10);
+        const berlinMinute = parseInt(p.minute, 10);
+        const berlinDay = parseInt(p.day, 10);
+
+        let berlinOffsetMin = (berlinHour * 60 + berlinMinute) - (h * 60 + m);
+        if (berlinDay > d) berlinOffsetMin += 24 * 60;
+        if (berlinDay < d) berlinOffsetMin -= 24 * 60;
+
+        const exactUtcMs = targetUtc.getTime() - berlinOffsetMin * 60 * 1000;
+        return new Date(exactUtcMs);
     } catch (e) {
         return null;
     }
