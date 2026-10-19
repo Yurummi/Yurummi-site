@@ -120,6 +120,27 @@
     color: #fff;
 }
 
+.cell-time {
+    display: inline-block;
+    cursor: help;
+}
+
+.cell-shift-pill {
+    display: inline-block;
+    font-size: 0.75em;
+    padding: 0 3px;
+    margin-left: 2px;
+    background: rgba(0, 0, 0, 0.16);
+    border-radius: 3px;
+    font-weight: 700;
+    vertical-align: baseline;
+}
+
+.stream-info.special .cell-shift-pill {
+    background: rgba(255, 255, 255, 0.28);
+    color: #fff;
+}
+
 /* ==========================================
    ЯЧЕЙКА — СТРИМ
    ========================================== */

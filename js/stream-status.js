@@ -190,15 +190,16 @@ function initStreamHeroBanner() {
             const parts = berlinFormatter.formatToParts(targetUtc);
             const p = {};
             for (const part of parts) p[part.type] = part.value;
-            const berlinHour = parseInt(p.hour, 10);
-            const berlinMinute = parseInt(p.minute, 10);
-            const berlinDay = parseInt(p.day, 10);
 
-            let berlinOffsetMin = (berlinHour * 60 + berlinMinute) - ((hours || 20) * 60 + (minutes || 0));
-            if (berlinDay > d) berlinOffsetMin += 24 * 60;
-            if (berlinDay < d) berlinOffsetMin -= 24 * 60;
+            const berlinUtc = Date.UTC(
+                parseInt(p.year, 10),
+                parseInt(p.month, 10) - 1,
+                parseInt(p.day, 10),
+                parseInt(p.hour, 10),
+                parseInt(p.minute, 10)
+            );
 
-            const streamDate = new Date(targetUtc.getTime() - berlinOffsetMin * 60 * 1000);
+            const streamDate = new Date(targetUtc.getTime() - (berlinUtc - targetUtc.getTime()));
 
             if (streamDate > now) {
                 const userH = String(streamDate.getHours()).padStart(2, '0');

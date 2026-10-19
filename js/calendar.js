@@ -41,34 +41,6 @@ function _escapeHtml(value) {
 }
 
 /**
- * Строит индексы событий на текущий рендер, чтобы не сканировать
- * весь STREAMS_LIST заново для каждого дня месяца.
- */
-function _indexEvents(list) {
-    const byDate = Object.create(null);
-    const periods = [];
-
-    for (let i = 0; i < list.length; i++) {
-        const event = list[i];
-        if (event.startDate) {
-            periods.push(event);
-        } else if (event.date) {
-            byDate[event.date] = event;
-        }
-    }
-
-    return { byDate: byDate, periods: periods };
-}
-
-function _findPeriodEvent(periods, dateStr) {
-    for (let i = 0; i < periods.length; i++) {
-        const p = periods[i];
-        if (dateStr >= p.startDate && dateStr <= p.endDate) return p;
-    }
-    return null;
-}
-
-/**
  * Конвертирует время стрима из времени стримера (Германия, Europe/Berlin)
  * в точный объект Date (с учетом часового пояса зрителя).
  */
@@ -92,24 +64,95 @@ function _getStreamLocalDateTime(dateStr, timeStr) {
         const parts = berlinFormatter.formatToParts(targetUtc);
         const p = {};
         for (const part of parts) p[part.type] = part.value;
-        const berlinHour = parseInt(p.hour, 10);
-        const berlinMinute = parseInt(p.minute, 10);
-        const berlinDay = parseInt(p.day, 10);
 
-        let berlinOffsetMin = (berlinHour * 60 + berlinMinute) - (h * 60 + m);
-        if (berlinDay > d) berlinOffsetMin += 24 * 60;
-        if (berlinDay < d) berlinOffsetMin -= 24 * 60;
+        const berlinUtc = Date.UTC(
+            parseInt(p.year, 10),
+            parseInt(p.month, 10) - 1,
+            parseInt(p.day, 10),
+            parseInt(p.hour, 10),
+            parseInt(p.minute, 10)
+        );
 
-        const exactUtcMs = targetUtc.getTime() - berlinOffsetMin * 60 * 1000;
+        const berlinOffsetMs = berlinUtc - targetUtc.getTime();
+        const exactUtcMs = targetUtc.getTime() - berlinOffsetMs;
         return new Date(exactUtcMs);
     } catch (e) {
         return null;
     }
 }
 
-function _formatStreamCellTime(streamEvent, dateStr) {
-    if (!streamEvent || !streamEvent.time) return '';
-    const exactDate = _getStreamLocalDateTime(dateStr, streamEvent.time);
+/**
+ * Строит индексы событий на текущий рендер, чтобы не сканировать
+ * весь STREAMS_LIST заново для каждого дня месяца.
+ * Индексирует разовые события по ЛОКАЛЬНОЙ дате зрителя,
+ * чтобы при переходе через полночь (+5ч и т.д.) стрим отображался
+ * в правильной ячейке дня пользователя.
+ */
+function _indexEvents(list) {
+    const byDate = Object.create(null);
+    const periods = [];
+
+    for (let i = 0; i < list.length; i++) {
+        const event = list[i];
+        if (event.startDate) {
+            periods.push(event);
+        } else if (event.date) {
+            let localDateStr = event.date;
+            let localTimeStr = event.time || '';
+            let isShiftedDay = false;
+            let dayShift = 0;
+
+            if (event.time) {
+                const exactDate = _getStreamLocalDateTime(event.date, event.time);
+                if (exactDate) {
+                    const y = exactDate.getFullYear();
+                    const m = exactDate.getMonth() + 1;
+                    const d = exactDate.getDate();
+                    localDateStr = _dateStr(y, m, d);
+
+                    const userH = String(exactDate.getHours()).padStart(2, '0');
+                    const userM = String(exactDate.getMinutes()).padStart(2, '0');
+                    const prefix = event.time.includes('±') ? '±' : '';
+                    localTimeStr = prefix + `${userH}:${userM}`;
+
+                    if (localDateStr !== event.date) {
+                        isShiftedDay = true;
+                        const origDateObj = new Date(event.date + 'T12:00:00Z');
+                        const localDateObj = new Date(localDateStr + 'T12:00:00Z');
+                        dayShift = Math.round((localDateObj - origDateObj) / (1000 * 60 * 60 * 24));
+                    }
+                }
+            }
+
+            const localEvent = Object.assign({}, event, {
+                localDateStr: localDateStr,
+                localTimeStr: localTimeStr,
+                isShiftedDay: isShiftedDay,
+                dayShift: dayShift,
+                originalDate: event.date,
+                originalTime: event.time
+            });
+
+            byDate[localDateStr] = localEvent;
+        }
+    }
+
+    return { byDate: byDate, periods: periods };
+}
+
+function _findPeriodEvent(periods, dateStr) {
+    for (let i = 0; i < periods.length; i++) {
+        const p = periods[i];
+        if (dateStr >= p.startDate && dateStr <= p.endDate) return p;
+    }
+    return null;
+}
+
+function _formatStreamCellTime(streamEvent) {
+    if (!streamEvent) return '';
+    if (streamEvent.localTimeStr) return streamEvent.localTimeStr;
+    if (!streamEvent.time) return '';
+    const exactDate = _getStreamLocalDateTime(streamEvent.originalDate || streamEvent.date, streamEvent.time);
     if (!exactDate) return _escapeHtml(streamEvent.time);
 
     const userH = String(exactDate.getHours()).padStart(2, '0');
@@ -258,9 +301,22 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
 
         // Содержимое плашки
         const specialClass = streamEvent.isSpecial ? 'special' : '';
-        const timeDisplay = _formatStreamCellTime(streamEvent, dateStr);
-        const timeTooltip = 'Время стримера: ' + _escapeHtml(streamEvent.time) + ' (Германия)';
-        const infoHtml = '<span class="cell-time" title="' + timeTooltip + '">' + timeDisplay + '</span><br>' + _escapeHtml(streamEvent.text);
+        const timeDisplay = _formatStreamCellTime(streamEvent);
+        let timeTooltip = 'Время стримера: ' + _escapeHtml(streamEvent.originalTime || streamEvent.time) + ' (Германия)';
+        let shiftBadge = '';
+
+        if (streamEvent.isShiftedDay && streamEvent.originalDate) {
+            const parts = streamEvent.originalDate.split('-');
+            const origDay = parseInt(parts[2], 10);
+            const origMonIndex = parseInt(parts[1], 10) - 1;
+            const origMonths = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+            const origMon = origMonths[origMonIndex] || '';
+            const shiftSign = streamEvent.dayShift > 0 ? '+1д' : '-1д';
+            timeTooltip = `Время стримера: ${streamEvent.originalTime || streamEvent.time} (${origDay} ${origMon}, Германия)`;
+            shiftBadge = ` <span class="cell-shift-pill" title="${timeTooltip}">${shiftSign}</span>`;
+        }
+
+        const infoHtml = '<span class="cell-time" title="' + timeTooltip + '">' + timeDisplay + shiftBadge + '</span><br>' + _escapeHtml(streamEvent.text);
         if (streamEvent.isCanceled) {
             classes += ' canceled-day';
             content += '<div class="stream-info">' + infoHtml + '</div>';
@@ -345,7 +401,7 @@ function renderCalendar() {
             if (diffHours === 0) {
                 tzNote.innerHTML = `⏰ Время стримов указано по вашему местному времени (<strong>${tzStr}</strong>, Германия / Европа)`;
             } else {
-                tzNote.innerHTML = `⏰ Время стримов адаптировано под ваш часовой пояс (<strong>${tzStr}</strong>) • Время стримера: 20:00 (Германия, GMT+2)`;
+                tzNote.innerHTML = `⏰ Время и дни стримов адаптированы под ваш часовой пояс (<strong>${tzStr}</strong>) • Время стримера: 20:00 (Германия, GMT+2)`;
             }
         } catch (e) {}
     }
