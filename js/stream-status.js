@@ -1,18 +1,87 @@
 // ── Stream Status & Interactive Enhancements for Yurummi ────────────────────────
 // Управляйте статусом эфира прямо здесь: измените isLive на true, когда начинаете стрим!
 window.STREAM_CONFIG = {
-    isLive: true, // true = в эфире, false = оффлайн
+    isLive: false, // Автоматически синхронизируется в реальном времени с Twitch (DecAPI)
     platform: 'twitch',
     channelUrl: 'https://twitch.tv/yurummi',
-    game: 'Общение & Презентация', // Игра или категория стрима
-    title: '🔥 ВОЗВРАЩЕНИЕ! Презентация сайта и нового Медиа-Хаба!',
+    game: '',
+    title: '',
     scheduleInfo: 'Стримы по расписанию'
 };
 
-// Поддержка тестирования через URL: ?live=1 / ?live=0
-if (typeof window !== 'undefined' && window.location.search) {
-    if (window.location.search.includes('live=1')) window.STREAM_CONFIG.isLive = true;
-    if (window.location.search.includes('live=0')) window.STREAM_CONFIG.isLive = false;
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/\'/g, '&#39;');
+}
+
+// ── Автоматическая синхронизация статуса с Twitch (DecAPI) ─────
+async function checkTwitchLiveStatus() {
+    // Поддержка ручного принудительного режима через ?live=1 или ?live=0
+    if (typeof window !== 'undefined' && window.location.search) {
+        if (window.location.search.includes('live=1')) {
+            window.STREAM_CONFIG.isLive = true;
+            if (!window.STREAM_CONFIG.game) window.STREAM_CONFIG.game = 'Just Chatting';
+            if (!window.STREAM_CONFIG.title) window.STREAM_CONFIG.title = 'Стрим на Twitch';
+            updateLiveStatusPills();
+            initStreamHeroBanner();
+            return;
+        }
+        if (window.location.search.includes('live=0')) {
+            window.STREAM_CONFIG.isLive = false;
+            updateLiveStatusPills();
+            initStreamHeroBanner();
+            return;
+        }
+    }
+
+    const channel = 'yurummi';
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4500);
+
+        const uptimeRes = await fetch(`https://decapi.me/twitch/uptime/${channel}`, {
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (!uptimeRes.ok) return;
+        const uptimeText = (await uptimeRes.text()).trim().toLowerCase();
+
+        const isLive = !uptimeText.includes('offline') && 
+                       !uptimeText.includes('not streaming') && 
+                       !uptimeText.includes('user not found') &&
+                       uptimeText.length > 0;
+
+        if (isLive) {
+            let game = '';
+            let title = '';
+            try {
+                const [gameRes, titleRes] = await Promise.all([
+                    fetch(`https://decapi.me/twitch/game/${channel}`),
+                    fetch(`https://decapi.me/twitch/title/${channel}`)
+                ]);
+                if (gameRes.ok) game = (await gameRes.text()).trim();
+                if (titleRes.ok) title = (await titleRes.text()).trim();
+            } catch (err) {}
+
+            window.STREAM_CONFIG.isLive = true;
+            window.STREAM_CONFIG.game = game || 'Стрим на Twitch';
+            window.STREAM_CONFIG.title = title || 'Присоединяйся к трансляции!';
+        } else {
+            window.STREAM_CONFIG.isLive = false;
+        }
+
+        updateLiveStatusPills();
+        initStreamHeroBanner();
+
+    } catch (e) {
+        // При сетевом сбое оставляем предыдущее состояние
+    }
 }
 
 // ── Всплывающий тост ──────────────────────────────────────────
@@ -120,7 +189,9 @@ function updateLiveStatusPills() {
         pill.href = cfg.channelUrl || 'https://twitch.tv/yurummi';
         if (cfg.isLive) {
             pill.className = 'nav-live-pill online';
-            pill.innerHTML = `<span class="nlp-dot live-pulse"></span><span class="nlp-text">LIVE${cfg.game ? ': ' + cfg.game : ''}</span>`;
+            const gameText = cfg.game || 'Twitch';
+            const titleSnippet = cfg.title ? ` — ${cfg.title}` : '';
+            pill.innerHTML = `<span class="nlp-dot live-pulse"></span><span class="nlp-text">LIVE: <strong>${escapeHtml(gameText)}</strong>${escapeHtml(titleSnippet)}</span>`;
             pill.title = `${cfg.title || 'В эфире'} (${cfg.game || ''}) — Кликните для перехода на трансляцию!`;
         } else {
             pill.className = 'nav-live-pill offline';
@@ -154,8 +225,8 @@ function initStreamHeroBanner() {
             pill.className = 'shb-status-pill online';
             if (pillText) pillText.textContent = 'В ЭФИРЕ';
         }
-        if (title) title.innerHTML = `🔴 <strong>${cfg.game || 'Стрим на Twitch'}</strong>`;
-        if (center) center.innerHTML = `<span style="color:#fca5a5;">${cfg.title || 'Присоединяйся к трансляции прямо сейчас!'}</span>`;
+        if (title) title.innerHTML = `🔴 <strong>${escapeHtml(cfg.game || 'Стрим на Twitch')}</strong>`;
+        if (center) center.innerHTML = `<span style="color:#fca5a5;">${escapeHtml(cfg.title || 'Присоединяйся к трансляции прямо сейчас!')}</span>`;
         if (right) {
             right.innerHTML = `
                 <a href="${cfg.channelUrl || 'https://twitch.tv/yurummi'}" target="_blank" rel="noopener" class="shb-btn shb-btn-twitch">
@@ -362,6 +433,10 @@ function initAllEnhancements() {
     initScrollEnhancements();
     initCommandCopying();
     checkMediaHubVisibility();
+
+    // Автоматическая проверка Twitch сразу и каждые 60 секунд
+    checkTwitchLiveStatus();
+    setInterval(checkTwitchLiveStatus, 60000);
 }
 
 if (document.readyState === 'loading') {

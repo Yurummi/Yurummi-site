@@ -115,6 +115,27 @@ nav a:hover {
     flex-shrink: 0;
 }
 
+.nlp-text {
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@media (max-width: 1000px) {
+    .nlp-text {
+        max-width: 140px;
+    }
+}
+
+@media (max-width: 650px) {
+    .nlp-text {
+        max-width: 90px;
+    }
+}
+
 .nav-live-pill.online .nlp-dot {
     background: #ff4757;
     box-shadow: 0 0 6px #ff4757;
