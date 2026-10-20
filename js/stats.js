@@ -25,6 +25,9 @@ let visibleCount = PAGE_SIZE;
 document.addEventListener('DOMContentLoaded', () => {
     // 100% autonomous: loaded directly from window.MEDIA_DATA (no fetch required!)
     if (window.MEDIA_DATA && Array.isArray(window.MEDIA_DATA.items)) {
+        window.MEDIA_DATA.items.forEach(it => {
+            if (it.poster) it.poster = it.poster.replace(/https?:\/\/shikimori\.(one|me)/g, 'https://shikimori.io');
+        });
         allItems = window.MEDIA_DATA.items;
         renderDashboard(window.MEDIA_DATA.stats);
         renderGenreCloud();
@@ -628,7 +631,13 @@ function renderCard(item, idx) {
     // Fixed-size Cover Thumbnail
     let posterThumb = '';
     if (item.poster && item.poster.trim().length > 0) {
-        posterThumb = `<img class="card-thumb-img" src="${escHtml(item.poster)}" alt="${escHtml(item.title)}" loading="lazy">`;
+        const safePoster = item.poster.replace(/https?:\/\/shikimori\.(one|me)/g, 'https://shikimori.io');
+        posterThumb = `
+            <img class="card-thumb-img" src="${escHtml(safePoster)}" alt="${escHtml(item.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+            <div class="card-thumb-placeholder" style="display:none;">
+                <span class="ctp-icon">${catMeta.icon}</span>
+                <span class="ctp-label">${catMeta.label}</span>
+            </div>`;
     } else {
         posterThumb = `
             <div class="card-thumb-placeholder">
@@ -829,11 +838,11 @@ function openModal(item, isRandom = false) {
                         else sBadge = `<span class="fsc-badge tier-good">${sR}/10</span>`;
                     }
 
-                    const posterSrc = s.poster || '';
+                    const posterSrc = (s.poster || '').replace(/https?:\/\/shikimori\.(one|me)/g, 'https://shikimori.io');
                     return `
                         <div class="franchise-season-card ${isCurrent ? 'is-current' : ''}" data-season-title="${escHtml(s.title)}" title="${escHtml(s.title)} (${s.episodes || '?'} сер.)">
                             <div class="fsc-thumb-box">
-                                ${posterSrc ? `<img src="${escHtml(posterSrc)}" alt="${escHtml(s.title)}" class="fsc-thumb-img" loading="lazy">` : `<div class="fsc-thumb-empty">🎌</div>`}
+                                ${posterSrc ? `<img src="${escHtml(posterSrc)}" alt="${escHtml(s.title)}" class="fsc-thumb-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\\'fsc-thumb-empty\\\'>🎌</div>';">` : `<div class="fsc-thumb-empty">🎌</div>`}
                             </div>
                             <div class="fsc-details">
                                 <div class="fsc-title" title="${escHtml(s.title)}">${escHtml(s.title)}</div>
@@ -926,9 +935,16 @@ function openModal(item, isRandom = false) {
     fallbackIcon.textContent = catMeta.icon;
 
     if (item.poster && item.poster.trim().length > 0) {
-        posterImg.src = item.poster;
+        const safePoster = item.poster.replace(/https?:\/\/shikimori\.(one|me)/g, 'https://shikimori.io');
+        posterImg.referrerPolicy = 'no-referrer';
+        posterImg.src = safePoster;
         posterImg.style.display = 'block';
         fallbackBox.style.display = 'none';
+        posterImg.onerror = function() {
+            this.onerror = null;
+            this.style.display = 'none';
+            fallbackBox.style.display = 'flex';
+        };
     } else {
         posterImg.src = '';
         posterImg.style.display = 'none';

@@ -1,13 +1,19 @@
 // ── Stream Status & Interactive Enhancements for Yurummi ────────────────────────
 // Управляйте статусом эфира прямо здесь: измените isLive на true, когда начинаете стрим!
 window.STREAM_CONFIG = {
-    isLive: false, // true = в эфире, false = оффлайн
+    isLive: true, // true = в эфире, false = оффлайн
     platform: 'twitch',
     channelUrl: 'https://twitch.tv/yurummi',
-    game: 'Phasmophobia', // Игра или категория стрима
-    title: 'Чилим на стриме, смотрим тайтлы и играем!',
+    game: 'Общение & Презентация', // Игра или категория стрима
+    title: '🔥 ВОЗВРАЩЕНИЕ! Презентация сайта и нового Медиа-Хаба!',
     scheduleInfo: 'Стримы по расписанию'
 };
+
+// Поддержка тестирования через URL: ?live=1 / ?live=0
+if (typeof window !== 'undefined' && window.location.search) {
+    if (window.location.search.includes('live=1')) window.STREAM_CONFIG.isLive = true;
+    if (window.location.search.includes('live=0')) window.STREAM_CONFIG.isLive = false;
+}
 
 // ── Всплывающий тост ──────────────────────────────────────────
 function showToast(message) {
@@ -135,6 +141,12 @@ function initStreamHeroBanner() {
     const title = document.getElementById('shb-title');
     const center = document.getElementById('shb-center');
     const right = document.getElementById('shb-right');
+
+    if (pill) {
+        pill.style.cursor = 'pointer';
+        pill.setAttribute('title', 'Кликните для перехода на трансляцию Twitch!');
+        pill.onclick = () => window.open(cfg.channelUrl || 'https://twitch.tv/yurummi', '_blank');
+    }
 
     if (cfg.isLive) {
         banner.classList.add('is-live');

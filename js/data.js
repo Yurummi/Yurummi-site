@@ -13,7 +13,7 @@
 //  false = на официальном сайте кнопка и слайд скрыты до команды со стрима (видны локально или с ?preview=1)
 //  true = активировано у всех зрителей на сайте
 // ============================================================
-const IS_MEDIA_HUB_ACTIVE = false;
+const IS_MEDIA_HUB_ACTIVE = true;
 
 const isMediaHubVisible = (typeof window !== 'undefined') && (
     IS_MEDIA_HUB_ACTIVE ||
