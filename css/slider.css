@@ -224,3 +224,80 @@
     background-color: #ffffff;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 2px 5px rgba(0, 0, 0, 0.8);
 }
+/* ==========================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ СЛАЙДЕРА
+   ========================================== */
+@media (max-width: 650px) {
+    .slider-container {
+        aspect-ratio: 16 / 10;
+        min-height: 220px;
+        border-width: 2.5px;
+        border-radius: 12px;
+    }
+
+    /* Компактный бейдж в углу — не закрывает арт */
+    .badge-wrapper {
+        top: -6px;
+        right: -6px;
+        transform: scale(0.65);
+        transform-origin: top right;
+    }
+
+    .badge.pink {
+        height: 38px;
+        font-size: 15px;
+        padding: 0 14px;
+        border-width: 2px;
+        margin-top: 14px;
+        margin-right: 6px;
+    }
+
+    .badge.yellow {
+        width: 85px;
+        height: 85px;
+        font-size: 18px;
+    }
+
+    .badge.green {
+        width: 110px;
+        height: 42px;
+        font-size: 16px;
+        margin-top: 14px;
+    }
+
+    /* Компактная подпись с мягким градиентом в самом низу */
+    .caption-panel {
+        padding: 8px 14px 10px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.6) 65%, transparent 100%);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    .caption-title {
+        font-size: 14.5px;
+        line-height: 1.25;
+        margin-bottom: 3px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    }
+
+    .caption-author {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /* Аккуратные точки пагинации */
+    .pagination {
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-width: 1.5px;
+    }
+}

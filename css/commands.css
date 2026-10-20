@@ -404,3 +404,38 @@
     color: #fff;
     box-shadow: 0 8px 25px rgba(0, 242, 254, 0.3);
 }
+/* ==========================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ ССЫЛОК И СОЦСЕТЕЙ
+   ========================================== */
+@media (max-width: 600px) {
+    .links-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .social-link-btn {
+        padding: 12px 16px;
+        font-size: 14.5px;
+        min-height: 48px;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+
+    .social-link-btn.span-center {
+        max-width: none !important;
+        margin: 0 !important;
+    }
+
+    .social-link-btn.btn-coop-email {
+        font-size: 13px;
+        padding: 12px 14px;
+        word-break: break-all;
+    }
+
+    .subheading-white {
+        font-size: 18px !important;
+        margin: 20px 0 10px !important;
+        text-align: center;
+    }
+}
