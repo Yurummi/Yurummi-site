@@ -384,6 +384,21 @@ function renderCalendar() {
 
     daysContainer.innerHTML = html.join('');
 
+    // На мобильных устройствах центрируем скролл на сегодняшнем дне
+    try {
+        const scrollWrap = document.querySelector('.calendar-scroll-wrap');
+        const todayCell = daysContainer.querySelector('.day-cell.today');
+        if (scrollWrap && todayCell && window.innerWidth <= 768) {
+            setTimeout(() => {
+                const cellLeft = todayCell.offsetLeft;
+                const cellWidth = todayCell.offsetWidth;
+                const wrapWidth = scrollWrap.clientWidth;
+                const targetScroll = cellLeft - (wrapWidth / 2) + (cellWidth / 2);
+                scrollWrap.scrollTo({ left: Math.max(0, targetScroll), behavior: 'smooth' });
+            }, 60);
+        }
+    } catch (e) {}
+
     // Обновляем плашку часового пояса под зрителя
     const tzNote = document.querySelector('.timezone-note');
     if (tzNote) {
@@ -424,3 +439,30 @@ function _dateStr(y, m, d) {
 
 // Инициализация
 renderCalendar();
+// Свайп влево/вправо по шапке календаря для удобного переключения месяцев
+(function initHeaderSwipe() {
+    const header = document.querySelector('.calendar-header');
+    if (!header) return;
+    let startX = 0;
+    let startY = 0;
+
+    header.addEventListener('touchstart', (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    header.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        const diffX = e.changedTouches[0].clientX - startX;
+        const diffY = e.changedTouches[0].clientY - startY;
+
+        if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+            if (diffX < 0) {
+                changeMonth(1);
+            } else {
+                changeMonth(-1);
+            }
+        }
+    }, { passive: true });
+})();

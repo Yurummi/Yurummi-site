@@ -1079,11 +1079,83 @@
         font-size: 20px;
     }
 }
+/* ==========================================
+   СКРОЛЛ-ОБЁРТКА СЕТКИ КАЛЕНДАРЯ (МОБИЛЬНАЯ ВЕРСИЯ)
+   ========================================== */
+.calendar-mobile-hint {
+    display: none;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ff3385;
+    margin: -6px 0 12px 0;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+    user-select: none;
+    animation: hint-bounce 2s ease infinite;
+}
 
+.calendar-wrapper.halloween-theme .calendar-mobile-hint {
+    color: #ff9933;
+    text-shadow: 0 0 8px rgba(255, 117, 24, 0.4);
+}
 
+@keyframes hint-bounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+}
 
+.calendar-scroll-wrap {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #ff3385 rgba(255, 255, 255, 0.08);
+    padding-bottom: 8px;
+}
 
+.calendar-wrapper.halloween-theme .calendar-scroll-wrap {
+    scrollbar-color: #ff7518 rgba(255, 255, 255, 0.08);
+}
 
+.calendar-scroll-wrap::-webkit-scrollbar {
+    height: 6px;
+}
 
+.calendar-scroll-wrap::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
 
+.calendar-scroll-wrap::-webkit-scrollbar-thumb {
+    background: #ff3385;
+    border-radius: 4px;
+}
 
+.calendar-wrapper.halloween-theme .calendar-scroll-wrap::-webkit-scrollbar-thumb {
+    background: #ff7518;
+    box-shadow: 0 0 6px rgba(255, 117, 24, 0.6);
+}
+
+@media (max-width: 650px) {
+    .calendar-mobile-hint {
+        display: block;
+    }
+    .calendar-grid {
+        min-width: 640px;
+    }
+    .calendar-wrapper {
+        padding: 14px 10px;
+    }
+    .day-cell {
+        min-height: 82px;
+        padding: 6px;
+    }
+    .stream-info {
+        font-size: 10px;
+        padding: 3px 2px;
+    }
+}
