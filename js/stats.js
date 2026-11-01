@@ -506,23 +506,26 @@ function getSeasonOrderNum(title) {
 
 function getFranchiseInfo(item) {
     if (!item.franchise) return null;
-    const all = (window.MEDIA_DATA?.items || []).filter(i => i.category === 'anime' && i.franchise === item.franchise);
+    const all = (window.MEDIA_DATA?.items || []).filter(i => i.category === item.category && i.franchise === item.franchise);
     if (all.length <= 1) return null;
 
     const sorted = [...all].sort((a, b) => {
-        const orderA = getSeasonOrderNum(a.title);
-        const orderB = getSeasonOrderNum(b.title);
+        const orderA = a.franchiseOrder ?? a.chronoOrder ?? getSeasonOrderNum(a.title);
+        const orderB = b.franchiseOrder ?? b.chronoOrder ?? getSeasonOrderNum(b.title);
         if (orderA !== orderB) return orderA - orderB;
         return a.title.localeCompare(b.title, 'ru');
     });
 
     const totalEps = sorted.reduce((sum, it) => sum + (it.episodes || 0), 0);
     const watchedEps = sorted.filter(it => it.status === 'watched').reduce((sum, it) => sum + (it.episodes || 0), 0);
+    const currentIndex = sorted.findIndex(it => it === item || it.title === item.title) + 1;
 
     return {
         key: item.franchise,
+        franchiseTitle: item.franchiseTitle || null,
         items: sorted,
         totalSeasons: sorted.length,
+        currentIndex: currentIndex > 0 ? currentIndex : 1,
         totalEpisodes: totalEps,
         watchedEpisodes: watchedEps
     };
@@ -602,10 +605,21 @@ function renderCard(item, idx) {
         subcatBadge = `<span class="badge-subcat subcat-dc">DC</span>`;
     }
 
-    // Episodes Badge (Anime)
+    // Episodes / Franchise Badge
     let episodesBadge = '';
-    if (item.category === 'anime' && (item.episodes || item.kind === 'movie')) {
-        const frInfo = getFranchiseInfo(item);
+    const frInfo = getFranchiseInfo(item);
+
+    if (item.category === 'film') {
+        if (frInfo && frInfo.totalSeasons > 1) {
+            const fTitle = frInfo.franchiseTitle || 'Франшиза';
+            episodesBadge = `
+                <div class="card-episodes-badge has-franchise is-film-franchise" title="Франшиза «${escHtml(fTitle)}»: часть ${frInfo.currentIndex} из ${frInfo.totalSeasons}">
+                    <span class="ep-icon">🎬</span>
+                    <span class="ep-cur">${frInfo.currentIndex}</span>
+                    <span class="ep-total">из ${frInfo.totalSeasons}</span>
+                </div>`;
+        }
+    } else if (item.category === 'anime' && (item.episodes || item.kind === 'movie')) {
         if (frInfo && frInfo.totalSeasons > 1) {
             episodesBadge = `
                 <div class="card-episodes-badge has-franchise" title="В этом сезоне: ${item.episodes || '?'} сер. • Всего во франшизе: ${frInfo.totalEpisodes} сер. (${frInfo.totalSeasons} сезона)">
@@ -626,6 +640,16 @@ function renderCard(item, idx) {
                     <span class="ep-cur">${item.episodes} сер.</span>
                 </div>`;
         }
+    } else if ((item.category === 'series' || item.category === 'cartoon') && frInfo && frInfo.totalSeasons > 1) {
+        const isMovieFranchise = !item.episodes && item.category === 'cartoon';
+        const icon = isMovieFranchise ? '🎬' : '📺';
+        const labelText = isMovieFranchise ? 'часть' : 'сезон';
+        episodesBadge = `
+            <div class="card-episodes-badge has-franchise" title="Франшиза: ${labelText} ${frInfo.currentIndex} из ${frInfo.totalSeasons}">
+                <span class="ep-icon">${icon}</span>
+                <span class="ep-cur">${frInfo.currentIndex}</span>
+                <span class="ep-total">из ${frInfo.totalSeasons}</span>
+            </div>`;
     }
 
     // Fixed-size Cover Thumbnail
@@ -808,21 +832,32 @@ function openModal(item, isRandom = false) {
         if (frInfo && frInfo.totalSeasons > 1) {
             const frTitleEl = document.getElementById('modal-franchise-title');
             if (frTitleEl) {
-                const baseSeason = frInfo.items.find(s => getSeasonOrderNum(s.title) === 1) || frInfo.items[0];
-                const cleanName = baseSeason.title.replace(/\s+(?:сезон|часть|\d+).*$/i, '').trim();
+                const baseSeason = frInfo.items.find(s => (s.franchiseOrder || getSeasonOrderNum(s.title)) === 1) || frInfo.items[0];
+                const cleanName = frInfo.franchiseTitle || baseSeason.title.replace(/\s+(?:сезон|часть|\d+).*$/i, '').trim();
                 frTitleEl.textContent = `Франшиза «${cleanName}»`;
+            }
+
+            const mfhIcon = frBlock.querySelector('.mfh-icon');
+            if (mfhIcon) {
+                mfhIcon.textContent = (item.category === 'film' || (!item.episodes && item.category === 'cartoon')) ? '🎬' : '📺';
             }
 
             const statsBadge = document.getElementById('modal-franchise-stats-badge');
             if (statsBadge) {
                 const sCount = frInfo.totalSeasons;
-                const sWord = (sCount % 10 === 1 && sCount % 100 !== 11) ? 'сезон' : ([2, 3, 4].includes(sCount % 10) && ![12, 13, 14].includes(sCount % 100)) ? 'сезона' : 'сезонов';
-                statsBadge.innerHTML = `<b>${sCount}</b> ${sWord} • <b>${frInfo.totalEpisodes}</b> сер. всего <span class="mfh-sub">(просмотрено: ${frInfo.watchedEpisodes})</span>`;
+                if (item.category === 'film') {
+                    const fWord = (sCount % 10 === 1 && sCount % 100 !== 11) ? 'фильм' : ([2, 3, 4].includes(sCount % 10) && ![12, 13, 14].includes(sCount % 100)) ? 'фильма' : 'фильмов';
+                    const watchedCount = frInfo.items.filter(it => it.status === 'watched').length;
+                    statsBadge.innerHTML = `<b>${sCount}</b> ${fWord} • часть <b>${frInfo.currentIndex}</b> из ${sCount} <span class="mfh-sub">(просмотрено: ${watchedCount})</span>`;
+                } else {
+                    const sWord = (sCount % 10 === 1 && sCount % 100 !== 11) ? 'сезон' : ([2, 3, 4].includes(sCount % 10) && ![12, 13, 14].includes(sCount % 100)) ? 'сезона' : 'сезонов';
+                    statsBadge.innerHTML = `<b>${sCount}</b> ${sWord} • <b>${frInfo.totalEpisodes}</b> сер. всего <span class="mfh-sub">(просмотрено: ${frInfo.watchedEpisodes})</span>`;
+                }
             }
 
             const track = document.getElementById('modal-franchise-seasons-track');
             if (track) {
-                track.innerHTML = frInfo.items.map(s => {
+                track.innerHTML = frInfo.items.map((s, idx) => {
                     const isCurrent = (s === item || s.title === item.title);
                     const sR = s.rating;
                     let sBadge = '';
@@ -839,15 +874,21 @@ function openModal(item, isRandom = false) {
                     }
 
                     const posterSrc = (s.poster || '').replace(/https?:\/\/shikimori\.(one|me)/g, 'https://shikimori.io');
+                    const isFilm = (item.category === 'film');
+                    const fallbackIcon = isFilm ? '🎬' : '🎌';
+                    const epLabel = isFilm
+                        ? `🎬 Часть ${s.franchiseOrder || (idx + 1)}`
+                        : (s.episodes ? `📺 ${s.episodes} сер.` : (item.category === 'series' ? `📺 Сезон ${s.franchiseOrder || (idx + 1)}` : `🎬 Фильм`));
+
                     return `
-                        <div class="franchise-season-card ${isCurrent ? 'is-current' : ''}" data-season-title="${escHtml(s.title)}" title="${escHtml(s.title)} (${s.episodes || '?'} сер.)">
+                        <div class="franchise-season-card ${isCurrent ? 'is-current' : ''}" data-season-title="${escHtml(s.title)}" title="${escHtml(s.title)}${s.episodes ? ` (${s.episodes} сер.)` : ''}">
                             <div class="fsc-thumb-box">
-                                ${posterSrc ? `<img src="${escHtml(posterSrc)}" alt="${escHtml(s.title)}" class="fsc-thumb-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\\'fsc-thumb-empty\\\'>🎌</div>';">` : `<div class="fsc-thumb-empty">🎌</div>`}
+                                ${posterSrc ? `<img src="${escHtml(posterSrc)}" alt="${escHtml(s.title)}" class="fsc-thumb-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\\'fsc-thumb-empty\\\'>${fallbackIcon}</div>';">` : `<div class="fsc-thumb-empty">${fallbackIcon}</div>`}
                             </div>
                             <div class="fsc-details">
                                 <div class="fsc-title" title="${escHtml(s.title)}">${escHtml(s.title)}</div>
                                 <div class="fsc-meta-row">
-                                    <span class="fsc-eps">📺 ${s.episodes || '?'} сер.</span>
+                                    <span class="fsc-eps">${epLabel}</span>
                                     ${sBadge}
                                     ${isCurrent ? `<span class="fsc-badge-current">⭐ Текущий</span>` : ''}
                                 </div>
