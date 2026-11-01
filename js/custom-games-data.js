@@ -384,15 +384,15 @@ window.CUSTOM_GAMES = [
         if (saDX) {
             saDX.hours = 8;
             saDX.minutes = 480;
-            saDX.status = "abandoned";
-            saDX.statusNote = "Заброшено на стриме (2 стрима по 4ч)";
+            saDX.status = "completed";
+            saDX.statusNote = "Пройдено на стриме в рамках марафона";
         }
         const sa2 = window.STEAM_GAMES.find(g => Number(g.id) === 213610);
         if (sa2) {
             sa2.hours = 8;
             sa2.minutes = 480;
-            sa2.status = "abandoned";
-            sa2.statusNote = "Заброшено на стриме (8ч)";
+            sa2.status = "completed";
+            sa2.statusNote = "Пройдено на стриме в рамках марафона";
         }
 
         // Добавляем внешние игры без дубликатов

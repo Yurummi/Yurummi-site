@@ -130,7 +130,7 @@ window.HLTB_DATA = {
         complete: 35,
         type: "story",
         label: "~11.5 ч.",
-        note: "Yurummi потратил 2 стрима по 4 часа (8 ч.) и забросил."
+        note: "Пройдено на стриме в рамках Марафона Соника."
     },
     213610: {
         title: "Sonic Adventure 2",
@@ -139,7 +139,7 @@ window.HLTB_DATA = {
         complete: 45,
         type: "story",
         label: "~14 ч.",
-        note: "Yurummi потратил 8 часов и забросил."
+        note: "Пройдено на стриме в рамках Марафона Соника."
     },
     570: {
         title: "Dota 2",
