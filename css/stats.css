@@ -730,7 +730,7 @@
     padding-right: 82px; /* Prevent text collision with top-right episodes badge */
 }
 
-/* ── Top-Right Episode Counter Badge (Anime) ─────────────── */
+/* ── Top-Right Episode Counter Badge (Anime & Films) ─────────────── */
 .card-episodes-badge {
     position: absolute;
     top: 10px;
@@ -738,16 +738,16 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: rgba(18, 16, 26, 0.88);
-    border: 1px solid rgba(168, 85, 247, 0.32);
+    background: rgba(18, 16, 26, 0.9);
+    border: 1px solid rgba(168, 85, 247, 0.35);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 7px;
-    padding: 2.5px 7px;
+    padding: 3px 7px;
     font-size: 11px;
     font-weight: 700;
     color: #e2d9f3;
-    line-height: 1.2;
+    line-height: 1;
     z-index: 2;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -758,18 +758,38 @@
 .card-episodes-badge .ep-icon {
     font-size: 11px;
     line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-0.5px);
+}
+
+.card-episodes-badge .ep-text {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+    line-height: 1;
 }
 
 .card-episodes-badge .ep-cur {
     color: #f1f5f9;
     font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+}
+
+.card-episodes-badge .ep-sep {
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 1;
 }
 
 .card-episodes-badge .ep-total {
     color: #c084fc;
-    font-weight: 600;
-    font-size: 10.5px;
-    opacity: 0.9;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
 }
 
 .card-episodes-badge.has-franchise {
@@ -786,11 +806,17 @@
 .card-episodes-badge.is-film-franchise .ep-total {
     color: #fbbf24;
     font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+}
+
+.card-episodes-badge.is-film-franchise .ep-sep {
+    color: rgba(251, 191, 36, 0.6);
 }
 
 .card-episodes-badge.is-movie {
     border-color: rgba(245, 158, 11, 0.4);
-    background: linear-gradient(135deg, rgba(45, 30, 15, 0.9) 0%, rgba(20, 16, 12, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(45, 30, 15, 0.9) 0%, rgba(20, 16, 26, 0.9) 100%);
     color: #fef3c7;
 }
 
@@ -798,6 +824,32 @@
     border-color: #ff3385;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(255, 51, 133, 0.3);
+}
+
+.card-director-pill {
+    font-size: 10px;
+    font-weight: 700;
+    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 2px 7px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-director-pill:hover {
+    background: rgba(255, 51, 133, 0.2);
+    border-color: #ff3385;
+    color: #fff;
+    transform: translateY(-1px);
 }
 
 .card-badges-row {
@@ -1231,6 +1283,25 @@
     background: #262626;
     color: #aaa;
     border: 1px solid #383838;
+}
+
+.modal-tag-director {
+    background: rgba(245, 158, 11, 0.14);
+    color: #fef08a;
+    border-color: rgba(245, 158, 11, 0.35);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-tag-director:hover {
+    background: rgba(245, 158, 11, 0.25);
+    border-color: #f59e0b;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.modal-tag-director strong {
+    color: #fbbf24;
 }
 
 .modal-tag-watched {

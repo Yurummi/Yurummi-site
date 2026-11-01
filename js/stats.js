@@ -307,6 +307,18 @@ function toggleGenre(g, forceAdd = false) {
     render();
 }
 
+function filterByDirector(directorName) {
+    if (!directorName) return;
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.value = directorName;
+        currentSearch = directorName.toLowerCase();
+        visibleCount = PAGE_SIZE;
+        render();
+        document.getElementById('media-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
 // ── Filter & Sort ─────────────────────────────────────────────────────────────
 function getFiltered() {
     let items = [...allItems];
@@ -369,7 +381,8 @@ function getFiltered() {
             const t = i.title.toLowerCase();
             const r = (i.review || '').toLowerCase();
             const d = (i.desc || '').toLowerCase();
-            return t.includes(currentSearch) || r.includes(currentSearch) || d.includes(currentSearch);
+            const dir = (i.director || '').toLowerCase();
+            return t.includes(currentSearch) || r.includes(currentSearch) || d.includes(currentSearch) || dir.includes(currentSearch);
         });
     }
 
@@ -454,6 +467,14 @@ function render() {
         pill.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleGenre(pill.dataset.genre);
+        });
+    });
+
+    // Attach click listeners to card director pills
+    grid.querySelectorAll('.card-director-pill[data-director]').forEach(pill => {
+        pill.addEventListener('click', (e) => {
+            e.stopPropagation();
+            filterByDirector(pill.dataset.director);
         });
     });
 
@@ -605,6 +626,12 @@ function renderCard(item, idx) {
         subcatBadge = `<span class="badge-subcat subcat-dc">DC</span>`;
     }
 
+    // Director Badge (Film)
+    let directorBadge = '';
+    if (item.category === 'film' && item.director) {
+        directorBadge = `<span class="card-director-pill" data-director="${escHtml(item.director)}" title="Режиссёр: ${escHtml(item.director)} (нажмите для фильтрации)">🎬 ${escHtml(item.director)}</span>`;
+    }
+
     // Episodes / Franchise Badge
     let episodesBadge = '';
     const frInfo = getFranchiseInfo(item);
@@ -615,8 +642,7 @@ function renderCard(item, idx) {
             episodesBadge = `
                 <div class="card-episodes-badge has-franchise is-film-franchise" title="Франшиза «${escHtml(fTitle)}»: часть ${frInfo.currentIndex} из ${frInfo.totalSeasons}">
                     <span class="ep-icon">🎬</span>
-                    <span class="ep-cur">${frInfo.currentIndex}</span>
-                    <span class="ep-total">из ${frInfo.totalSeasons}</span>
+                    <span class="ep-text"><span class="ep-cur">${frInfo.currentIndex}</span><span class="ep-sep">/</span><span class="ep-total">${frInfo.totalSeasons}</span></span>
                 </div>`;
         }
     } else if (item.category === 'anime' && (item.episodes || item.kind === 'movie')) {
@@ -624,20 +650,19 @@ function renderCard(item, idx) {
             episodesBadge = `
                 <div class="card-episodes-badge has-franchise" title="В этом сезоне: ${item.episodes || '?'} сер. • Всего во франшизе: ${frInfo.totalEpisodes} сер. (${frInfo.totalSeasons} сезона)">
                     <span class="ep-icon">📺</span>
-                    <span class="ep-cur">${item.episodes || '?'} сер.</span>
-                    <span class="ep-total">/ ${frInfo.totalEpisodes}</span>
+                    <span class="ep-text"><span class="ep-cur">${item.episodes || '?'} сер.</span><span class="ep-sep">/</span><span class="ep-total">${frInfo.totalEpisodes}</span></span>
                 </div>`;
         } else if (item.kind === 'movie' || (item.episodes === 1 && /фильм|movie/i.test(item.title))) {
             episodesBadge = `
                 <div class="card-episodes-badge is-movie" title="Полнометражный фильм">
                     <span class="ep-icon">🎬</span>
-                    <span class="ep-cur">Фильм</span>
+                    <span class="ep-text"><span class="ep-cur">Фильм</span></span>
                 </div>`;
         } else if (item.episodes) {
             episodesBadge = `
                 <div class="card-episodes-badge" title="Длительность: ${item.episodes} сер.">
                     <span class="ep-icon">📺</span>
-                    <span class="ep-cur">${item.episodes} сер.</span>
+                    <span class="ep-text"><span class="ep-cur">${item.episodes} сер.</span></span>
                 </div>`;
         }
     } else if ((item.category === 'series' || item.category === 'cartoon') && frInfo && frInfo.totalSeasons > 1) {
@@ -647,8 +672,7 @@ function renderCard(item, idx) {
         episodesBadge = `
             <div class="card-episodes-badge has-franchise" title="Франшиза: ${labelText} ${frInfo.currentIndex} из ${frInfo.totalSeasons}">
                 <span class="ep-icon">${icon}</span>
-                <span class="ep-cur">${frInfo.currentIndex}</span>
-                <span class="ep-total">из ${frInfo.totalSeasons}</span>
+                <span class="ep-text"><span class="ep-cur">${frInfo.currentIndex}</span><span class="ep-sep">/</span><span class="ep-total">${frInfo.totalSeasons}</span></span>
             </div>`;
     }
 
@@ -698,6 +722,7 @@ function renderCard(item, idx) {
                 <div class="card-badges-row">
                     <span class="card-cat-pill">${catMeta.icon} ${catMeta.label}</span>
                     ${subcatBadge}
+                    ${directorBadge}
                 </div>
                 <div class="card-title" title="${escHtml(item.title)}">${escHtml(item.title)}</div>
             </div>
@@ -822,6 +847,23 @@ function openModal(item, isRandom = false) {
             epTag.style.display = 'inline-block';
         } else {
             epTag.style.display = 'none';
+        }
+    }
+
+    // Director tag in modal meta row
+    const dirTag = document.getElementById('modal-director-tag');
+    if (dirTag) {
+        if (item.category === 'film' && item.director) {
+            dirTag.innerHTML = `🎬 Режиссёр: <strong>${escHtml(item.director)}</strong>`;
+            dirTag.title = `Нажмите для фильтрации по режиссёру: ${item.director}`;
+            dirTag.style.display = 'inline-block';
+            dirTag.onclick = () => {
+                closeModal();
+                filterByDirector(item.director);
+            };
+        } else {
+            dirTag.style.display = 'none';
+            dirTag.onclick = null;
         }
     }
 
