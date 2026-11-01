@@ -44,6 +44,14 @@ const ALL_SLIDES = [
         url: 'https://youtu.be/wcKhnvOBlq4'
     },
     {
+        file: 'img/arts/Юрумми хеллоуин финал.webp',
+        badgeStyle: 'pink',
+        badgeText: '🎃 АРТ',
+        textMain: 'Косплей на Алису в стране чудес',
+        textAuthor: 'К Хеллоуину',
+        url: '#arts'
+    },
+    {
         file: 'img/arts/КУМИ.webp',
         badgeStyle: 'pink',
         badgeText: '💖 АРТ',
