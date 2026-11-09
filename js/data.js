@@ -25,6 +25,23 @@ const isMediaHubVisible = (typeof window !== 'undefined') && (
 
 const ALL_SLIDES = [
     {
+        file: 'img/arts/Холууу снег 3.0.webp',
+        badgeStyle: 'pink',
+        badgeText: '❄️ АРТ',
+        textMain: 'Холууу снег 3.0',
+        authorPrefix: '🎨',
+        textAuthor: 'Зимний арт',
+        url: '#arts'
+    },
+    {
+        file: 'img/arts/Юрумми хеллоуин финал.webp',
+        badgeStyle: 'pink',
+        badgeText: '🎃 АРТ',
+        textMain: 'Косплей на Алису в стране чудес',
+        textAuthor: 'К Хеллоуину',
+        url: '#arts'
+    },
+    {
         file: 'img/slider/yurummi_maid_arcade.jpg',
         badgeStyle: 'pink',
         badgeText: '🎮 ИГРОВАЯ',
@@ -42,23 +59,6 @@ const ALL_SLIDES = [
         textMain: 'СВОЯ ИГРА: АНИМЕ КВИЗ',
         textAuthor: 'Юрумми+',
         url: 'https://youtu.be/wcKhnvOBlq4'
-    },
-    {
-        file: 'img/arts/Холууу снег 3.0.webp',
-        badgeStyle: 'pink',
-        badgeText: '❄️ АРТ',
-        textMain: 'Холууу снег 3.0',
-        authorPrefix: '🎨',
-        textAuthor: 'Зимний арт',
-        url: '#arts'
-    },
-    {
-        file: 'img/arts/Юрумми хеллоуин финал.webp',
-        badgeStyle: 'pink',
-        badgeText: '🎃 АРТ',
-        textMain: 'Косплей на Алису в стране чудес',
-        textAuthor: 'К Хеллоуину',
-        url: '#arts'
     },
     {
         file: 'img/arts/КУМИ.webp',
