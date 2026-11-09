@@ -44,6 +44,15 @@ const ALL_SLIDES = [
         url: 'https://youtu.be/wcKhnvOBlq4'
     },
     {
+        file: 'img/arts/Холууу снег 3.0.webp',
+        badgeStyle: 'pink',
+        badgeText: '❄️ АРТ',
+        textMain: 'Холууу снег 3.0',
+        authorPrefix: '🎨',
+        textAuthor: 'Зимний арт',
+        url: '#arts'
+    },
+    {
         file: 'img/arts/Юрумми хеллоуин финал.webp',
         badgeStyle: 'pink',
         badgeText: '🎃 АРТ',

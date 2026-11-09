@@ -2304,8 +2304,8 @@ function initWeeklyHighlight() {
     const card = document.getElementById('weekly-highlight-card');
     if (!card) return;
 
-    // Ищем рекомендацию тайтла (Вайолет Эвергарден. Фильм)
-    const highlightItem = allItems.find(i => i.title && (i.title.toLowerCase().includes('вайолет эвергарден') || i.title.toLowerCase().includes('эвергарден')))
+    // Ищем рекомендацию тайтла (Топ Ган: Мэверик)
+    const highlightItem = allItems.find(i => i.title && i.title.toLowerCase().includes('топ ган: мэверик'))
         || allItems.find(i => i.rating >= 100)
         || allItems[0];
 
@@ -2321,23 +2321,31 @@ function initWeeklyHighlight() {
     const genresEl = document.getElementById('whc-genres');
     const quoteEl = document.getElementById('whc-quote');
 
-    const defaultVioletPoster = 'https://shikimori.one/system/animes/original/37987.jpg?1711979789';
+    const defaultPoster = 'https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg';
 
     if (posterImg) {
-        const posterUrl = highlightItem.poster || defaultVioletPoster;
+        const posterUrl = highlightItem.poster || defaultPoster;
         posterImg.src = posterUrl;
-        posterImg.alt = highlightItem.title || 'Вайолет Эвергарден. Фильм';
+        posterImg.alt = highlightItem.title || 'Топ Ган: Мэверик';
         posterImg.onerror = () => {
-            posterImg.src = defaultVioletPoster;
+            posterImg.src = defaultPoster;
         };
         posterImg.style.cursor = 'pointer';
     }
 
-    if (titleEl) titleEl.textContent = highlightItem.title || 'Вайолет Эвергарден. Фильм';
+    const catMeta = CATEGORY_META[highlightItem.category] || { icon: '🎬', label: 'Фильм' };
+    const statusLabels = {
+        watched: '✅ Просмотрено',
+        watching: '▶️ Смотрю',
+        planned: '📋 В планах',
+        dropped: '🛑 Брошено'
+    };
+
+    if (titleEl) titleEl.textContent = highlightItem.title || 'Топ Ган: Мэверик';
     if (ratingEl) ratingEl.textContent = `👑 ${highlightItem.rating || 100}`;
-    if (catEl) catEl.textContent = '🎌 Аниме';
-    if (yearEl) yearEl.textContent = '2020';
-    if (statusEl) statusEl.textContent = '✅ Просмотрено';
+    if (catEl) catEl.textContent = `${catMeta.icon} ${catMeta.label}`;
+    if (yearEl) yearEl.textContent = highlightItem.year || '2022';
+    if (statusEl) statusEl.textContent = statusLabels[highlightItem.status] || '✅ Просмотрено';
 
     if (genresEl && Array.isArray(highlightItem.genres) && highlightItem.genres.length > 0) {
         genresEl.innerHTML = highlightItem.genres.map(g => `<span class="whc-genre-tag">${escHtml(g)}</span>`).join('');
@@ -2346,7 +2354,7 @@ function initWeeklyHighlight() {
     if (quoteEl) {
         quoteEl.textContent = (highlightItem.review && highlightItem.review.trim().length > 0)
             ? `«${highlightItem.review}»`
-            : '«Невероятно трогательная и глубокая история. Потрясающая визуальная работа студии Kyoto Animation, одна из лучших эмоциональных драм, заслужившая оценку 100 баллов!»';
+            : '«Круто отснят и ваще эмоции круто передал. На одном дыхании смотрелся.»';
     }
 
     const handleOpen = () => {

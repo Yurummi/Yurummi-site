@@ -1,13 +1,13 @@
 window.MEDIA_DATA = {
   "stats": {
-    "total": 904,
+    "total": 897,
     "watched": 363,
     "watching": 11,
-    "planned": 528,
+    "planned": 521,
     "dropped": 2,
-    "masterpiece": 21,
-    "anime": 377,
-    "films": 456,
+    "masterpiece": 22,
+    "anime": 372,
+    "films": 454,
     "marvel": 40,
     "dc": 25,
     "series": 22,
@@ -20072,6 +20072,26 @@ window.MEDIA_DATA = {
       "episodes": 24,
       "kind": "tv",
       "franchise": null
+    },
+    {
+      "title": "Топ Ган: Мэверик",
+      "rating": 100,
+      "tier": "masterpiece",
+      "review": "Круто отснят и ваще эмоции круто передал. На одном дыхании смотрелся.",
+      "desc": "Более тридцати лет Пит «Мэверик» Митчелл остаётся одним из лучших лётчиков-испытателей ВМФ США, избегая повышения, которое приковало бы его к земле. Когда ему поручают подготовить отряд молодых выпускников элитной школы «Топ Ган» к смертельно опасной боевой миссии, Мэверику предстоит столкнуться с призраками собственного прошлого и собственными страхами.",
+      "poster": "https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
+      "url": "https://www.themoviedb.org/movie/361743",
+      "status": "watched",
+      "category": "film",
+      "subcat": "",
+      "chronoOrder": null,
+      "universeOrder": "",
+      "genres": [
+        "Боевик",
+        "Драма",
+        "Военный"
+      ],
+      "director": "Джозеф Косински"
     }
   ]
 };
