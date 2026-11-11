@@ -38,7 +38,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 13,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Хёрюн Ли"
     },
     {
       "title": "Ранма 1/2 (1989)",
@@ -63,7 +64,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 161,
       "kind": "tv",
-      "franchise": "ranma"
+      "franchise": "ranma",
+      "director": "Цунэо Нисимура"
     },
     {
       "title": "Дандадан 2",
@@ -89,7 +91,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "dandadan"
+      "franchise": "dandadan",
+      "director": "Фуюши Осиро"
     },
     {
       "title": "Киноманка Помпо",
@@ -113,7 +116,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 1,
       "kind": "movie",
-      "franchise": null
+      "franchise": null,
+      "director": "Такэси Когата"
     },
     {
       "title": "Семья шпиона — Код: Белый",
@@ -137,7 +141,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 1,
       "kind": "movie",
-      "franchise": "spy_x_family"
+      "franchise": "spy_x_family",
+      "director": "Такахиро Хасуи"
     },
     {
       "title": "Вавилон",
@@ -161,7 +166,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Кэйити Арабики"
     },
     {
       "title": "Путь домохозяина",
@@ -185,7 +191,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 5,
       "kind": "ona",
-      "franchise": null
+      "franchise": null,
+      "director": "Кэнтаро Кавамото"
     },
     {
       "title": "Судьба: Девочка-волшебница Иллия",
@@ -210,7 +217,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 1,
       "kind": "ova",
-      "franchise": null
+      "franchise": null,
+      "director": "Мацуки Ясухиро"
     },
     {
       "title": "Причина полюбить её",
@@ -258,7 +266,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Такахиро Омори"
     },
     {
       "title": "Сквозь бальный зал",
@@ -283,7 +292,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 24,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Ёситаке Итикава"
     },
     {
       "title": "Бесклассовый герой: Да мне всё равно не нужны эти ваши умения",
@@ -333,7 +343,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 13,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Масааки Юаса"
     },
     {
       "title": "Кэрол и Тьюсдей",
@@ -357,7 +368,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 24,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Синъитиро Ватанабэ"
     },
     {
       "title": "Дека-данс",
@@ -381,7 +393,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Юсукэ Ямамото"
     },
     {
       "title": "Золотой парень",
@@ -406,7 +419,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 6,
       "kind": "ova",
-      "franchise": null
+      "franchise": null,
+      "director": "Ёсиаки Ивасаки"
     },
     {
       "title": "Рейтинг короля",
@@ -430,7 +444,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 23,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Дзюн Камия"
     },
     {
       "title": "Эф — история мелодий",
@@ -454,7 +469,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Акиюки Симбо"
     },
     {
       "title": "Мартовский лев",
@@ -479,7 +495,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 22,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Акиюки Симбо"
     },
     {
       "title": "Праздник кукол",
@@ -530,7 +547,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 25,
       "kind": "tv",
-      "franchise": "rezero"
+      "franchise": "rezero",
+      "director": "Масахару Ватанабэ"
     },
     {
       "title": "Насколько тяжёлые гантели ты сможешь поднять?",
@@ -554,7 +572,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Кацуми Оно"
     },
     {
       "title": "Потерянные в звёздном свете",
@@ -578,7 +597,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 1,
       "kind": "ona",
-      "franchise": null
+      "franchise": null,
+      "director": "Масаси Кудо"
     },
     {
       "title": "Звёздное дитя 3",
@@ -604,7 +624,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 11,
       "kind": "tv",
-      "franchise": "oshi_no_ko"
+      "franchise": "oshi_no_ko",
+      "director": "Йоситоки Оима"
     },
     {
       "title": "Быть героем Икс",
@@ -628,7 +649,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 24,
       "kind": "ona",
-      "franchise": null
+      "franchise": null,
+      "director": "Масахиро Ватанабэ"
     },
     {
       "title": "Благоухающий цветок расцветает с достоинством",
@@ -652,7 +674,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 13,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Юта Ямасита"
     },
     {
       "title": "Рубеж Шангри-Ла 2",
@@ -680,7 +703,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 25,
       "kind": "tv",
-      "franchise": "shangri_la_frontier"
+      "franchise": "shangri_la_frontier",
+      "director": "Мандзи Синоки"
     },
     {
       "title": "Полное исследование",
@@ -704,7 +728,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Кими Такаги"
     },
     {
       "title": "Перерождение мужчины средних лет в дочь дворянина",
@@ -729,7 +754,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Мандзи Синоки"
     },
     {
       "title": "Вайолет Эвергарден. Фильм",
@@ -754,7 +780,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 1,
       "kind": "movie",
-      "franchise": "violet_evergarden"
+      "franchise": "violet_evergarden",
+      "director": "Таити Исихама"
     },
     {
       "title": "Дандадан",
@@ -780,7 +807,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "dandadan"
+      "franchise": "dandadan",
+      "director": "Фуюши Осиро"
     },
     {
       "title": "Звёздное дитя",
@@ -807,7 +835,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 11,
       "kind": "tv",
-      "franchise": "oshi_no_ko"
+      "franchise": "oshi_no_ko",
+      "director": "Йоситоки Оима"
     },
     {
       "title": "Звёздное дитя 2",
@@ -834,7 +863,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 13,
       "kind": "tv",
-      "franchise": "oshi_no_ko"
+      "franchise": "oshi_no_ko",
+      "director": "Йоситоки Оима"
     },
     {
       "title": "Меч и жезл Вистории",
@@ -859,7 +889,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "wistoria"
+      "franchise": "wistoria",
+      "director": "Хитоси Нанба"
     },
     {
       "title": "Перерождение в аристократа со способностью анализа 2",
@@ -883,7 +914,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "kantei_skill"
+      "franchise": "kantei_skill",
+      "director": "Такэюки Огивара"
     },
     {
       "title": "Провожающая в последний путь Фрирен",
@@ -908,7 +940,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 28,
       "kind": "tv",
-      "franchise": "frieren"
+      "franchise": "frieren",
+      "director": "Кэйити Окабэ"
     },
     {
       "title": "Провожающая в последний путь Фрирен 2",
@@ -933,7 +966,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 10,
       "kind": "tv",
-      "franchise": "frieren"
+      "franchise": "frieren",
+      "director": "Кэйити Окабэ"
     },
     {
       "title": "Меч и жезл Вистории 2",
@@ -958,7 +992,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "wistoria"
+      "franchise": "wistoria",
+      "director": "Хитоси Нанба"
     },
     {
       "title": "Кайдзю 8 2",
@@ -983,7 +1018,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 11,
       "kind": "tv",
-      "franchise": "kaiju_8"
+      "franchise": "kaiju_8",
+      "director": "Хиротака Мори"
     },
     {
       "title": "Безымянная память",
@@ -1007,7 +1043,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "nameless_memory"
+      "franchise": "nameless_memory",
+      "director": "Акира Иванами"
     },
     {
       "title": "Повелитель тайн: Клоун",
@@ -1032,7 +1069,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 13,
       "kind": "ona",
-      "franchise": null
+      "franchise": null,
+      "director": "Кэйити Арабики"
     },
     {
       "title": "Магическая битва 3",
@@ -1058,7 +1096,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "jujutsu_kaisen"
+      "franchise": "jujutsu_kaisen",
+      "director": "Сунгхоо Парк"
     },
     {
       "title": "Поднятие уровня в одиночку 2: Восстань из тени",
@@ -1082,7 +1121,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 13,
       "kind": "tv",
-      "franchise": "solo_leveling"
+      "franchise": "solo_leveling",
+      "director": "Суюнг Ли"
     },
     {
       "title": "Голубая шкатулка",
@@ -1106,7 +1146,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 25,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Масаси Кудо"
     },
     {
       "title": "Восхождение героя щита 4",
@@ -1132,7 +1173,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "shield_hero"
+      "franchise": "shield_hero",
+      "director": "Таку Иватани"
     },
     {
       "title": "Эта фарфоровая кукла влюбилась 2",
@@ -1157,7 +1199,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "sono_bisque_doll"
+      "franchise": "sono_bisque_doll",
+      "director": "Дзюн Камия"
     },
     {
       "title": "Реинкарнация безработного: История о приключениях в другом мире 2. Часть 2",
@@ -1183,7 +1226,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "mushoku_tensei"
+      "franchise": "mushoku_tensei",
+      "director": "Мандзи Синоки"
     },
     {
       "title": "Рубеж Шангри-Ла",
@@ -1210,7 +1254,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 25,
       "kind": "tv",
-      "franchise": "shangri_la_frontier"
+      "franchise": "shangri_la_frontier",
+      "director": "Мандзи Синоки"
     },
     {
       "title": "Дни Сакамото 2",
@@ -1235,7 +1280,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 11,
       "kind": "tv",
-      "franchise": "sakamoto_days"
+      "franchise": "sakamoto_days",
+      "director": "Масахиро Ватанабэ"
     },
     {
       "title": "Лазарь",
@@ -1259,7 +1305,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 13,
       "kind": "tv",
-      "franchise": null
+      "franchise": null,
+      "director": "Такаюки Есино"
     },
     {
       "title": "Дисквалифицирован по жизни",
@@ -1454,7 +1501,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 11,
       "kind": "tv",
-      "franchise": "sakamoto_days"
+      "franchise": "sakamoto_days",
+      "director": "Масахиро Ватанабэ"
     },
     {
       "title": "Этот глупый свин не понимает мечту Санта-Клауса",
@@ -1826,7 +1874,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "shield_hero"
+      "franchise": "shield_hero",
+      "director": "Таку Иватани"
     },
     {
       "title": "Для каждой тебя, что я раньше любил",
@@ -2365,7 +2414,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 23,
       "kind": "tv",
-      "franchise": "jujutsu_kaisen"
+      "franchise": "jujutsu_kaisen",
+      "director": "Сунгхоо Парк"
     },
     {
       "title": "Месть масамунэ R",
@@ -2629,7 +2679,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 13,
       "kind": "tv",
-      "franchise": "shield_hero"
+      "franchise": "shield_hero",
+      "director": "Таку Иватани"
     },
     {
       "title": "DOTA: Кровь дракона 3",
@@ -3313,7 +3364,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "solo_leveling"
+      "franchise": "solo_leveling",
+      "director": "Суюнг Ли"
     },
     {
       "title": "Развращённая гильдия",
@@ -18905,7 +18957,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 24,
       "kind": "tv",
-      "franchise": "jujutsu_kaisen"
+      "franchise": "jujutsu_kaisen",
+      "director": "Сунгхоо Парк"
     },
     {
       "title": "Восхождение героя щита",
@@ -18930,7 +18983,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 25,
       "kind": "tv",
-      "franchise": "shield_hero"
+      "franchise": "shield_hero",
+      "director": "Таку Иватани"
     },
     {
       "title": "Эта фарфоровая кукла влюбилась",
@@ -18955,7 +19009,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 12,
       "kind": "tv",
-      "franchise": "sono_bisque_doll"
+      "franchise": "sono_bisque_doll",
+      "director": "Дзюн Камия"
     },
     {
       "title": "Реинкарнация безработного: История о приключениях в другом мире",
@@ -18980,7 +19035,8 @@ window.MEDIA_DATA = {
       ],
       "episodes": 11,
       "kind": "tv",
-      "franchise": "mushoku_tensei"
+      "franchise": "mushoku_tensei",
+      "director": "Мандзи Синоки"
     },
     {
       "title": "Реинкарнация безработного: История о приключениях в другом мире. Часть 2",

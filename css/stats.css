@@ -766,7 +766,7 @@
 
 .card-episodes-badge .ep-text {
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     gap: 3px;
     line-height: 1;
 }

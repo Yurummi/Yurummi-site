@@ -626,10 +626,11 @@ function renderCard(item, idx) {
         subcatBadge = `<span class="badge-subcat subcat-dc">DC</span>`;
     }
 
-    // Director Badge (Film)
+    // Director Badge (Film + Anime)
     let directorBadge = '';
-    if (item.category === 'film' && item.director) {
-        directorBadge = `<span class="card-director-pill" data-director="${escHtml(item.director)}" title="Режиссёр: ${escHtml(item.director)} (нажмите для фильтрации)">🎬 ${escHtml(item.director)}</span>`;
+    if (item.director) {
+        const dirIcon = item.category === 'anime' ? '🎌' : '🎬';
+        directorBadge = `<span class="card-director-pill" data-director="${escHtml(item.director)}" title="Режиссёр: ${escHtml(item.director)} (нажмите для фильтрации)">${dirIcon} ${escHtml(item.director)}</span>`;
     }
 
     // Episodes / Franchise Badge
@@ -853,8 +854,9 @@ function openModal(item, isRandom = false) {
     // Director tag in modal meta row
     const dirTag = document.getElementById('modal-director-tag');
     if (dirTag) {
-        if (item.category === 'film' && item.director) {
-            dirTag.innerHTML = `🎬 Режиссёр: <strong>${escHtml(item.director)}</strong>`;
+        if (item.director) {
+            const dIcon = item.category === 'anime' ? '🎌' : '🎬';
+            dirTag.innerHTML = `${dIcon} Режиссёр: <strong>${escHtml(item.director)}</strong>`;
             dirTag.title = `Нажмите для фильтрации по режиссёру: ${item.director}`;
             dirTag.style.display = 'inline-block';
             dirTag.onclick = () => {
