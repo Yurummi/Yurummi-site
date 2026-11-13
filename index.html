@@ -384,13 +384,27 @@
             <div class="gallery-subtitle">Мои арты (Полноценные)</div>
             <div class="gallery-grid" id="main-arts-grid">
                 <!-- НОВЕЙШЕЕ СВЕРХУ -->
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/ХИКИ МАЯК 0.1.webp">
+                    <picture>
+                        <source srcset="img/arts/ХИКИ МАЯК 0.1.webp" type="image/webp">
+                        <img src="img/arts/ХИКИ МАЯК 0.1.png" alt="Подарок ДР для Хики" loading="lazy">
+                    </picture>
+                    <div class="gallery-overlay">
+                        <h3>Подарок ДР для Хики</h3>
+                        <p>Маяк (2 арта)</p>
+                    </div>
+                </div>
+                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/arts/ХИКИ МАЯК карта таро.webp" style="display: none;">
+                    <h3>Подарок ДР для Хики</h3>
+                    <p>Карта Таро</p>
+                </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/Холууу снег 3.0.webp">
                     <picture>
                         <source srcset="img/arts/Холууу снег 3.0.webp" type="image/webp">
-                        <img src="img/arts/Холууу снег 3.0.png" alt="Холууу снег 3.0" loading="lazy">
+                        <img src="img/arts/Холууу снег 3.0.png" alt="Арт для Холу" loading="lazy">
                     </picture>
                     <div class="gallery-overlay">
-                        <h3>Холууу снег 3.0</h3>
+                        <h3>Арт для Холу</h3>
                         <p>Зимний арт</p>
                     </div>
                 </div>
@@ -889,7 +903,7 @@
                     <svg width="100%" height="100%" style="position:absolute; top:0; left:0; z-index:1; pointer-events:none;">
                         <path d="M 50 125 L 550 125"                      stroke="#ff3385" stroke-width="4" fill="none" stroke-linecap="round"/>
                         <path d="M 550 125 L 630 60  L 750 60"            stroke="#444"    stroke-width="4" fill="none" stroke-linecap="round"/>
-                        <path d="M 550 125 L 630 190 L 1250 190"          stroke="#a855f7" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M 550 125 L 630 190 L 1380 190"          stroke="#a855f7" stroke-width="4" fill="none" stroke-linecap="round"/>
                         <!-- Ветка озвучки Соника -->
                         <path d="M 1030 190 L 1030 250 L 1150 250" stroke="#00d2ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="6,6"/>
                     </svg>
@@ -926,13 +940,16 @@
                         <div class="h-label top">Ивент: Горничная</div>
                     </div>
                     <div class="h-node active event event-sonic" style="top:178px; left:1018px;" onclick="document.getElementById('card-sonic').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
-                        <div class="h-label bottom">Ивент: Соник</div>
+                        <div class="h-label bottom">Марафон Соника ч1</div>
                     </div>
                     
                     <div class="h-node active" style="top:238px; left:1118px;" onclick="document.getElementById('sonic-dubbing-details').open = true; document.getElementById('card-sonic').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
                         <div class="h-label bottom" style="color:#00d2ff; width: 140px; text-align: center; left: -50px;">Озвучка Соник Бум<br><span style="font-size:10px;">(Сайд-квест)</span></div>
                     </div>
-                    <div class="h-node future" style="top:178px; left:1168px;">
+                    <div class="h-node active event" style="top:178px; left:1168px;" onclick="document.getElementById('card-taro').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
+                        <div class="h-label bottom">Гадания на Таро</div>
+                    </div>
+                    <div class="h-node future" style="top:178px; left:1318px;">
                         <div class="h-label top" style="color:#a855f7;">...Загрузка...</div>
                     </div>
                 </div>
@@ -1066,11 +1083,11 @@
                     <div class="lore-video">
                         <!-- Плейсхолдер для Соника -->
                         <div class="video-placeholder" style="background-image: url('img/lore/Sonic-marathon.webp'), url('img/lore/Sonic-marathon.png');">
-                            <div class="video-overlay" style="background: rgba(0,0,0,0.7);">МАРАФОН СОНИКА</div>
+                            <div class="video-overlay" style="background: rgba(0,0,0,0.7);">МАРАФОН СОНИКА ч1</div>
                         </div>
                     </div>
                     <div class="lore-content">
-                        <h3 class="lore-title" style="color:#00d2ff;">Марафон Соника</h3>
+                        <h3 class="lore-title" style="color:#00d2ff;">Марафон Соника ч1</h3>
                         <p class="lore-desc">
                             Мы начали грандиозный марафон по играм серии Sonic, но из-за непредвиденных технических сложностей его пришлось временно отложить. Но на этом сониковский контент не закончился!
                         </p>
@@ -1146,6 +1163,21 @@
                                 </div>
                             </div>
                         </details>
+                    </div>
+                </div>
+
+                <div id="card-taro" class="lore-card">
+                    <div class="lore-video">
+                        <a href="https://www.twitch.tv/videos/2916366168" target="_blank" class="video-placeholder" style="background-image: url('img/lore/ТАРО.webp'), url('img/lore/ТАРО.png');">
+                            <span class="play-btn">▶</span>
+                            <div class="video-overlay" style="border-color:#ff3385;">Гадания на картах Таро</div>
+                        </a>
+                    </div>
+                    <div class="lore-content">
+                        <h3 class="lore-title" style="color:#ff3385;">Гадания на картах Таро</h3>
+                        <p class="lore-desc">
+                            Мы гадали на картах Таро для подписчиков и всё это было в комичной форме подано. Было видно так же мои ручки с маникюром.
+                        </p>
                     </div>
                 </div>
 
@@ -1310,8 +1342,9 @@
             { id: 'dead', label: 'Стереть\nданные', shape: 'dot', color: '#444', size: 15 },
             { id: 'act4_save', label: 'Сохранить\nФурумми', shape: 'dot', color: '#a855f7', size: 15 },
             { id: 'maid', label: 'Вирус\nГорничной', image: 'img/lore/maid.webp', shape: 'circularImage', size: 35 },
-            { id: 'sonic', label: 'Марафон\nСоника', image: 'img/lore/Sonic-marathon.webp', shape: 'circularImage', size: 30 },
+            { id: 'sonic', label: 'Марафон\nСоника ч1', image: 'img/lore/Sonic-marathon.webp', shape: 'circularImage', size: 30 },
             { id: 'sonic_dub', label: 'Озвучка\nСоник Бум', shape: 'box', color: '#0055ff', font: {color: '#fff'} },
+            { id: 'taro', label: 'Гадания\nна Таро', image: 'img/lore/ТАРО.webp', shape: 'circularImage', size: 30 },
             { id: 'future', label: '???\n(Загрузка...)', shape: 'dot', color: '#555', size: 15 }
         ]);
 
@@ -1324,7 +1357,8 @@
             { from: 'act4_save', to: 'maid', color: {color: '#a855f7'} },
             { from: 'maid', to: 'sonic', color: {color: '#a855f7'} },
             { from: 'sonic', to: 'sonic_dub', color: {color: '#00d2ff'}, dashes: true },
-            { from: 'sonic', to: 'future', color: {color: '#555'}, dashes: true }
+            { from: 'sonic', to: 'taro', color: {color: '#a855f7'} },
+            { from: 'taro', to: 'future', color: {color: '#555'}, dashes: true }
         ]);
 
         var container = document.getElementById('lore-network-container');
@@ -1371,7 +1405,8 @@
                     'act4_save': 'card-act4',
                     'maid': 'card-act4',
                     'sonic': 'card-sonic',
-                    'sonic_dub': 'card-sonic'
+                    'sonic_dub': 'card-sonic',
+                    'taro': 'card-taro'
                 };
                 
                 if (nodeId === 'sonic_dub') {

@@ -25,10 +25,19 @@ const isMediaHubVisible = (typeof window !== 'undefined') && (
 
 const ALL_SLIDES = [
     {
+        file: 'img/arts/ХИКИ МАЯК 0.1.webp',
+        badgeStyle: 'pink',
+        badgeText: '🎨 АРТ',
+        textMain: 'Арт для Хики',
+        authorPrefix: '🎁',
+        textAuthor: 'Подарок на ДР',
+        url: '#arts'
+    },
+    {
         file: 'img/arts/Холууу снег 3.0.webp',
         badgeStyle: 'pink',
         badgeText: '❄️ АРТ',
-        textMain: 'Холууу снег 3.0',
+        textMain: 'Арт для Холу',
         authorPrefix: '🎨',
         textAuthor: 'Зимний арт',
         url: '#arts'
