@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "2.0",
+  "generatedAt": "2026-11-13 01:59:58",
+  "stats": {
+    "media": {
+      "total": 900,
+      "activeTotal": 574,
+      "watched": 364,
+      "watching": 14,
+      "planned": 520,
+      "dropped": 2,
+      "masterpiece": 22,
+      "withReview": 39,
+      "anime": 375,
+      "films": 63,
+      "shelf": 326,
+      "marvel": 40,
+      "dc": 25,
+      "series": 22,
+      "cartoons": 39,
+      "manga": 10
+    },
+    "games": {
+      "total": 326,
+      "steam": 313,
+      "custom": 13,
+      "nonSteam": 13,
+      "perfect": 25,
+      "reviewed": 14,
+      "software": 9,
+      "over100h": 9,
+      "hours10": 65
+    }
+  },
+  "weeklyHighlight": {
+    "titleMatch": "Топ Ган: Мэверик",
+    "badge": "Рекомендация недели",
+    "quote": "Круто отснят и ваще эмоции круто передал. На одном дыхании смотрелся."
+  },
+  "scaleLegend": [
+    {
+      "tier": "masterpiece",
+      "icon": "👑",
+      "range": "100+",
+      "label": "Шедевр",
+      "desc": "Превзошло всё! Личный топ"
+    },
+    {
+      "tier": "exceeded",
+      "icon": "🚀",
+      "range": "20–90",
+      "label": "Выше ожиданий",
+      "desc": "Эмоции сильно выше планки"
+    },
+    {
+      "tier": "solid",
+      "icon": "⭐",
+      "range": "10",
+      "label": "База / Ок",
+      "desc": "Выдало ровно то, что нужно"
+    },
+    {
+      "tier": "good",
+      "icon": "👍",
+      "range": "8–9.5",
+      "label": "Хорошо",
+      "desc": "Приятно провести время"
+    },
+    {
+      "tier": "mediocre",
+      "icon": "😐",
+      "range": "5–7",
+      "label": "Проходняк",
+      "desc": "На один раз / так себе"
+    }
+  ],
+  "tables": {
+    "media_anime": {
+      "zone": "media",
+      "count": 375,
+      "json": "db/tables/media_anime.json",
+      "chunk": "db/chunks/media_anime.js",
+      "jsonBytes": 783927,
+      "chunkBytes": 720118
+    },
+    "media_films": {
+      "zone": "media",
+      "count": 63,
+      "json": "db/tables/media_films.json",
+      "chunk": "db/chunks/media_films.js",
+      "jsonBytes": 78123,
+      "chunkBytes": 69383
+    },
+    "media_shelf": {
+      "zone": "media",
+      "count": 326,
+      "json": "db/tables/media_shelf.json",
+      "chunk": "db/chunks/media_shelf.js",
+      "jsonBytes": 394031,
+      "chunkBytes": 348652
+    },
+    "media_marvel": {
+      "zone": "media",
+      "count": 40,
+      "json": "db/tables/media_marvel.json",
+      "chunk": "db/chunks/media_marvel.js",
+      "jsonBytes": 54996,
+      "chunkBytes": 48611
+    },
+    "media_dc": {
+      "zone": "media",
+      "count": 25,
+      "json": "db/tables/media_dc.json",
+      "chunk": "db/chunks/media_dc.js",
+      "jsonBytes": 32825,
+      "chunkBytes": 28979
+    },
+    "media_series": {
+      "zone": "media",
+      "count": 22,
+      "json": "db/tables/media_series.json",
+      "chunk": "db/chunks/media_series.js",
+      "jsonBytes": 24486,
+      "chunkBytes": 21389
+    },
+    "media_cartoons": {
+      "zone": "media",
+      "count": 39,
+      "json": "db/tables/media_cartoons.json",
+      "chunk": "db/chunks/media_cartoons.js",
+      "jsonBytes": 46429,
+      "chunkBytes": 40564
+    },
+    "media_manga": {
+      "zone": "media",
+      "count": 10,
+      "json": "db/tables/media_manga.json",
+      "chunk": "db/chunks/media_manga.js",
+      "jsonBytes": 16118,
+      "chunkBytes": 14839
+    },
+    "games_steam": {
+      "zone": "games",
+      "count": 313,
+      "json": "db/tables/games_steam.json",
+      "chunk": "db/chunks/games_steam.js",
+      "jsonBytes": 346745,
+      "chunkBytes": 286436
+    },
+    "games_custom": {
+      "zone": "games",
+      "count": 13,
+      "json": "db/tables/games_custom.json",
+      "chunk": "db/chunks/games_custom.js",
+      "jsonBytes": 16530,
+      "chunkBytes": 13163
+    },
+    "games_hltb": {
+      "zone": "games",
+      "count": 226,
+      "json": "db/tables/games_hltb.json",
+      "chunk": "db/chunks/games_hltb.js",
+      "jsonBytes": 53307,
+      "chunkBytes": 41078
+    }
+  }
+}
