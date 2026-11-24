@@ -245,7 +245,6 @@ const STREAMS_LIST = [
 
     // Ноябрь 2026
     { date: '2026-11-26', time: '20:00', text: 'Тестовый стрим', isSpecial: true, isCanceled: false },
-    { date: '2026-11-28', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
 
     // Периодические события
     { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' },
