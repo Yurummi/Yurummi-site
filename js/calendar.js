@@ -294,6 +294,10 @@ function _renderDayCell(year, month, day, todayStr, index, firstDay) {
             classes += ' stream-day';
         }
 
+        if (streamEvent.isSpecial) {
+            classes += ' special-day';
+        }
+
         // Прошедший стрим
         if (dateStr < todayStr && !streamEvent.isCanceled) {
             classes += ' past-stream';

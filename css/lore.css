@@ -1,40 +1,86 @@
 /* ==========================================
-   КАРТОЧКИ ЛОРА
+   КАРТОЧКИ ЛОРА (Единый кинематографичный стиль)
    ========================================== */
 .lore-timeline {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    margin-top: 20px;
+    gap: 25px;
+    margin-top: 30px;
+    position: relative;
+    z-index: 20;
 }
 
 .lore-card {
+    --lore-accent: #ff3385;
+    --lore-accent-light: #ff80b3;
+    --lore-accent-bg: rgba(255, 51, 133, 0.12);
+    --lore-accent-glow: rgba(255, 51, 133, 0.22);
     display: flex;
     flex-direction: row;
-    align-items: center;
-    padding: 15px;
-    background: #1e1e1e;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    border: 1px solid #333;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    align-items: flex-start;
+    padding: 18px;
+    background: #181615;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border: 1px solid #332b25;
+    border-left: 3px solid var(--lore-accent);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    gap: 22px;
+    position: relative;
+    z-index: 2;
+}
+
+.lore-card.lore-theme-gray {
+    --lore-accent: #94a3b8;
+    --lore-accent-light: #cbd5e1;
+    --lore-accent-bg: rgba(148, 163, 184, 0.12);
+    --lore-accent-glow: rgba(148, 163, 184, 0.18);
+}
+
+.lore-card.lore-theme-pink {
+    --lore-accent: #ff3385;
+    --lore-accent-light: #ff80b3;
+    --lore-accent-bg: rgba(255, 51, 133, 0.12);
+    --lore-accent-glow: rgba(255, 51, 133, 0.22);
+}
+
+.lore-card.lore-theme-purple {
+    --lore-accent: #a855f7;
+    --lore-accent-light: #d8b4fe;
+    --lore-accent-bg: rgba(168, 85, 247, 0.14);
+    --lore-accent-glow: rgba(168, 85, 247, 0.24);
+}
+
+.lore-card.lore-theme-blue {
+    --lore-accent: #00a8ff;
+    --lore-accent-light: #38bdf8;
+    --lore-accent-bg: rgba(0, 168, 255, 0.14);
+    --lore-accent-glow: rgba(0, 168, 255, 0.24);
+}
+
+.lore-card.lore-theme-gold {
+    --lore-accent: #f59e0b;
+    --lore-accent-light: #fcd34d;
+    --lore-accent-bg: rgba(245, 158, 11, 0.14);
+    --lore-accent-glow: rgba(245, 158, 11, 0.24);
 }
 
 .lore-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(255, 51, 133, 0.15);
-    border-color: #ff3385;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.75), 0 0 22px var(--lore-accent-glow);
+    border-color: var(--lore-accent);
+    z-index: 100 !important;
 }
 
 .lore-video {
-    flex: 1;
-    min-width: 320px;
-    max-width: 400px;
+    flex: 0 0 340px;
     aspect-ratio: 16 / 9;
     background: #0f0f0f;
     position: relative;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .video-placeholder {
@@ -48,59 +94,132 @@
     text-decoration: none;
     color: #fff;
     position: relative;
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6);
-    transition: box-shadow 0.3s;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.18);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .video-placeholder:hover {
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.05);
 }
 
-.video-placeholder .play-btn {
-    font-size: 50px;
-    color: #ff3385;
-    transition: transform 0.3s, text-shadow 0.3s;
-    z-index: 2;
-}
-
-.video-placeholder:hover .play-btn {
-    transform: scale(1.1);
-    text-shadow: 0 0 15px #ff3385;
+.video-placeholder .play-btn,
+.play-btn {
+    display: none !important;
 }
 
 .video-overlay {
     position: absolute;
     bottom: 10px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 6px 15px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border: 1px solid #ff3385;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    backdrop-filter: blur(4px);
 }
 
 .lore-content {
-    flex: 2;
-    padding: 15px 30px;
+    flex: 1;
+    padding: 6px 10px 6px 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+}
+
+.lore-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    padding: 0;
+    margin-bottom: 6px;
+    width: fit-content;
+    background: none;
+    border: none;
+    color: var(--lore-accent-light);
+}
+
+.lore-badge::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--lore-accent);
+    flex-shrink: 0;
 }
 
 .lore-title {
-    color: #ff3385;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 26px;
+    color: #ffffff;
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.3;
+    transition: color 0.2s ease;
+}
+
+.lore-card:hover .lore-title {
+    color: var(--lore-accent-light);
 }
 
 .lore-desc {
-    color: #ccc;
-    font-size: 16px;
-    line-height: 1.7;
-    margin: 0;
+    color: #cbd5e1;
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin: 0 0 16px;
+    flex: 1;
+}
+
+.lore-watch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(145, 70, 255, 0.12);
+    border: 1px solid #9146ff;
+    color: #e9d5ff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    width: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.lore-watch-btn:hover {
+    background: #9146ff;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(145, 70, 255, 0.45);
+    transform: translateY(-2px);
+}
+
+.lore-watch-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+@media (max-width: 860px) {
+    .lore-card {
+        flex-direction: column;
+    }
+    .lore-video {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+    }
+    .lore-content {
+        padding: 10px 0 0 0;
+    }
 }
 
 /* ==========================================
@@ -108,16 +227,19 @@
    ========================================== */
 .char-tooltip {
     position: relative;
-    color: #a855f7;
-    border-bottom: 1px dashed #a855f7;
+    color: #ff80b3;
+    border-bottom: 1px dashed #ff3385;
     cursor: help;
     font-weight: bold;
-    transition: color 0.3s;
+    transition: color 0.2s;
+    display: inline-block;
+    z-index: 10;
 }
 
 .char-tooltip:hover {
     color: #ff3385;
     border-color: #ff3385;
+    z-index: 100;
 }
 
 /* Базовые стили для текстовых и видео-тултипов */
@@ -126,25 +248,22 @@
     visibility: hidden;
     opacity: 0;
     position: absolute;
-    bottom: 130%;
+    bottom: calc(100% + 14px);
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: #1a1a1a !important;
-    border: 2px solid #a855f7;
-    padding: 15px;
+    transform: translateX(-50%) translateY(8px);
+    background: #181615 !important;
+    border: 2px solid #ff3385 !important;
+    padding: 14px;
     border-radius: 12px;
-    width: 260px;
-    z-index: 99999 !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    transition:
-        opacity 0.3s ease 1s,
-        transform 0.3s ease 1s,
-        visibility 0s linear 1.3s;
+    width: 250px;
+    z-index: 999999 !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.95);
     pointer-events: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
 }
 
 /* Невидимый мостик, чтобы тултип не пропадал при переходе курсора */
@@ -155,10 +274,10 @@
     top: 100%;
     left: 0;
     right: 0;
-    height: 25px;
+    height: 18px;
 }
 
-/* Показываем тултип при наведении (с задержкой) */
+/* Показываем тултип при наведении (МГНОВЕННО и плавно) */
 .char-tooltip:hover .tooltip-content,
 .tooltip-content:hover,
 .h-node:hover .node-tooltip,
@@ -166,10 +285,7 @@
     visibility: visible;
     opacity: 1;
     transform: translateX(-50%) translateY(0);
-    transition:
-        opacity 0.3s ease 0s,
-        transform 0.3s ease 0s,
-        visibility 0s linear 0s;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
 }
 
 /* Стрелка вниз */
@@ -179,10 +295,10 @@
     position: absolute;
     top: 100%;
     left: 50%;
-    margin-left: -10px;
-    border-width: 10px;
+    margin-left: -8px;
+    border-width: 8px;
     border-style: solid;
-    border-color: #a855f7 transparent transparent transparent;
+    border-color: #ff3385 transparent transparent transparent !important;
 }
 
 .tooltip-content img {
@@ -303,15 +419,16 @@
 .lore-tree-window {
     width: 100%;
     height: 350px;
-    background: #111;
+    background: #0f0d0c;
     border-radius: 16px;
-    border: 2px solid #2a2a2a;
+    border: 2px solid #2a2522;
     overflow: hidden;
     position: relative;
+    z-index: 1; /* Чтобы тултипы карточек ниже перекрывали окно карты */
     cursor: grab;
     margin-top: 40px;
     margin-bottom: 40px;
-    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+    box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.9);
     touch-action: none; /* Запрещает скролл страницы при перетаскивании карты */
 }
 
@@ -441,9 +558,317 @@
 .h-node.active:hover .h-label { color: #a855f7; }
 
 /* ==========================================
+   ТРИЛОГИЯ: КАПСУЛА СЮЖЕТА (КИНДЕР-СЮРПРИЗ)
+   ========================================== */
+.lore-trilogy-block {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 0;
+}
+
+.lore-trilogy-card {
+    border: 1px solid #332b25 !important;
+    border-left: 4px solid #ff3385 !important;
+    border-color: #332b25 !important;
+    border-left-color: #ff3385 !important;
+    background: linear-gradient(145deg, #181615 0%, #1f171d 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), -2px 0 16px rgba(255, 51, 133, 0.28) !important;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.lore-trilogy-card:hover {
+    border-color: #332b25 !important;
+    border-left: 4px solid #ff5c9d !important;
+    border-left-color: #ff5c9d !important;
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.75), -3px 0 22px rgba(255, 51, 133, 0.45) !important;
+}
+
+.lore-trilogy-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 51, 133, 0.04));
+    pointer-events: none;
+}
+
+/* Бедж и метки трилогии */
+.lore-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.lore-pill-episodes {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(255, 51, 133, 0.15);
+    border: 1px solid rgba(255, 51, 133, 0.35);
+    color: #ff80b3;
+}
+
+/* Кнопка открытия капсулы "Киндер" (по ширине как блок озвучки Соника) */
+.trilogy-action-bar {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.trilogy-toggle-btn {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 51, 133, 0.1);
+    border: 1px solid rgba(255, 51, 133, 0.4);
+    color: #ff80b3;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.trilogy-toggle-btn:hover {
+    background: rgba(255, 51, 133, 0.2);
+    border-color: #ff3385;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(255, 51, 133, 0.25);
+}
+
+.trilogy-toggle-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-chevron {
+    font-size: 11px;
+    transition: transform 0.3s ease;
+}
+
+.lore-trilogy-block.is-open .btn-chevron {
+    transform: rotate(180deg);
+}
+
+.trilogy-status-hint {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Разворот трилогии (древовидная ветка как на эскизе) */
+.trilogy-capsule-drawer {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin 0.35s ease;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin-top: 0;
+    padding: 0;
+    position: relative;
+}
+
+.lore-trilogy-block.is-open .trilogy-capsule-drawer {
+    max-height: 5000px;
+    opacity: 1;
+    pointer-events: auto;
+    margin-top: 18px;
+    padding-bottom: 8px;
+    overflow: visible !important;
+}
+
+/* Список внутренних актов со светящейся вертикальной линией-стволом слева */
+.trilogy-acts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    padding-left: 36px;
+    margin-left: 1px;
+}
+
+/* Вертикальная направляющая линия ветки от левого края главной карточки */
+.trilogy-acts-list::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    bottom: 24px;
+    left: 2px;
+    width: 3px;
+    background: linear-gradient(180deg, #ff3385 0%, #ff3385 85%, rgba(255, 51, 133, 0.2) 100%);
+    box-shadow: 0 0 10px rgba(255, 51, 133, 0.5);
+    border-radius: 2px;
+}
+
+/* Внутренние карточки актов */
+.lore-inner-card {
+    position: relative;
+    background: #161413;
+    border: 1px solid #332b25;
+    border-left: 4px solid #ff3385 !important;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), -2px 0 10px rgba(255, 51, 133, 0.2);
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.lore-inner-card:hover {
+    transform: none !important;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.8), -3px 0 20px rgba(255, 51, 133, 0.5) !important;
+    border-color: rgba(255, 51, 133, 0.6) !important;
+    border-left: 4px solid #ff5c9d !important;
+    z-index: 50 !important;
+}
+
+/* Горизонтальный мостик от вертикальной линии к карточке акта */
+.lore-inner-card::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: -32.5px;
+    width: 32.5px;
+    height: 2px;
+    background: #ff3385;
+    box-shadow: 0 0 6px rgba(255, 51, 133, 0.6);
+    pointer-events: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.lore-inner-card:hover::before {
+    background: #ff80b3;
+    box-shadow: 0 0 10px rgba(255, 51, 133, 0.85);
+}
+
+/* Светящийся кругляш-узел на вертикальной ветке (никогда не отсоединяется) */
+.lore-inner-card::after {
+    content: '';
+    position: absolute;
+    top: 37px;
+    left: -36.5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff80b3;
+    border: 2px solid #ff3385;
+    box-shadow: 0 0 8px #ff3385;
+    pointer-events: none;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.lore-inner-card:hover::after {
+    transform: scale(1.35);
+    background: #ffffff;
+    box-shadow: 0 0 14px #ff3385, 0 0 6px #ffffff;
+}
+
+/* Тултипы внутри карточек трилогии: открываются вниз, чтобы верхняя часть с аватаром не обрезалась */
+.lore-inner-card .char-tooltip {
+    position: relative;
+    z-index: 20;
+}
+
+.lore-inner-card .char-tooltip:hover {
+    z-index: 1000 !important;
+}
+
+.lore-inner-card .tooltip-content {
+    bottom: auto !important;
+    top: calc(100% + 14px) !important;
+    transform: translateX(-50%) translateY(-6px);
+}
+
+.lore-inner-card .char-tooltip:hover .tooltip-content,
+.lore-inner-card .tooltip-content:hover {
+    transform: translateX(-50%) translateY(0);
+}
+
+.lore-inner-card .tooltip-content::after {
+    top: auto !important;
+    bottom: 100% !important;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #ff3385 transparent !important;
+}
+
+.lore-inner-card .tooltip-content::before {
+    top: auto !important;
+    bottom: 100% !important;
+    height: 18px;
+}
+
+/* Кнопка закрытия разворота внизу */
+.trilogy-close-bar {
+    text-align: center;
+    margin-top: 18px;
+    padding-top: 10px;
+    padding-left: 36px;
+}
+
+.trilogy-close-btn {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(255, 51, 133, 0.08);
+    border: 1px dashed rgba(255, 51, 133, 0.35);
+    color: #ff80b3;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.trilogy-close-btn:hover {
+    border-color: #ff3385;
+    border-style: solid;
+    color: #fff;
+    background: rgba(255, 51, 133, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 51, 133, 0.25);
+}
+
+/* ==========================================
    МОБИЛЬНАЯ ВЕРСИЯ (ОБЯЗАТЕЛЬНО В КОНЦЕ ФАЙЛА)
    ========================================== */
 @media (max-width: 768px) {
+    .trilogy-acts-list {
+        padding-left: 20px;
+        margin-left: 0;
+        gap: 14px;
+    }
+    .trilogy-acts-list::before {
+        left: 2px;
+    }
+    .lore-inner-card::before {
+        left: -20px;
+        width: 18px;
+        top: 24px;
+    }
+    .lore-inner-card::after {
+        left: -23px;
+        top: 21px;
+    }
+    .trilogy-close-bar {
+        padding-left: 20px;
+    }
     .lore-card {
         flex-direction: column;
         padding: 0;

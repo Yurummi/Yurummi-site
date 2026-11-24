@@ -122,12 +122,22 @@ function _showLightboxElement(element) {
         }
     }
 
+    let versionPill = '';
+    const group = element.getAttribute('data-gallery-group');
+    if (group && typeof lightboxElements !== 'undefined' && lightboxElements.length > 0) {
+        const groupItems = lightboxElements.filter(el => el.getAttribute('data-gallery-group') === group);
+        if (groupItems.length > 1) {
+            const currentIdx = groupItems.indexOf(element) + 1;
+            versionPill = ` <span class="lightbox-version-pill">${currentIdx} / ${groupItems.length}</span>`;
+        }
+    }
+
     if (musicLink) {
         lightboxCaption.innerHTML =
-            '<strong>' + title + '</strong><br>' + subtitle +
+            '<strong>' + title + '</strong>' + versionPill + '<br>' + subtitle +
             '<br><span class="music-hint">🎵 псс... кликни по самой картинке!</span>';
     } else {
-        lightboxCaption.innerHTML = '<strong>' + title + '</strong><br>' + subtitle;
+        lightboxCaption.innerHTML = '<strong>' + title + '</strong>' + versionPill + '<br>' + subtitle;
     }
 
     lightbox.classList.add('active');

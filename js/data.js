@@ -25,6 +25,15 @@ const isMediaHubVisible = (typeof window !== 'undefined') && (
 
 const ALL_SLIDES = [
     {
+        file: 'img/fanarts/Школьница.webp',
+        badgeStyle: 'pink',
+        badgeText: '🎨 ФАН-АРТ',
+        textMain: 'Школьница',
+        authorPrefix: '💖',
+        textAuthor: '@Maku_q',
+        url: 'https://t.me/maku_qq'
+    },
+    {
         file: 'img/arts/ХИКИ МАЯК 0.1.webp',
         badgeStyle: 'pink',
         badgeText: '🎨 АРТ',
@@ -233,6 +242,11 @@ const STREAMS_LIST = [
     { date: '2026-10-24', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
     { date: '2026-10-27', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
     { date: '2026-10-31', time: '20:00', text: 'Хэллоуинский стрим 🎃👻', isSpecial: true, isCanceled: false },
+
+    // Ноябрь 2026
+    { date: '2026-11-26', time: '20:00', text: 'Тестовый стрим', isSpecial: true, isCanceled: false },
+    { date: '2026-11-28', time: '20:00', text: 'Стрим', isSpecial: false, isCanceled: false },
+
     // Периодические события
     { startDate: '2026-07-06', endDate: '2026-07-17', text: 'ОТПУСК 🌴', type: 'vacation' },
     { startDate: '2026-10-10', endDate: '2026-10-17', text: 'Отпуск 🍁', type: 'vacation' },

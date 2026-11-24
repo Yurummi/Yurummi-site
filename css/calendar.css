@@ -149,6 +149,18 @@
     border-color: #ff3385;
 }
 
+.day-cell.special-day {
+    background: linear-gradient(145deg, #38142e 0%, #1c0a1a 100%);
+    border-color: #ff5c9d;
+    box-shadow: 0 0 12px rgba(255, 51, 133, 0.4);
+}
+
+.day-cell.special-day .day-number {
+    color: #ff80b3;
+    font-weight: 800;
+    text-shadow: 0 0 8px rgba(255, 51, 133, 0.5);
+}
+
 .day-cell.stream-day:hover {
     transform: scale(1.05);
     z-index: 10;

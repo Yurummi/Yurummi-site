@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="css/gallery.css">
     <link rel="stylesheet" href="css/calendar.css">
     <link rel="stylesheet" href="css/lore.css">
+    <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/commands.css">
     <link rel="stylesheet" href="css/effects.css">
 </head>
@@ -59,7 +60,6 @@
         <a href="#schedule">Расписание</a>
         <a href="#faq">Обо мне</a>
         <a href="#lore">Лор</a>
-        <a href="#commands">Команды</a>
         <a href="#support">Соцсети и Ссылки</a>
         <a href="stats.html" id="nav-games-link" style="color:#00f2fe; text-shadow:0 0 10px rgba(0,242,254,0.5); font-weight:700; display: none;">🎮 Игровая</a>
         <a id="nav-live-pill" href="https://twitch.tv/yurummi" target="_blank" rel="noopener" class="nav-live-pill offline" title="Twitch канал Yurummi">
@@ -384,17 +384,18 @@
             <div class="gallery-subtitle">Мои арты (Полноценные)</div>
             <div class="gallery-grid" id="main-arts-grid">
                 <!-- НОВЕЙШЕЕ СВЕРХУ -->
-                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/ХИКИ МАЯК 0.1.webp">
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/ХИКИ МАЯК 0.1.webp" data-gallery-group="hiki-bday">
+                    <span class="gallery-badge-multi" title="2 версии"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg> 2</span>
                     <picture>
                         <source srcset="img/arts/ХИКИ МАЯК 0.1.webp" type="image/webp">
                         <img src="img/arts/ХИКИ МАЯК 0.1.png" alt="Подарок ДР для Хики" loading="lazy">
                     </picture>
                     <div class="gallery-overlay">
                         <h3>Подарок ДР для Хики</h3>
-                        <p>Маяк (2 арта)</p>
+                        <p>Маяк</p>
                     </div>
                 </div>
-                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/arts/ХИКИ МАЯК карта таро.webp" style="display: none;">
+                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/arts/ХИКИ МАЯК карта таро.webp" data-gallery-group="hiki-bday" style="display: none;">
                     <h3>Подарок ДР для Хики</h3>
                     <p>Карта Таро</p>
                 </div>
@@ -425,7 +426,7 @@
                     </picture>
                     <div class="gallery-overlay">
                         <h3>С Днём Рождения, Куми! 🎉</h3>
-                        <p>Подарок на ДР. Канал: <a href="https://t.me/kumimp3" target="_blank" style="color: #ff99bb; text-decoration: underline; font-weight: bold;" onclick="event.stopPropagation()">@kumimp3</a></p>
+                        <p>Подарок на ДР для @kumimp3</p>
                     </div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/Депрессия.png">
@@ -438,7 +439,7 @@
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/Ya_i_Maku_final.webp">
                     <picture><source srcset="img/arts/Ya_i_Maku_final.webp" type="image/webp"><img src="img/arts/Ya_i_Maku_final.webp" alt="Я и Маку" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>Я и Маку</h3><p>скетч для Маку</p></div>
+                    <div class="gallery-overlay"><h3>Я и Маку</h3><p>Скетч для Маку</p></div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/Фарочан ФИНАЛЛ.png">
                     <picture><source srcset="img/arts/Фарочан ФИНАЛЛ.webp" type="image/webp"><img src="img/arts/Фарочан ФИНАЛЛ.png" alt="Фарочан" loading="lazy"></picture>
@@ -458,7 +459,7 @@
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/offlineфинал.png">
                     <picture><source srcset="img/arts/offlineфинал.webp" type="image/webp"><img src="img/arts/offlineфинал.png" alt="Оффлайн экран" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>Оффлайн экран</h3><p></p></div>
+                    <div class="gallery-overlay"><h3>Оффлайн экран</h3><p>Заставка для стрима</p></div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/arts/Микубот.png">
                     <picture><source srcset="img/arts/Микубот.webp" type="image/webp"><img src="img/arts/Микубот.png" alt="Микубот" loading="lazy"></picture>
@@ -481,22 +482,40 @@
             <div class="gallery-subtitle spaced">Фан-арты (От зрителей)</div>
             <div class="gallery-grid" id="fan-arts-grid">
                 <!-- НОВЕЙШЕЕ СВЕРХУ -->
-                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/us3.png">
-                    <picture><source srcset="img/fanarts/us3.webp" type="image/webp"><img src="img/fanarts/us3.png" alt="ЛУЧШЕЕ ТРИО" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>ЛУЧШЕЕ ТРИО</h3><p>От Ямады (2 арта)</p></div>
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/Школьница.jpg">
+                    <picture><source srcset="img/fanarts/Школьница.webp" type="image/webp"><img src="img/fanarts/Школьница.jpg" alt="Школьница от @Maku_q" loading="lazy"></picture>
+                    <div class="gallery-overlay"><h3>Школьница</h3><p>От @Maku_q</p></div>
                 </div>
-                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/fanarts/us5.png" style="display: none;"></div>
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/us3.png" data-gallery-group="yamada-trio">
+                    <span class="gallery-badge-multi" title="2 версии"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg> 2</span>
+                    <picture><source srcset="img/fanarts/us3.webp" type="image/webp"><img src="img/fanarts/us3.png" alt="ЛУЧШЕЕ ТРИО" loading="lazy"></picture>
+                    <div class="gallery-overlay"><h3>ЛУЧШЕЕ ТРИО</h3><p>От @yamada_ai</p></div>
+                </div>
+                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/fanarts/us5.png" data-gallery-group="yamada-trio" style="display: none;">
+                    <h3>ЛУЧШЕЕ ТРИО</h3>
+                    <p>От @yamada_ai (версия 2)</p>
+                </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/беременный соник.png">
                     <picture><source srcset="img/fanarts/беременный соник.webp" type="image/webp"><img src="img/fanarts/беременный соник.png" alt="Фан-арт от Holu___" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От Holu___</p></div>
+                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От @Holu___</p></div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/Широк фан арт от ямады.jpg">
-                    <picture><img src="img/fanarts/Широк фан арт от ямады.jpg" alt="Фан арт от ямады" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>Фан-арт</h3><p>От Ямады (4 версии)</p></div>
+                <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/Широк фан арт от ямады.jpg" data-gallery-group="yamada-shirok">
+                    <span class="gallery-badge-multi" title="4 версии"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg> 4</span>
+                    <picture><img src="img/fanarts/Широк фан арт от ямады.jpg" alt="Широк фан-арт" loading="lazy"></picture>
+                    <div class="gallery-overlay"><h3>Широк</h3><p>От @yamada_ai</p></div>
                 </div>
-                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/fanarts/полнорост фан арт от ямады.png" style="display: none;"></div>
-                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/fanarts/полнорост фан арт от ямады прозрачный.png" style="display: none;"></div>
-                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/fanarts/полнорост фан арт от ямады белый.png" style="display: none;"></div>
+                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/fanarts/полнорост фан арт от ямады.png" data-gallery-group="yamada-shirok" style="display: none;">
+                    <h3>Широк (Полнорост)</h3>
+                    <p>От @yamada_ai</p>
+                </div>
+                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/fanarts/полнорост фан арт от ямады прозрачный.png" data-gallery-group="yamada-shirok" style="display: none;">
+                    <h3>Широк (Прозрачный фон)</h3>
+                    <p>От @yamada_ai</p>
+                </div>
+                <div class="gallery-item-hidden" onclick="openLightbox(this)" data-src="img/fanarts/полнорост фан арт от ямады белый.png" data-gallery-group="yamada-shirok" style="display: none;">
+                    <h3>Широк (Белый фон)</h3>
+                    <p>От @yamada_ai</p>
+                </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/fanarts/frumi_v_korobke.webp">
                     <picture><source srcset="img/fanarts/frumi_v_korobke.webp" type="image/webp"><img src="img/fanarts/frumi_v_korobke.webp" alt="Фурумми в коробке от @Maku_q" loading="lazy"></picture>
                     <div class="gallery-overlay"><h3>Фурумми в коробке</h3><p>От @Maku_q</p></div>
@@ -588,11 +607,11 @@
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/sketches/Ya_i_Maku.webp">
                     <picture><source srcset="img/sketches/Ya_i_Maku.webp" type="image/webp"><img src="img/sketches/Ya_i_Maku.webp" alt="Я и Маку" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>Я и Маку</h3><p>скетч для Маку</p></div>
+                    <div class="gallery-overlay"><h3>Я и Маку</h3><p>Скетч для Маку</p></div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/sketches/pochtalion.webp">
                     <picture><source srcset="img/sketches/pochtalion.webp" type="image/webp"><img src="img/sketches/pochtalion.webp" alt="почтальон" loading="lazy"></picture>
-                    <div class="gallery-overlay"><h3>почтальон</h3><p>Доставщик газеты</p></div>
+                    <div class="gallery-overlay"><h3>Почтальон</h3><p>Доставщик газеты</p></div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)" role="button" tabindex="0" data-src="img/sketches/Маку Соник.png">
                     <picture><source srcset="img/sketches/Маку Соник.webp" type="image/webp"><img src="img/sketches/Маку Соник.png" alt="Маку Соник" loading="lazy"></picture>
@@ -852,24 +871,118 @@
     </section>
 
     <!-- ========================================== -->
-    <!--  ОБО МНЕ (FAQ)                             -->
+    <!--  ОБО МНЕ (FAQ / ДЕТЕКТИВНАЯ ДОСКА)         -->
     <!-- ========================================== -->
     <section id="faq" style="padding-top: 60px;">
         <div class="content-container">
             <h2 class="section-title">Обо мне</h2>
-            <div class="faq-card">
-                <h3 class="subheading-pink" style="margin-top: 0;">Привет! Я Yurummi 📦</h3>
-                <p>Если ты новенький, то у тебя наверняка вопрос: <em>«Кто это вообще такой?»</em>.</p>
-                <p>Yurummi - это мой оригинальный персонаж с коробкой на голове. У него есть свой глубокий лор и целый мир внутри этой самой <span id="secret-box" style="cursor: pointer; display: inline-block; transition: transform 0.1s; user-select: none; -webkit-user-select: none; -moz-user-select: none;">коробки</span>. Пока что я держу большинство тайн при себе, но просто знайте: ОН СУЩЕСТВУЕТ.</p>
-                <h3 class="subheading-pink" style="margin-top: 30px;">А что за кошкодевочка? 🐱</h3>
-                <p>Всё течёт, всё меняется! Встречайте - <strong>Furummi (Фурумми)</strong>! Это «мой новый» маскот и альтер-эго на стримах. Коробка никуда не исчезла, мы просто добавили в наш суровый картонный мир немного ушек, милоты и уюта.</p>
-                <h3 class="subheading-pink" style="margin-top: 30px;">Особая благодарность 🎨</h3>
-                <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; margin-top: 15px; text-align: center;">
-                    <p style="margin-top: 0; margin-bottom: 20px; text-align: left;">Хочу сказать огромное спасибо художнице <strong><a href="https://t.me/maku_qq" target="_blank" style="color: #ff3385;">@Maku_q</a></strong>! Она стала автором огромного числа работ, которые вы видите на моём канале - от великолепных фан-артов до смайликов на Твиче. Маку уже стала большой частью меня и моего канала, и её поддержка невероятно важна.</p>
-                    
-                    <div onclick="openLightbox(this)" role="button" tabindex="0" style="display: inline-block; width: 100%; max-width: 800px; border: 2px solid #ff3385; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.2s;">
-                        <picture><source srcset="img/fanarts/комикс.webp" type="image/webp"><img src="img/fanarts/комикс.jpg" alt="Комикс от Maku_q" style="width: 100%; height: auto; display: block;"></picture>
-                        <div style="display: none;"><h3>Комикс от Maku_q</h3><p>Особая благодарность</p></div>
+
+            <div class="detective-board">
+                <!-- Заголовок доски расследований -->
+                <div class="board-header">
+                    <div class="board-case-badge">Дело № 2026-Y · Досье маскотов</div>
+                    <p class="board-subtitle">Материалы дела и главные лица канала</p>
+                </div>
+
+                <!-- Сетка двух досье персонажей -->
+                <div class="detective-characters-grid">
+                    <!-- Красная нить связи между кнопками -->
+                    <svg class="detective-thread-svg" viewBox="0 0 1000 60" preserveAspectRatio="none">
+                        <path d="M 250 8 Q 500 48 750 8" stroke="#ef4444" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,4" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));"/>
+                    </svg>
+                    <!-- Досье 1: Yurummi -->
+                    <div class="detective-card card-yurummi">
+                        <div class="detective-pin" title="Улика прикреплена"></div>
+                        <div class="polaroid-frame">
+                            <div class="polaroid-img-wrap">
+                                <picture>
+                                    <source srcset="img/fanarts/юрумипнгартналови.webp" type="image/webp">
+                                    <img src="img/fanarts/юрумипнгартналови.png" alt="Yurummi" loading="lazy">
+                                </picture>
+                            </div>
+                            <div class="detective-stamp stamp-red">ОБЪЕКТ #01</div>
+                        </div>
+                        <div class="dossier-body">
+                            <h3 class="dossier-name">Yurummi <span>📦</span></h3>
+                            <div class="dossier-alias">The Box Guy · Оригинал</div>
+                            <div class="dossier-rows">
+                                <div class="dossier-row">
+                                    <span class="dossier-label">Статус:</span>
+                                    <span class="dossier-val">Оригинальный персонаж, беглец</span>
+                                </div>
+                                <div class="dossier-row">
+                                    <span class="dossier-label">Приметы:</span>
+                                    <span class="dossier-val">Картонная <span id="secret-box" style="cursor: pointer; color: #ff3385; font-weight: bold; border-bottom: 1px dashed #ff3385; display: inline-block; transition: transform 0.1s; user-select: none;" title="Попробуй покликать!">коробка</span> на голове</span>
+                                </div>
+                                <div class="dossier-row">
+                                    <span class="dossier-label">Угроза:</span>
+                                    <span class="dossier-val">Умеет открывать порталы в мультивселенную</span>
+                                </div>
+                            </div>
+                            <div class="dossier-note">
+                                «Внутри этой коробки скрыт целый мир и глубокий лор. Большинство тайн пока под грифом СЕКРЕТНО, но знайте главное: ОН СУЩЕСТВУЕТ.»
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Досье 2: Furummi -->
+                    <div class="detective-card card-furummi">
+                        <div class="detective-pin" title="Улика прикреплена"></div>
+                        <div class="polaroid-frame">
+                            <div class="polaroid-img-wrap">
+                                <picture>
+                                    <source srcset="img/lore/БУУУУУМ.webp" type="image/webp">
+                                    <img src="img/lore/БУУУУУМ.png" alt="Furummi" loading="lazy">
+                                </picture>
+                            </div>
+                            <div class="detective-stamp stamp-purple">ОБЪЕКТ #02</div>
+                        </div>
+                        <div class="dossier-body">
+                            <h3 class="dossier-name">Furummi <span>🐱</span></h3>
+                            <div class="dossier-alias">Кошкодевочка · Альтер-эго</div>
+                            <div class="dossier-rows">
+                                <div class="dossier-row">
+                                    <span class="dossier-label">Статус:</span>
+                                    <span class="dossier-val">Альтер-эго и маскот на стримах</span>
+                                </div>
+                                <div class="dossier-row">
+                                    <span class="dossier-label">Приметы:</span>
+                                    <span class="dossier-val">Кошачьи ушки, розовые волосы, милота</span>
+                                </div>
+                                <div class="dossier-row">
+                                    <span class="dossier-label">Событие:</span>
+                                    <span class="dossier-val">Съела коробку</span>
+                                </div>
+                            </div>
+                            <div class="dossier-note">
+                                «Всё течёт, всё меняется! Коробка никуда не исчезла, мы просто добавили в наш суровый картонный мир немного ушек, уюта и стримерской атмосферы.»
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Нижняя папка дела: Благодарность художнице -->
+                <div class="detective-evidence-folder">
+                    <div class="evidence-clip"></div>
+                    <div class="evidence-info">
+                        <span class="evidence-badge">Приложение к делу · Благодарность</span>
+                        <h4 class="evidence-title">Главный иллюстратор: <a href="https://t.me/maku_qq" target="_blank" style="color: #ff3385;">@Maku_q</a></h4>
+                        <p class="evidence-text">
+                            Огромное спасибо художнице <strong><a href="https://t.me/maku_qq" target="_blank">@Maku_q</a></strong>! Она нарисовала огромную часть всего, что вы видите на канале: арты, комиксы и смайлики на Twitch. Без неё этот канал выглядел бы совсем иначе.
+                        </p>
+                    </div>
+
+                    <!-- Миниатюра комикса (улика с лайтбоксом) -->
+                    <div onclick="openLightbox(this)" role="button" tabindex="0" class="evidence-comic-thumb" title="Нажмите, чтобы открыть комикс">
+                        <picture>
+                            <source srcset="img/fanarts/комикс.webp" type="image/webp">
+                            <img src="img/fanarts/комикс.jpg" alt="Комикс от Maku_q" loading="lazy">
+                        </picture>
+                        <div class="comic-zoom-badge">🔍 Улика: Комикс (открыть)</div>
+                        <div style="display: none;">
+                            <h3>Комикс от Maku_q</h3>
+                            <p>Особая благодарность художнице канала</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -883,7 +996,7 @@
         <div class="content-container">
             <h2 class="section-title">Лор канала</h2>
             <p class="section-intro" style="margin-bottom: 40px;">
-                Мультивселенная, вирусы и интерактивные расследования. Изучай хронологию событий ниже.
+                От истории про коробку и похищения в прямом эфире до марафонов и гаданий. Вся хронология канала — ниже.
             </p>
 
             <!-- Интерактивная карта -->
@@ -893,10 +1006,16 @@
                 </div>
 
                 
-                <button id="lore-fullscreen-btn" onclick="toggleLoreFullscreen()" style="position: absolute; top: 15px; right: 15px; z-index: 10; background: rgba(0,0,0,0.8); color: #fff; border: 1px solid #555; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 14px; display: flex; gap: 8px; align-items: center; transition: 0.2s;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    Интерактивная карта (На весь экран)
-                </button>
+                <div style="position: absolute; top: 15px; right: 15px; z-index: 10; display: flex; gap: 8px;">
+                    <button id="lore-reset-btn" onclick="resetLoreNetwork()" style="background: rgba(24, 22, 21, 0.85); color: #fff; border: 1px solid #ff3385; padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; gap: 6px; align-items: center; transition: 0.2s; backdrop-filter: blur(4px);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                        Сбросить вид
+                    </button>
+                    <button id="lore-fullscreen-btn" onclick="toggleLoreFullscreen()" style="background: rgba(24, 22, 21, 0.85); color: #fff; border: 1px solid #443b34; padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; gap: 6px; align-items: center; transition: 0.2s; backdrop-filter: blur(4px);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        На весь экран
+                    </button>
+                </div>
                 <div id="lore-network-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 5; background: #0a0a0a;"></div>
 
                 <div class="tree-canvas" id="loreCanvas" style="display: none;">
@@ -911,14 +1030,20 @@
                     <div class="h-node" style="top:113px; left:38px;" onclick="document.getElementById('card-intro').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
                         <div class="h-label top">Начало (Изгнание)</div>
                     </div>
-                    <div class="h-node" style="top:113px; left:188px;" onclick="document.getElementById('card-act1').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
-                        <div class="h-label bottom">Акт I: Экстренные новости</div>
+                    <div class="h-node active event" style="top:113px; left:168px;" onclick="document.getElementById('card-fnaf').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
+                        <div class="h-label bottom">Марафон FNAF</div>
                     </div>
-                    <div class="h-node" style="top:113px; left:338px;" onclick="document.getElementById('card-act2').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
-                        <div class="h-label top">Акт II: Папка с секретами</div>
+                    <div class="h-node active" style="top:113px; left:298px;" onclick="window.openTrilogyCapsule(); window.filterTrilogyAct('all'); document.getElementById('card-trilogy').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
+                        <div class="h-label top">Трилогия (3 Акта)</div>
                     </div>
-                    <div class="h-node" style="top:113px; left:538px;" onclick="document.getElementById('card-act3').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
-                        <div class="h-label bottom">Акт III: Судьбоносный код</div>
+                    <div class="h-node" style="top:75px; left:418px;" onclick="window.openTrilogyCapsule(); window.filterTrilogyAct('act1'); document.getElementById('card-act1').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
+                        <div class="h-label top">Акт I</div>
+                    </div>
+                    <div class="h-node" style="top:75px; left:508px;" onclick="window.openTrilogyCapsule(); window.filterTrilogyAct('act2'); document.getElementById('card-act2').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
+                        <div class="h-label top">Акт II</div>
+                    </div>
+                    <div class="h-node" style="top:113px; left:608px;" onclick="window.openTrilogyCapsule(); window.filterTrilogyAct('act3'); document.getElementById('card-act3').scrollIntoView({behavior:'smooth',block:'center'})" role="button" tabindex="0">
+                        <div class="h-label bottom">Акт III: Код</div>
                     </div>
 
                     <div class="h-node dead" style="top:48px; left:718px;">
@@ -958,17 +1083,18 @@
             <!-- Хронология событий -->
             <div class="lore-timeline">
 
-                <div id="card-intro" class="lore-card">
+                <!-- Предыстория -->
+                <div id="card-intro" class="lore-card lore-theme-gray">
                     <div class="lore-video">
                         <div class="video-placeholder" style="background-image: url('img/lore/intro-bg.webp'), url('img/lore/intro-bg.jpg');">
-                            <div class="video-overlay" style="bottom:auto; top:15px; border-color:#555;">Предыстория</div>
+                            <div class="video-overlay">Хроника</div>
                         </div>
                     </div>
                     <div class="lore-content">
+                        <span class="lore-badge">Предыстория · Канон</span>
                         <h3 class="lore-title">Эпоха Изгнания</h3>
                         <p class="lore-desc">
                             Всё началось далеко за пределами привычного мира. Спасаясь от преследования мстительных богов,
-
                             <span class="char-tooltip glitch-name">отец Юрумми
                                 <span class="tooltip-content glitch-tooltip">
                                     <span class="glitch-avatar">?</span>
@@ -981,124 +1107,202 @@
                                     </span>
                                 </span>
                             </span>
-
-                            отправляет его сквозь мультивселенную. Будучи ещё младенцем,
+                            отправляет сына сквозь мультивселенную. Ещё младенцем
                             <span class="char-tooltip">Юрумми
                                 <span class="tooltip-content">
                                     <picture><source srcset="img/fanarts/юрумипнгартналови.webp" type="image/webp"><img src="img/fanarts/юрумипнгартналови.png" alt="Юрумми" loading="lazy"></picture>
                                     <strong>Юрумми</strong>
-                                    <span>Парень с коробкой на голове. Беглец из другого измерения, пытающийся жить обычной жизнью на Земле.</span>
+                                    <span>Парень с коробкой на голове. Беглец из другого измерения, скрывающийся среди людей.</span>
                                 </span>
                             </span>
-                            попадает на планету Земля, где долгие годы ведёт жизнь обычного человека, скрывая своё происхождение под картонной коробкой.
+                            попадает на Землю, где долгие годы живёт среди людей, пряча своё происхождение под картонной коробкой.
                         </p>
                     </div>
                 </div>
 
-                <div id="card-act1" class="lore-card">
+                <!-- Марафон FNAF -->
+                <div id="card-fnaf" class="lore-card lore-theme-gold">
                     <div class="lore-video">
-                        <a href="https://www.twitch.tv/videos/2666615999" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt1.webp'), url('img/lore/akt1.png');">
-                            <span class="play-btn">▶</span>
-                            <div class="video-overlay">Смотреть Акт I</div>
-                        </a>
-                    </div>
-                    <div class="lore-content">
-                        <h3 class="lore-title">Акт I: Экстренные новости</h3>
-                        <p class="lore-desc">
-                            Эфир прерывается срочным включением. Ведущий новостей
-                            <span class="char-tooltip">Мистер Б. Окс
-                                <span class="tooltip-content">
-                                    <picture><source srcset="img/lore/mr-boks.webp" type="image/webp"><img src="img/lore/mr-boks.png" alt="Б. Окс" loading="lazy"></picture>
-                                    <strong>Мистер Б. Окс</strong>
-                                    <span>Усатая версия Юрумми. Загадочный ведущий новостей, у которого всегда есть свои скрытые мотивы.</span>
-                                </span>
-                            </span>
-                            сообщает тревожную весть — загадочная кошкодевочка Фурумми бесследно исчезла! Единственный свидетель на месте преступления — кот
-                            <span class="char-tooltip">Ботглорп
-                                <span class="tooltip-content">
-                                    <picture><source srcset="img/lore/glorp.webp" type="image/webp"><img src="img/lore/glorp.png" alt="Ботглорп" loading="lazy"></picture>
-                                    <strong>Ботглорп</strong>
-                                    <span>Верный кот-помощник и бот из чата. Понимает всё, но говорит только «мяу». Хакер со стажем.</span>
-                                </span>
-                            </span>,
-                            от которого невозможно добиться внятных показаний. Зрителям приходится взять расследование в свои руки, используя команду <code>!улика</code> в чате.
-                        </p>
-                    </div>
-                </div>
-
-                <div id="card-act2" class="lore-card">
-                    <div class="lore-video">
-                        <a href="https://www.twitch.tv/videos/2666617364" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt2.webp'), url('img/lore/akt2.png');">
-                            <span class="play-btn">▶</span>
-                            <div class="video-overlay">Смотреть Акт II</div>
-                        </a>
-                    </div>
-                    <div class="lore-content">
-                        <h3 class="lore-title">Акт II: Папка с секретами</h3>
-                        <p class="lore-desc">
-                            Мистер Б. Окс гордо анализирует собранные чатом теории, запуская игру «Правда или Ложь». Но внезапно всплывают анонимные улики и странные звонки в студию, прямо указывающие на причастность самого Б. Окса к похищению! Впав в панику, ведущий пытается всё отрицать. Ситуация накаляется, когда Ботглорп взламывает систему защиты студии, и трансляция экстренно обрывается.
-                        </p>
-                    </div>
-                </div>
-
-                <div id="card-act3" class="lore-card">
-                    <div class="lore-video">
-                        <a href="https://www.twitch.tv/videos/2666618658" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt3.webp'), url('img/lore/akt3.png');">
-                            <span class="play-btn">▶</span>
-                            <div class="video-overlay">Смотреть Акт III</div>
-                        </a>
-                    </div>
-                    <div class="lore-content">
-                        <h3 class="lore-title">Акт III: Судьбоносный код</h3>
-                        <p class="lore-desc">
-                            Юрумми и Ботглорп по комиксам отслеживают сигнал до главного компьютера Б. Окса. Чат проникает в систему и находит запечатанные файлы с мольбой
-                            <span class="char-tooltip">Фурумми
-                                <span class="tooltip-content">
-                                    <picture><source srcset="img/lore/БУУУУУМ.webp" type="image/webp"><img src="img/lore/БУУУУУМ.png" alt="Фурумми" loading="lazy"></picture>
-                                    <strong>Фурумми</strong>
-                                    <span>Милая кошкодевочка и альтер-эго. Её истинная сила и намерения долгое время оставались загадкой.</span>
-                                </span>
-                            </span>
-                            о спасении. Появляется сам Б. Окс, уверяя, что запечатал её ради нашей же безопасности. После эпичного босс-файта через чат-команды злодей повержен. Перед зрителями встаёт выбор: <strong>Стереть файлы</strong> или <strong>Сохранить Фурумми</strong>. Чат выбирает сохранение... и Фурумми перехватывает контроль над реальностью.
-                        </p>
-                    </div>
-                </div>
-
-                <div id="card-act4" class="lore-card">
-                    <div class="lore-video">
-                        <a href="https://www.twitch.tv/videos/2790091850" target="_blank" class="video-placeholder" style="background-image: url('img/lore/maid.webp'), url('img/lore/maid.png');">
-                            <span class="play-btn">▶</span>
-                            <div class="video-overlay" style="border-color:#a855f7;">Секретный Ивент</div>
-                        </a>
-                    </div>
-                    <div class="lore-content">
-                        <h3 class="lore-title" style="color:#a855f7;">Вирус Горничной</h3>
-                        <p class="lore-desc">
-                            Последствия выбора чата не заставили себя ждать. Эфир был заражён таинственным «вирусом», который полностью изменил реальность. На экране появилась Фурумми в костюме горничной, окончательно закрепив свою власть над каналом. Юрумми с коробкой больше не выходит на связь в прежнем виде. Новая эра официально началась.
-                        </p>
-                    </div>
-                </div>
-
-                <div id="card-sonic" class="lore-card" style="align-items: flex-start;">
-                    <div class="lore-video">
-                        <!-- Плейсхолдер для Соника -->
-                        <div class="video-placeholder" style="background-image: url('img/lore/Sonic-marathon.webp'), url('img/lore/Sonic-marathon.png');">
-                            <div class="video-overlay" style="background: rgba(0,0,0,0.7);">МАРАФОН СОНИКА ч1</div>
+                        <div class="video-placeholder" style="background-image: url('img/lore/fnaf-cover.jpg');" title="Марафон FNAF">
+                            <div class="video-overlay">Марафон • Игры</div>
                         </div>
                     </div>
                     <div class="lore-content">
-                        <h3 class="lore-title" style="color:#00d2ff;">Марафон Соника ч1</h3>
+                        <span class="lore-badge">Игровой марафон · До трилогии</span>
+                        <h3 class="lore-title">Ночной кошмар: Марафон FNAF</h3>
                         <p class="lore-desc">
-                            Мы начали грандиозный марафон по играм серии Sonic, но из-за непредвиденных технических сложностей его пришлось временно отложить. Но на этом сониковский контент не закончился!
+                            Легендарный хоррор-марафон ещё до событий сюжетной трилогии: стример решился на глобальное испытание и прошёл все части культовой франшизы Five Nights at Freddy’s (все номерные игры за исключением VR-версий). Ночные смены в пиццерии, разбор скриптов аниматроников, тонны скримеров и бессонные часы перед мониторами. Итоговый ролик для YouTube всё ещё на монтаже, но сам марафон — уже часть золотой истории стримов!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Сага «Юрумми / Фурумми» (Трилогия: Акты I–III в раскрывающейся капсуле) -->
+                <div id="card-trilogy" class="lore-trilogy-block">
+                    <!-- Заглавная карточка-капсула трилогии -->
+                    <div class="lore-card lore-trilogy-card lore-theme-pink" onclick="window.toggleTrilogyCapsule(event)">
+                        <div class="lore-video">
+                            <div class="video-placeholder" style="background-image: url('img/lore/trilogy-cover.jpg');" title="Трилогия: Акты I–III">
+                                <div class="video-overlay">Трилогия • 3 Акта</div>
+                            </div>
+                        </div>
+                        <div class="lore-content">
+                            <div class="lore-badge-row">
+                                <span class="lore-badge">Сюжетная трилогия · Основная арка</span>
+                            </div>
+                            <h3 class="lore-title">Сага «Юрумми / Фурумми»</h3>
+                            <p class="lore-desc">
+                                Главная сквозная сюжетная арка, навсегда изменившая судьбу канала: внезапное исчезновение Фурумми, расследование с чатом в прямом эфире, взлом студии и разоблачение Мистера Б. Окса, секретные архивы и финальный хакерский штурм с решающим моральным выбором зрителей.
+                            </p>
+                            <div class="trilogy-action-bar">
+                                <button type="button" class="trilogy-toggle-btn" id="trilogyToggleBtn" onclick="window.toggleTrilogyCapsule(event)">
+                                    <span class="trilogy-toggle-left">
+                                        <span class="btn-text">Развернуть трилогию (3 Акта)</span>
+                                    </span>
+                                    <span class="btn-chevron">▼</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Раскрывающийся лоток-разворот с 3 актами -->
+                    <div class="trilogy-capsule-drawer" id="trilogyCapsuleDrawer">
+                        <!-- 3 внутренних акта в виде вертикальной ветки -->
+                        <div class="trilogy-acts-list">
+                            <!-- Акт I -->
+                            <div id="card-act1" class="lore-card lore-inner-card lore-theme-pink" data-act="act1">
+                                <div class="lore-video">
+                                    <a href="https://www.twitch.tv/videos/2666615999" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt1-cover.jpg');" title="Смотреть Акт I на Twitch">
+                                        <div class="video-overlay">Акт I • VOD</div>
+                                    </a>
+                                </div>
+                                <div class="lore-content">
+                                    <span class="lore-badge">Акт I · Экстренные новости</span>
+                                    <h3 class="lore-title">Экстренные новости</h3>
+                                    <p class="lore-desc">
+                                        Стрим внезапно прерывает экстренный выпуск новостей. Ведущий
+                                        <span class="char-tooltip">Мистер Б. Окс
+                                            <span class="tooltip-content">
+                                                <picture><source srcset="img/lore/mr-boks.webp" type="image/webp"><img src="img/lore/mr-boks.png" alt="Б. Окс" loading="lazy"></picture>
+                                                <strong>Мистер Б. Окс</strong>
+                                                <span>Усатая версия Юрумми. Загадочный ведущий новостей со скрытыми мотивами.</span>
+                                            </span>
+                                        </span>
+                                        объявляет, что Фурумми бесследно пропала, а единственный свидетель — кот-хакер
+                                        <span class="char-tooltip">Ботглорп
+                                            <span class="tooltip-content">
+                                                <picture><source srcset="img/lore/glorp.webp" type="image/webp"><img src="img/lore/glorp.png" alt="Ботглорп" loading="lazy"></picture>
+                                                <strong>Ботглорп</strong>
+                                                <span>Верный кот-помощник и чат-бот. Понимает всё, но говорит только «мяу».</span>
+                                            </span>
+                                        </span>.
+                                        Чату приходится брать расследование в свои руки и собирать зацепки командой <code>!улика</code>.
+                                    </p>
+                                    <a href="https://www.twitch.tv/videos/2666615999" target="_blank" class="lore-watch-btn">
+                                        <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                                        Смотреть запись эфира
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Акт II -->
+                            <div id="card-act2" class="lore-card lore-inner-card lore-theme-pink" data-act="act2">
+                                <div class="lore-video">
+                                    <a href="https://www.twitch.tv/videos/2666617364" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt2-cover.jpg');" title="Смотреть Акт II на Twitch">
+                                        <div class="video-overlay">Акт II • VOD</div>
+                                    </a>
+                                </div>
+                                <div class="lore-content">
+                                    <span class="lore-badge">Акт II · Папка с секретами</span>
+                                    <h3 class="lore-title">Папка с секретами</h3>
+                                    <p class="lore-desc">
+                                        Мистер Б. Окс разбирает версии чата в викторине «Правда или Ложь», но всё идёт не по плану. В студию начинают поступать странные звонки и анонимные улики, указывающие на самого ведущего. Б. Окс паникует и пытается оправдаться, пока Ботглорп взламывает защиту студии — и эфир обрывается помехами.
+                                    </p>
+                                    <a href="https://www.twitch.tv/videos/2666617364" target="_blank" class="lore-watch-btn">
+                                        <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                                        Смотреть запись эфира
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Акт III -->
+                            <div id="card-act3" class="lore-card lore-inner-card lore-theme-purple" data-act="act3">
+                                <div class="lore-video">
+                                    <a href="https://www.twitch.tv/videos/2666618658" target="_blank" class="video-placeholder" style="background-image: url('img/lore/akt3-cover.jpg');" title="Смотреть Акт III на Twitch">
+                                        <div class="video-overlay">Акт III • VOD</div>
+                                    </a>
+                                </div>
+                                <div class="lore-content">
+                                    <span class="lore-badge">Акт III · Развилка судьбы</span>
+                                    <h3 class="lore-title">Судьбоносный код</h3>
+                                    <p class="lore-desc">
+                                        Юрумми и Ботглорп выходят на суперкомпьютер Б. Окса. Внутри файлов обнаруживается просьба
+                                        <span class="char-tooltip">Фурумми
+                                            <span class="tooltip-content">
+                                                <picture><source srcset="img/lore/БУУУУУМ.webp" type="image/webp"><img src="img/lore/БУУУУУМ.png" alt="Фурумми" loading="lazy"></picture>
+                                                <strong>Фурумми</strong>
+                                                <span>Милая кошкодевочка и альтер-эго. Сила её влияния долго скрывалась.</span>
+                                            </span>
+                                        </span>
+                                        о помощи, а после босс-файта перед чатом встаёт главный выбор: <strong>Стереть данные</strong> или <strong>Сохранить Фурумми</strong>. Зрители решают спасти её — и власть на канале переходит к ней.
+                                    </p>
+                                    <a href="https://www.twitch.tv/videos/2666618658" target="_blank" class="lore-watch-btn">
+                                        <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                                        Смотреть запись эфира
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Кнопка сворачивания внизу -->
+                        <div class="trilogy-close-bar">
+                            <button type="button" class="trilogy-close-btn" onclick="window.toggleTrilogyCapsule(event, false)">
+                                ▲ Свернуть разворот трилогии
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вирус Горничной -->
+                <div id="card-act4" class="lore-card lore-theme-purple">
+                    <div class="lore-video">
+                        <a href="https://www.twitch.tv/videos/2790091850" target="_blank" class="video-placeholder" style="background-image: url('img/lore/maid-cover.jpg');" title="Смотреть Спешл на Twitch">
+                            <div class="video-overlay">Спешл • VOD</div>
+                        </a>
+                    </div>
+                    <div class="lore-content">
+                        <span class="lore-badge">Спешл · Новая эра</span>
+                        <h3 class="lore-title">Вирус Горничной</h3>
+                        <p class="lore-desc">
+                            Выбор чата быстро аукнулся. Стрим накрывает странный «вирус горничной»: в кадре появляется горничная с коробкой на голове и гитарой, а Фурумми окончательно закрепляется на канале. Коробка отходит на второй план — начинается эпоха кошкодевочки.
+                        </p>
+                        <a href="https://www.twitch.tv/videos/2790091850" target="_blank" class="lore-watch-btn">
+                            <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                            Смотреть запись эфира
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Марафон Соника -->
+                <div id="card-sonic" class="lore-card lore-theme-blue">
+                    <div class="lore-video">
+                        <div class="video-placeholder" style="background-image: url('img/lore/sonic-cover.jpg');">
+                            <div class="video-overlay">Марафон • Игры</div>
+                        </div>
+                    </div>
+                    <div class="lore-content">
+                        <span class="lore-badge">Игровой марафон · Сайд-квест</span>
+                        <h3 class="lore-title">Марафон Соника ч.1</h3>
+                        <p class="lore-desc">
+                            Был запущен глобальный марафон, в котором мы решили пройти огромную франшизу про синего ежа. Но в какой-то момент стример немного устал от Соника и решил разбить марафон на несколько частей — когда именно выйдет продолжение, пока неизвестно. Зато по пути родился фанатский дубляж мультсериала вместе с Маку!
                         </p>
                         
-                        <!-- Блок с озвучкой (разворачивающийся) -->
-                        <details id="sonic-dubbing-details" style="margin-top: 25px; width: 100%; box-sizing: border-box; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                        <!-- Блок с озвучкой -->
+                        <details id="sonic-dubbing-details" style="width: 100%; box-sizing: border-box; background: #101923; border: 1px solid rgba(0, 168, 255, 0.35); border-radius: 10px; overflow: hidden; margin-top: auto;">
                             <style>
                                 #sonic-dubbing-details summary::after {
                                     content: '▼';
-                                    color: #00d2ff;
-                                    font-size: 1.1rem;
+                                    color: #38bdf8;
+                                    font-size: 0.9rem;
                                     margin-left: auto;
                                     transition: transform 0.3s;
                                 }
@@ -1109,56 +1313,28 @@
                                     display: none;
                                 }
                             </style>
-                            <summary style="background: linear-gradient(90deg, rgba(0,210,255,0.15), transparent); padding: 15px 20px; border-bottom: 1px solid #333; cursor: pointer; list-style: none; outline: none; display: flex; align-items: center; justify-content: space-between;">
-                                <h4 style="color: #00d2ff; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
-                                    🎙️ Секретный Архив: Озвучка
-                                </h4>
+                            <summary style="background: rgba(0, 168, 255, 0.1); padding: 12px 16px; cursor: pointer; list-style: none; outline: none; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(0, 168, 255, 0.2);">
+                                <span style="color: #38bdf8; font-size: 13.5px; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                                    🎙️ Сайд-квест: Озвучка Sonic Boom (2 серии)
+                                </span>
                             </summary>
                             
-                            <div style="padding: 20px;">
-                                <p style="margin-top: 0; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; line-height: 1.6;">Мы с Маку решили сделать фанатскую озвучку двух случайных серий мультсериала! Видео хранятся в архиве Google Диска, чтобы избежать блокировок. <br>Кстати, все наши секретные материалы иногда всплывают в <a href="https://t.me/yurummiplums" target="_blank" style="color: #00d2ff; text-decoration: underline;">Секретном Архиве (Telegram)</a>.</p>
+                            <div style="padding: 16px;">
+                                <p style="margin-top: 0; margin-bottom: 14px; font-size: 13.5px; color: #cbd5e1; line-height: 1.5;">Фанатская озвучка двух серий от Юрумми и Маку! Видео сохранены в облаке Google Диска. <a href="https://t.me/yurummiplums" target="_blank" style="color: #38bdf8; text-decoration: underline;">Секретный Архив TG</a>.</p>
                                 
-                                <script>
-                                function switchNewsSonicEpisode(btn, url, castHTML) {
-                                    document.getElementById('news-sonic-player').src = url;
-                                    document.getElementById('news-sonic-cast-content').innerHTML = castHTML;
-                                    var btns = document.querySelectorAll('.news-ep-btn');
-                                    btns.forEach(b => {
-                                        b.style.background = 'transparent';
-                                        b.style.color = '#333';
-                                    });
-                                    btn.style.background = '#333';
-                                    btn.style.color = '#e8e4d9';
-                                }
-                                function switchSonicEpisode(btn, url, castHTML) {
-                                    document.getElementById('sonic-player').src = url;
-                                    document.getElementById('sonic-cast-content').innerHTML = castHTML;
-                                    var btns = document.querySelectorAll('.sonic-ep-btn');
-                                    btns.forEach(b => {
-                                        b.style.background = 'rgba(0, 210, 255, 0.1)';
-                                        b.style.color = '#00d2ff';
-                                    });
-                                    btn.style.background = '#00d2ff';
-                                    btn.style.color = '#000';
-                                }
-                                </script>
-                                
-                                <!-- Переключатель серий -->
-                                <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-                                    <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Соник<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Эми')" style="background: #00d2ff; color: #000; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px;">Лихорадка в хижине</button>
-                                    
-                                    <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Тейлз<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Зоуи и Эггман')" style="background: rgba(0, 210, 255, 0.1); color: #00d2ff; border: 1px solid #00d2ff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px;">Влюблённый Тейлз</button>
+                                <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                                    <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Соник<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Эми')" style="background: #00a8ff; color: #05111a; border: 1px solid #00a8ff; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12.5px;">Серия 1: Лихорадка</button>
+                                    <button class="sonic-ep-btn" onclick="switchSonicEpisode(this, 'https://drive.google.com/file/d/1FkG0Tf6tRnjSSib7fjv0dhNiy410M9xO/preview', '<span style=&quot;color: #ff3385;&quot;>Юрумми:</span> Тейлз<br><span style=&quot;color: #a855f7;&quot;>Маку:</span> Зоуи и Эггман')" style="background: rgba(0, 168, 255, 0.12); color: #38bdf8; border: 1px solid rgba(0, 168, 255, 0.45); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12.5px;">Серия 2: Влюблённый Тейлз</button>
                                 </div>
                                 
-                                <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                                <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 6px; overflow: hidden; border: 1px solid rgba(0, 168, 255, 0.25);">
                                     <iframe id="sonic-player" src="https://drive.google.com/file/d/1LJaWORxwG5TOUihDNP9wV64w2km7WZ-7/preview" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" style="position: absolute; top: 0; left: 0;"></iframe>
                                 </div>
                                 
-                                <div id="sonic-cast" style="margin-top: 20px; font-size: 0.95rem; text-align: left; padding: 15px; background: rgba(0, 0, 0, 0.2); border: 1px solid #333; border-left: 3px solid #00d2ff; border-radius: 8px; line-height: 1.6;">
-                                    <strong style="color: #00d2ff; display: block; margin-bottom: 8px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">🎙️ Роли озвучивали</strong>
+                                <div id="sonic-cast" style="margin-top: 12px; font-size: 12.5px; padding: 10px 14px; background: rgba(0,0,0,0.4); border-left: 3px solid #00a8ff; border-radius: 6px; color: #cbd5e1;">
+                                    <strong style="color: #38bdf8; display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase;">🎙️ Роли озвучивали:</strong>
                                     <div id="sonic-cast-content">
-                                        <span style="color: #ff3385;">Юрумми:</span> Соник<br>
-                                        <span style="color: #a855f7;">Маку:</span> Эми
+                                        <span style="color: #ff3385;">Юрумми:</span> Соник &nbsp;|&nbsp; <span style="color: #a855f7;">Маку:</span> Эми
                                     </div>
                                 </div>
                             </div>
@@ -1166,51 +1342,26 @@
                     </div>
                 </div>
 
-                <div id="card-taro" class="lore-card">
+                <!-- Гадания на Таро -->
+                <div id="card-taro" class="lore-card lore-theme-gold">
                     <div class="lore-video">
-                        <a href="https://www.twitch.tv/videos/2916366168" target="_blank" class="video-placeholder" style="background-image: url('img/lore/ТАРО.webp'), url('img/lore/ТАРО.png');">
-                            <span class="play-btn">▶</span>
-                            <div class="video-overlay" style="border-color:#ff3385;">Гадания на картах Таро</div>
+                        <a href="https://www.twitch.tv/videos/2916366168" target="_blank" class="video-placeholder" style="background-image: url('img/lore/taro-cover.jpg');" title="Смотреть Таро-стрим на Twitch">
+                            <div class="video-overlay">Таро • VOD</div>
                         </a>
                     </div>
                     <div class="lore-content">
-                        <h3 class="lore-title" style="color:#ff3385;">Гадания на картах Таро</h3>
+                        <span class="lore-badge">Интерактив · Таро-стрим</span>
+                        <h3 class="lore-title">Гадания на картах Таро</h3>
                         <p class="lore-desc">
-                            Мы гадали на картах Таро для подписчиков и всё это было в комичной форме подано. Было видно так же мои ручки с маникюром.
+                            Мистический вечер при свечах, где древние арканы приоткрывали завесу тайны над судьбами зрителей... правда, со здоровой долей самоиронии. Тематический стрим с комичными раскладами на картах Таро для подписчиков, где будущее чата предсказывал загадочный оракул с картонной коробкой на голове.
                         </p>
+                        <a href="https://www.twitch.tv/videos/2916366168" target="_blank" class="lore-watch-btn">
+                            <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                            Смотреть запись эфира
+                        </a>
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!--  КОМАНДЫ ЧАТА                              -->
-    <!-- ========================================== -->
-    <section id="commands">
-        <div class="content-container">
-            <h2 class="section-title">Команды чата</h2>
-            <div class="command-group">
-                <details>
-                    <summary>🌐 Полезные ссылки</summary>
-                    <div class="command-content">
-                        <div class="cmd-item"><span class="cmd-name">!тг</span><span class="cmd-desc">Ссылка на мой Telegram канал.</span></div>
-                        <div class="cmd-item"><span class="cmd-name">!ютуб</span><span class="cmd-desc">Ссылка на мой YouTube канал.</span></div>
-                        <div class="cmd-item"><span class="cmd-name">!дискорд</span><span class="cmd-desc">Присоединиться к нашему серверу.</span></div>
-                        <div class="cmd-item"><span class="cmd-name">!сайт</span><span class="cmd-desc">Ссылка на этот сайт со всей инфой.</span></div>
-                        <div class="cmd-item"><span class="cmd-name">!онлифанс</span><span class="cmd-desc">Мои самые красивые фото.</span></div>
-                    </div>
-                </details>
-            </div>
-            <div class="command-group">
-                <details>
-                    <summary>🎮 Игры с чатом</summary>
-                    <div class="command-content">
-                        <div class="cmd-item"><span class="cmd-name">!seppuku</span><span class="cmd-desc">Отправит тебя в таймаут на 60 секунд. На свой страх и риск! ⚔️</span></div>
-                        <div class="cmd-item"><span class="cmd-name">!topseppuku</span><span class="cmd-desc">Показывает лидеров по количеству прописанных !seppuku.</span></div>
-                    </div>
-                </details>
             </div>
         </div>
     </section>
@@ -1222,7 +1373,7 @@
         <div class="content-container">
             <h2 class="section-title">Соцсети &amp; Ссылки</h2>
             <p class="section-intro" style="margin-bottom: 30px;">
-                Здесь собраны все актуальные соцсети, каналы и контакты. Заглядывай пообщаться, следить за анонсами или поддержать творчество! ✨
+                Все мои площадки, соцсети и контакты в одном месте. Заглядывай пообщаться и следить за анонсами!
             </p>
             <div class="donate-wrapper">
                 <div class="links-grid">
@@ -1309,6 +1460,20 @@
         </div>
     </section>
 
+    <!-- Футер сайта -->
+    <footer style="text-align: center; padding: 35px 20px 45px; border-top: 1px solid rgba(255, 255, 255, 0.08); background: #0c0a09; color: #777; font-size: 13px;">
+        <p style="margin: 0;">Официальный сайт стримера Yurummi 📦</p>
+        <div id="local-legacy-link" style="display: none; margin-top: 10px;">
+            <a href="index-legacy.html" style="color: #999; text-decoration: none; border-bottom: 1px dashed #666; padding-bottom: 2px; transition: color 0.2s;" onmouseover="this.style.color='#ff3385'" onmouseout="this.style.color='#999'" title="Открыть локальную архивную версию сайта">⏳ Предыдущая версия сайта (локальный архив)</a>
+        </div>
+        <script>
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
+                var lll = document.getElementById('local-legacy-link');
+                if (lll) lll.style.display = 'block';
+            }
+        </script>
+    </footer>
+
     <!-- Сообщение режима seppuku -->
     <div class="seppuku-message">
         Сайт отправился в таймаут! ⚔️<br>
@@ -1331,103 +1496,334 @@
 
     <script>
     // --- LORE INTERACTIVE NETWORK ---
+    window.loreNetwork = null;
+    window.loreNetworkNodes = null;
+    window.loreNetworkEdges = null;
+    window.isLoreNetworkTrilogyOpen = false;
+
+    // --- ТРИЛОГИЯ: МЕХАНИКА КАПСУЛЫ (КИНДЕР-СЮРПРИЗ) ---
+    window.toggleTrilogyCapsule = function(event, forceState) {
+        if (event) {
+            // Разрешаем клик только по кнопкам раскрытия/сворачивания
+            var isToggleTrigger = event.target.closest('#trilogyToggleBtn') || event.target.closest('.trilogy-close-btn');
+            if (event.target.closest('a') || (event.target.closest('button') && !isToggleTrigger)) {
+                return;
+            }
+            event.stopPropagation();
+        }
+        var block = document.getElementById('card-trilogy');
+        if (!block) return;
+        
+        var shouldOpen;
+        if (typeof forceState === 'boolean') {
+            shouldOpen = forceState;
+        } else {
+            shouldOpen = !block.classList.contains('is-open');
+        }
+        
+        var btn = document.getElementById('trilogyToggleBtn');
+        if (shouldOpen) {
+            block.classList.add('is-open');
+            if (btn) {
+                var textEl = btn.querySelector('.btn-text');
+                if (textEl) textEl.textContent = 'Свернуть разворот трилогии';
+            }
+            if (window.setLoreNetworkTrilogyState) {
+                window.setLoreNetworkTrilogyState(true);
+            }
+        } else {
+            block.classList.remove('is-open');
+            if (btn) {
+                var textEl = btn.querySelector('.btn-text');
+                if (textEl) textEl.textContent = 'Развернуть трилогию (3 Акта)';
+            }
+            if (window.setLoreNetworkTrilogyState) {
+                window.setLoreNetworkTrilogyState(false);
+            }
+        }
+    };
+
+    window.openTrilogyCapsule = function() {
+        var block = document.getElementById('card-trilogy');
+        if (block && !block.classList.contains('is-open')) {
+            window.toggleTrilogyCapsule(null, true);
+        }
+    };
+
+    window.filterTrilogyAct = function(actId) {
+        window.openTrilogyCapsule();
+    };
+
+    // --- ДИНАМИЧЕСКИЕ СОСТОЯНИЯ ЛИНИИ МЕТРО (СХЕМА: РИСУНОК 3) ---
+    function getClosedMetroNodes() {
+        return [
+            { id: 'intro', label: 'Начало\n(Изгнание)', image: 'img/lore/intro-bg.webp', shape: 'circularImage', size: 30, color: { border: '#94a3b8', background: '#181615', highlight: { border: '#e2e8f0', background: '#181615' } }, x: 50, y: 140, fixed: true },
+            { id: 'fnaf', label: 'Марафон\nFNAF', image: 'img/lore/fnaf-cover.jpg', shape: 'circularImage', size: 32, color: { border: '#f59e0b', background: '#181615', highlight: { border: '#ffffff', background: '#f59e0b' } }, x: 200, y: 140, fixed: true },
+            { id: 'trilogy', label: 'Трилогия:\nЮрумми / Фурумми', image: 'img/lore/trilogy-cover.jpg', shape: 'circularImage', size: 40, color: { border: '#ff3385', background: '#181615', hover: { border: '#ffffff', background: '#ff3385' }, highlight: { border: '#ffffff', background: '#ff3385' } }, x: 370, y: 140, fixed: true },
+            
+            // Развилка судьбы
+            { id: 'dead', label: '❌ Стереть данные', shape: 'box', color: { background: '#1c1917', border: '#ef4444' }, font: { color: '#f87171', size: 12 }, x: 550, y: 55, fixed: true },
+            { id: 'act4_save', label: '💜 Сохранить Фурумми\n[Выбор чата]', shape: 'box', color: { background: '#2e1065', border: '#a855f7' }, font: { color: '#f3e8ff', size: 12 }, x: 550, y: 225, fixed: true },
+            
+            // Ветка после спасения
+            { id: 'maid', label: 'Вирус\nГорничной', image: 'img/lore/maid-cover.jpg', shape: 'circularImage', size: 34, color: { border: '#a855f7', background: '#181615', highlight: { border: '#ffffff', background: '#a855f7' } }, x: 710, y: 225, fixed: true },
+            { id: 'sonic', label: 'Марафон\nСоника ч.1', image: 'img/lore/sonic-cover.jpg', shape: 'circularImage', size: 32, color: { border: '#00a8ff', background: '#181615', highlight: { border: '#ffffff', background: '#00a8ff' } }, x: 860, y: 225, fixed: true },
+            { id: 'sonic_dub', label: '🎙️ Сайд-квест:\nОзвучка Sonic', shape: 'box', color: { background: '#0c2438', border: '#00a8ff' }, font: { color: '#38bdf8', size: 11 }, x: 860, y: 320, fixed: true },
+            { id: 'taro', label: 'Интерактив\nГадания на Таро', image: 'img/lore/taro-cover.jpg', shape: 'circularImage', size: 32, color: { border: '#f59e0b', background: '#181615', highlight: { border: '#ffffff', background: '#f59e0b' } }, x: 1010, y: 225, fixed: true },
+            { id: 'future', label: '✨ ???\nСкоро...', shape: 'dot', color: '#a855f7', size: 16, x: 1140, y: 225, fixed: true }
+        ];
+    }
+
+    function getClosedMetroEdges() {
+        return [
+            { from: 'intro', to: 'fnaf', color: {color: '#f59e0b'}, width: 3, smooth: false },
+            { from: 'fnaf', to: 'trilogy', color: {color: '#ff3385'}, width: 3.5, smooth: false },
+            { from: 'trilogy', to: 'dead', color: {color: '#ef4444'}, dashes: [6, 4], width: 2, smooth: { type: 'cubicBezier', forceDirection: 'horizontal', roundness: 0.4 } },
+            { from: 'trilogy', to: 'act4_save', color: {color: '#c084fc'}, width: 3, smooth: { type: 'cubicBezier', forceDirection: 'horizontal', roundness: 0.4 } },
+            { from: 'act4_save', to: 'maid', color: {color: '#c084fc'}, width: 3, smooth: false },
+            { from: 'maid', to: 'sonic', color: {color: '#c084fc'}, width: 3, smooth: false },
+            { from: 'sonic', to: 'sonic_dub', color: {color: '#00a8ff'}, dashes: [5, 4], width: 2.5, smooth: false },
+            { from: 'sonic', to: 'taro', color: {color: '#c084fc'}, width: 3, smooth: false },
+            { from: 'taro', to: 'future', color: {color: '#a855f7'}, dashes: [6, 4], width: 2, smooth: false }
+        ];
+    }
+
+    function getOpenMetroNodes() {
+        return [
+            { id: 'intro', label: 'Начало\n(Изгнание)', image: 'img/lore/intro-bg.webp', shape: 'circularImage', size: 30, color: { border: '#94a3b8', background: '#181615', highlight: { border: '#e2e8f0', background: '#181615' } }, x: 50, y: 140, fixed: true },
+            { id: 'fnaf', label: 'Марафон\nFNAF', image: 'img/lore/fnaf-cover.jpg', shape: 'circularImage', size: 32, color: { border: '#f59e0b', background: '#181615', highlight: { border: '#ffffff', background: '#f59e0b' } }, x: 190, y: 140, fixed: true },
+            
+            // Левая половинка капсулы (скорлупка)
+            { id: 'trilogy_left', label: '◐ Свернуть', shape: 'box', color: { background: '#2d1424', border: '#ff3385' }, font: { color: '#ff80b3', size: 12, bold: true }, x: 310, y: 140, fixed: true },
+            
+            // 3 внутренних акта
+            { id: 'act1', label: 'Акт I\nЭкстренный эфир', image: 'img/lore/akt1-cover.jpg', shape: 'circularImage', size: 28, color: { border: '#ff3385', background: '#181615', highlight: { border: '#ffffff', background: '#ff3385' } }, x: 420, y: 140, fixed: true },
+            { id: 'act2', label: 'Акт II\nСекреты студии', image: 'img/lore/akt2-cover.jpg', shape: 'circularImage', size: 28, color: { border: '#ff3385', background: '#181615', highlight: { border: '#ffffff', background: '#ff3385' } }, x: 535, y: 140, fixed: true },
+            { id: 'act3', label: 'Акт III\nСудьбоносный код', image: 'img/lore/akt3-cover.jpg', shape: 'circularImage', size: 32, color: { border: '#a855f7', background: '#181615', highlight: { border: '#ffffff', background: '#a855f7' } }, x: 650, y: 140, fixed: true },
+            
+            // Правая половинка капсулы (скорлупка)
+            { id: 'trilogy_right', label: '◑ Свернуть', shape: 'box', color: { background: '#2d1424', border: '#ff3385' }, font: { color: '#ff80b3', size: 12, bold: true }, x: 755, y: 140, fixed: true },
+            
+            // Развилка судьбы
+            { id: 'dead', label: '❌ Стереть данные', shape: 'box', color: { background: '#1c1917', border: '#ef4444' }, font: { color: '#f87171', size: 12 }, x: 915, y: 55, fixed: true },
+            { id: 'act4_save', label: '💜 Сохранить Фурумми\n[Выбор чата]', shape: 'box', color: { background: '#2e1065', border: '#a855f7' }, font: { color: '#f3e8ff', size: 12 }, x: 915, y: 225, fixed: true },
+            
+            // Ветка после спасения
+            { id: 'maid', label: 'Вирус\nГорничной', image: 'img/lore/maid-cover.jpg', shape: 'circularImage', size: 34, color: { border: '#a855f7', background: '#181615', highlight: { border: '#ffffff', background: '#a855f7' } }, x: 1075, y: 225, fixed: true },
+            { id: 'sonic', label: 'Марафон\nСоника ч.1', image: 'img/lore/sonic-cover.jpg', shape: 'circularImage', size: 32, color: { border: '#00a8ff', background: '#181615', highlight: { border: '#ffffff', background: '#00a8ff' } }, x: 1225, y: 225, fixed: true },
+            { id: 'sonic_dub', label: '🎙️ Сайд-квест:\nОзвучка Sonic', shape: 'box', color: { background: '#0c2438', border: '#00a8ff' }, font: { color: '#38bdf8', size: 11 }, x: 1225, y: 320, fixed: true },
+            { id: 'taro', label: 'Интерактив\nГадания на Таро', image: 'img/lore/taro-cover.jpg', shape: 'circularImage', size: 32, color: { border: '#f59e0b', background: '#181615', highlight: { border: '#ffffff', background: '#f59e0b' } }, x: 1375, y: 225, fixed: true },
+            { id: 'future', label: '✨ ???\nСкоро...', shape: 'dot', color: '#a855f7', size: 16, x: 1505, y: 225, fixed: true }
+        ];
+    }
+
+    function getOpenMetroEdges() {
+        return [
+            { from: 'intro', to: 'fnaf', color: {color: '#f59e0b'}, width: 3, smooth: false },
+            { from: 'fnaf', to: 'trilogy_left', color: {color: '#ff3385'}, width: 3, smooth: false },
+            { from: 'trilogy_left', to: 'act1', color: {color: '#ff3385'}, width: 2.5, smooth: false },
+            { from: 'act1', to: 'act2', color: {color: '#ff3385'}, width: 2.5, smooth: false },
+            { from: 'act2', to: 'act3', color: {color: '#ff3385'}, width: 2.5, smooth: false },
+            { from: 'act3', to: 'trilogy_right', color: {color: '#a855f7'}, width: 2.5, smooth: false },
+            { from: 'trilogy_right', to: 'dead', color: {color: '#ef4444'}, dashes: [6, 4], width: 2, smooth: { type: 'cubicBezier', forceDirection: 'horizontal', roundness: 0.4 } },
+            { from: 'trilogy_right', to: 'act4_save', color: {color: '#c084fc'}, width: 3, smooth: { type: 'cubicBezier', forceDirection: 'horizontal', roundness: 0.4 } },
+            { from: 'act4_save', to: 'maid', color: {color: '#c084fc'}, width: 3, smooth: false },
+            { from: 'maid', to: 'sonic', color: {color: '#c084fc'}, width: 3, smooth: false },
+            { from: 'sonic', to: 'sonic_dub', color: {color: '#00a8ff'}, dashes: [5, 4], width: 2.5, smooth: false },
+            { from: 'sonic', to: 'taro', color: {color: '#c084fc'}, width: 3, smooth: false },
+            { from: 'taro', to: 'future', color: {color: '#a855f7'}, dashes: [6, 4], width: 2, smooth: false }
+        ];
+    }
+
+    window.setLoreNetworkTrilogyState = function(isOpen) {
+        if (!window.loreNetworkNodes || !window.loreNetworkEdges || window.isLoreNetworkTrilogyOpen === isOpen) return;
+        window.isLoreNetworkTrilogyOpen = isOpen;
+        
+        var newNodes = isOpen ? getOpenMetroNodes() : getClosedMetroNodes();
+        var newEdges = isOpen ? getOpenMetroEdges() : getClosedMetroEdges();
+        
+        window.loreNetworkNodes.clear();
+        window.loreNetworkNodes.add(newNodes);
+        window.loreNetworkEdges.clear();
+        window.loreNetworkEdges.add(newEdges);
+        
+        if (window.loreNetwork) {
+            window.loreNetwork.fit({
+                animation: {
+                    duration: 400,
+                    easingFunction: 'easeInOutQuad'
+                }
+            });
+        }
+    };
+
     document.addEventListener("DOMContentLoaded", function() {
         if (!document.getElementById('lore-network-container')) return;
         
-        var nodes = new vis.DataSet([
-            { id: 'intro', label: 'Начало', shape: 'dot', color: '#ff3385', size: 15 },
-            { id: 'act1', label: 'Акт I\nИИ', image: 'img/lore/akt1.webp', shape: 'circularImage', size: 30 },
-            { id: 'act2', label: 'Акт II\nЗащита', image: 'img/lore/akt2.webp', shape: 'circularImage', size: 30 },
-            { id: 'act3', label: 'Акт III\nСудьба', image: 'img/lore/akt3.webp', shape: 'circularImage', size: 30 },
-            { id: 'dead', label: 'Стереть\nданные', shape: 'dot', color: '#444', size: 15 },
-            { id: 'act4_save', label: 'Сохранить\nФурумми', shape: 'dot', color: '#a855f7', size: 15 },
-            { id: 'maid', label: 'Вирус\nГорничной', image: 'img/lore/maid.webp', shape: 'circularImage', size: 35 },
-            { id: 'sonic', label: 'Марафон\nСоника ч1', image: 'img/lore/Sonic-marathon.webp', shape: 'circularImage', size: 30 },
-            { id: 'sonic_dub', label: 'Озвучка\nСоник Бум', shape: 'box', color: '#0055ff', font: {color: '#fff'} },
-            { id: 'taro', label: 'Гадания\nна Таро', image: 'img/lore/ТАРО.webp', shape: 'circularImage', size: 30 },
-            { id: 'future', label: '???\n(Загрузка...)', shape: 'dot', color: '#555', size: 15 }
-        ]);
-
-        var edges = new vis.DataSet([
-            { from: 'intro', to: 'act1', color: {color: '#ff3385'} },
-            { from: 'act1', to: 'act2', color: {color: '#ff3385'} },
-            { from: 'act2', to: 'act3', color: {color: '#ff3385'} },
-            { from: 'act3', to: 'dead', color: {color: '#444'}, dashes: true },
-            { from: 'act3', to: 'act4_save', color: {color: '#a855f7'} },
-            { from: 'act4_save', to: 'maid', color: {color: '#a855f7'} },
-            { from: 'maid', to: 'sonic', color: {color: '#a855f7'} },
-            { from: 'sonic', to: 'sonic_dub', color: {color: '#00d2ff'}, dashes: true },
-            { from: 'sonic', to: 'taro', color: {color: '#a855f7'} },
-            { from: 'taro', to: 'future', color: {color: '#555'}, dashes: true }
-        ]);
+        window.loreNetworkNodes = new vis.DataSet(getClosedMetroNodes());
+        window.loreNetworkEdges = new vis.DataSet(getClosedMetroEdges());
 
         var container = document.getElementById('lore-network-container');
-        var data = { nodes: nodes, edges: edges };
+        var data = { nodes: window.loreNetworkNodes, edges: window.loreNetworkEdges };
         var options = {
+            physics: false,
             nodes: {
-                borderWidth: 2,
+                borderWidth: 3,
                 borderWidthSelected: 4,
-                font: { color: '#ffffff', size: 14, strokeWidth: 3, strokeColor: '#000000' }
-            },
-            edges: {
-                width: 2,
-                smooth: { type: 'continuous' }
-            },
-            physics: {
-                solver: 'forceAtlas2Based',
-                forceAtlas2Based: {
-                    gravitationalConstant: -100,
-                    centralGravity: 0.01,
-                    springLength: 100,
-                    springConstant: 0.08
-                },
-                maxVelocity: 50,
-                minVelocity: 0.1,
-                timestep: 0.5
+                color: { border: '#ff3385', background: '#181615', highlight: { border: '#ffffff', background: '#ff3385' } },
+                font: { color: '#ffffff', size: 13, face: 'system-ui, -apple-system, sans-serif', strokeWidth: 3, strokeColor: '#0a0a0a' }
             },
             interaction: {
                 hover: true,
                 zoomView: true,
-                dragView: true
+                dragView: true,
+                dragNodes: false
             }
         };
-        var network = new vis.Network(container, data, options);
+        window.loreNetwork = new vis.Network(container, data, options);
 
-        // Click event to scroll to cards
-        network.on("click", function (params) {
+        // Auto-fit on initial render
+        window.loreNetwork.once("afterDrawing", function() {
+            window.loreNetwork.fit({ animation: false });
+        });
+
+        // --- ДЕЛИКАТНАЯ ПУЛЬСАЦИЯ ЦЕЛЬНОЙ НОДЫ ТРИЛОГИИ (СИГНАЛ КЛИКАБЕЛЬНОЙ КНОПКИ) ---
+        var isTrilogyHovered = false;
+        window.loreNetwork.on("hoverNode", function(params) {
+            container.style.cursor = "pointer";
+            if (params.node === 'trilogy') {
+                isTrilogyHovered = true;
+            }
+        });
+        window.loreNetwork.on("blurNode", function(params) {
+            container.style.cursor = "default";
+            if (params.node === 'trilogy') {
+                isTrilogyHovered = false;
+            }
+        });
+
+        // 1. Отрисовка под нодой: мягкий дышащий неоновый ореол и деликатные волны-радары
+        window.loreNetwork.on("beforeDrawing", function(ctx) {
+            if (!window.loreNetwork || window.isLoreNetworkTrilogyOpen) return;
+            try {
+                var pos = window.loreNetwork.getPositions(['trilogy']);
+                if (!pos || !pos.trilogy || typeof pos.trilogy.x !== 'number') return;
+                
+                var x = pos.trilogy.x;
+                var y = pos.trilogy.y;
+                var nodeRadius = 40;
+                var now = performance.now();
+
+                // Плавное мягкое дыхание (период ~2.6 сек)
+                var breathe = (Math.sin(now * 0.0024) + 1) / 2; // 0..1
+                var auraRadius = nodeRadius + 5 + breathe * 9;  // 45..54px
+
+                ctx.save();
+                // Мягкий неоновый градиент ореола
+                var auraGrad = ctx.createRadialGradient(x, y, nodeRadius - 8, x, y, auraRadius);
+                var baseAlpha = isTrilogyHovered ? 0.52 : 0.32;
+                auraGrad.addColorStop(0, 'rgba(255, 51, 133, ' + (baseAlpha + breathe * 0.22) + ')');
+                auraGrad.addColorStop(0.5, 'rgba(255, 70, 150, ' + ((baseAlpha * 0.5) + breathe * 0.14) + ')');
+                auraGrad.addColorStop(1, 'rgba(255, 51, 133, 0)');
+
+                ctx.fillStyle = auraGrad;
+                ctx.beginPath();
+                ctx.arc(x, y, auraRadius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Расходящиеся деликатные кольца (beacon waves)
+                var period = 2600;
+                for (var i = 0; i < 2; i++) {
+                    var offset = (now + i * 1300) % period;
+                    var progress = offset / period; // 0..1
+                    var rippleRadius = nodeRadius + progress * 22; // 40..62px
+                    var rippleAlpha = Math.sin(progress * Math.PI) * (isTrilogyHovered ? 0.55 : 0.38) * (1 - progress * 0.5);
+
+                    if (rippleAlpha > 0.02) {
+                        ctx.beginPath();
+                        ctx.arc(x, y, rippleRadius, 0, Math.PI * 2);
+                        ctx.strokeStyle = 'rgba(255, 100, 175, ' + rippleAlpha + ')';
+                        ctx.lineWidth = 1.6 * (1 - progress * 0.4);
+                        ctx.stroke();
+                    }
+                }
+                ctx.restore();
+            } catch(e) {}
+        });
+
+        // 2. Отрисовка поверх ноды: легкое мерцание контура
+        window.loreNetwork.on("afterDrawing", function(ctx) {
+            if (!window.loreNetwork || window.isLoreNetworkTrilogyOpen) return;
+            try {
+                var pos = window.loreNetwork.getPositions(['trilogy']);
+                if (!pos || !pos.trilogy || typeof pos.trilogy.x !== 'number') return;
+                
+                var x = pos.trilogy.x;
+                var y = pos.trilogy.y;
+                var now = performance.now();
+                var breathe = (Math.sin(now * 0.0024) + 1) / 2;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, y, 40, 0, Math.PI * 2);
+                ctx.lineWidth = 2.5 + (isTrilogyHovered ? 1.5 : breathe * 1.2);
+                ctx.strokeStyle = isTrilogyHovered 
+                    ? 'rgba(255, 255, 255, 0.85)' 
+                    : 'rgba(255, 130, 185, ' + (0.3 + breathe * 0.4) + ')';
+                ctx.shadowColor = '#ff3385';
+                ctx.shadowBlur = (isTrilogyHovered ? 14 : 7) + breathe * 8;
+                ctx.stroke();
+                ctx.restore();
+            } catch(e) {}
+        });
+
+        // 3. Анимационный цикл с авто-паузой при уходе из зоны видимости
+        var isLoreContainerVisible = true;
+        if ('IntersectionObserver' in window) {
+            var loreObserver = new IntersectionObserver(function(entries) {
+                isLoreContainerVisible = entries[0].isIntersecting;
+            }, { threshold: 0.05 });
+            loreObserver.observe(container);
+        }
+
+        function stepTrilogyPulse() {
+            if (window.loreNetwork && !window.isLoreNetworkTrilogyOpen && isLoreContainerVisible && !document.hidden) {
+                window.loreNetwork.redraw();
+            }
+            requestAnimationFrame(stepTrilogyPulse);
+        }
+        requestAnimationFrame(stepTrilogyPulse);
+
+        // Click event to interact with nodes
+        window.loreNetwork.on("click", function (params) {
             if (params.nodes.length > 0) {
                 var nodeId = params.nodes[0];
-                var cardMap = {
-                    'intro': 'card-intro',
-                    'act1': 'card-act1',
-                    'act2': 'card-act2',
-                    'act3': 'card-act3',
-                    'act4_save': 'card-act4',
-                    'maid': 'card-act4',
-                    'sonic': 'card-sonic',
-                    'sonic_dub': 'card-sonic',
-                    'taro': 'card-taro'
-                };
-                
-                if (nodeId === 'sonic_dub') {
+                if (nodeId === 'trilogy') {
+                    window.openTrilogyCapsule();
+                    window.setLoreNetworkTrilogyState(true);
+                } else if (nodeId === 'trilogy_left' || nodeId === 'trilogy_right') {
+                    window.toggleTrilogyCapsule(null, false);
+                    window.setLoreNetworkTrilogyState(false);
+                } else if (nodeId === 'act1' || nodeId === 'act2' || nodeId === 'act3') {
+                    window.openTrilogyCapsule();
+                } else if (nodeId === 'sonic_dub') {
                     var details = document.getElementById('sonic-dubbing-details');
-                    if(details) details.open = true;
-                }
-                
-                var targetId = cardMap[nodeId];
-                if (targetId) {
-                    var el = document.getElementById(targetId);
-                    if (el) {
-                        el.scrollIntoView({behavior:'smooth', block:'center'});
-                        // if fullscreen, close it to see the card
-                        if(document.getElementById('loreWindow').classList.contains('fullscreen-lore')) {
-                            toggleLoreFullscreen();
-                        }
-                    }
+                    if (details) details.open = true;
                 }
             }
         });
     });
+
+    window.resetLoreNetwork = function() {
+        if (window.loreNetwork) {
+            window.loreNetwork.fit({
+                animation: {
+                    duration: 500,
+                    easingFunction: 'easeInOutQuad'
+                }
+            });
+        }
+    };
 
     function toggleLoreFullscreen() {
         var win = document.getElementById('loreWindow');
@@ -1438,7 +1834,7 @@
             win.style.height = '400px';
             win.style.width = '100%';
             win.style.zIndex = '1';
-            btn.textContent = '🔍 На весь экран';
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> На весь экран';
             document.body.style.overflow = 'auto';
         } else {
             win.classList.add('fullscreen-lore');
@@ -1448,9 +1844,30 @@
             win.style.width = '100vw';
             win.style.height = '100vh';
             win.style.zIndex = '99999';
-            btn.textContent = '✖ Закрыть';
+            btn.innerHTML = '✖ Закрыть';
             document.body.style.overflow = 'hidden';
         }
+        setTimeout(function() {
+            if (window.loreNetwork) {
+                window.loreNetwork.fit({ animation: false });
+            }
+        }, 100);
+    }
+
+    function switchSonicEpisode(btn, url, castHtml) {
+        var player = document.getElementById('sonic-player');
+        if (player) player.src = url;
+        var cast = document.getElementById('sonic-cast-content');
+        if (cast) cast.innerHTML = castHtml;
+        
+        document.querySelectorAll('.sonic-ep-btn').forEach(function(b) {
+            b.style.background = 'rgba(0, 168, 255, 0.12)';
+            b.style.color = '#38bdf8';
+            b.style.borderColor = 'rgba(0, 168, 255, 0.45)';
+        });
+        btn.style.background = '#00a8ff';
+        btn.style.color = '#05111a';
+        btn.style.borderColor = '#00a8ff';
     }
     </script>
     <!-- Плавающая кнопка "Наверх" -->
