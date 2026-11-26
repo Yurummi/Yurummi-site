@@ -25,6 +25,15 @@ const isMediaHubVisible = (typeof window !== 'undefined') && (
 
 const ALL_SLIDES = [
     {
+        file: 'img/arts/Тутр др 0.1.webp',
+        badgeStyle: 'pink',
+        badgeText: '🎨 АРТ',
+        textMain: 'Подарок на ДР для Тутр',
+        authorPrefix: '🎁',
+        textAuthor: 'Подарок на ДР',
+        url: '#arts'
+    },
+    {
         file: 'img/fanarts/Школьница.webp',
         badgeStyle: 'pink',
         badgeText: '🎨 ФАН-АРТ',
